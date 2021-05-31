@@ -1,0 +1,86 @@
+<% layout(layout_directory+'/mainLayout') -%>
+    <!-- begin:: Content Head -->
+    <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+        <div class="kt-subheader__main">
+            <h3 class="kt-subheader__title">
+                <%= page_title %>
+            </h3>
+        </div>
+    </div>
+    <!-- end:: Content Head -->
+
+    <!-- begin:: Content -->
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
+    	<!-- Dashboard Tiles -->
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="kt-portlet kt-portlet--fit kt-portlet--head-lg kt-portlet--head-overlay kt-portlet--skin-solid kt-portlet--height-fluid">
+                    <div class="kt-portlet__head kt-portlet__head--noborder kt-portlet__space-x">
+                        <div class="kt-portlet__head-label">
+                            <h3 class="kt-portlet__head-title" style="display: none;">
+                                <b> Total Admins : &nbsp; 3</b>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="kt-portlet__body kt-portlet__body--fit">
+                        <div class="kt-widget17 pb-2">
+                            <div class="kt-widget17__visual kt-widget17__visual--chart kt-portlet-fit--top kt-portlet-fit--sides" style="background-color: #1a1f26">
+                                <div class="kt-widget17__chart" style="height:120px;">
+                                </div>
+                            </div>
+                            <div class="kt-widget17__stats">
+                                <div class="kt-widget17__items">
+                                   
+
+                                   
+                                    <div class="kt-widget17__item">
+                                        <a href="<%= generateUrl('cms.list') %>">
+                                        <span class="kt-widget17__subtitle">
+                                            Total CMS
+                                        </span>
+                                        <span class="kt-widget17__subtitle" id="totalReservationCount"><%= cmsCount %></span>
+                                    </a>
+                                    </div>
+                                </div>
+
+                                <div class="kt-widget17__items">
+                                   
+
+                                    <div class="kt-widget17__item">
+                                        <a href="<%= generateUrl('notification.list') %>">
+                                        <span class="kt-widget17__subtitle">
+                                            Total Notification
+                                        </span>
+                                        <span class="kt-widget17__subtitle" id="totalReservationCount"><%= notificationCount %></span>
+                                    </a>
+                                    </div>
+                                   
+
+                                    
+                                </div>
+
+                            </div>
+                            
+                        </div>
+
+
+                        
+
+                    </div>
+
+
+                    
+
+                </div>
+            </div>
+        </div>
+        <!-- Dashboard Tiles -->
+    </div>
+    <!-- end:: Content -->
+
+    <script>
+        var fileref = document.createElement('script')
+        fileref.setAttribute("type", "text/javascript")
+        fileref.setAttribute("src", "/assets/app/custom/general/dashboard.js");
+        document.getElementsByTagName("body")[0].appendChild(fileref);
+    </script>
