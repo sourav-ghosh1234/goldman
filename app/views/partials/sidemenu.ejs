@@ -84,6 +84,39 @@
                         <span class="kt-menu__link-text">Country</span>
                     </a>
                 </li>
+
+                <li class="kt-menu__item kt-menu__item--submenu <%=(page_name == 'propertytype-management' || page_name== 'estatetype-management') ? 'kt-menu__item--open' : ''%>"
+                    aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                    <a href="javascript:;"
+                        class="kt-menu__link kt-menu__toggle
+                        <%=(page_name == 'propertytype-management' || page_name== 'estatetype-management') ? 'active' : ''%>">
+                        <i class="kt-menu__link-icon fas fa-crosshairs"></i>
+
+                        <span class="kt-menu__link-text">Property Management</span>
+                        <i class="kt-menu__ver-arrow la la-angle-right"></i>
+                    </a>
+                    <div class="kt-menu__submenu " kt-hidden-height="80">
+                        <span class="kt-menu__arrow"></span>
+                        <ul class="kt-menu__subnav">
+                             <li class="kt-menu__item " aria-haspopup="true">
+                                 <a href="<%= generateUrl('estatetype.list') %>"
+                                     class="kt-menu__link <%=(page_name == 'estatetype-management') ? 'active' : ''%>">
+                                     <i class="kt-menu__link-icon fas fa-crosshairs"></i>
+                                     <span class="kt-menu__link-text">Estate Type</span>
+                                 </a>
+                             </li>
+                            <li class="kt-menu__item " aria-haspopup="true">
+                                <a href="<%= generateUrl('propertytype.list') %>"
+                                    class="kt-menu__link <%=(page_name == 'propertytype-management') ? 'active' : ''%>">
+                                    <i class="kt-menu__link-icon fas fa-quidditch"></i>
+                                    <span class="kt-menu__link-text">Property Type</span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </li>
+
                 
 
 
