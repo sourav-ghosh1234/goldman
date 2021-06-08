@@ -116,11 +116,19 @@
                         </ul>
                     </div>
                 </li>
+                <li class="kt-menu__item " aria-haspopup="true">
+                    <a href="<%= generateUrl('services.list') %>" class="kt-menu__link <%=(page_name == 'services-management') ? 'active' : ''%>">
+                        <i class="fab fa-servicestack"></i>
+                        <span class="kt-menu__link-text">Service Management</span>
+                    </a>
+                </li>
 
-                
-
-
-                
+                <li class="kt-menu__item " aria-haspopup="true">
+                    <a href="<%= generateUrl('art.list') %>" class="kt-menu__link <%=(page_name == 'art-management') ? 'active' : ''%>">
+                        <i class="fas fa-stamp"></i>
+                        <span class="kt-menu__link-text">Art Management</span>
+                    </a>
+                </li>
 
                 <!-- <li class="kt-menu__item " aria-haspopup="true">
                     <a href="<%= generateUrl('notification.list') %>" class="kt-menu__link <%=(page_name == 'notification-management') ? 'active' : ''%>">
