@@ -13,7 +13,7 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="kt-portlet">
-				<form class="kt-form kt-form--label-right" id="editUserFrm" action="<%= generateUrl('art.update') %>" method="POST" enctype="multipart/form-data">
+				<form class="kt-form kt-form--label-right" id="editArtFrm" action="<%= generateUrl('art.update') %>" method="POST" enctype="multipart/form-data">
 					<div class="kt-portlet__body">
 						<div class="form-group row">
 							<div class="col-lg-6">
@@ -25,7 +25,7 @@
 						<div class="form-group row">
 							<div class="col-lg-6">
 								<label>Image:</label>
-								<input type="file" name="image" id="image" class="form-control required">
+								<input type="file" name="image" id="image" class="form-control">
 							</div>
 							<div class="col-lg-6">
 								<img src="/uploads/art/<%=response.art_data.image%>" alt="" height="120" width="200">

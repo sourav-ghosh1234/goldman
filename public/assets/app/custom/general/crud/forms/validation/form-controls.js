@@ -646,6 +646,80 @@ var KTFormControls = function() {
         });
     };
 
+    var frmServiceValidation = function () {
+        $('#frmService').validate({
+            rules: {
+                title: {
+                    required: true
+                },
+            },
+            messages: {
+                title: {
+                    required: 'Title is Required'
+                },
+            },
+            invalidHandler: function (event, validate) {
+            },
+            submitHandler: function (form) {
+                form[0].submit();
+            }
+        });
+    };
+
+    var frmCreateArtValidation = function () {
+        $('#frmCreateArt').validate({
+            rules: {
+                title: {
+                    required: true
+                },
+                image: {
+                    required: true,
+                    accept:'image/*'
+                },
+            },
+            messages: {
+                title: {
+                    required: 'Title is Required'
+                },
+                image: {
+                    required: "Image is required",
+                    accept:"Invalid file type" 
+                },
+            },
+            invalidHandler: function (event, validate) {
+            },
+            submitHandler: function (form) {
+                form[0].submit();
+            }
+        });
+    };
+
+    var editArtFrmValidation = function () {
+        $('#editArtFrm').validate({
+            rules: {
+                title: {
+                    required: true
+                },
+                image: {
+                    accept:'image/*'
+                },
+            },
+            messages: {
+                title: {
+                    required: 'Title is Required'
+                },
+                image: {
+                    accept:"Invalid file type" 
+                },
+            },
+            invalidHandler: function (event, validate) {
+            },
+            submitHandler: function (form) {
+                form[0].submit();
+            }
+        });
+    };
+
     var blankSpaceNotAllow = function () {
         $("input").on("keypress", function (e) {
             var startPos = e.currentTarget.selectionStart;
@@ -673,6 +747,9 @@ var KTFormControls = function() {
             editContactInfo();
             playerAddValidation();
             playerEditValidation();
+            frmServiceValidation();
+            frmCreateArtValidation();
+            editArtFrmValidation();
         }
     };
 }();
