@@ -79,7 +79,7 @@ var KTFormControls = function() {
         });
     };
 
-    var editSetting = function () {
+    var editSetting = function() {
         // alert('hgfd');
         $("#editSettings").validate({
 
@@ -96,24 +96,24 @@ var KTFormControls = function() {
                 },
             },
             //display error alert on form submit  
-            invalidHandler: function (event, validator) {
+            invalidHandler: function(event, validator) {
                 KTUtil.scrollTop();
             },
 
-            submitHandler: function (form) {
+            submitHandler: function(form) {
                 form[0].submit();
             }
         });
     };
 
-    var editCMSValidation = function () {
+    var editCMSValidation = function() {
         $("#frmEditCMS").validate({
 
             // define validation rules
             rules: {
                 event: 'blur',
                 content: {
-                    required: function (textarea) {
+                    required: function(textarea) {
                         CKEDITOR.instances[textarea.id].updateElement(); // update textarea
                         var editorcontent = textarea.value.replace(/<[^>]*>/gi, ''); // strip tags
                         return editorcontent.length === 0;
@@ -130,17 +130,17 @@ var KTFormControls = function() {
                 }
             },
             //display error alert on form submit  
-            invalidHandler: function (event, validator) {
+            invalidHandler: function(event, validator) {
                 KTUtil.scrollTop();
             },
 
-            submitHandler: function (form) {
+            submitHandler: function(form) {
                 form[0].submit();
             }
         });
     };
 
-    var commissionerAddValidation = function () {
+    var commissionerAddValidation = function() {
         $('#commissionerAddForm').validate({
             rules: {
                 first_name: {
@@ -196,16 +196,16 @@ var KTFormControls = function() {
                     required: 'Password is Required'
                 },
             },
-            invalidHandler: function (event, validate) {
+            invalidHandler: function(event, validate) {
 
             },
-            submitHandler: function (form) {
+            submitHandler: function(form) {
                 form[0].submit();
             }
         });
     };
 
-    var commissionerEditValidation = function () {
+    var commissionerEditValidation = function() {
         $('#commissionerValidation').validate({
             rules: {
                 first_name: {
@@ -222,7 +222,7 @@ var KTFormControls = function() {
                 },
                 email: {
                     required: true,
-                    email:true
+                    email: true
                 },
                 phone: {
                     required: true
@@ -243,22 +243,22 @@ var KTFormControls = function() {
                 },
                 email: {
                     required: 'Email is Required',
-                    email:'Please enter valid email'
+                    email: 'Please enter valid email'
                 },
                 phone: {
                     required: 'Phone is Required'
                 },
             },
-            invalidHandler: function (event, validate) {
+            invalidHandler: function(event, validate) {
 
             },
-            submitHandler: function (form) {
+            submitHandler: function(form) {
                 form[0].submit();
             }
         });
     };
 
-    var memberAddValidation = function () {
+    var memberAddValidation = function() {
         $('#memberAddFrm').validate({
             rules: {
                 first_name: {
@@ -314,16 +314,16 @@ var KTFormControls = function() {
                     required: 'Password is Required'
                 },
             },
-            invalidHandler: function (event, validate) {
+            invalidHandler: function(event, validate) {
 
             },
-            submitHandler: function (form) {
+            submitHandler: function(form) {
                 form[0].submit();
             }
         });
     };
 
-    var memberEditValidation = function () {
+    var memberEditValidation = function() {
         $('#memberEditFrm').validate({
             rules: {
                 first_name: {
@@ -367,16 +367,16 @@ var KTFormControls = function() {
                     required: 'Phone is Required'
                 },
             },
-            invalidHandler: function (event, validate) {
+            invalidHandler: function(event, validate) {
 
             },
-            submitHandler: function (form) {
+            submitHandler: function(form) {
                 form[0].submit();
             }
         });
     };
 
-    var sportAddValidation = function () {
+    var sportAddValidation = function() {
         $('#frmsport').validate({
             rules: {
                 title: {
@@ -388,21 +388,21 @@ var KTFormControls = function() {
                     required: 'Title is Required'
                 },
             },
-            invalidHandler: function (event, validate) {
+            invalidHandler: function(event, validate) {
 
             },
-            submitHandler: function (form) {
+            submitHandler: function(form) {
                 form[0].submit();
             }
         });
     };
 
-    var notificationAddValidation = function () {
+    var notificationAddValidation = function() {
         $('#frmnotification').validate({
             rules: {
                 event: 'blur',
                 content: {
-                    required: function (textarea) {
+                    required: function(textarea) {
                         CKEDITOR.instances[textarea.id].updateElement(); // update textarea
                         var editorcontent = textarea.value.replace(/<[^>]*>/gi, ''); // strip tags
                         return editorcontent.length === 0;
@@ -411,9 +411,9 @@ var KTFormControls = function() {
                 title: {
                     required: true
                 },
-               /*  content: {
-                    required: true
-                }, */
+                /*  content: {
+                     required: true
+                 }, */
             },
             messages: {
                 title: {
@@ -423,21 +423,21 @@ var KTFormControls = function() {
                     required: 'Content is Required'
                 },
             },
-            invalidHandler: function (event, validate) {
+            invalidHandler: function(event, validate) {
 
             },
-            submitHandler: function (form) {
+            submitHandler: function(form) {
                 form[0].submit();
             }
         });
     };
 
-    var notificationEditValidation = function () {
+    var notificationEditValidation = function() {
         $('#frmEditNotification').validate({
             rules: {
                 event: 'blur',
                 content: {
-                    required: function (textarea) {
+                    required: function(textarea) {
                         CKEDITOR.instances[textarea.id].updateElement(); // update textarea
                         var editorcontent = textarea.value.replace(/<[^>]*>/gi, ''); // strip tags
                         return editorcontent.length === 0;
@@ -455,16 +455,16 @@ var KTFormControls = function() {
                     required: 'Content is Required'
                 },
             },
-            invalidHandler: function (event, validate) {
+            invalidHandler: function(event, validate) {
 
             },
-            submitHandler: function (form) {
+            submitHandler: function(form) {
                 form[0].submit();
             }
         });
-    }; 
+    };
 
-    var commissionerfeeEditValidation = function () {
+    var commissionerfeeEditValidation = function() {
         $('#frmcommissionerfee').validate({
             rules: {
                 amount: {
@@ -476,15 +476,14 @@ var KTFormControls = function() {
                     required: 'Amount is Required'
                 },
             },
-            invalidHandler: function (event, validate) {
-            },
-            submitHandler: function (form) {
+            invalidHandler: function(event, validate) {},
+            submitHandler: function(form) {
                 form[0].submit();
             }
         });
     };
 
-    var leaguefeeEditValidation = function () {
+    var leaguefeeEditValidation = function() {
         $('#frmleaguefee').validate({
             rules: {
                 amount: {
@@ -496,15 +495,14 @@ var KTFormControls = function() {
                     required: 'Amount is Required'
                 },
             },
-            invalidHandler: function (event, validate) {
-            },
-            submitHandler: function (form) {
+            invalidHandler: function(event, validate) {},
+            submitHandler: function(form) {
                 form[0].submit();
             }
         });
     };
 
-    var editContactInfo = function () {
+    var editContactInfo = function() {
         $("#editContactinfos").validate({
             rules: {
                 contactinfo_value: {
@@ -518,17 +516,17 @@ var KTFormControls = function() {
                 },
             },
             //display error alert on form submit  
-            invalidHandler: function (event, validator) {
+            invalidHandler: function(event, validator) {
                 KTUtil.scrollTop();
             },
 
-            submitHandler: function (form) {
+            submitHandler: function(form) {
                 form[0].submit();
             }
         });
     };
 
-    var playerAddValidation = function () {
+    var playerAddValidation = function() {
         $('#playerAddFrm').validate({
             rules: {
                 first_name: {
@@ -584,16 +582,16 @@ var KTFormControls = function() {
                     required: 'Password is Required'
                 },
             },
-            invalidHandler: function (event, validate) {
+            invalidHandler: function(event, validate) {
 
             },
-            submitHandler: function (form) {
+            submitHandler: function(form) {
                 form[0].submit();
             }
         });
     };
 
-    var playerEditValidation = function () {
+    var playerEditValidation = function() {
         $('#playerEditFrm').validate({
             rules: {
                 first_name: {
@@ -637,16 +635,16 @@ var KTFormControls = function() {
                     required: 'Phone is Required'
                 },
             },
-            invalidHandler: function (event, validate) {
+            invalidHandler: function(event, validate) {
 
             },
-            submitHandler: function (form) {
+            submitHandler: function(form) {
                 form[0].submit();
             }
         });
     };
 
-    var frmServiceValidation = function () {
+    var frmServiceValidation = function() {
         $('#frmService').validate({
             rules: {
                 title: {
@@ -658,15 +656,14 @@ var KTFormControls = function() {
                     required: 'Title is Required'
                 },
             },
-            invalidHandler: function (event, validate) {
-            },
-            submitHandler: function (form) {
+            invalidHandler: function(event, validate) {},
+            submitHandler: function(form) {
                 form[0].submit();
             }
         });
     };
 
-    var frmCreateArtValidation = function () {
+    var frmCreateArtValidation = function() {
         $('#frmCreateArt').validate({
             rules: {
                 title: {
@@ -674,7 +671,7 @@ var KTFormControls = function() {
                 },
                 image: {
                     required: true,
-                    accept:'image/*'
+                    accept: 'image/*'
                 },
             },
             messages: {
@@ -683,25 +680,24 @@ var KTFormControls = function() {
                 },
                 image: {
                     required: "Image is required",
-                    accept:"Invalid file type" 
+                    accept: "Invalid file type"
                 },
             },
-            invalidHandler: function (event, validate) {
-            },
-            submitHandler: function (form) {
+            invalidHandler: function(event, validate) {},
+            submitHandler: function(form) {
                 form[0].submit();
             }
         });
     };
 
-    var editArtFrmValidation = function () {
+    var editArtFrmValidation = function() {
         $('#editArtFrm').validate({
             rules: {
                 title: {
                     required: true
                 },
                 image: {
-                    accept:'image/*'
+                    accept: 'image/*'
                 },
             },
             messages: {
@@ -709,19 +705,43 @@ var KTFormControls = function() {
                     required: 'Title is Required'
                 },
                 image: {
-                    accept:"Invalid file type" 
+                    accept: "Invalid file type"
                 },
             },
-            invalidHandler: function (event, validate) {
-            },
-            submitHandler: function (form) {
+            invalidHandler: function(event, validate) {},
+            submitHandler: function(form) {
                 form[0].submit();
             }
         });
     };
 
-    var blankSpaceNotAllow = function () {
-        $("input").on("keypress", function (e) {
+    var languageFrmValidation = function() {
+        $('#languageFrm').validate({
+            rules: {
+                title: {
+                    required: true
+                },
+                shortcode: {
+                    required: true
+                },
+            },
+            messages: {
+                title: {
+                    required: 'Title is Required'
+                },
+                shortcode: {
+                    required: "Shortcode is Required"
+                },
+            },
+            invalidHandler: function(event, validate) {},
+            submitHandler: function(form) {
+                form[0].submit();
+            }
+        });
+    };
+
+    var blankSpaceNotAllow = function() {
+        $("input").on("keypress", function(e) {
             var startPos = e.currentTarget.selectionStart;
             if (e.which === 32 && startPos == 0)
                 e.preventDefault();
@@ -750,6 +770,7 @@ var KTFormControls = function() {
             frmServiceValidation();
             frmCreateArtValidation();
             editArtFrmValidation();
+            languageFrmValidation();
         }
     };
 }();
