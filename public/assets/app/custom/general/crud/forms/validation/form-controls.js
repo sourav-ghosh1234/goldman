@@ -740,6 +740,61 @@ var KTFormControls = function() {
         });
     };
 
+    var contactRequestFrmValidation = function() {
+        $('#frmAddContactRequest').validate({
+            rules: {
+                salutation: {
+                    required: true
+                },
+                firstName: {
+                    required: true
+                },
+                lastName: {
+                    required: true
+                },
+                email: {
+                    required: true
+                },
+                dialCode: {
+                    required: true
+                },
+                contactNo: {
+                    required: true
+                },
+                message: {
+                    required: true
+                },
+            },
+            messages: {
+                salutation: {
+                    required: 'Salutation is Required'
+                },
+                firstName: {
+                    required: "First Name is Required"
+                },
+                lastName: {
+                    required: "Last Name is Required"
+                },
+                email: {
+                    required: "Email is Required"
+                },
+                dialCode: {
+                    required: "Dial Code is Required"
+                },
+                contactNo: {
+                    required: "Contact No is Required"
+                },
+                message: {
+                    required: "Message is Required"
+                },
+            },
+            invalidHandler: function(event, validate) {},
+            submitHandler: function(form) {
+                form[0].submit();
+            }
+        });
+    };
+
     var blankSpaceNotAllow = function() {
         $("input").on("keypress", function(e) {
             var startPos = e.currentTarget.selectionStart;
@@ -771,6 +826,7 @@ var KTFormControls = function() {
             frmCreateArtValidation();
             editArtFrmValidation();
             languageFrmValidation();
+            contactRequestFrmValidation();
         }
     };
 }();

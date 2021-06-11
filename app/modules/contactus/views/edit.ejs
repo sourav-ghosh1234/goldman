@@ -1,0 +1,77 @@
+<% layout(layout_directory+'/mainLayout') -%>
+    <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+        <div class="kt-subheader__main">
+            <h3 class="kt-subheader__title">
+                <%= page_title %>
+            </h3>
+            <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+            <div class="kt-subheader__breadcrumbs">
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active"><%= page_title %></span>
+            </div>
+        </div>
+    </div>
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="kt-portlet">
+                    <form class="kt-form kt-form--label-right" id="frmAddContactRequest" action="<%= generateUrl('contactus.update') %>" method="POST">
+                        <div class="kt-portlet__body">
+
+                            <div class="form-group row">
+                                <div class="col-lg-2">
+                                    <label>Salutation:</label>
+                                    <select name="salutation" id="salutation" class="form-control">
+									<option value="">Select</option>
+									<option value="Mr." <%= response.contactus_data.salutation == 'Mr.' ? 'selected' : '' %> >Mr.</option>
+									<option value="Mrs." <%= response.contactus_data.salutation == 'Mrs.' ? 'selected' : '' %> >Mrs.</option>
+								</select>
+                                </div>
+                                <div class="col-lg-5">
+                                    <label>First Name:</label>
+                                    <input type="text" name="firstName" id="firstName" class="form-control required" required placeholder="Enter First Name" value="<%= response.contactus_data.firstName %>">
+                                </div>
+                                <div class="col-lg-5">
+                                    <label>Last Name:</label>
+                                    <input type="text" name="lastName" id="lastName" class="form-control required" required placeholder="Enter Last Name" value="<%= response.contactus_data.lastName %>">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-5">
+                                    <label>Email:</label>
+                                    <input type="text" name="email" id="email" class="form-control required" required placeholder="Enter First Name" value="<%= response.contactus_data.email %>">
+                                </div>
+                                <div class="col-lg-2">
+                                    <label>Dial Code:</label>
+                                    <input type="text" name="dialCode" id="dialCode" class="form-control required" required placeholder="Enter Last Name" value="<%= response.contactus_data.dialCode %>">
+                                </div>
+                                <div class="col-lg-5">
+                                    <label>Contact No:</label>
+                                    <input type="text" name="contactNo" id="contactNo" class="form-control required" required placeholder="Enter Last Name" value="<%= response.contactus_data.contactNo %>">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-12">
+                                    <label>Message:</label>
+                                    <textarea name="message" id="message" cols="5" rows="5" class="form-control"><%= response.contactus_data.message %></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- hidden user id -->
+                        <input type="hidden" name="contactus_id" value="<%=response.contactus_data._id%>">
+                        <div class="kt-portlet__foot">
+                            <div class="kt-form__actions">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <a href="<%= generateUrl('contactus.list') %>" class="btn btn-secondary">Cancel</a>
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
