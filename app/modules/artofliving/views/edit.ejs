@@ -1,0 +1,137 @@
+<% layout(layout_directory+'/mainLayout') -%>
+
+    <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+        <div class="kt-subheader__main">
+            <h3 class="kt-subheader__title">
+                <%= page_title %>
+            </h3>
+            <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+        </div>
+    </div>
+
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="kt-portlet">
+                    <form class="kt-form kt-form--label-right" id="frmEditArtoFLiving" action="<%= generateUrl('artofliving.update') %>" method="POST" enctype="multipart/form-data">
+                        <div class="kt-portlet__body">
+
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label>Page Heading Title:</label>
+                                    <input type="text" name="pageHeadingTitle" id="pageHeadingTitle" class="form-control" placeholder="Enter Page Haeding Title" value="<%= response.artofliving_data.pageHeadingTitle%>">
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Page Heading Main Title:</label>
+                                    <input type="text" name="pageHeadingMainTitle" id="pageHeadingMainTitle" class="form-control" placeholder="Enter Page heading Main Title" value="<%= response.artofliving_data.pageHeadingMainTitle%>">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-lg-12">
+                                    <label>Page Heading Content:</label>
+                                    <textarea class="form-control" name="pageHeadingContent" id="pageHeadingContent" placeholder="Enter Page Heading Description"><%= response.artofliving_data.pageHeadingContent%></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label for="pageHeadingImage" class="control-label">Page Heading Image</label>
+                                    <div class="controls">
+                                        <input id="pageHeadingImage" name="pageHeadingImage" type="file" placeholder="Enter Title" accept="image/*" class="form-control imagepickerWithPreviewId" data-previewelement="pageHeadingImagePreview" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <% if ( response.artofliving_data.pageHeadingImage != '' ) {%>
+                                        <img class="pageHeadingImage" id="pageHeadingImagePreview" height="80px" src="/uploads/artofliving/<%= response.artofliving_data.pageHeadingImage %>">
+                                        <% } else { %>
+                                            <img class="pageHeadingImage" id="pageHeadingImagePreview" height="80px" src="">
+                                            <% }  %>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label>Page Heading Button Text:</label>
+                                    <input type="text" name="pageHeadingButtonText" id="pageHeadingButtonText" class="form-control" placeholder="Enter Page Heading Button Text" value="<%= response.artofliving_data.pageHeadingButtonText%>">
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Page Heading Button URL:</label>
+                                    <input type="text" name="pageHeadingButtonUrl" id="pageHeadingButtonUrl" class="form-control" placeholder="Enter Page Heading Button Link" value="<%= response.artofliving_data.pageHeadingButtonUrl%>">
+                                </div>
+                            </div>
+
+                            <% if(response.artofliving_data.sections.length > 0) {%>
+                                <% response.artofliving_data.sections.forEach((content, index) => {%>
+                                    <div class="form-group row">
+                                        <div class="col-lg-6">
+                                            <label>Section Title:</label>
+                                            <input type="text" name="sections[<%= index %>][title]" id="sections<%= index %>title" class="form-control" placeholder="Enter Section Title" value="<%= content.title %>">
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label>Section Description:</label>
+                                            <textarea class="form-control" name="sections[<%= index %>][description]" id="sections[<%= index %>]" placeholder="Enter Section Description"><%= content.description %></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-lg-6">
+                                            <label for="pageHeadingImage" class="control-label">Section Image</label>
+                                            <div class="controls">
+                                                <input id="sections<%= index %>Image" name="sectionImage_<%= index %>" type="file" placeholder="Enter Title" accept="image/*" class="form-control imagepickerWithPreviewId" data-previewelement="sections<%= index %>ImagePreview" />
+                                            </div>
+                                            <input type="hidden" name="sections[<%= index %>][image]" value="<%=content.image%>">
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <% if ( content.image != '' ) {%>
+                                                <img class="sections<%= index %>Image" id="sections<%= index %>ImagePreview" height="80px" src="/uploads/artofliving/<%= content.image %>">
+                                                <% } else { %>
+                                                    <img class="sections<%= index %>Image" id="sections<%= index %>ImagePreview" height="80px" src="">
+                                                    <% }  %>
+                                        </div>
+                                    </div>
+                                    <% }) %>
+                                        <% } else { %>
+                                            <div class="form-group row">
+                                                <div class="col-lg-6">
+                                                    <label>Section Title:</label>
+                                                    <input type="text" name="sections[0][title]" id="sections0Title" class="form-control" placeholder="Enter Section Title" value="<%= response.artofliving_data.sections[0]['title']%>">
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <label>Section Description:</label>
+                                                    <textarea class="form-control" name="sections[0][description]" id="sections0Description" placeholder="Enter Section Description"><%= response.artofliving_data.sections[0]['description']%></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-lg-6">
+                                                    <label for="pageHeadingImage" class="control-label">Section Image</label>
+                                                    <div class="controls">
+                                                        <input id="sections" name="sectionImage_0" type="file" placeholder="Enter Title" accept="image/*" class="form-control imagepickerWithPreviewId" data-previewelement="sectionImage0Preview" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <% if ( response.artofliving_data.pageHeadingImage != '' ) {%>
+                                                        <img class="pageHeadingImage" id="sectionImage0Preview" height="80px" src="/uploads/artofliving/<%= response.artofliving_data.sections[0]['image'] %>">
+                                                        <% } else { %>
+                                                            <img class="pageHeadingImage" id="sectionImage0Preview" height="80px" src="">
+                                                            <% }  %>
+                                                </div>
+                                            </div>
+                                            <% } %>
+
+                        </div>
+                        <div class="kt-portlet__foot">
+                            <div class="kt-form__actions">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <input type="hidden" name="id" value="<%= response.artofliving_data._id%>">
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <a href="<%= generateUrl('artofliving.edit') %>" class="btn btn-secondary">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
