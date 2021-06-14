@@ -15,6 +15,8 @@ const PropertySchema = new Schema({
     city: { type: Schema.Types.ObjectId, ref: 'City' },
     country: { type: Schema.Types.ObjectId, ref: 'Country' },
     price: { type: Number },
+    noOfRooms: { type: Number },
+    yearBuilt: { type: Number },
     totalArea: { type: Number },
     noOfBedRooms: { type: Number },
     noOfKitchens: { type: Number },

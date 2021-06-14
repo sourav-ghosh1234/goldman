@@ -80,6 +80,27 @@ $(document).on('click', '.removeBanner', function(e) {
     $(this).closest('.banner').remove();
 });
 
+$(document).on('click', '.addGallery', function(e) {
+    e.preventDefault();
+    let numOfItems = $('.gallery').length;
+    let item = `<div class="form-group row gallery">
+                    <div class="col-lg-5">
+                        <input type="file" name="gallery_${numOfItems}" required id="image" class="form-control imagepickerWithPreviewId required" data-previewelement="gallery${numOfItems}Preview">
+                    </div>
+                    <div class="col-lg-5">
+                        <img class="galleryImage" id="gallery${numOfItems}Preview" height="80px" src="">
+                    </div>
+                    <div class="col-lg-2"><button class="btn btn-danger btn-rounded pull-right removeGallery" id="item${numOfItems}">Remove</button></div>
+                </div>
+                `;
+
+    $('.gallery-item-wrapper').append(item);
+});
+
+$(document).on('click', '.removeGallery', function(e) {
+    e.preventDefault();
+    $(this).closest('.gallery').remove();
+});
 
 $(document).ready(function() {
 

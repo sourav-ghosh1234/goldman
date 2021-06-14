@@ -39,10 +39,26 @@ class PropertyController {
 
             if (_.isEmpty(property)) {
                 if (req.files.length > 0) {
-                    gm('./public/uploads/property/' + req.files[0].filename).resize(200, 200, '!').write('./public/uploads/property/thumb/' + req.files[0].filename, function(err, result) {
-                        if (!err) console.log('done');
+                    // gm('./public/uploads/property/' + req.files[0].filename).resize(200, 200, '!').write('./public/uploads/property/thumb/' + req.files[0].filename, function(err, result) {
+                    //     if (!err) console.log('done');
+                    // });
+                    // req.body.image = req.files[0].filename;
+                    req.body.imageGallery = [];
+                    req.files.forEach(file => {
+                        if (file.fieldname.search('gallery') != -1) {
+                            let fileIndex = file.fieldname.split('_')[1];
+                            gm('./public/uploads/property/' + file.filename).resize(200, 200, '!').write('./public/uploads/property/thumb/' + file.filename, function(err, result) {
+                                if (!err) console.log('done');
+                            });
+                            req.body.imageGallery[fileIndex] = file.filename;
+                        } else {
+                            gm('./public/uploads/property/' + file.filename).resize(200, 200, '!').write('./public/uploads/property/thumb/' + file.filename, function(err, result) {
+                                if (!err) console.log('done');
+                            });
+                            req.body[file.fieldname] = file.filename;
+                        }
                     });
-                    req.body.image = req.files[0].filename;
+
                 }
                 let propertySave = await propertyRepo.save(req.body);
                 if (propertySave) {
@@ -97,20 +113,38 @@ class PropertyController {
             let property = await propertyRepo.getByField({ 'title': { $regex: req.body.title, $options: 'i' }, _id: { $ne: propertyId } });
             if (_.isEmpty(property)) {
                 let propertyData = await propertyRepo.getById(propertyId);
+                req.body.imageGallery = propertyData.imageGallery;
                 if (req.files && req.files.length > 0) {
-                    if (fs.existsSync('./public/uploads/property/' + propertyData.image) && propertyData.image != '') {
-                        fs.unlinkSync('./public/uploads/property/' + propertyData.image);
-                    }
-                    if (fs.existsSync('./public/uploads/property/thumb/' + propertyData.image) && propertyData.image != '') {
-                        fs.unlinkSync('./public/uploads/property/thumb/' + propertyData.image);
-                    }
-                    gm('./public/uploads/property/' + req.files[0].filename).resize(200, 200, '!').write('./public/uploads/property/thumb/' + req.files[0].filename, function(err, result) {
-                        if (!err) console.log('done');
+
+                    req.files.forEach(file => {
+                        if (file.fieldname.search('gallery') != -1) {
+                            let fileIndex = file.fieldname.split('_')[1];
+                            if (propertyData.imageGallery[fileIndex] && propertyData.imageGallery[fileIndex] != '' && fs.existsSync(`./public/uploads/property/${propertyData.imageGallery[fileIndex]}`)) {
+                                fs.unlinkSync(`./public/uploads/property/${propertyData.imageGallery[fileIndex]}`);
+                            }
+                            if (fs.existsSync('./public/uploads/property/thumb/' + propertyData.imageGallery[fileIndex]) && propertyData.imageGallery[fileIndex] != '') {
+                                fs.unlinkSync('./public/uploads/property/thumb/' + propertyData.imageGallery[fileIndex]);
+                            }
+                            gm('./public/uploads/property/' + file.filename).resize(200, 200, '!').write('./public/uploads/property/thumb/' + file.filename, function(err, result) {
+                                if (!err) console.log('done');
+                            });
+
+                            req.body.imageGallery[fileIndex] = file.filename;
+                        } else {
+                            if (propertyData[file.fieldname] && propertyData[file.fieldname] != '' && fs.existsSync(`./public/uploads/property/${propertyData[file.fieldname]}`)) {
+                                fs.unlinkSync(`./public/uploads/property/${propertyData[file.fieldname]}`);
+                            }
+                            if (fs.existsSync('./public/uploads/property/thumb/' + propertyData[file.fieldname]) && propertyData[file.fieldname] != '') {
+                                fs.unlinkSync('./public/uploads/property/thumb/' + propertyData[file.fieldname]);
+                            }
+                            gm('./public/uploads/property/' + file.filename).resize(200, 200, '!').write('./public/uploads/property/thumb/' + file.filename, function(err, result) {
+                                if (!err) console.log('done');
+                            });
+                            req.body[file.fieldname] = file.filename;
+                        }
                     });
-                    req.body.image = req.files[0].filename;
-                } else {
-                    delete req.body.image;
                 }
+
                 let propertyUpdate = await propertyRepo.updateById(req.body, propertyId);
                 if (propertyUpdate) {
                     req.flash('success', "Property updated successfully");

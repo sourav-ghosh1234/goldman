@@ -42,6 +42,50 @@
                                             <% } %>
                                 </div>
                             </div>
+
+                            <div class="form-group row">
+                                <!--  -->
+                                <div class="col-lg-12">
+                                    <h5 class="pull-left">Image Gallery</h5>
+                                    <button class="btn btn-info btn-rounded pull-right addGallery">Add</button>
+                                </div>
+                                <div class="col-lg-12">&nbsp;</div>
+                                <div class="gallery-item-wrapper col-lg-12">
+                                    <% if(response.property_data.imageGallery.length > 0) {%>
+                                        <% response.property_data.imageGallery.map((imageItem, index) => { %>
+                                            <div class="form-group row gallery">
+                                                <div class="col-lg-5">
+                                                    <input type="file" name="gallery_<%= index %>" id="image" class="form-control imagepickerWithPreviewId" data-previewelement="gallery<%= index %>Preview">
+                                                </div>
+                                                <input type="hidden" name="imageGallery[<%= index %>][image]" value="<%=imageItem%>">
+                                                <div class="col-lg-5">
+                                                    <% if(imageItem != '') {%>
+                                                        <img class="galleryImage" id="gallery<%= index %>Preview" height="80px" src="/uploads/property/<%= imageItem %>">
+                                                        <!-- <input type="hidden" name="photosAndVideos[gallery][0]"> -->
+                                                        <% } else { %>
+                                                            <img class="galleryImage" id="gallery0Preview" height="80px" src="">
+                                                            <% } %>
+                                                </div>
+                                                <% if(index != 0) {%>
+                                                    <div class="col-lg-2"><button class="btn btn-danger btn-rounded pull-right removeGallery" id="item<%= index %>">Remove</button></div>
+                                                    <% } %>
+                                            </div>
+                                            <% }) %>
+                                                <% } else { %>
+                                                    <div class="form-group row gallery">
+                                                        <div class="col-lg-5">
+                                                            <input type="file" name="gallery_0" id="image" class="form-control imagepickerWithPreviewId" data-previewelement="gallery0Preview">
+                                                        </div>
+                                                        <div class="col-lg-5">
+                                                            <img class="galleryImage" id="gallery0Preview" height="80px" src="">
+                                                        </div>
+                                                        <div class="col-lg-2"><button class="btn btn-danger btn-rounded pull-right removeGallery" id="item0">Remove</button></div>
+                                                    </div>
+                                                    <% } %>
+                                </div>
+                                <!--  -->
+                            </div>
+
                             <div class="form-group row">
                                 <div class="col-lg-12">
                                     <label>Description:</label>
@@ -52,17 +96,27 @@
                                 <div class="col-lg-6">
                                     <label>Property Type:</label>
                                     <select name="propertyType" id="propertyType" class="form-control required">
-								<option value="">Select Property Type</option>
-								<% if(response.propertyTypes) {%>
-									<% response.propertyTypes.forEach(propertyType => {%>
-										<option value="<%= propertyType._id %>" <%= String(propertyType._id) == String(response.property_data.propertyType) ? 'selected' : '' %> ><%= propertyType.title %></option>
-									<% }); %>
-								<% } %>
-							</select>
+                                        <option value="">Select Property Type</option>
+                                        <% if(response.propertyTypes) {%>
+                                            <% response.propertyTypes.forEach(propertyType => {%>
+                                                <option value="<%= propertyType._id %>" <%= String(propertyType._id) == String(response.property_data.propertyType) ? 'selected' : '' %> ><%= propertyType.title %></option>
+                                            <% }); %>
+                                        <% } %>
+							        </select>
                                 </div>
                                 <div class="col-lg-6">
                                     <label>Total Area:</label>
                                     <input type="number" name="totalArea" id="totalArea" class="form-control required" required placeholder="Enter Total Area" value="<%= response.property_data.totalArea %>">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label>Number of Rooms:</label>
+                                    <input type="number" name="noOfRooms" id="noOfRooms" class="form-control required" required placeholder="Enter Number of Bed Rooms" value="<%= response.property_data.noOfRooms %>">
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Year Built:</label>
+                                    <input type="number" name="yearBuilt" id="yearBuilt" class="form-control required" required placeholder="Enter Number of Kitchens" value="<%= response.property_data.yearBuilt %>">
                                 </div>
                             </div>
                             <div class="form-group row">
