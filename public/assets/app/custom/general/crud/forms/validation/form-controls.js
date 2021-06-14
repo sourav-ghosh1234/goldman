@@ -795,6 +795,195 @@ var KTFormControls = function() {
         });
     };
 
+    var addPropertyFrmValidation = function() {
+        $('#addPropertyFrm').validate({
+            rules: {
+                title: {
+                    required: true
+                },
+                price: {
+                    required: true
+                },
+                image: {
+                    required: true
+                },
+                description: {
+                    required: true
+                },
+                propertyType: {
+                    required: true
+                },
+                totalArea: {
+                    required: true
+                },
+                noOfBedRooms: {
+                    required: true
+                },
+                noOfKitchens: {
+                    required: true
+                },
+                noOfBathrooms: {
+                    required: true
+                },
+                address: {
+                    required: true
+                },
+                city: {
+                    required: true
+                },
+                country: {
+                    required: true
+                },
+            },
+            messages: {
+                title: {
+                    required: 'Title is Required',
+                },
+                price: {
+                    required: 'Price is Required',
+                },
+                image: {
+                    required: 'Image is Required',
+                },
+                description: {
+                    required: 'Description is Required',
+                },
+                propertyType: {
+                    required: 'Propetyrtype is Required',
+                },
+                totalArea: {
+                    required: 'Total Area is Required',
+                },
+                noOfBedRooms: {
+                    required: 'No Of Bedrooms is Required',
+                },
+                noOfKitchens: {
+                    required: 'No of Kitchens is Required',
+                },
+                noOfBathrooms: {
+                    required: 'No of Bathrooms is Required',
+                },
+                address: {
+                    required: 'Address is Required',
+                },
+                city: {
+                    required: 'City is Required',
+                },
+                country: {
+                    required: 'Country is Required',
+                },
+            },
+            invalidHandler: function(event, validate) {},
+            submitHandler: function(form) {
+                form[0].submit();
+            }
+        });
+    };
+
+    var editPropertyFrmValidation = function() {
+        $('#editPropertyFrm').validate({
+            rules: {
+                title: {
+                    required: true
+                },
+                price: {
+                    required: true
+                },
+                description: {
+                    required: true
+                },
+                propertyType: {
+                    required: true
+                },
+                totalArea: {
+                    required: true
+                },
+                noOfBedRooms: {
+                    required: true
+                },
+                noOfKitchens: {
+                    required: true
+                },
+                noOfBathrooms: {
+                    required: true
+                },
+                address: {
+                    required: true
+                },
+                city: {
+                    required: true
+                },
+                country: {
+                    required: true
+                },
+            },
+            messages: {
+                title: {
+                    required: 'Title is Required',
+                },
+                price: {
+                    required: 'Price is Required',
+                },
+                description: {
+                    required: 'Description is Required',
+                },
+                propertyType: {
+                    required: 'Propetyrtype is Required',
+                },
+                totalArea: {
+                    required: 'Total Area is Required',
+                },
+                noOfBedRooms: {
+                    required: 'No Of Bedrooms is Required',
+                },
+                noOfKitchens: {
+                    required: 'No of Kitchens is Required',
+                },
+                noOfBathrooms: {
+                    required: 'No of Bathrooms is Required',
+                },
+                address: {
+                    required: 'Address is Required',
+                },
+                city: {
+                    required: 'City is Required',
+                },
+                country: {
+                    required: 'Country is Required',
+                },
+            },
+            invalidHandler: function(event, validate) {},
+            submitHandler: function(form) {
+                form[0].submit();
+            }
+        });
+    };
+
+    var cityFrmValidation = function() {
+        $('#cityFrm').validate({
+            rules: {
+                city: {
+                    required: true
+                },
+                countryId: {
+                    required: true
+                },
+            },
+            messages: {
+                city: {
+                    required: 'City is Required'
+                },
+                countryId: {
+                    required: "Country is Required"
+                },
+            },
+            invalidHandler: function(event, validate) {},
+            submitHandler: function(form) {
+                form[0].submit();
+            }
+        });
+    };
+
     var blankSpaceNotAllow = function() {
         $("input").on("keypress", function(e) {
             var startPos = e.currentTarget.selectionStart;
@@ -827,6 +1016,9 @@ var KTFormControls = function() {
             editArtFrmValidation();
             languageFrmValidation();
             contactRequestFrmValidation();
+            addPropertyFrmValidation();
+            editPropertyFrmValidation();
+            cityFrmValidation();
         }
     };
 }();
