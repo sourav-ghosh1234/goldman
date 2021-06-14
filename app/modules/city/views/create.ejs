@@ -1,0 +1,52 @@
+<% layout(layout_directory+'/mainLayout') -%>
+    <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+        <div class="kt-subheader__main">
+            <h3 class="kt-subheader__title">
+                <%= page_title %>
+            </h3>
+            <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+            <div class="kt-subheader__breadcrumbs">
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active"><%= page_title %></span>
+            </div>
+        </div>
+    </div>
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="kt-portlet">
+                    <form class="kt-form kt-form--label-right" id="frmCreateUser" action="<%= generateUrl('city.store') %>" method="POST">
+                        <div class="kt-portlet__body">
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label>City Name:</label>
+                                    <input type="text" name="city" id="city" class="form-control required" required placeholder="Enter City Name">
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Property Type:</label>
+                                    <select name="countryId" id="countryId" class="form-control required">
+                                        <option value="">Select Property Type</option>
+                                        <% if(response.countries) {%>
+                                            <% response.countries.forEach(country => {%>
+                                                <option value="<%= country._id %>"><%= country.country_name %></option>
+                                            <% }); %>
+                                        <% } %>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kt-portlet__foot">
+                            <div class="kt-form__actions">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <a href="<%= generateUrl('country.list') %>" class="btn btn-secondary">Cancel</a>
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

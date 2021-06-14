@@ -160,6 +160,20 @@
                     </a>
                 </li>
 
+                <li class="kt-menu__item " aria-haspopup="true">
+                    <a href="<%= generateUrl('property.list') %>" class="kt-menu__link <%=(page_name == 'property-management') ? 'active' : ''%>">
+                        <i class="fas fa-pen-nib"></i>
+                        <span class="kt-menu__link-text">Property Management</span>
+                    </a>
+                </li>
+
+                <li class="kt-menu__item " aria-haspopup="true">
+                    <a href="<%= generateUrl('city.list') %>" class="kt-menu__link <%=(page_name == 'city-management') ? 'active' : ''%>">
+                        <i class="fas fa-pen-nib"></i>
+                        <span class="kt-menu__link-text">City Management</span>
+                    </a>
+                </li>
+
                 <!-- <li class="kt-menu__item " aria-haspopup="true">
                     <a href="<%= generateUrl('notification.list') %>" class="kt-menu__link <%=(page_name == 'notification-management') ? 'active' : ''%>">
                         <i class="fas  fa-envelope"></i>

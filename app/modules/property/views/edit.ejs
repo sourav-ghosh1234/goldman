@@ -1,0 +1,129 @@
+<% layout(layout_directory+'/mainLayout') -%>
+    <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+        <div class="kt-subheader__main">
+            <h3 class="kt-subheader__title">
+                <%= page_title %>
+            </h3>
+            <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+            <div class="kt-subheader__breadcrumbs">
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active"><%= page_title %></span>
+            </div>
+        </div>
+    </div>
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="kt-portlet">
+                    <form class="kt-form kt-form--label-right" id="editPropertyFrm" action="<%= generateUrl('property.update') %>" method="POST" enctype="multip`/form-data">
+                        <div class="kt-portlet__body">
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label>Title:</label>
+                                    <input type="text" name="title" id="title" class="form-control required" required placeholder="Enter Title" value="<%= response.property_data.title %>">
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Price:</label>
+                                    <input type="number" name="price" id="price" class="form-control required" required placeholder="Enter Price" value="<%= response.property_data.price %>">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label for="image" class="control-label">Image</label>
+                                    <div class="controls">
+                                        <input id="image" name="image" type="file" placeholder="Enter Title" accept="image/*" class="form-control imagepickerWithPreviewId" data-previewelement="imagePreview" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <% if(response.property_data.image != '') {%>
+                                        <img class="image" id="imagePreview" height="80px" src="/uploads/property/<%= response.property_data.image %>">
+                                        <% } else { %>
+                                            <img class="image" id="imagePreview" height="80px" src="">
+                                            <% } %>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-12">
+                                    <label>Description:</label>
+                                    <textarea name="description" id="description" cols="30" rows="5" class="form-control"><%= response.property_data.description %></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label>Property Type:</label>
+                                    <select name="propertyType" id="propertyType" class="form-control required">
+								<option value="">Select Property Type</option>
+								<% if(response.propertyTypes) {%>
+									<% response.propertyTypes.forEach(propertyType => {%>
+										<option value="<%= propertyType._id %>" <%= String(propertyType._id) == String(response.property_data.propertyType) ? 'selected' : '' %> ><%= propertyType.title %></option>
+									<% }); %>
+								<% } %>
+							</select>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Total Area:</label>
+                                    <input type="number" name="totalArea" id="totalArea" class="form-control required" required placeholder="Enter Total Area" value="<%= response.property_data.totalArea %>">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label>Number of Bed Rooms:</label>
+                                    <input type="number" name="noOfBedRooms" id="noOfBedRooms" class="form-control required" required placeholder="Enter Number of Bed Rooms" value="<%= response.property_data.noOfBedRooms %>">
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Number of Kitchens:</label>
+                                    <input type="number" name="noOfKitchens" id="noOfKitchens" class="form-control required" required placeholder="Enter Number of Kitchens" value="<%= response.property_data.noOfKitchens %>">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-6 ">
+                                    <label>Number of Bathrooms:</label>
+                                    <input type="number" name="noOfBathrooms" id="noOfBathrooms" class="form-control required" required placeholder="Enter Number of Bathrooms" value="<%= response.property_data.noOfBathrooms %>">
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Address:</label>
+                                    <input type="text" name="address" id="address" class="form-control required" required placeholder="Enter Address" value="<%= response.property_data.address %>">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label>City:</label>
+                                    <select name="city" id="city" class="form-control required">
+                                        <option value="">Select City</option>
+                                        <% if(response.cities) {%>
+                                            <% response.cities.forEach(city => {%>
+                                                <option value="<%= city._id %>" <%= String(city._id) == String(response.property_data.city) ? 'selected' : '' %> ><%= city.city %></option>
+                                            <% }); %>
+                                        <% } %>
+                                    </select>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Country:</label>
+                                    <select name="country" id="country" class="form-control required">
+                                        <option value="">Select Country</option>
+                                        <% if(response.countries) {%>
+                                            <% response.countries.forEach(country => {%>
+                                                <option value="<%= country._id %>" <%= String(country._id) == String(response.property_data.country) ? 'selected' : '' %> ><%= country.country_name %></option>
+                                            <% }); %>
+                                        <% } %>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- hidden user id -->
+                        <input type="hidden" name="property_id" value="<%=response.property_data._id%>">
+                        <div class="kt-portlet__foot">
+                            <div class="kt-form__actions">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <a href="<%= generateUrl('property.list') %>" class="btn btn-secondary">Cancel</a>
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
