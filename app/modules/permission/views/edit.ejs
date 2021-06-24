@@ -1,0 +1,54 @@
+<% layout(layout_directory+'/mainLayout') -%>
+<div class="kt-subheader   kt-grid__item" id="kt_subheader">
+    <div class="kt-subheader__main">
+        <h3 class="kt-subheader__title"> <%= page_title %> </h3>
+        <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+    </div>
+</div>
+
+<div class="kt-content kt-grid__item kt-grid__item--fluid" id="kt_content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="kt-portlet">
+                <form class="kt-form kt-form--label-right" id="" action="<%= generateUrl('admin.permission.update') %>" method="POST" novalidate>
+                    <div class="kt-portlet__body">
+                            <div class="from-group row mb-4">
+                                <div style="width: 80%;"></div>
+                                <span class="pull-right" style="font-size: 1.2em;"><input type="checkbox" class="selectAll"> Select all Permissions</span>
+                            </div>
+                        <% if(response && response.length > 0) { %>
+                            <% response.forEach(permissions => { %>
+                                <div class="from-group row" style="background-color: #f7eded;">
+                                    <h5 class="pull-left" style="width: 80%;"><%= utils.pretifyRouteName(permissions._id) %></h5>
+                                    <span class="pull-right" style="font-size: 1.1em;"><input type="checkbox" class="selectAllInGroup" data-group="<%= permissions._id %>"> Select all in this Group</span>
+                                </div>
+                                <div class="form-group row">
+                                    <% permissions.permission_list.forEach(permission => {%>
+                                        <div class="col-lg-4">
+                                            <input type="checkbox" class="routes <%= permissions._id %>" name="permissionall[]" value="<%= permission._id %>" 
+                                            <%= permission.hasAccess ? 'checked="checked"' : '' %> data-group-item="<%= permissions._id %>">
+                                            <label><%= utils.pretifyRouteName(permission.displayName) %></label>
+                                        </div>
+                                    <% }) %>
+                                </div>
+                            <% }) %>
+                        <% } %>
+                    </div>
+                    
+                    <!-- hidden user id -->
+					<input type="hidden" name="role" value="<%= role %>">
+                    <div class="kt-portlet__foot">
+                        <div class="kt-form__actions">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <a href="<%= generateUrl('admin.role.list') %>" class="btn btn-secondary">Cancel</a>
+                                    <button type="submit" class="btn btn-primary">Update Permissions</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

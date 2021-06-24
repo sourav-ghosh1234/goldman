@@ -4,7 +4,6 @@ const mongoosePaginate = require('mongoose-paginate');
 const roleSchema = mongoose.Schema({
     roleDisplayName: String,
     role: String,
-    rolegroup: { type: String, default: 'backend', enum: ['frontend', 'backend'] },
     desc: {type: String, default: '' },
 });
 

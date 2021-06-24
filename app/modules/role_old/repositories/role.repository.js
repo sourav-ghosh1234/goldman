@@ -2,24 +2,22 @@ const Role = require('role/models/role.model');
 const perPage = config.PAGINATION_PERPAGE;
 
 class RoleRepository {
-    constructor() {}
+    constructor() { }
 
-    async getAll(searchQuery, page) {
+    async getAll(searchQuery, page, cb) {
         try {
-            // const match = [{ role: { $in: ['admin', 'user', 'community_manager', 'payments_support'] } }];
-            let match = [{ rolegroup: { $in: ['backend', 'frontend'] } }];
+            const match = [{ "status": "Active" }];
             if (_.has(searchQuery, "keyword")) {
                 if (searchQuery.keyword != '') {
                     const search_string = searchQuery.keyword.trim();
                     match.push({
                         "$or": [{ 'roleDisplayName': { '$regex': search_string, '$options': 'i' } },
-                            { 'desc': { '$regex': search_string, '$options': 'i' } }
+                        { 'desc': { '$regex': search_string, '$options': 'i' } }
                         ]
                     });
                 }
             }
-            let role = await Role.paginate({ "$and": match }, { page: page, limit: perPage, sort: { _id: -1 } });;
-            return role;
+            await Role.paginate({ "$and": match }, { page: page, limit: perPage });
         } catch (error) {
             return error;
         }
@@ -69,7 +67,7 @@ class RoleRepository {
 
     async save(data) {
         try {
-            return await Role.create(data);
+            return await Role.create(data).lean().exec();
         } catch (error) {
             return error;
         }

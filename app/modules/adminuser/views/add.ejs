@@ -1,0 +1,110 @@
+<% layout(layout_directory+'/mainLayout') -%>
+
+<div class="kt-subheader   kt-grid__item" id="kt_subheader">
+    <div class="kt-subheader__main">
+        <h3 class="kt-subheader__title">
+            <%= page_title %>
+        </h3>
+        <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+        <!-- <div class="kt-subheader__breadcrumbs">
+            <a href="<%= generateUrl('user.dashboard') %>" class="kt-subheader__breadcrumbs-home">Dashboard</a>
+            <span class="kt-subheader__breadcrumbs-separator"></span>
+            <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active"><%= page_title %></span>
+        </div> -->
+    </div>
+</div>
+
+<div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="kt-portlet">
+                <form class="kt-form kt-form--label-right" id="createAdminUser"
+                    action="<%= generateUrl('adminuser.insert') %>" method="POST" enctype='multipart/form-data'>
+                    <div class="kt-portlet__body">
+                        <div class="form-group row">
+                            <div class="col-lg-6">
+                                <label>First Name:</label>
+                                <input type="text" name="first_name" id="first_name" class="form-control"
+                                    pattern="^[a-zA-Z].*" placeholder="Enter First Name">
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Last Name:</label>
+                                <input type="text" name="last_name" id="last_name" class="form-control"
+                                    pattern="^[a-zA-Z].*" placeholder="Enter Last Name">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-lg-6">
+                                <label>Role:</label>
+                                <select class="form-control" name="role">
+                                    <option value=""elect an Admin Role</option>
+                                    <% if(response.length > 0) {%>
+                                        <% response.map( role => {%>
+                                            <option value="<%= role._id %>"><%= role.roleDisplayName %></option>
+                                        <% }) %>
+                                    <% } %>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-lg-6">
+                                <label>Email:</label>
+                                <input type="email" name="email" id="email" class="form-control"
+                                    placeholder="Enter Email">
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Password:</label>
+                                <input type="password" name="password" id="password" class="form-control"
+                                    placeholder="Enter Password">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <div class="col-lg-6">
+                                <label>Contact:</label>
+                                <input type="tel" name="phone" id="phone" class="form-control"
+                                    placeholder="Enter Contact no.">
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Lives In:</label>
+                                <input type="text" name="address" id="address" class="form-control"
+                                    placeholder="Enter Address">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-lg-12">
+                                <label>Bio:</label>
+                                <textarea class="form-control ckeditor" name="bio" id="" cols="30" rows="10"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-6">
+                                <label>Profile Image</label>
+                                <input type="file" name="profile_image" id="profile_image" class="form-control imagepicker"
+                                    data-validation-required-message="This field is required">
+                            </div>
+                            <div class="col-lg-6">
+                                <img class="pickedImage" height="125px" src="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kt-portlet__foot">
+                        <div class="kt-form__actions">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <a href="<%= generateUrl('adminuser.listing') %>"
+                                        class="btn btn-secondary">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

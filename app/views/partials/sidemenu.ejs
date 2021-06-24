@@ -96,12 +96,6 @@
                         <span class="kt-menu__arrow"></span>
                         <ul class="kt-menu__subnav">
                             <li class="kt-menu__item " aria-haspopup="true">
-                                <a href="<%= generateUrl('estatetype.list') %>" class="kt-menu__link <%=(page_name == 'estatetype-management') ? 'active' : ''%>">
-                                    <i class="kt-menu__link-icon fas fa-crosshairs"></i>
-                                    <span class="kt-menu__link-text">Estate Type</span>
-                                </a>
-                            </li>
-                            <li class="kt-menu__item " aria-haspopup="true">
                                 <a href="<%= generateUrl('propertytype.list') %>" class="kt-menu__link <%=(page_name == 'propertytype-management') ? 'active' : ''%>">
                                     <i class="kt-menu__link-icon fas fa-quidditch"></i>
                                     <span class="kt-menu__link-text">Property Type</span>
@@ -110,6 +104,12 @@
 
                         </ul>
                     </div>
+                </li>
+                <li class="kt-menu__item " aria-haspopup="true">
+                    <a href="<%= generateUrl('estatetype.list') %>" class="kt-menu__link <%=(page_name == 'estatetype-management') ? 'active' : ''%>">
+                        <i class="kt-menu__link-icon fas fa-crosshairs"></i>
+                        <span class="kt-menu__link-text">Estate Type</span>
+                    </a>
                 </li>
                 <li class="kt-menu__item " aria-haspopup="true">
                     <a href="<%= generateUrl('services.list') %>" class="kt-menu__link <%=(page_name == 'services-management') ? 'active' : ''%>">
