@@ -33,7 +33,7 @@ var KTDatatableCms = function() {
             {
                 field: 'title',
                 title: 'Language',
-                width: 110,
+                width: 170,
                 template: function(row) {
                     return row.title;
                 },
@@ -44,6 +44,14 @@ var KTDatatableCms = function() {
                 width: 110,
                 template: function(row) {
                     return row.shortcode;
+                },
+            },
+            {
+                field: 'isDefault',
+                title: 'Default Language',
+                width: 110,
+                template: function(row) {
+                    return row.isDefault == true ? 'Yes' : 'No';
                 },
             },
             {

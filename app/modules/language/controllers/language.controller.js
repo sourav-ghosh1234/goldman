@@ -3,6 +3,7 @@ const express = require('express');
 const routeLabel = require('route-label');
 const router = express.Router();
 const namedRouter = routeLabel(router);
+const fs = require('fs');
 
 class languageController {
     constructor() {
@@ -28,6 +29,9 @@ class languageController {
             //console.log("29>>",language); process.exit();
 
             if (_.isEmpty(language)) {
+                if (req.files.length > 0) {
+                    req.body.icon = req.files[0].filename;
+                }
                 let languageSave = await languageRepo.save(req.body);
                 if (languageSave) {
                     req.flash('success', "Language created successfully.");
@@ -77,6 +81,13 @@ class languageController {
             //  let language = await languageRepo.getByField({'title':req.body.title,_id:{$ne:languageId}});
             let language = await languageRepo.getByField({ 'title': { $regex: req.body.title, $options: 'i' }, _id: { $ne: languageId } });
             if (_.isEmpty(language)) {
+                let languageData = await languageRepo.getById(languageId);
+                if (req.files.length > 0) {
+                    if (languageData.icon && languageData.icon != '' && fs.existsSync(`./public/uploads/language/${languageData.icon}`)) {
+                        fs.unlinkSync(`./public/uploads/language/${languageData.icon}`);
+                    }
+                    req.body.icon = req.files[0].filename;
+                }
                 let languageUpdate = await languageRepo.updateById(req.body, languageId);
                 if (languageUpdate) {
                     req.flash('success', "Language updated successfully");
@@ -88,6 +99,7 @@ class languageController {
                 res.redirect(namedRouter.urlFor('language.edit', { id: languageId }));
             }
         } catch (e) {
+            console.log(99, e);
             return res.status(500).send({ message: e.message });
         }
 
