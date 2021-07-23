@@ -1,4 +1,4 @@
-const artoflivingRepo = require('artofliving/repositories/artofliving.repository');
+const serviceContentRepo = require('services_content/repositories/services_content.repository');
 const languageRepo = require('language/repositories/language.repository');
 const express = require('express');
 const routeLabel = require('route-label');
@@ -8,9 +8,9 @@ const querystring = require('querystring');
 const fs = require('fs');
 
 
-class artOfLivingController {
+class serviceContentController {
     constructor() {
-        this.artOfLiving = [];
+        this.serviceContent = [];
     }
 
     /*
@@ -22,25 +22,25 @@ class artOfLivingController {
             let result = {};
             let languages = await languageRepo.getAllByField({ 'status': 'Active',isDeleted:false});
 			result.languages = languages;
-            let artofliving = await artoflivingRepo.getByField();
+            let serviceContent = await serviceContentRepo.getByField();
             
             // This is for language section //
 			var translateArr = [];
-			for (var i = 0; i < artofliving.translate.length; i++) {
-                translateArr[artofliving.translate[i].language] = artofliving.translate[i];
+			for (var i = 0; i < serviceContent.translate.length; i++) {
+                translateArr[serviceContent.translate[i].language] = serviceContent.translate[i];
 			}
-			artofliving.translate = translateArr
-            if (!_.isEmpty(artofliving)) {
-                result.artofliving_data = artofliving;
-                res.render('artofliving/views/edit.ejs', {
-                    page_name: 'artofliving-management',
+			serviceContent.translate = translateArr
+            if (!_.isEmpty(serviceContent)) {
+                result.serviceContent_data = serviceContent;
+                res.render('services_content/views/edit.ejs', {
+                    page_name: 'service-content-management',
                     page_title: 'Home Content Edit',
                     user: req.user,
                     response: result
                 });
             } else {
                 req.flash('error', "Sorry Home Content not found!");
-                res.redirect(namedRouter.urlFor('artofliving.edit'));
+                res.redirect(namedRouter.urlFor('services.content.edit'));
             }
         } catch (e) {
             return res.status(500).send({
@@ -54,15 +54,15 @@ class artOfLivingController {
     */
     async update(req, res) {
         try {
-            const artOfLivingId = req.body.id;
-            let artOfLiving = await artoflivingRepo.getById(artOfLivingId);
-            let imageArr = artOfLiving.image;
+            const serviceContentId = req.body.id;
+            let serviceContent = await serviceContentRepo.getById(serviceContentId);
+            let imageArr = serviceContent.image;
             if (req.files.length > 0) {
                 req.files.forEach(file => {
                     if (file.fieldname.search('sectionImage') != -1) {
                         let fileIndex = file.fieldname.split('_')[1];
-                        if (artOfLiving.sections[fileIndex]['image'] && artOfLiving.sections[fileIndex]['image'] != '' && fs.existsSync(`./public/uploads/artofliving/${artOfLiving.sections[fileIndex]['image']}`)) {
-                            fs.unlinkSync(`./public/uploads/artofliving/${artOfLiving.sections[fileIndex]['image']}`);
+                        if (serviceContent.sections[fileIndex]['image'] && serviceContent.sections[fileIndex]['image'] != '' && fs.existsSync(`./public/uploads/services_content/${serviceContent.sections[fileIndex]['image']}`)) {
+                            fs.unlinkSync(`./public/uploads/services_content/${serviceContent.sections[fileIndex]['image']}`);
                         }
                         req.body.sections[fileIndex]['image'] = file.filename;
                     } else {
@@ -78,10 +78,10 @@ class artOfLivingController {
                 req.body.image = imageArr; 
             }
             
-            let artOfLivingUpdateById = await artoflivingRepo.updateById(req.body, artOfLivingId);
-            if (artOfLivingUpdateById) {
-                req.flash('success', "Art Of Living Updated Successfully");
-                res.redirect(namedRouter.urlFor('artofliving.edit'));
+            let serviceContentUpdateById = await serviceContentRepo.updateById(req.body, serviceContentId);
+            if (serviceContentUpdateById) {
+                req.flash('success', "Services Content Updated Successfully");
+                res.redirect(namedRouter.urlFor('services.content.edit'));
             }
         } catch (e) {
             console.log(66, e);
@@ -93,4 +93,4 @@ class artOfLivingController {
 
 }
 
-module.exports = new artOfLivingController();
+module.exports = new serviceContentController();

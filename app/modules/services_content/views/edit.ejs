@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="kt-portlet">
-                    <form class="kt-form kt-form--label-right" id="frmEditArtoFLiving" action="<%= generateUrl('artofliving.update') %>" method="POST" enctype="multipart/form-data">
+                    <form class="kt-form kt-form--label-right" id="frmEditServicesContent" action="<%= generateUrl('services.content.update') %>" method="POST" enctype="multipart/form-data">
                         
                         <div class="kt-portlet__body">
                             <ul class="nav nav-pills nav-fill" role="tablist">
@@ -41,18 +41,13 @@
                                     <div class="form-group row">
                                         <div class="col-lg-6">
                                             <label>Page Heading Title:</label>
-                                            <input type="text" name="pageHeadingTitle" id="pageHeadingTitle" class="form-control" placeholder="Enter Page Haeding Title" value="<%= response.artofliving_data.pageHeadingTitle%>">
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label>Page Heading Main Title:</label>
-                                            <input type="text" name="pageHeadingMainTitle" id="pageHeadingMainTitle" class="form-control" placeholder="Enter Page heading Main Title" value="<%= response.artofliving_data.pageHeadingMainTitle%>">
+                                            <input type="text" name="pageHeadingTitle" id="pageHeadingTitle" class="form-control" placeholder="Enter Page Haeding Title" value="<%= response.serviceContent_data.pageHeadingTitle%>">
                                         </div>
                                     </div>
-        
                                     <div class="form-group row">
                                         <div class="col-lg-12">
                                             <label>Page Heading Content:</label>
-                                            <textarea class="ckeditor form-control" name="pageHeadingContent" id="pageHeadingContent" placeholder="Enter Page Heading Description" rows="6"><%= response.artofliving_data.pageHeadingContent%></textarea>
+                                            <textarea class="ckeditor form-control" name="pageHeadingContent" id="pageHeadingContent" placeholder="Enter Page Heading Description" rows="6"><%= response.serviceContent_data.pageHeadingContent%></textarea>
                                         </div>
                                     </div>
         
@@ -61,12 +56,12 @@
                                             <label for="image" class="control-label">Images</label>
                                             <div class="row mix-grid">
                                                 <% 
-                                                if(response.artofliving_data.image.length >0) {
-                                                    for(var i=0; i< response.artofliving_data.image.length; i++) { %>
+                                                if(response.serviceContent_data.image.length >0) {
+                                                    for(var i=0; i< response.serviceContent_data.image.length; i++) { %>
                                                     <div class="col-md-2" id="banner_<%=i%>">
                                                         <div class="hover-effect">
-                                                            <div class="img"><img src="/uploads/artofliving/<%= response.artofliving_data.image[i] %>" alt="" class="img-responsive" height="80px"/></div>
-                                                            <div class="info"><a href="javascript:delImg('<%=i%>','<%=response.artofliving_data.image[i]%>')" class="mix-link"><i class="fas fa-trash-alt" style="color:red"></i></a></div>
+                                                            <div class="img"><img src="/uploads/services_content/<%= response.serviceContent_data.image[i] %>" alt="" class="img-responsive" height="80px"/></div>
+                                                            <div class="info"><a href="javascript:delImg('<%=i%>','<%=response.serviceContent_data.image[i]%>')" class="mix-link"><i class="fas fa-trash-alt" style="color:red"></i></a></div>
                                                         </div>
                                                     </div>
                                                     <% } } %>
@@ -81,11 +76,11 @@
                                      <div class="form-group row">
                                         <div class="col-lg-6">
                                             <label>Page Heading Button Text:</label>
-                                            <input type="text" name="pageHeadingButtonText" id="pageHeadingButtonText" class="form-control" placeholder="Enter Page Heading Button Text" value="<%= response.artofliving_data.pageHeadingButtonText%>">
+                                            <input type="text" name="pageHeadingButtonText" id="pageHeadingButtonText" class="form-control" placeholder="Enter Page Heading Button Text" value="<%= response.serviceContent_data.pageHeadingButtonText%>">
                                         </div>
                                     </div>
-                                    <% if(response.artofliving_data.sections.length > 0) {%>
-                                        <% response.artofliving_data.sections.forEach((content, index) => {%>
+                                    <% if(response.serviceContent_data.sections.length > 0) {%>
+                                        <% response.serviceContent_data.sections.forEach((content, index) => {%>
                                             <div class="form-group row">
                                                 <div class="col-lg-6">
                                                     <label>Section Title:</label>
@@ -108,7 +103,7 @@
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <% if ( content.image != '' ) {%>
-                                                        <img class="sections<%= index %>Image" id="sections<%= index %>ImagePreview" height="80px" src="/uploads/artofliving/<%= content.image %>">
+                                                        <img class="sections<%= index %>Image" id="sections<%= index %>ImagePreview" height="80px" src="/uploads/services_content/<%= content.image %>">
                                                         <% } else { %>
                                                             <img class="sections<%= index %>Image" id="sections<%= index %>ImagePreview" height="80px" src="">
                                                             <% }  %>
@@ -122,26 +117,18 @@
                                             </div>
                                             <% }) %>
                                             <% } %>
-                                        <div class="form-group row">
-                                            <div class="col-lg-6">
-                                                <label>Contact Us More Info Button Text:</label>
-                                                <input type="text" name="contactButtonText" id="contactButtonText" class="form-control" placeholder="Enter Buuton" value="<%= response.artofliving_data.contactButtonText%>">
-                                            </div>
-                                        </div>   
+                                       
                                 </div>
                                 <% }else{
                                     let pageHeadingTitle = ''
                                     let pageHeadingMainTitle = '' 
                                     let pageHeadingContent = ''  
                                     let pageHeadingButtonText = '' 
-                                    let contactButtonText = ''
-
-                                    if(_.has(response.artofliving_data.translate,language.shortcode)) {
-                                        pageHeadingTitle =  response.artofliving_data.translate[language.shortcode].pageHeadingTitle
-                                        pageHeadingMainTitle =  response.artofliving_data.translate[language.shortcode].pageHeadingMainTitle
-                                        pageHeadingContent =  response.artofliving_data.translate[language.shortcode].pageHeadingContent
-                                        pageHeadingButtonText =  response.artofliving_data.translate[language.shortcode].pageHeadingButtonText
-                                        contactButtonText = response.artofliving_data.translate[language.shortcode].contactButtonText
+                                    
+                                    if(_.has(response.serviceContent_data.translate,language.shortcode)) {
+                                        pageHeadingTitle =  response.serviceContent_data.translate[language.shortcode].pageHeadingTitle
+                                        pageHeadingContent =  response.serviceContent_data.translate[language.shortcode].pageHeadingContent
+                                        pageHeadingButtonText =  response.serviceContent_data.translate[language.shortcode].pageHeadingButtonText
                                     }
                                 %>
                                 <div class="tab-pane" id="kt_tabs_<%=language.shortcode%>" role="tabpanel">
@@ -149,10 +136,6 @@
                                         <div class="col-lg-6">
                                             <label>Page Heading Title:</label>
                                             <input type="text" name="translate[<%=count%>][pageHeadingTitle]" id="pageHeadingTitle" class="form-control" placeholder="Enter Page Haeding Title" value="<%=pageHeadingTitle%>">
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label>Page Heading Main Title:</label>
-                                            <input type="text" name="translate[<%=count%>][pageHeadingMainTitle]" id="pageHeadingMainTitle" class="form-control" placeholder="Enter Page heading Main Title" value="<%=pageHeadingMainTitle%>">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -167,23 +150,17 @@
                                             <input type="text" name="translate[<%=count%>][pageHeadingButtonText]" id="pageHeadingButtonText" class="form-control" placeholder="Enter Page Heading Button Text" value="<%=pageHeadingButtonText%>">
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <div class="col-lg-6">
-                                            <label>Contact Us More Info Button Text:</label>
-                                            <input type="text" name="translate[<%=count%>][contactButtonText]" id="contactButtonText" class="form-control" placeholder="Enter Buuton" value="<%= contactButtonText%>">
-                                        </div>
-                                    </div>  
-                                    
+                                   
                                     <% 
                                     let sectionTitle = ''
                                     let sectionDescription = '' 
                                     let sectionButton = ''  
                                     
                                     for(var s=0; s<5; s++) {
-                                    if(_.has(response.artofliving_data.translate,language.shortcode) && response.artofliving_data.translate[language.shortcode].sections.length > 0) {
-                                        sectionTitle = _.has(response.artofliving_data.translate[language.shortcode].sections[s],'title')?response.artofliving_data.translate[language.shortcode].sections[s].title:''
-                                        sectionDescription = _.has(response.artofliving_data.translate[language.shortcode].sections[s],'description')?response.artofliving_data.translate[language.shortcode].sections[s].description:''
-                                        sectionButton = _.has(response.artofliving_data.translate[language.shortcode].sections[s],'button')?response.artofliving_data.translate[language.shortcode].sections[s].button:''
+                                    if(_.has(response.serviceContent_data.translate,language.shortcode) && response.serviceContent_data.translate[language.shortcode].sections.length > 0) {
+                                        sectionTitle = _.has(response.serviceContent_data.translate[language.shortcode].sections[s],'title')?response.serviceContent_data.translate[language.shortcode].sections[s].title:''
+                                        sectionDescription = _.has(response.serviceContent_data.translate[language.shortcode].sections[s],'description')?response.serviceContent_data.translate[language.shortcode].sections[s].description:''
+                                        sectionButton = _.has(response.serviceContent_data.translate[language.shortcode].sections[s],'button')?response.serviceContent_data.translate[language.shortcode].sections[s].button:''
                                     } 
                                    %>
                                         
@@ -218,10 +195,10 @@
                             <div class="kt-form__actions">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <input type="hidden" name="id" value="<%= response.artofliving_data._id%>">
+                                        <input type="hidden" name="id" value="<%= response.serviceContent_data._id%>">
                                         <input type="hidden" name="delImgIds" id="delImgIds" value="">
                                         <button type="submit" class="btn btn-primary">Update</button>
-                                        <a href="<%= generateUrl('artofliving.edit') %>" class="btn btn-secondary">Cancel</a>
+                                        <a href="<%= generateUrl('services.content.edit') %>" class="btn btn-secondary">Cancel</a>
                                     </div>
                                 </div>
                             </div>

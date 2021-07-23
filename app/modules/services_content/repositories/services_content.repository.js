@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
-const ArtOfLiving = require('artofliving/models/artofliving.model');
+const ServiceContent = require('services_content/models/services_content.model');
 const perPage = config.PAGINATION_PERPAGE;
 
-const ArtOfLivingRepository = {
+const serviceContentRepository = {
 
     getById: async(id) => {
-        let result = await ArtOfLiving.findById(id).exec();
+        let result = await ServiceContent.findById(id).exec();
         try {
             if (!result) {
                 return null;
@@ -18,7 +18,7 @@ const ArtOfLivingRepository = {
     },
 
     getByField: async(params) => {
-        let result = await ArtOfLiving.findOne(params).lean().exec();
+        let result = await ServiceContent.findOne(params).lean().exec();
         try {
             if (!result) {
                 return null;
@@ -31,7 +31,7 @@ const ArtOfLivingRepository = {
     },
 
     getAllByField: async(params) => {
-        let result = await ArtOfLiving.find(params).exec();
+        let result = await ServiceContent.find(params).exec();
         try {
             if (!result) {
                 return null;
@@ -45,9 +45,9 @@ const ArtOfLivingRepository = {
 
     delete: async(id) => {
         try {
-            let result = await ArtOfLiving.findById(id);
+            let result = await ServiceContent.findById(id);
             if (result) {
-                let resultDelete = await ArtOfLiving.remove({ _id: id }).exec();
+                let resultDelete = await ServiceContent.remove({ _id: id }).exec();
                 if (!resultDelete) {
                     return null;
                 }
@@ -60,7 +60,7 @@ const ArtOfLivingRepository = {
 
     updateById: async(data, id) => {
         try {
-            let result = await ArtOfLiving.findByIdAndUpdate(id, data, { new: true, upsert: true }).exec();
+            let result = await ServiceContent.findByIdAndUpdate(id, data, { new: true, upsert: true }).exec();
             if (!result) {
                 return null;
             }
@@ -72,4 +72,4 @@ const ArtOfLivingRepository = {
 
 };
 
-module.exports = ArtOfLivingRepository;
+module.exports = serviceContentRepository;

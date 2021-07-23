@@ -2,14 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const status = ["Active", "Inactive"];
 
-const ArtOfLivingSchema = new Schema({
+const ServiceContentSchema = new Schema({
     pageHeadingTitle: { type: String, default: '' },
-    pageHeadingMainTitle: { type: String, default: '' },
     pageHeadingContent: { type: String, default: '' },
     image: [{ type: String, default: '' }],
     pageHeadingButtonText: { type: String, default: '' },
-    pageHeadingButtonUrl: { type: String, default: '' },
-    contactButtonText: { type: String, default: '' },
     sections: [{
         title: { type: String, default: '' },
         description: { type: String, default: '' },
@@ -19,10 +16,8 @@ const ArtOfLivingSchema = new Schema({
     translate:[{
         language: {type:String, default: ''},
         pageHeadingTitle: { type: String, default: '' },
-        pageHeadingMainTitle: { type: String, default: '' },
         pageHeadingContent: { type: String, default: '' },
         pageHeadingButtonText: { type: String, default: '' },
-        contactButtonText: { type: String, default: '' },
         sections: [{
             title: { type: String, default: '' },
             description: { type: String, default: '' },
@@ -34,4 +29,4 @@ const ArtOfLivingSchema = new Schema({
 }, { timestamps: true });
 
 // create the model for users and expose it to our app
-module.exports = mongoose.model('ArtOfLiving', ArtOfLivingSchema);
+module.exports = mongoose.model('Service_Content', ServiceContentSchema);

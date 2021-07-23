@@ -29,7 +29,14 @@ var KTDatatableCms = function() {
         // columns definition
 
         columns: [
-
+            {
+                field: 'icon',
+                title: 'Image',
+                width: 120,
+                template: function(row) {
+                    return `<img src="/uploads/language/${row.icon}" alt="" height="32" width="32">`
+                },
+            },
             {
                 field: 'title',
                 title: 'Language',
@@ -48,7 +55,7 @@ var KTDatatableCms = function() {
             },
             {
                 field: 'isDefault',
-                title: 'Default Language',
+                title: 'Default',
                 width: 110,
                 template: function(row) {
                     return row.isDefault == true ? 'Yes' : 'No';

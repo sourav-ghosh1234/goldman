@@ -128,4 +128,31 @@ $(document).ready(function() {
             .replace(/(\..*)\./g, '$1') // decimal can't exist more than once
             .replace(/(\.[\d]{2})./g, '$1'); // not more than 2 digits after decimal
     });
+    
 });
+
+function delImg(id, image_name) {
+    alert('eoeoeo');
+    swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+    }).then(function(result) {
+        if (result.value) {
+            if ($("#delImgIds").val() != '') {
+                $("#delImgIds").val($("#delImgIds").val() + ',' + image_name);
+
+            }
+            else {
+
+                $("#delImgIds").val(image_name);
+
+            }
+            $("#banner_" + id).remove();
+        }
+    });
+}
