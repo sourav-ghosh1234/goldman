@@ -984,6 +984,75 @@ var KTFormControls = function() {
         });
     };
 
+    var newsFrmAddValidation = function() {
+        $('#frmAddNews').validate({
+            rules: {
+                title: {
+                    required: true
+                },
+                date: {
+                    required: true
+                },
+                author_name: {
+                    required: true
+                },
+                image: {
+                    required: true
+                }
+            },
+            messages: {
+                title: {
+                    required: 'Title is Required'
+                },
+                date: {
+                    required: 'Date is Required'
+                },
+                author_name: {
+                    required: 'Author name is Required'
+                },
+                image: {
+                    required: "Please upload an image"
+                },
+            },
+            invalidHandler: function(event, validate) {},
+            submitHandler: function(form) {
+                form[0].submit();
+            }
+        });
+    };
+
+    var newsFrmEditValidation = function() {
+        $('#frmEditNews').validate({
+            rules: {
+                title: {
+                    required: true
+                },
+                date: {
+                    required: true
+                },
+                author_name: {
+                    required: true
+                }
+            },
+            messages: {
+                title: {
+                    required: 'Title is Required'
+                },
+                date: {
+                    required: 'Date is Required'
+                },
+                author_name: {
+                    required: 'Author name is Required'
+                }
+                
+            },
+            invalidHandler: function(event, validate) {},
+            submitHandler: function(form) {
+                form[0].submit();
+            }
+        });
+    };
+
     var blankSpaceNotAllow = function() {
         $("input").on("keypress", function(e) {
             var startPos = e.currentTarget.selectionStart;
@@ -1019,6 +1088,8 @@ var KTFormControls = function() {
             addPropertyFrmValidation();
             editPropertyFrmValidation();
             cityFrmValidation();
+            newsFrmAddValidation();
+            newsFrmEditValidation();
         }
     };
 }();

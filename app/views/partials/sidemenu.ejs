@@ -124,6 +124,12 @@
                         <span class="kt-menu__link-text">Art Management</span>
                     </a>
                 </li>
+                <li class="kt-menu__item " aria-haspopup="true">
+                    <a href="<%= generateUrl('news.list') %>" class="kt-menu__link <%=(page_name == 'news-management') ? 'active' : ''%>">
+                        <i class="flaticon-edit-1"></i>
+                        <span class="kt-menu__link-text">News</span>
+                    </a>
+                </li>
 
                 <li class="kt-menu__item " aria-haspopup="true">
                     <a href="<%= generateUrl('language.list') %>" class="kt-menu__link <%=(page_name == 'language-management') ? 'active' : ''%>">
