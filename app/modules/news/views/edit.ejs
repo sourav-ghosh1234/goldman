@@ -46,10 +46,12 @@
 								<label for="description" class="control-label">Image</label>
 								<input type="file" name="image" id="image" class="form-control" accept="image/*">
 							</div>
+							<% if(response.image) { %>
 							<div class="col-lg-2">
                                 <br>
                                 <img src="/uploads/news/thumb/<%= response.image%>" alt="No image found" height="50px">
                             </div>
+							<% } %>
 						</div>
 
 
