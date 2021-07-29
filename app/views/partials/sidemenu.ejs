@@ -137,6 +137,13 @@
                         <span class="kt-menu__link-text">Language Management</span>
                     </a>
                 </li>
+                <li class="kt-menu__item" aria-haspopup="true">
+                        <a href="<%= generateUrl('menu.list') %>" class="kt-menu__link <%=(page_name == 'menu-list') ? 'active' : ''%>">
+                            <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i>
+                            <i class="fas fa-bars"></i>
+                            <span class="kt-menu__link-text">Header & Footer</span>
+                        </a>
+                </li>
 
                 <li class="kt-menu__item " aria-haspopup="true">
                     <a href="<%= generateUrl('homecontent.edit') %>" class="kt-menu__link <%=(page_name == 'homecontent-management') ? 'active' : ''%>">
