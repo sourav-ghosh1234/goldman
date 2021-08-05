@@ -144,6 +144,12 @@
                             <span class="kt-menu__link-text">Header & Footer</span>
                         </a>
                 </li>
+                <li class="kt-menu__item " aria-haspopup="true">
+                    <a href="<%= generateUrl('staticText.edit') %>" class="kt-menu__link <%=(page_name == 'statictext-management') ? 'active' : ''%>">
+                        <i class="fas fa-calendar-minus"></i>
+                        <span class="kt-menu__link-text">Static Text</span>
+                    </a>
+                </li>
 
                 <li class="kt-menu__item " aria-haspopup="true">
                     <a href="<%= generateUrl('homecontent.edit') %>" class="kt-menu__link <%=(page_name == 'homecontent-management') ? 'active' : ''%>">
