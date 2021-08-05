@@ -13,199 +13,221 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="kt-portlet">
-                    <form class="kt-form kt-form--label-right" id="frmEditHomeContent" action="<%= generateUrl('homecontent.update') %>" method="POST" enctype="multipart/form-data">
+                    <form class="kt-form kt-form--label-right" id="frmEditHomeContent1" action="<%= generateUrl('homecontent.update') %>" method="POST" enctype="multipart/form-data">
+                        
                         <div class="kt-portlet__body">
-
-                            <div class="form-group row">
-                                <!--  -->
-                                <div class="col-lg-12">
-                                    <h5 class="pull-left">Banner</h5>
-                                    <button class="btn btn-info btn-rounded pull-right addBanner">Add</button>
-                                </div>
-                                <div class="col-lg-12">&nbsp;</div>
-                                <div class="banner-item-wrapper col-lg-12">
-                                    <% if(response.homecontent_data.banners.length > 0) {%>
-                                        <% response.homecontent_data.banners.map((imageItem, index) => { %>
-                                            <div class="form-group row banner">
-                                                <div class="col-lg-5">
-                                                    <input type="file" name="banner_<%= index %>" id="image" class="form-control imagepickerWithPreviewId" data-previewelement="banner<%= index %>Preview">
-                                                </div>
-                                                <input type="hidden" name="banners[<%= index %>][image]" value="<%=imageItem.image%>">
-                                                <div class="col-lg-5">
-                                                    <% if(imageItem.image != '') {%>
-                                                        <img class="bannerImage" id="banner<%= index %>Preview" height="80px" src="/uploads/homecontent/<%= imageItem.image %>">
-                                                        <!-- <input type="hidden" name="photosAndVideos[gallery][0]"> -->
-                                                        <% } else { %>
-                                                            <img class="bannerImage" id="banner0Preview" height="80px" src="">
-                                                            <% } %>
-                                                </div>
-                                                <% if(index != 0) {%>
-                                                    <div class="col-lg-2"><button class="btn btn-danger btn-rounded pull-right removeGallery" id="item<%= index %>">Remove</button></div>
-                                                    <% } %>
-                                                        <div class="col-lg-5 mt-4">
-                                                            <input type="text" class="form-control requuired" name="banners[<%= index %>][title]" placeholder="Enter Title" value="<%= imageItem.title %>">
-                                                        </div>
+                            <ul class="nav nav-pills nav-fill" role="tablist">
+                                <%response.languages.map((data)=>{%>
+                                <%if(data.isDefault){%>
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab"
+                                        href="#kt_tabs_<%=data.shortcode%>"><%=data.title%></a>
+                                </li>
+                                <%}else{%>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#kt_tabs_<%=data.shortcode%>"><%=data.title%></a>
+                                </li>
+                                <%}%>
+                            <%})%>
+                            </ul>
+                            <div class="tab-content">
+                                <%
+                                        let count = 0;
+                                        response.languages.map((language)=>{
+                                    %>
+                                <%if(language.shortcode == 'en'){%>
+                                <div class="tab-pane active" id="kt_tabs_<%=language.shortcode%>" role="tabpanel">
+                                    
+                                    <div class="form-group row">
+                                        <div class="col-lg-6">
+                                            <label>Banner Image:</label>
+                                            <input id="bannerImage" name="bannerImage" type="file" placeholder="Image" accept="image/*" class="form-control"/>
+                                            <input type="hidden" name="bannerImage" value="<%=response.homecontent_data.bannerImage%>">
+                                        </div>
+                                        <% if(response.homecontent_data.bannerImage) { %>
+                                        <div class="col-lg-6">
+                                            <img src="/uploads/homecontent/<%= response.homecontent_data.bannerImage %>" alt="" class="img-responsive" height="80px"/>
+                                        </div>
+                                        <% } %>
+                                    </div>
+                                    <div class="form-group row">
+                                       <div class="col-lg-6">
+                                            <label>Banner Text:</label>
+                                            <input type="text" name="bannerText" id="bannerText" class="form-control" placeholder="Enter Banner Text" value="<%= response.homecontent_data.bannerText%>">
+                                        </div>
+                                    </div>
+        
+                                    <div class="form-group row">
+                                        <div class="col-lg-12">
+                                            <label>Content:</label>
+                                            <textarea class="ckeditor form-control" name="content" id="content" placeholder="Enter Content" rows="4"><%= response.homecontent_data.content%></textarea>
+                                        </div>
+                                    </div>
+                                    <% if(response.homecontent_data.realEstateService) {%>
+                                        <div class="form-group row">
+                                            <div class="col-lg-6">
+                                                <label>Real estate service Title:</label>
+                                                <input type="text" name="realEstateService[title]" id="realEstateServiceTitle" class="form-control" placeholder="Enter Section Title" value="<%= response.homecontent_data.realEstateService.title %>">
                                             </div>
-                                            <% }) %>
-                                                <% } else { %>
-                                                    <div class="form-group row banner">
-                                                        <div class="col-lg-5">
-                                                            <input type="file" name="banner_0" id="image" class="form-control imagepickerWithPreviewId" data-previewelement="banner0Preview">
-                                                        </div>
-                                                        <div class="col-lg-5">
-                                                            <img class="galleryImage" id="banner0Preview" height="80px" src="">
-                                                        </div>
-                                                        <div class="col-lg-2"><button class="btn btn-danger btn-rounded pull-right removeGallery" id="item0">Remove</button></div>
-                                                        <div class="col-lg-5 mt-4">
-                                                            <input type="text" class="form-control requuired" name="banners[0][title]" placeholder="Enter Image Alt Text">
-                                                        </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-lg-12">
+                                                <label>Real estate service Description:</label>
+                                                <textarea class="ckeditor form-control" name="realEstateService[description]" id="realEstateServiceDesc" placeholder="Enter Section Description" rows="4"><%= response.homecontent_data.realEstateService.description %></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-lg-6">
+                                                <label for="pageHeadingImage" class="control-label">Real estate service Image</label>
+                                                <div class="controls">
+                                                    <input id="realEstateServiceImage" name="realEstateService_image" type="file" placeholder="Enter Image" accept="image/*" class="form-control"/>
+                                                </div>
+                                                <input type="hidden" name="realEstateService[image]" value="<%=response.homecontent_data.realEstateService.image%>">
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <% if ( response.homecontent_data.realEstateService.image) {%>
+                                                    <img class="" id="" height="80px" src="/uploads/homecontent/<%= response.homecontent_data.realEstateService.image %>">
+                                                <% }%>
+                                            </div>
+                                        </div>
+                                       <% } %>
+                                    <% if(response.homecontent_data.artOfLiving) {%>
+                                            <div class="form-group row">
+                                                <div class="col-lg-6">
+                                                    <label>Art of living Title:</label>
+                                                    <input type="text" name="artOfLiving[title]" id="artOfLivingTitle" class="form-control" placeholder="Enter Section Title" value="<%= response.homecontent_data.artOfLiving.title %>">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-lg-12">
+                                                    <label>Art of living Description:</label>
+                                                    <textarea class="ckeditor form-control" name="artOfLiving[description]" id="artOfLivingDesc" placeholder="Enter Section Description" rows="4"><%= response.homecontent_data.artOfLiving.description %></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-lg-6">
+                                                    <label for="pageHeadingImage" class="control-label">Art of living Image</label>
+                                                    <div class="controls">
+                                                        <input id="artOfLivingImage" name="artOfLiving_image" type="file" placeholder="Enter Image" accept="image/*" class="form-control"/>
                                                     </div>
-                                                    <% } %>
+                                                    <input type="hidden" name="artOfLiving[image]" value="<%=response.homecontent_data.artOfLiving.image%>">
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <% if ( response.homecontent_data.artOfLiving.image) {%>
+                                                        <img class="" id="" height="80px" src="/uploads/homecontent/<%= response.homecontent_data.artOfLiving.image %>">
+                                                    <% }%>
+                                                </div>
+                                            </div>
+                                           <% } %>
+                                           
+                                           <div class="form-group row">
+                                                <div class="col-lg-6">
+                                                    <label>Current Properties Heading:</label>
+                                                    <input type="text" name="currentPropertiesHeading" id="currentPropertiesHeading" class="form-control" placeholder="Enter Heading" value="<%= response.homecontent_data.currentPropertiesHeading%>">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-lg-12">
+                                                    <label>Current Properties Content:</label>
+                                                    <textarea class="ckeditor form-control" name="currentPropertiesText" id="currentPropertiesText" placeholder="Enter Content" rows="4"><%= response.homecontent_data.currentPropertiesText%></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-lg-6">
+                                                    <label>Contact Us Heading:</label>
+                                                    <input type="text" name="contactusHeading" id="contactusHeading" class="form-control" placeholder="Enter Heading" value="<%= response.homecontent_data.contactusHeading %>">
+                                                </div>
+                                            </div>
+                                       
                                 </div>
-                                <!--  -->
-                            </div>
+                                <% }else{
+                                    let bannerText = ''
+                                    let content = '' 
+                                    let realEstateTitle = ''  
+                                    let realEstateDesc = '' 
+                                    let artLivingTitle = ''
+                                    let artLivingDesc = ''
+                                    let currentPropertiesHeading = ''
+                                    let currentPropertiesText = ''
+                                    let contactusHeading = ''
 
-                            <div class="form-group row">
-                                <div class="col-lg-12">
-                                    <label>Short Description:</label>
-                                    <textarea class="form-control" name="shortDescription" id="shortDescription" placeholder="Enter Short Description"><%= response.homecontent_data.shortDescription%></textarea>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <div class="col-lg-6">
-                                    <label>Content 1 Title:</label>
-                                    <input type="text" name="content1Title" id="content1Title" class="form-control" placeholder="Enter Content 1 Title" value="<%= response.homecontent_data.content1Title%>">
-                                </div>
-                                <div class="col-lg-6">
-                                    <label>Content 1 Description:</label>
-                                    <textarea class="form-control" name="content1Description" id="content1Description" placeholder="Enter Content 1 Description"><%= response.homecontent_data.content1Description%></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-lg-6">
-                                    <label for="content1Image" class="control-label">Content 1 Image</label>
-                                    <div class="controls">
-                                        <input id="content1Image" name="content1Image" type="file" placeholder="Enter Title" accept="image/*" class="form-control imagepickerWithPreviewId" data-previewelement="content1ImagePreview" />
+                                    if(_.has(response.homecontent_data.translate,language.shortcode)) {
+                                        bannerText =  response.homecontent_data.translate[language.shortcode].bannerText
+                                        content =  response.homecontent_data.translate[language.shortcode].content
+                                        realEstateTitle =  response.homecontent_data.translate[language.shortcode].realEstateService.title
+                                        realEstateDesc =  response.homecontent_data.translate[language.shortcode].realEstateService.description
+                                        artLivingTitle =  response.homecontent_data.translate[language.shortcode].artOfLiving.title
+                                        artLivingDesc =  response.homecontent_data.translate[language.shortcode].artOfLiving.description
+                                        currentPropertiesHeading =  response.homecontent_data.translate[language.shortcode].currentPropertiesHeading
+                                        currentPropertiesText = response.homecontent_data.translate[language.shortcode].currentPropertiesText
+                                        contactusHeading = response.homecontent_data.translate[language.shortcode].contactusHeading
+                                    }
+                                %>
+                                <div class="tab-pane" id="kt_tabs_<%=language.shortcode%>" role="tabpanel">
+                                    <div class="form-group row">
+                                        <div class="col-lg-6">
+                                            <label>Banner Text:</label>
+                                            <input type="text" name="translate[<%=count%>][bannerText]" id="bannerText_<%=count%>" class="form-control" placeholder="Enter Banner Text" value="<%= bannerText%>">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <% if ( response.homecontent_data.content1Image != '' ) {%>
-                                        <img class="content1Image" id="content1ImagePreview" height="80px" src="/uploads/homecontent/<%= response.homecontent_data.content1Image %>">
-                                        <% } else { %>
-                                            <img class="content1Image" id="content1ImagePreview" height="80px" src="">
-                                            <% }  %>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <div class="col-lg-6">
-                                    <label>Content 2 Title:</label>
-                                    <input type="text" name="content2Title" id="content2Title" class="form-control" placeholder="Enter Content 2 Title" value="<%= response.homecontent_data.content2Title%>">
-                                </div>
-                                <div class="col-lg-6">
-                                    <label>Content 2 Description:</label>
-                                    <textarea class="form-control" name="content2Description" id="content2Description" placeholder="Enter Content 2 Description"><%= response.homecontent_data.content2Description%></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-lg-6">
-                                    <label for="content2Image" class="control-label">Content 2 Image</label>
-                                    <div class="controls">
-                                        <input id="content2Image" name="content2Image" type="file" placeholder="Enter Title" accept="image/*" class="form-control imagepickerWithPreviewId" data-previewelement="content2ImagePreview" />
+                                    <div class="form-group row">
+                                        <div class="col-lg-12">
+                                            <label>Content:</label>
+                                            <textarea class="ckeditor form-control" name="translate[<%=count%>][content]" id="content_<%=count%>" placeholder="Enter Content" rows="4"><%= content%></textarea>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <% if ( response.homecontent_data.content2Image != '' ) {%>
-                                        <img class="content2Image" id="content2ImagePreview" height="80px" src="/uploads/homecontent/<%= response.homecontent_data.content2Image %>">
-                                        <% } else { %>
-                                            <img class="content2Image" id="content2ImagePreview" height="80px" src="">
-                                            <% }  %>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-lg-6 mb-4">
-                                    <label>Content 2 Button Text:</label>
-                                    <input type="text" name="content2ButtonText" id="content2ButtonText" class="form-control" placeholder="Enter Content 2 Button Text" value="<%= response.homecontent_data.content2ButtonText %>">
-                                </div>
-                                <div class="col-lg-6">
-                                    <label>Content 2 Button Link:</label>
-                                    <textarea class="form-control" name="content2ButtonUrl" id="content2ButtonUrl" placeholder="Enter Content 2 Button Link"><%= response.homecontent_data.content2ButtonUrl || '' %></textarea>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <div class="col-lg-6">
-                                    <label>Content 3 Title:</label>
-                                    <input type="text" name="content3Title" id="content3Title" class="form-control" placeholder="Enter Content 3 Title" value="<%= response.homecontent_data.content3Title%>">
-                                </div>
-                                <div class="col-lg-6">
-                                    <label>Content 3 Description:</label>
-                                    <textarea class="form-control" name="content3Description" id="content3Description" placeholder="Enter Content 3 Description"><%= response.homecontent_data.content3Description%></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-lg-6">
-                                    <label for="content3Image" class="control-label">Content 3 Image</label>
-                                    <div class="controls">
-                                        <input id="content3Image" name="content3Image" type="file" placeholder="Enter Title" accept="image/*" class="form-control imagepickerWithPreviewId" data-previewelement="content3ImagePreview" />
+                                        <div class="form-group row">
+                                            <div class="col-lg-6">
+                                                <label>Real estate service Title:</label>
+                                                <input type="text" name="translate[<%=count%>][realEstateService][title]" id="realEstateServiceTitle_<%=count%>" class="form-control" placeholder="Enter Title" value="<%= realEstateTitle %>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-lg-12">
+                                                <label>Real estate service Description:</label>
+                                                <textarea class="ckeditor form-control" name="translate[<%=count%>][realEstateService][description]" id="realEstateServiceDesc_<%=count%>" placeholder="Enter Description" rows="4"><%= realEstateDesc %></textarea>
+                                            </div>
+                                        </div>
+                                      
+                                     
+                                        <div class="form-group row">
+                                            <div class="col-lg-6">
+                                                <label>Art of living Title:</label>
+                                                <input type="text" name="translate[<%=count%>][artOfLiving][title]" id="artOfLivingTitle_<%=count%>" class="form-control" placeholder="Enter Title" value="<%= artLivingTitle %>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-lg-12">
+                                                <label>Art of living Description:</label>
+                                                <textarea class="ckeditor form-control" name="translate[<%=count%>][artOfLiving][description]" id="artOfLivingDesc_<%=count%>" placeholder="Enter Description" rows="4"><%= artLivingDesc %></textarea>
+                                            </div>
+                                        </div>
+                                     
+                                      <div class="form-group row">
+                                        <div class="col-lg-6">
+                                            <label>Current Properties Heading:</label>
+                                            <input type="text" name="translate[<%=count%>][currentPropertiesHeading]" id="currentPropertiesHeading_<%=count%>" class="form-control" placeholder="Enter Heading" value="<%= currentPropertiesHeading%>">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <% if ( response.homecontent_data.content3Image != '' ) {%>
-                                        <img class="content3Image" id="content3ImagePreview" height="80px" src="/uploads/homecontent/<%= response.homecontent_data.content3Image %>">
-                                        <% } else { %>
-                                            <img class="content3Image" id="content3ImagePreview" height="80px" src="">
-                                            <% }  %>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-lg-6 mb-4">
-                                    <label>Content 3 Button Text:</label>
-                                    <input type="text" name="content3ButtonText" id="content3ButtonText" class="form-control" placeholder="Enter Content 3 Button Text" value="<%= response.homecontent_data.content3ButtonText %>">
-                                </div>
-                                <div class="col-lg-6">
-                                    <label>Content 3 Button Link:</label>
-                                    <textarea class="form-control" name="content3ButtonUrl" id="content3ButtonUrl" placeholder="Enter Content 3 Button Link"><%= response.homecontent_data.content3ButtonUrl || '' %></textarea>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <div class="col-lg-6">
-                                    <label>Content 4 Title:</label>
-                                    <input type="text" name="content4Title" id="content2Title" class="form-control" placeholder="Enter Content 4 Title" value="<%= response.homecontent_data.content4Title%>">
-                                </div>
-                                <div class="col-lg-6">
-                                    <label>Content 4 Description:</label>
-                                    <textarea class="form-control" name="content4Description" id="content4Description" placeholder="Enter Content 4 Description"><%= response.homecontent_data.content4Description%></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-lg-6">
-                                    <label for="content4Image" class="control-label">Content 4 Image</label>
-                                    <div class="controls">
-                                        <input id="content4Image" name="content4Image" type="file" placeholder="Enter Title" accept="image/*" class="form-control imagepickerWithPreviewId" data-previewelement="content4ImagePreview" />
+                                    <div class="form-group row">
+                                        <div class="col-lg-12">
+                                            <label>Current Properties Content:</label>
+                                            <textarea class="ckeditor form-control" name="translate[<%=count%>][currentPropertiesText]" id="currentPropertiesText_<%=count%>" placeholder="Enter Content" rows="4"><%= currentPropertiesText%></textarea>
+                                        </div>
                                     </div>
+                                    <div class="form-group row">
+                                        <div class="col-lg-6">
+                                            <label>Contact Us Heading:</label>
+                                            <input type="text" name="translate[<%=count%>][contactusHeading]" id="contactusHeading_<%=count%>" class="form-control" placeholder="Enter Heading" value="<%= contactusHeading %>">
+                                        </div>
+                                    </div>
+                                    
+                                    <input type="hidden" name="translate[<%=count%>][language]" value="<%=language.shortcode%>">
                                 </div>
-                                <div class="col-lg-6">
-                                    <% if ( response.homecontent_data.content4Image != '' ) {%>
-                                        <img class="content4Image" id="content4ImagePreview" height="80px" src="/uploads/homecontent/<%= response.homecontent_data.content4Image %>">
-                                        <% } else { %>
-                                            <img class="content4Image" id="content4ImagePreview" height="80px" src="">
-                                            <% }  %>
-                                </div>
+                                <% count++ }%>
+                                <%})%>
                             </div>
-                            <div class="form-group row">
-                                <div class="col-lg-6 mb-4">
-                                    <label>Content 4 Button Text:</label>
-                                    <input type="text" name="content4ButtonText" id="content4ButtonText" class="form-control" placeholder="Enter Content 4 Button Text" value="<%= response.homecontent_data.content4ButtonText %>">
-                                </div>
-                                <div class="col-lg-6">
-                                    <label>Content 4 Button Link:</label>
-                                    <textarea class="form-control" name="content4ButtonUrl" id="content4ButtonUrl" placeholder="Enter Content 4 Button Link"><%= response.homecontent_data.content4ButtonUrl || '' %></textarea>
-                                </div>
-                            </div>
-
+                            <!-- hidden user id -->
                         </div>
                         <div class="kt-portlet__foot">
                             <div class="kt-form__actions">

@@ -1,4 +1,5 @@
 const homecontentRepo = require('homecontent/repositories/homecontent.repository');
+const languageRepo = require('language/repositories/language.repository');
 const express = require('express');
 const routeLabel = require('route-label');
 const router = express.Router();
@@ -14,14 +15,24 @@ class homeContentController {
 
     /*
     // @Method: edit
-    // @Description:  Coupon update page
+    // @Description:  Home content update page
     */
     async edit(req, res) {
         try {
             let result = {};
+            let languages = await languageRepo.getAllByField({ 'status': 'Active',isDeleted:false});
+			result.languages = languages;
             let homecontent = await homecontentRepo.getByField();
+            
+            // This is for language section //
+			var translateArr = [];
+			for (var i = 0; i < homecontent.translate.length; i++) {
+                translateArr[homecontent.translate[i].language] = homecontent.translate[i];
+			}
+            homecontent.translate = translateArr
             if (!_.isEmpty(homecontent)) {
                 result.homecontent_data = homecontent;
+                
                 res.render('homecontent/views/edit.ejs', {
                     page_name: 'homecontent-management',
                     page_title: 'Home Content Edit',
@@ -37,10 +48,11 @@ class homeContentController {
                 message: e.message
             });
         }
+
     };
 
     /* @Method: update
-    // @Description: coupon update action
+    // @Description: Home content update action
     */
     async update(req, res) {
         try {
@@ -48,21 +60,26 @@ class homeContentController {
             let homeContent = await homecontentRepo.getById(homecontentId);
             if (req.files.length > 0) {
                 req.files.forEach(file => {
-                    if (file.fieldname.search('banner') != -1) {
-                        let fileIndex = file.fieldname.split('_')[1];
-                        if (homeContent.banners[fileIndex]['image'] && homeContent.banners[fileIndex]['image'] != '' && fs.existsSync(`./public/uploads/homecontent/${homeContent.banners[fileIndex]['image']}`)) {
-                            fs.unlinkSync(`./public/uploads/homecontent/${homeContent.banners[fileIndex]['image']}`);
+                    if (file.fieldname == 'bannerImage') {
+                        if (homeContent.bannerImage && homeContent.bannerImage != '' && fs.existsSync(`./public/uploads/homecontent/${homeContent.bannerImage}`)) {
+                            fs.unlinkSync(`./public/uploads/homecontent/${homeContent.bannerImage}`);
                         }
-                        req.body.banners[fileIndex]['image'] = file.filename;
-                    } else {
-                        if (homeContent.banners[file.fieldname] && homeContent.banners[file.fieldname] != '' && fs.existsSync(`./public/uploads/homecontent/${homeContent.banners[file.fieldname]}`)) {
-                            fs.unlinkSync(`./public/uploads/homecontent/${homeContent.banners[file.fieldname]}`);
+                        req.body.bannerImage = file.filename;
+                    } 
+                    if (file.fieldname == 'artOfLiving_image') {
+                        if (homeContent.artOfLiving.image && homeContent.artOfLiving.image != '' && fs.existsSync(`./public/uploads/homecontent/${homeContent.artOfLiving.image}`)) {
+                            fs.unlinkSync(`./public/uploads/homecontent/${homeContent.artOfLiving.image}`);
                         }
-                        req.body[file.fieldname] = file.filename;
-                    }
+                        req.body.artOfLiving.image = file.filename;
+                    } 
+                    if (file.fieldname == 'realEstateService_image') {
+                        if (homeContent.realEstateService.image && homeContent.realEstateService.image != '' && fs.existsSync(`./public/uploads/homecontent/${homeContent.realEstateService.image}`)) {
+                            fs.unlinkSync(`./public/uploads/homecontent/${homeContent.realEstateService.image}`);
+                        }
+                        req.body.realEstateService.image = file.filename;
+                    } 
                 });
             }
-
             let homecontentIdUpdate = await homecontentRepo.updateById(req.body, homecontentId);
             if (homecontentIdUpdate) {
                 req.flash('success', "Home Content Updated Successfully");
