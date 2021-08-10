@@ -1,0 +1,251 @@
+<% layout(layout_directory+'/mainLayout') -%>
+
+    <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+        <div class="kt-subheader__main">
+            <h3 class="kt-subheader__title">
+                <%= page_title %>
+            </h3>
+            <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+        </div>
+    </div>
+
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="kt-portlet">
+                    <form class="kt-form kt-form--label-right" id="frmEditContactContent" action="<%= generateUrl('contactcontent.update') %>" method="POST" enctype="multipart/form-data">
+                        
+                        <div class="kt-portlet__body">
+                            <ul class="nav nav-pills nav-fill" role="tablist">
+                                <%response.languages.map((data)=>{%>
+                                <%if(data.isDefault){%>
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab"
+                                        href="#kt_tabs_<%=data.shortcode%>"><%=data.title%></a>
+                                </li>
+                                <%}else{%>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#kt_tabs_<%=data.shortcode%>"><%=data.title%></a>
+                                </li>
+                                <%}%>
+                            <%})%>
+                            </ul>
+                            <div class="tab-content">
+                                <%
+                                        let count = 0;
+                                        response.languages.map((language)=>{
+                                    %>
+                                <%if(language.shortcode == 'en'){%>
+                                <div class="tab-pane active" id="kt_tabs_<%=language.shortcode%>" role="tabpanel">
+                                    <div class="form-group row">
+                                       <div class="col-lg-6">
+                                            <label>Heading:</label>
+                                            <input type="text" name="heading" id="heading" class="form-control" placeholder="Enter Heading" value="<%= response.contactcontent_data.heading%>">
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label>Address:</label>
+                                            <input type="text" name="address" id="address" class="form-control" placeholder="Enter Address" value="<%= response.contactcontent_data.address%>">
+                                        </div>
+                                    </div>
+        
+                                    <div class="form-group row">
+                                        <div class="col-lg-12">
+                                            <label>Sub Heading:</label>
+                                            <input type="text" name="subHeading" id="subHeading" class="form-control" placeholder="Enter Sub Heading" value="<%= response.contactcontent_data.subHeading%>">
+                                        </div>
+                                    </div>
+                                    <% if(response.contactcontent_data.contact_one) {%>
+                                        <div class="form-group row">
+                                            <div class="col-lg-6">
+                                                <label>Contact One Heading:</label>
+                                                <input type="text" name="contact_one[heading]" id="contact_one_heading" class="form-control" placeholder="Enter Heading" value="<%= response.contactcontent_data.contact_one.heading %>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-lg-6">
+                                                <label>Contact One Address:</label>
+                                                <input type="text" name="contact_one[address]" id="contact_one_address" class="form-control" placeholder="Enter Address" value="<%= response.contactcontent_data.contact_one.address %>">
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label>Contact One Phone:</label>
+                                                <input type="text" name="contact_one[phone]" id="contact_one_phone" class="form-control" placeholder="Enter Phone" value="<%= response.contactcontent_data.contact_one.phone %>">
+                                            </div>
+                                        </div>
+                                        
+                                    <% } %>
+                                    <% if(response.contactcontent_data.contact_two) {%>
+                                        <div class="form-group row">
+                                            <div class="col-lg-6">
+                                                <label>Contact Two Heading:</label>
+                                                <input type="text" name="contact_two[heading]" id="contact_two_heading" class="form-control" placeholder="Enter Heading" value="<%= response.contactcontent_data.contact_two.heading %>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-lg-6">
+                                                <label>Contact Two Address:</label>
+                                                <input type="text" name="contact_two[address]" id="contact_two_address" class="form-control" placeholder="Enter Address" value="<%= response.contactcontent_data.contact_two.address %>">
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label>Contact Two Phone:</label>
+                                                <input type="text" name="contact_two[phone]" id="contact_two_phone" class="form-control" placeholder="Enter Phone" value="<%= response.contactcontent_data.contact_two.phone %>">
+                                            </div>
+                                        </div>
+                                        
+                                    <% } %>
+                                    <% if(response.contactcontent_data.contact_three) {%>
+                                        <div class="form-group row">
+                                            <div class="col-lg-6">
+                                                <label>Contact Three Heading:</label>
+                                                <input type="text" name="contact_three[heading]" id="contact_three_heading" class="form-control" placeholder="Enter Heading" value="<%= response.contactcontent_data.contact_three.heading %>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-lg-6">
+                                                <label>Contact Three Address:</label>
+                                                <input type="text" name="contact_three[address]" id="contact_three_address" class="form-control" placeholder="Enter Address" value="<%= response.contactcontent_data.contact_three.address %>">
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label>Contact Three Phone:</label>
+                                                <input type="text" name="contact_three[phone]" id="contact_three_phone" class="form-control" placeholder="Enter Phone" value="<%= response.contactcontent_data.contact_three.phone %>">
+                                            </div>
+                                        </div>
+                                        
+                                    <% } %>
+                                    <% if(response.contactcontent_data.contact_four) {%>
+                                        <div class="form-group row">
+                                            <div class="col-lg-6">
+                                                <label>Heading:</label>
+                                                <input type="text" name="contact_four[heading]" id="contact_four_heading" class="form-control" placeholder="Enter Heading" value="<%= response.contactcontent_data.contact_four.heading %>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-lg-6">
+                                                <label>Address:</label>
+                                                <input type="text" name="contact_four[address]" id="contact_four_address" class="form-control" placeholder="Enter Address" value="<%= response.contactcontent_data.contact_four.address %>">
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label>Phone:</label>
+                                                <input type="text" name="contact_four[phone]" id="contact_four_phone" class="form-control" placeholder="Enter Phone" value="<%= response.contactcontent_data.contact_four.phone %>">
+                                            </div>
+                                        </div>
+                                        
+                                    <% } %>
+                                 </div>
+                                <% }else{
+                                    let heading = ''
+                                    let address = '' 
+                                    let subHeading = ''  
+                                    let contact_one_heading = '' 
+                                    let contact_one_address = ''
+                                    let contact_one_phone = ''
+                                    let contact_two_heading = '' 
+                                    let contact_two_address = ''
+                                    let contact_two_phone = ''
+                                    let contact_three_heading = '' 
+                                    let contact_three_address = ''
+                                    let contact_three_phone = ''
+
+                                    if(_.has(response.contactcontent_data.translate,language.shortcode)) {
+                                        heading =  response.contactcontent_data.translate[language.shortcode].heading
+                                        address =  response.contactcontent_data.translate[language.shortcode].address
+                                        subHeading =  response.contactcontent_data.translate[language.shortcode].subHeading
+                                        contact_one_heading =  response.contactcontent_data.translate[language.shortcode].contact_one.heading
+                                        contact_one_address =  response.contactcontent_data.translate[language.shortcode].contact_one.address
+                                        contact_one_phone =  response.contactcontent_data.translate[language.shortcode].contact_one.phone
+                                        contact_two_heading =  response.contactcontent_data.translate[language.shortcode].contact_two.heading
+                                        contact_two_address =  response.contactcontent_data.translate[language.shortcode].contact_two.address
+                                        contact_two_phone =  response.contactcontent_data.translate[language.shortcode].contact_two.phone
+                                        contact_three_heading =  response.contactcontent_data.translate[language.shortcode].contact_three.heading
+                                        contact_three_address =  response.contactcontent_data.translate[language.shortcode].contact_three.address
+                                        contact_three_phone =  response.contactcontent_data.translate[language.shortcode].contact_three.phone
+                                    }
+                                %>
+                                <div class="tab-pane" id="kt_tabs_<%=language.shortcode%>" role="tabpanel">
+                                    
+                                    <div class="form-group row">
+                                        <div class="col-lg-6">
+                                             <label>Heading:</label>
+                                             <input type="text" name="translate[<%=count%>][heading]" id="heading_<%=count%>" class="form-control" placeholder="Enter Heading" value="<%= heading%>">
+                                         </div>
+                                         <div class="col-lg-6">
+                                             <label>Address:</label>
+                                             <input type="text" name="translate[<%=count%>][address]" id="address_<%=count%>" class="form-control" placeholder="Enter Address" value="<%= address%>">
+                                         </div>
+                                     </div>
+                                     <div class="form-group row">
+                                        <div class="col-lg-12">
+                                            <label>Sub Heading:</label>
+                                            <input type="text" name="translate[<%=count%>][subHeading]" id="subHeading_<%=count%>" class="form-control" placeholder="Enter Sub Heading" value="<%= subHeading%>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-lg-6">
+                                            <label>Contact One Heading:</label>
+                                            <input type="text" name="translate[<%=count%>][contact_one][heading]" id="contact_one_heading_<%=count%>" class="form-control" placeholder="Enter Heading" value="<%= contact_one_heading %>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-lg-6">
+                                            <label>Contact One Address:</label>
+                                            <input type="text" name="translate[<%=count%>][contact_one][address]" id="contact_one_address_<%=count%>" class="form-control" placeholder="Enter Address" value="<%= contact_one_address %>">
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label>Contact One Phone:</label>
+                                            <input type="text" name="translate[<%=count%>][contact_one][phone]" id="contact_one_phone_<%=count%>" class="form-control" placeholder="Enter Phone" value="<%= contact_one_phone %>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-lg-6">
+                                            <label>Contact Two Heading:</label>
+                                            <input type="text" name="translate[<%=count%>][contact_two][heading]" id="contact_two_heading_<%=count%>" class="form-control" placeholder="Enter Heading" value="<%= contact_two_heading %>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-lg-6">
+                                            <label>Contact Two Address:</label>
+                                            <input type="text" name="translate[<%=count%>][contact_two][address]" id="contact_two_address_<%=count%>" class="form-control" placeholder="Enter Address" value="<%= contact_two_address %>">
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label>Contact Two Phone:</label>
+                                            <input type="text" name="translate[<%=count%>][contact_two][phone]" id="contact_two_phone_<%=count%>" class="form-control" placeholder="Enter Phone" value="<%= contact_two_phone %>">
+                                        </div>
+                                    </div>
+                                     <div class="form-group row">
+                                        <div class="col-lg-6">
+                                            <label>Contact Three Heading:</label>
+                                            <input type="text" name="translate[<%=count%>][contact_three][heading]" id="contact_three_heading_<%=count%>" class="form-control" placeholder="Enter Heading" value="<%= contact_three_heading %>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-lg-6">
+                                            <label>Contact Three Address:</label>
+                                            <input type="text" name="translate[<%=count%>][contact_three][address]" id="contact_three_address_<%=count%>" class="form-control" placeholder="Enter Address" value="<%= contact_three_address %>">
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label>Contact Three Phone:</label>
+                                            <input type="text" name="translate[<%=count%>][contact_three][phone]" id="contact_three_phone_<%=count%>" class="form-control" placeholder="Enter Phone" value="<%= contact_three_phone %>">
+                                        </div>
+                                    </div>
+                                   <input type="hidden" name="translate[<%=count%>][language]" value="<%=language.shortcode%>">
+                                </div>
+                                <% count++ }%>
+                                <%})%>
+                            </div>
+                            <!-- hidden user id -->
+                        </div>
+                        <div class="kt-portlet__foot">
+                            <div class="kt-form__actions">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <input type="hidden" name="id" value="<%= response.contactcontent_data._id%>">
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <a href="<%= generateUrl('contactcontent.edit') %>" class="btn btn-secondary">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

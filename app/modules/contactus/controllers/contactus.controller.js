@@ -1,4 +1,6 @@
 const contactusRepo = require('contactus/repositories/contactus.repository');
+const languageRepo = require('language/repositories/language.repository');
+const contactcontentRepo = require('contactus/repositories/contactcontent.repository');
 const express = require('express');
 const routeLabel = require('route-label');
 const router = express.Router();
@@ -146,6 +148,66 @@ class contactusController {
             return res.status(500).send({ message: e.message });
         }
     }
+
+
+    /*
+    // @Method: editContent
+    // @Description: Contact content update page
+    */
+    async editContent(req, res) {
+        try {
+            let result = {};
+            let languages = await languageRepo.getAllByField({ 'status': 'Active',isDeleted:false});
+			result.languages = languages;
+            let contactcontent = await contactcontentRepo.getByField();
+            
+            
+            // This is for language section //
+			var translateArr = [];
+			for (var i = 0; i < contactcontent.translate.length; i++) {
+                translateArr[contactcontent.translate[i].language] = contactcontent.translate[i];
+			}
+            contactcontent.translate = translateArr
+            if (!_.isEmpty(contactcontent)) {
+                result.contactcontent_data = contactcontent;
+                
+                res.render('contactus/views/edit_content.ejs', {
+                    page_name: 'contactcontent-management',
+                    page_title: 'Contact Content Edit',
+                    user: req.user,
+                    response: result
+                });
+            } else {
+                req.flash('error', "Sorry Contact Content not found!");
+                res.redirect(namedRouter.urlFor('contactcontent.edit'));
+            }
+        } catch (e) {
+            return res.status(500).send({
+                message: e.message
+            });
+        }
+
+    };
+
+    /* @Method: updateContent
+    // @Description: Contact content update action
+    */
+    async updateContent(req, res) {
+        try {
+            const contactcontentId = req.body.id;
+            let contactContent = await contactcontentRepo.getById(contactcontentId);
+            let contactContentIdUpdate = await contactcontentRepo.updateById(req.body, contactcontentId);
+            if (contactContentIdUpdate) {
+                req.flash('success', "Contact Content Updated Successfully");
+                res.redirect(namedRouter.urlFor('contactcontent.edit'));
+            }
+        } catch (e) {
+            console.log(66, e);
+            return res.status(500).send({
+                message: e.message
+            });
+        }
+    };
 
 }
 

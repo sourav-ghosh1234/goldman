@@ -9,7 +9,6 @@ const LanguageSchema = new Schema({
     title: { type: String, default: '' },
     shortcode: { type: String, default: '' },
     icon: { type: String, default: '' },
-    isDefault: { type: Boolean, default: false },
     status: { type: String, default: "Active", enum: status },
     isDeleted: { type: Boolean, default: false, enum: deleted },
 }, { timestamps: true });
