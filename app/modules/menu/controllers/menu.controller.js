@@ -99,7 +99,7 @@ class menuController {
                 });
             } else {
                 req.flash('error', "Sorry menu not found!");
-                res.redirect(namedRouter.urlFor('admin.menu.list'));
+                res.redirect(namedRouter.urlFor('menu.list'));
             }
         } catch (e) {
             return res.status(500).send({
@@ -142,9 +142,9 @@ class menuController {
         try {
             let menu = await menuRepo.getById(req.body.id);
             if (!_.isEmpty(menu)) {
-                let menuStatus = (menu.isActive == true) ? false : true;
+                let menuStatus = (menu.status == 'Active') ? 'Inactive' : 'Active';
                 let menuUpdate = menuRepo.updateById({
-                    'isActive': menuStatus
+                    'status': menuStatus
                 }, req.body.id);
                 req.flash('success', "menu status has changed successfully");
                 res.send(menuUpdate);
@@ -165,7 +165,7 @@ class menuController {
     async destroy(req, res) {
         try {
             // console.log("menu CNTRL")
-            let menuDelete = await menuRepo.delete(req.params.id)
+            let menuDelete = await menuRepo.updateById({ "isDeleted": true }, req.params.id);
             if (!_.isEmpty(menuDelete)) {
                 req.flash('success', 'menu Removed Successfully');
                 res.redirect(namedRouter.urlFor('menu.list'));

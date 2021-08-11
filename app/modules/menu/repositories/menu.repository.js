@@ -238,10 +238,10 @@ const menuRepository = {
                 new: true,
                 upsert: true
             }).exec();
-            if (!cms) {
+            if (!menu) {
                 return null;
             }
-            return cms;
+            return menu;
         } catch (e) {
             return e;
         }
