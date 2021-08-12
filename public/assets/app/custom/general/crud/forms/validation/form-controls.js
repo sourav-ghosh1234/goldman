@@ -1053,6 +1053,46 @@ var KTFormControls = function() {
         });
     };
 
+    var amenitiesAddFrmEditValidation = function() {
+        $('#addAmenitiesFrm').validate({
+            rules: {
+                title: {
+                    required: true
+                }
+            },
+            messages: {
+                title: {
+                    required: 'Please enter title'
+                }
+                
+            },
+            invalidHandler: function(event, validate) {},
+            submitHandler: function(form) {
+                form[0].submit();
+            }
+        });
+    };
+
+    var amenitiesEditFrmEditValidation = function() {
+        $('#editAmenitiesFrm').validate({
+            rules: {
+                title: {
+                    required: true
+                }
+            },
+            messages: {
+                title: {
+                    required: 'Please enter title'
+                }
+                
+            },
+            invalidHandler: function(event, validate) {},
+            submitHandler: function(form) {
+                form[0].submit();
+            }
+        });
+    };
+
     var blankSpaceNotAllow = function() {
         $("input").on("keypress", function(e) {
             var startPos = e.currentTarget.selectionStart;
@@ -1090,6 +1130,8 @@ var KTFormControls = function() {
             cityFrmValidation();
             newsFrmAddValidation();
             newsFrmEditValidation();
+            amenitiesAddFrmEditValidation();
+            amenitiesEditFrmEditValidation();
         }
     };
 }();

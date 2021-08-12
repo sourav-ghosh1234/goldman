@@ -4,9 +4,8 @@ const mongooseAggregatePaginate = require('mongoose-aggregate-paginate');
 
 const status = ["Active", "Inactive"];
 
-const AmenitiesSchema = new Schema({
-  title: { type: String, default: '' },
-  icon : { type: String, default: '' },
+const CharacteristicsSchema = new Schema({
+  title: { type: String },
   description: { type: String, default: '' },
   language: {type:String, default: 'en'},
   translate: [{
@@ -19,7 +18,7 @@ const AmenitiesSchema = new Schema({
 });
 
 // For pagination
-AmenitiesSchema.plugin(mongooseAggregatePaginate);
+CharacteristicsSchema.plugin(mongooseAggregatePaginate);
 
 // create the model for users and expose it to our app
-module.exports = mongoose.model('Amenities', AmenitiesSchema);
+module.exports = mongoose.model('Characteristics', CharacteristicsSchema);

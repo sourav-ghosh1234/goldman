@@ -63,33 +63,46 @@
                 <li class="kt-menu__item " aria-haspopup="true">
                     <a href="<%= generateUrl('setting.listing') %>" class="kt-menu__link <%=(page_name == 'setting-management') ? 'active' : ''%>">
                         <i class="kt-menu__link-icon fa fa-bars"></i>
-                        <span class="kt-menu__link-text">Settings Management</span>
+                        <span class="kt-menu__link-text">Settings</span>
                     </a>
                 </li>
-
-
-
-
                 <li class="kt-menu__item " aria-haspopup="true">
-                    <a href="<%= generateUrl('cms.list') %>" class="kt-menu__link <%=(page_name == 'cms-management') ? 'active' : ''%>">
-                        <i class="kt-menu__link-icon fas fa-server"></i>
-                        <span class="kt-menu__link-text">CMS Management</span>
+                    <a href="<%= generateUrl('language.list') %>" class="kt-menu__link <%=(page_name == 'language-management') ? 'active' : ''%>">
+                        <i class="fas fa-language"></i>
+                        <span class="kt-menu__link-text">Language</span>
                     </a>
                 </li>
-
+                <li class="kt-menu__item" aria-haspopup="true">
+                    <a href="<%= generateUrl('menu.list') %>" class="kt-menu__link <%=(page_name == 'menu-list') ? 'active' : ''%>">
+                        <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i>
+                        <i class="fas fa-bars"></i>
+                        <span class="kt-menu__link-text">Header & Footer</span>
+                    </a>
+                </li>
+                <li class="kt-menu__item " aria-haspopup="true">
+                    <a href="<%= generateUrl('staticText.edit') %>" class="kt-menu__link <%=(page_name == 'statictext-management') ? 'active' : ''%>">
+                        <i class="fas fa-calendar-minus"></i>
+                        <span class="kt-menu__link-text">Static Text</span>
+                    </a>
+                </li>         
                 <li class="kt-menu__item " aria-haspopup="true">
                     <a href="<%= generateUrl('country.list') %>" class="kt-menu__link ">
                         <i class="kt-menu__link-icon fas fa-globe-americas"></i>
                         <span class="kt-menu__link-text">Country</span>
                     </a>
                 </li>
-
-                <li class="kt-menu__item kt-menu__item--submenu <%=(page_name == 'propertytype-management' || page_name== 'estatetype-management') ? 'kt-menu__item--open' : ''%>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                <li class="kt-menu__item " aria-haspopup="true">
+                    <a href="<%= generateUrl('city.list') %>" class="kt-menu__link <%=(page_name == 'city-management') ? 'active' : ''%>">
+                        <i class="fas fa-city"></i>
+                        <span class="kt-menu__link-text">City</span>
+                    </a>
+                </li>
+                <li class="kt-menu__item kt-menu__item--submenu <%=(page_name == 'propertytype-management' || page_name== 'amenities-management' || page_name== 'characteristics-management' || page_name== 'property-management') ? 'kt-menu__item--open' : ''%>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
                     <a href="javascript:;" class="kt-menu__link kt-menu__toggle
-                        <%=(page_name == 'propertytype-management' || page_name== 'estatetype-management') ? 'active' : ''%>">
+                        <%=(page_name == 'propertytype-management' || page_name== 'amenities-management' || page_name== 'characteristics-management' || page_name== 'property-management') ? 'active' : ''%>">
                         <i class="kt-menu__link-icon fas fa-crosshairs"></i>
 
-                        <span class="kt-menu__link-text">Property Management</span>
+                        <span class="kt-menu__link-text">Property Manage</span>
                         <i class="kt-menu__ver-arrow la la-angle-right"></i>
                     </a>
                     <div class="kt-menu__submenu " kt-hidden-height="80">
@@ -97,11 +110,34 @@
                         <ul class="kt-menu__subnav">
                             <li class="kt-menu__item " aria-haspopup="true">
                                 <a href="<%= generateUrl('propertytype.list') %>" class="kt-menu__link <%=(page_name == 'propertytype-management') ? 'active' : ''%>">
-                                    <i class="kt-menu__link-icon fas fa-quidditch"></i>
+                                    <i class="kt-menu__link-icon fas fa-list"></i>
                                     <span class="kt-menu__link-text">Property Type</span>
                                 </a>
                             </li>
-
+                        </ul>
+                        <ul class="kt-menu__subnav">
+                            <li class="kt-menu__item " aria-haspopup="true">
+                                <a href="<%= generateUrl('amenities.list') %>" class="kt-menu__link <%=(page_name == 'amenities-management') ? 'active' : ''%>">
+                                    <i class="kt-menu__link-icon fas fa-list"></i>
+                                    <span class="kt-menu__link-text">Amenities</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="kt-menu__subnav">
+                            <li class="kt-menu__item " aria-haspopup="true">
+                                <a href="<%= generateUrl('characteristics.list') %>" class="kt-menu__link <%=(page_name == 'characteristics-management') ? 'active' : ''%>">
+                                    <i class="kt-menu__link-icon fas fa-list"></i>
+                                    <span class="kt-menu__link-text">Characteristics</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="kt-menu__subnav">
+                            <li class="kt-menu__item " aria-haspopup="true">
+                                <a href="<%= generateUrl('property.list') %>" class="kt-menu__link <%=(page_name == 'property-management') ? 'active' : ''%>">
+                                    <i class="kt-menu__link-icon fas fa-building"></i>
+                                    <span class="kt-menu__link-text">Property</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -129,28 +165,7 @@
                         <i class="flaticon-edit-1"></i>
                         <span class="kt-menu__link-text">News</span>
                     </a>
-                </li>
-
-                <li class="kt-menu__item " aria-haspopup="true">
-                    <a href="<%= generateUrl('language.list') %>" class="kt-menu__link <%=(page_name == 'language-management') ? 'active' : ''%>">
-                        <i class="fas fa-language"></i>
-                        <span class="kt-menu__link-text">Language Management</span>
-                    </a>
-                </li>
-                <li class="kt-menu__item" aria-haspopup="true">
-                        <a href="<%= generateUrl('menu.list') %>" class="kt-menu__link <%=(page_name == 'menu-list') ? 'active' : ''%>">
-                            <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i>
-                            <i class="fas fa-bars"></i>
-                            <span class="kt-menu__link-text">Header & Footer</span>
-                        </a>
-                </li>
-                <li class="kt-menu__item " aria-haspopup="true">
-                    <a href="<%= generateUrl('staticText.edit') %>" class="kt-menu__link <%=(page_name == 'statictext-management') ? 'active' : ''%>">
-                        <i class="fas fa-calendar-minus"></i>
-                        <span class="kt-menu__link-text">Static Text</span>
-                    </a>
-                </li>
-
+                </li>               
                 <li class="kt-menu__item " aria-haspopup="true">
                     <a href="<%= generateUrl('homecontent.edit') %>" class="kt-menu__link <%=(page_name == 'homecontent-management') ? 'active' : ''%>">
                         <i class="fas fa-calendar-minus"></i>
@@ -184,18 +199,10 @@
                         <span class="kt-menu__link-text">Pagecontent Management</span>
                     </a>
                 </li>
-
                 <li class="kt-menu__item " aria-haspopup="true">
-                    <a href="<%= generateUrl('property.list') %>" class="kt-menu__link <%=(page_name == 'property-management') ? 'active' : ''%>">
-                        <i class="fas fa-building"></i>
-                        <span class="kt-menu__link-text">Property Management</span>
-                    </a>
-                </li>
-
-                <li class="kt-menu__item " aria-haspopup="true">
-                    <a href="<%= generateUrl('city.list') %>" class="kt-menu__link <%=(page_name == 'city-management') ? 'active' : ''%>">
-                        <i class="fas fa-city"></i>
-                        <span class="kt-menu__link-text">City Management</span>
+                    <a href="<%= generateUrl('cms.list') %>" class="kt-menu__link <%=(page_name == 'cms-management') ? 'active' : ''%>">
+                        <i class="kt-menu__link-icon fas fa-server"></i>
+                        <span class="kt-menu__link-text">CMS</span>
                     </a>
                 </li>
 

@@ -4,6 +4,7 @@ const express = require('express');
 const routeLabel = require('route-label');
 const router = express.Router();
 const namedRouter = routeLabel(router);
+const mongoose = require('mongoose');
 var fs = require('fs');
 
 
@@ -19,7 +20,7 @@ class amenitiesController {
     async list(req, res) {
         try {
             res.render('amenities/views/list.ejs', {
-                page_name: 'amenities-list',
+                page_name: 'amenities-management',
                 page_title: 'Amenities List',
                 user: req.user,
 
@@ -100,6 +101,9 @@ class amenitiesController {
                 'title': req.body.title
             });
             if (_.isEmpty(amenitiesData)) {
+                if (req.files.length > 0) {
+                    req.body.icon = req.files[0].filename;
+                }
                 let amenitiesInsert = amenitiesRepo.save(req.body);
                 if (amenitiesInsert) {
                     req.flash('success', "Amenities Created Successfully");
@@ -162,19 +166,38 @@ class amenitiesController {
     // @Description: amenities update action
     */
     async update(req, res) {
-
         try {
             const amenitiesId = req.body.id;
-            let data = await amenitiesRepo.getById(amenitiesId);
-            let amenitiesUpdate = amenitiesRepo.updateById(req.body, amenitiesId)
-            if (amenitiesUpdate) {
-                req.flash('success', "Amenities Updated Successfully");
-                res.redirect(namedRouter.urlFor('amenities.list'));
-            } else {
+            let amenitiesData = await amenitiesRepo.getById(amenitiesId);
+            var chkTitle = {
+                isDeleted: false,
+                title: req.body.title,
+                _id: { $ne: mongoose.Types.ObjectId(amenitiesId) }
+            };
+
+            let isExist = await amenitiesRepo.getByField(chkTitle);
+            if (!_.isEmpty(isExist)) {
+                req.flash('error', "Amenities already exist.");
                 res.redirect(namedRouter.urlFor('amenities.edit', {
                     id: req.body.amenitiesId
                 }));
-            }
+            } else {
+                if (req.files.length > 0) {
+                    if (amenitiesData.icon && amenitiesData.icon != '' && fs.existsSync(`./public/uploads/amenities/${amenitiesData.icon}`)) {
+                        fs.unlinkSync(`./public/uploads/amenities/${amenitiesData.icon}`);
+                    }
+                    req.body.icon = req.files[0].filename;
+                }
+                let amenitiesUpdate = amenitiesRepo.updateById(req.body, amenitiesId)
+                if (amenitiesUpdate) {
+                    req.flash('success', "Amenities Updated Successfully");
+                    res.redirect(namedRouter.urlFor('amenities.list'));
+                } else {
+                    res.redirect(namedRouter.urlFor('amenities.edit', {
+                        id: req.body.amenitiesId
+                    }));
+                }
+          } 
         } catch (e) {
             return res.status(500).send({
                 message: e.message

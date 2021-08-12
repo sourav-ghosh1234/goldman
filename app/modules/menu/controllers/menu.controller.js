@@ -116,15 +116,29 @@ class menuController {
         try {
             const menuId = req.body.id;
             let data = await menuRepo.getById(menuId);
-            let menuUpdate = menuRepo.updateById(req.body, menuId)
-            if (menuUpdate) {
-                req.flash('success', "menu Updated Successfully");
-                res.redirect(namedRouter.urlFor('menu.list'));
-            } else {
+            var chkTitle = {
+                isDeleted: false,
+                title: req.body.title,
+                menu_type : req.body.menu_type,
+                _id: { $ne: mongoose.Types.ObjectId(menuId) }
+            };
+            let isExist = await menuRepo.getByField(chkTitle);
+            if (!_.isEmpty(isExist)) {
+                req.flash('error', "Menu already exist.");
                 res.redirect(namedRouter.urlFor('menu.edit', {
                     id: req.body.menuId
                 }));
-            }
+            } else {
+                let menuUpdate = menuRepo.updateById(req.body, menuId)
+                if (menuUpdate) {
+                    req.flash('success', "menu Updated Successfully");
+                    res.redirect(namedRouter.urlFor('menu.list'));
+                } else {
+                    res.redirect(namedRouter.urlFor('menu.edit', {
+                        id: req.body.menuId
+                    }));
+                }
+           }  
         } catch (e) {
             return res.status(500).send({
                 message: e.message

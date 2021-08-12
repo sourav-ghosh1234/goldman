@@ -18,7 +18,7 @@
     <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
         <div class="row">
             <div class="kt-portlet">
-                <form class="kt-form kt-form--label-right" id="frmpropertytype" action="<%= generateUrl('propertytype.update') %>" enctype="multipart/form-data"
+                <form class="kt-form kt-form--label-right" id="editCharacteristicsFrm" action="<%= generateUrl('characteristics.update') %>" enctype="multipart/form-data"
                     method="POST">
 
                     <div class="kt-portlet__body">
@@ -49,22 +49,22 @@
                                         <div class="form-group row">
                                             <div class="col-lg-6">
                                                 <label>Title:</label>
-                                                <input type="text" name="title" id="title" class="form-control cms-title" placeholder="Enter Title" value="<%=response.propertytype_data.title%>">
+                                                <input type="text" name="title" id="title" class="form-control cms-title" placeholder="Enter Title" value="<%=response.characteristics_data.title%>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-lg-6">
                                                 <label>Description:</label>
-                                                <textarea name="description" id="description" class="form-control" placeholder="Enter Description" rows="6"><%=response.propertytype_data.description%></textarea>
+                                                <textarea name="description" id="description" class="form-control" placeholder="Enter Description" rows="6"><%=response.characteristics_data.description%></textarea>
                                             </div>
                                         </div>
                                     </div>
                                     <%}else{
                             let title = ''
                             let description = ''
-                            if(_.has(response.propertytype_data.translate,language.shortcode)) {
-                                title =  response.propertytype_data.translate[language.shortcode].title
-                                description =  response.propertytype_data.translate[language.shortcode].description
+                            if(_.has(response.characteristics_data.translate,language.shortcode)) {
+                                title =  response.characteristics_data.translate[language.shortcode].title
+                                description =  response.characteristics_data.translate[language.shortcode].description
                             }
                             %>
                                         <div class="tab-pane" id="kt_tabs_<%=language.shortcode%>" role="tabpanel">
@@ -87,13 +87,13 @@
                                             <%})%>
                         </div>
                         <!-- hidden user id -->
-                        <input type="hidden" name="id" value="<%=response.propertytype_data._id%>">
+                        <input type="hidden" name="id" value="<%=response.characteristics_data._id%>">
                     </div>
                     <div class="kt-portlet__foot">
                         <div class="kt-form__actions">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <a href="<%= generateUrl('propertytype.list') %>" class="btn btn-secondary">Cancel</a>
+                                    <a href="<%= generateUrl('characteristics.list') %>" class="btn btn-secondary">Cancel</a>
                                     <button type="submit" class="btn btn-primary">Update</button>
 
                                 </div>

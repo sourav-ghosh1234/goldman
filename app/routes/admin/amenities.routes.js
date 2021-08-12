@@ -2,8 +2,22 @@ const express = require('express');
 const routeLabel = require('route-label');
 const router = express.Router();
 const namedRouter = routeLabel(router);
+const fs = require('fs');
 const amenitiesController = require('amenities/controllers/amenities.controller');
 const multer = require('multer');
+const Storage = multer.diskStorage({
+    destination: function(req, file, callback) {
+        if (!fs.existsSync('./public/uploads/amenities')) {
+            fs.mkdirSync('./public/uploads/amenities');
+        }
+        callback(null, "./public/uploads/amenities");
+    },
+    filename: function(req, file, callback) {
+        callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname.replace(/\s/g, '_'));
+    }
+});
+
+const uploadFile = multer({ storage: Storage });
 const request_param = multer();
 
 
@@ -22,9 +36,9 @@ namedRouter.post("amenities.getall", '/amenities/getall', async (req, res) => {
 });
 namedRouter.get("amenities.list", '/amenities/list', amenitiesController.list);
 namedRouter.get("amenities.create", '/amenities/create', amenitiesController.create);
-namedRouter.post("amenities.store", '/amenities/store', request_param.any(), amenitiesController.store);
+namedRouter.post("amenities.store", '/amenities/store', uploadFile.any(), amenitiesController.store);
 namedRouter.get("amenities.edit", '/amenities/edit/:id', amenitiesController.edit);
-namedRouter.post("amenities.update", '/amenities/update', request_param.any(), amenitiesController.update);
+namedRouter.post("amenities.update", '/amenities/update', uploadFile.any(), amenitiesController.update);
 namedRouter.get("amenities.statusChange", '/amenities/status-change/:id', amenitiesController.statusChange);
 namedRouter.get("amenities.delete", '/amenities/delete/:id', amenitiesController.destroy);
 

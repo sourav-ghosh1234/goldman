@@ -11,7 +11,7 @@
     <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
         <div class="row">
             <div class="kt-portlet">
-                <form class="kt-form kt-form--label-right" id="editAmenitiesFrm" action="<%= generateUrl('amenities.store') %>" enctype="multipart/form-data"
+                <form class="kt-form kt-form--label-right" id="addAmenitiesFrm" action="<%= generateUrl('amenities.store') %>" enctype="multipart/form-data"
                     method="POST">
 
                     <div class="kt-portlet__body">
@@ -40,19 +40,37 @@
                                 <%if(language.shortcode == 'en'){%>
                                     <div class="tab-pane active" id="kt_tabs_<%=language.shortcode%>" role="tabpanel">
                                         <div class="form-group row">
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-6">
                                                 <label>Title:</label>
                                                 <input type="text" name="title" id="title" class="form-control" placeholder="Enter Title" value="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-lg-6">
+                                                <label>Icon</label>
+                                                <input type="file" name="icon" id="icon" class="form-control imagepickerWithPreviewId" data-previewelement="iconPreview">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                           <div class="col-lg-6">
+                                                <label>Description:</label>
+                                                <textarea name="description" id="description" class="form-control" placeholder="Enter Description" rows="6"></textarea>
                                             </div>
                                         </div>
                                     </div>
                                     <% } else{ %>
                                         <div class="tab-pane" id="kt_tabs_<%=language.shortcode%>" role="tabpanel">
                                             <div class="form-group row">
-                                                <div class="col-lg-4">
+                                                <div class="col-lg-6">
                                                     <label>Title:</label>
-                                                    <input type="text" name="translate[<%=count%>][title]" id="title" class="form-control" placeholder="Enter Title"
+                                                    <input type="text" name="translate[<%=count%>][title]" id="title_<%=count%>" class="form-control" placeholder="Enter Title"
                                                         value="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                               <div class="col-lg-6">
+                                                    <label>Description:</label>
+                                                    <textarea name="translate[<%=count%>][description]" id="description_<%=count%>" class="form-control" placeholder="Enter Description" rows="6"></textarea>
                                                 </div>
                                             </div>
                                             <input type="hidden" name="translate[<%=count%>][language]" value="<%=language.shortcode%>">

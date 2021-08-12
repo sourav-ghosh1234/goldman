@@ -10,10 +10,10 @@ const MenuSchema = new Schema({
   slug: { type: String, default: '' },
   menu_type: { type: String, enum: ['header', 'footer'] },
   menu_order: { type: Number, default: 0 },
-  language: { type: String },
+  language: {type:String, default: 'en'},
   translate: [{
     title: { type: String, default: '' },
-    language: { type: String },
+    language: { type: String, default: '' }
   }],
   isDeleted: { type: Boolean, default: false, enum: [true, false] },
   status: { type: String, default: "Active", enum: status },

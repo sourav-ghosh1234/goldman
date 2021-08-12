@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const languageRepo = require('language/repositories/language.repository');
 const propertytypeRepo = require('propertytype/repositories/propertytype.repository');
 const express = require('express');
 const routeLabel = require('route-label');
@@ -16,49 +17,6 @@ class PropertyTypeController {
         this.propertytype = [];
 
     }
-
-    /* @Method: create
-    // @Description: propertytype create view render
-    */
-    async create(req, res) {
-        try {
-            res.render('propertytype/views/add.ejs', {
-                page_name: 'propertytype-management',
-                page_title: 'Create Property Type',
-                user: req.user,
-            });
-        } catch (e) {
-            return res.status(500).send({ message: e.message });
-        }
-    };
-
-    /* @Method: insert
-// @Description: save propertytype
-*/
-    async insert(req, res) {
-        try {
-            let propertytypeCheck = await propertytypeRepo.getByField({ 'title': req.body.title, isDeleted: false });
-            if (_.isEmpty(propertytypeCheck)) {
-                if (req.files.length) {
-                    gm('./public/uploads/propertytype/' + req.files[0].filename).resize(200, 200, '!').write('./public/uploads/propertytype/thumb/' + req.files[0].filename, function(err, result) {
-                        if (!err) console.log('done');
-                    });
-                    req.body.image = req.files[0].filename;
-                }
-                let save = await propertytypeRepo.save(req.body);
-                if (save) {
-                    req.flash('success', 'The propertytype has created successfully.');
-                    res.redirect(namedRouter.urlFor('propertytype.list'));
-                }
-            } else {
-                req.flash('error', "Property Type already exist.");
-                res.redirect(namedRouter.urlFor('propertytype.list'));
-            }
-        } catch (e) {
-            req.flash('error', e.message);
-            res.redirect(namedRouter.urlFor('propertytype.create'));
-        }
-    };
 
     /* @Method: list
     // @Description: To get all the propertytype from DB
@@ -111,14 +69,70 @@ class PropertyTypeController {
                 return { status: 500, data: [], message: e.message };
             }
         }
-        /**
-         * @Method: edit
-         * @Description: To edit propertytype information
-         */
+
+    /* @Method: create
+    // @Description: propertytype create view render
+    */
+    async create(req, res) {
+        try {
+            let result = {};
+            let languages = await languageRepo.getAllByField({
+                'status': 'Active',isDeleted:false
+            });
+            result.languages = languages;
+            res.render('propertytype/views/add.ejs', {
+                page_name: 'propertytype-management',
+                page_title: 'Create Property Type',
+                user: req.user,
+                response: result
+            });
+        } catch (e) {
+            return res.status(500).send({ message: e.message });
+        }
+    };
+
+    /* @Method: insert
+    // @Description: save propertytype
+    */
+    async insert(req, res) {
+        try {
+            let propertytypeCheck = await propertytypeRepo.getByField({ 'title': req.body.title, isDeleted: false });
+            if (_.isEmpty(propertytypeCheck)) {
+                let save = await propertytypeRepo.save(req.body);
+                if (save) {
+                    req.flash('success', 'The propertytype has created successfully.');
+                    res.redirect(namedRouter.urlFor('propertytype.list'));
+                }
+            } else {
+                req.flash('error', "Property Type already exist.");
+                res.redirect(namedRouter.urlFor('propertytype.list'));
+            }
+        } catch (e) {
+            req.flash('error', e.message);
+            res.redirect(namedRouter.urlFor('propertytype.create'));
+        }
+    };
+
+    /**
+     * @Method: edit
+     * @Description: To edit propertytype information
+     */
     async edit(req, res) {
         try {
             let result = {};
+            let languages = await languageRepo.getAllByField({
+                'status': 'Active',isDeleted:false
+            });
+            result.languages = languages;
             let propertytypeData = await propertytypeRepo.getById(req.params.id);
+             // This is for language section //
+             var translateArr = [];
+             for (var i = 0; i < propertytypeData.translate.length; i++) {
+                 translateArr[propertytypeData.translate[i].language] = propertytypeData.translate[i]
+             }
+             
+             propertytypeData.translate = translateArr
+
             if (!_.isEmpty(propertytypeData)) {
                 result.propertytype_data = propertytypeData;
                 res.render('propertytype/views/edit.ejs', {
@@ -153,18 +167,6 @@ class PropertyTypeController {
                 req.flash('error', "Property Type already exist.");
                 res.redirect(namedRouter.urlFor('propertytype.edit', { id: req.body.id }));
             } else {
-                if (req.files.length > 0) {
-                    if (fs.existsSync('./public/uploads/propertytype/' + propertytypeData.image) && propertytypeData.image != '') {
-                        fs.unlinkSync('./public/uploads/propertytype/' + propertytypeData.image);
-                    }
-                    if (fs.existsSync('./public/uploads/propertytype/thumb/' + propertytypeData.image) && propertytypeData.image != '') {
-                        fs.unlinkSync('./public/uploads/propertytype/thumb/' + propertytypeData.image);
-                    }
-                    gm('./public/uploads/propertytype/' + req.files[0].filename).resize(200, 200, '!').write('./public/uploads/propertytype/thumb/' + req.files[0].filename, function(err, result) {
-                        if (!err) console.log('done');
-                    });
-                    req.body.image = req.files[0].filename;
-                }
                 let propertytypeUpdate = await propertytypeRepo.updateById(req.body, req.body.id);
                 if (propertytypeUpdate) {
                     req.flash('success', 'Property Type updated successfully.');

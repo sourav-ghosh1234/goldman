@@ -8,7 +8,7 @@ var KTDatatableCms = function () {
             type: 'remote',
             source: {
                 read: {
-                    url: `${window.location.protocol}//${window.location.host}/amenities/getall`,
+                    url: `${window.location.protocol}//${window.location.host}/characteristics/getall`,
                 },
             },
             pageSize: 10,
@@ -58,7 +58,7 @@ var KTDatatableCms = function () {
                         "Inactive": { 'title': "Inactive", 'class': ' kt-badge--danger' },
                     };
                     return '<span style="cursor:pointer;" class="kt-badge ' + status[row.status].class +
-                        ' kt-badge--inline kt-badge--pill KTAmenitiesStatusUpdate onHover" data-id="' + row._id + '" >' + status[row.status].title +
+                        ' kt-badge--inline kt-badge--pill KTCharacteristicsStatusUpdate onHover" data-id="' + row._id + '" >' + status[row.status].title +
                         '</span>';
                 },
             },
@@ -72,7 +72,7 @@ var KTDatatableCms = function () {
                 autoHide: false,
                 template: function (row) {
                     return '\
-                    \<a href="'+window.location.protocol+'//' + window.location.host + '/amenities/edit/' + row._id + '" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Edit">\
+                    \<a href="'+window.location.protocol+'//' + window.location.host + '/characteristics/edit/' + row._id + '" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Edit">\
                         <i class="flaticon-edit"></i>\
                     </a>\
                     \<a id="del-' + row._id + '" href="javascript:;" class="btn btn-sm btn-clean btn-icon btn-icon-sm ktDelete" title="Delete">\
@@ -85,13 +85,13 @@ var KTDatatableCms = function () {
     };
 
     // basic demo
-    var amenitiesSelector = function () {
+    var characteristicsSelector = function () {
 
         options.search = {
             input: $('#generalSearch'),
         };
 
-        var datatable = $('#amenitiesRecordSelection').KTDatatable(options);
+        var datatable = $('#characteristicsRecordSelection').KTDatatable(options);
 
         $('#kt_form_status').on('change', function () {
             datatable.search($(this).val(), 'Status');
@@ -143,12 +143,12 @@ var KTDatatableCms = function () {
                 reverseButtons: true
             }).then(function (result) {
                 if (result.value) {
-                    window.location.href = `${window.location.protocol}//${window.location.host}/amenities/delete/${elemID}`;
+                    window.location.href = `${window.location.protocol}//${window.location.host}/characteristics/delete/${elemID}`;
                 }
             });
         });
 
-        $(document).on('click', '.KTAmenitiesStatusUpdate', function() {
+        $(document).on('click', '.KTCharacteristicsStatusUpdate', function() {
             var elemID = $(this).data('id');
             swal.fire({
                 title: 'Are you sure?',
@@ -160,7 +160,7 @@ var KTDatatableCms = function () {
                 reverseButtons: true
             }).then(function(result) {
                 if (result.value) {
-                    window.location.href = `${window.location.protocol}//${window.location.host}/amenities/status-change/${elemID}`;
+                    window.location.href = `${window.location.protocol}//${window.location.host}/characteristics/status-change/${elemID}`;
                 }
             });
         })
@@ -169,7 +169,7 @@ var KTDatatableCms = function () {
     return {
         // public functions
         init: function () {
-            amenitiesSelector();
+            characteristicsSelector();
         },
     };
 }();

@@ -47,24 +47,51 @@
                                 <%if(language.shortcode == 'en'){%>
                                     <div class="tab-pane active" id="kt_tabs_<%=language.shortcode%>" role="tabpanel">
                                         <div class="form-group row">
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-6">
                                                 <label>Title:</label>
                                                 <input type="text" name="title" id="title" class="form-control cms-title" placeholder="Enter Title" value="<%=response.amenities_data.title%>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-lg-6">
+                                                <label>Icon</label>
+                                                <input type="file" name="icon" id="icon" class="form-control imagepickerWithPreviewId" data-previewelement="iconPreview">
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <% if(response.amenities_data.icon && response.amenities_data.icon != '') {%>
+                                                    <img class="iconImage" id="iconPreview" height="80px" src="/uploads/amenities/<%= response.amenities_data.icon %>">
+                                                    <% } else { %>
+                                                        <img class="iconImage" id="iconPreview" height="80px" src="">
+                                                    <% } %>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-lg-6">
+                                                <label>Description:</label>
+                                                <textarea name="description" id="description" class="form-control" placeholder="Enter Description" rows="6"><%=response.amenities_data.description%></textarea>
                                             </div>
                                         </div>
                                     </div>
                                     <%}else{
                             let title = ''
+                            let description = ''
                             if(_.has(response.amenities_data.translate,language.shortcode)) {
                                 title =  response.amenities_data.translate[language.shortcode].title
+                                description =  response.amenities_data.translate[language.shortcode].description
                             }
                             %>
                                         <div class="tab-pane" id="kt_tabs_<%=language.shortcode%>" role="tabpanel">
                                             <div class="form-group row">
-                                                <div class="col-lg-4">
+                                                <div class="col-lg-6">
                                                     <label>Title:</label>
-                                                    <input type="text" name="translate[<%=count%>][title]" id="title" class="form-control cms-title" placeholder="Enter Title"
+                                                    <input type="text" name="translate[<%=count%>][title]" id="title_<%=count%>" class="form-control cms-title" placeholder="Enter Title"
                                                         value="<%=title%>">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-lg-6">
+                                                    <label>Description:</label>
+                                                    <textarea name="translate[<%=count%>][description]" id="description_<%=count%>" class="form-control" placeholder="Enter Description" rows="6"><%=description%></textarea>
                                                 </div>
                                             </div>
                                             <input type="hidden" name="translate[<%=count%>][language]" value="<%=language.shortcode%>">

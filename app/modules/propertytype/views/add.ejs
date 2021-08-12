@@ -6,43 +6,85 @@
                 <%= page_title %>
             </h3>
             <span class="kt-subheader__separator kt-subheader__separator--v"></span>
-            <!-- <div class="kt-subheader__breadcrumbs">
-			<a href="<%= generateUrl('user.dashboard') %>" class="kt-subheader__breadcrumbs-home">Dashboard</a>
-			<span class="kt-subheader__breadcrumbs-separator"></span>
-			<span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active"><%= page_title %></span>
-		</div> -->
-        </div>
+         </div>
     </div>
-
     <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
         <div class="row">
-            <div class="col-lg-12">
-                <div class="kt-portlet">
-                    <form class="kt-form kt-form--label-right" id="frmpropertytype" action="<%= generateUrl('propertytype.insert') %>" method="POST" enctype="multipart/form-data">
-                        <div class="kt-portlet__body">
-                           
-                            <div class="form-group row">
+            <div class="kt-portlet">
+                <form class="kt-form kt-form--label-right" id="frmpropertytype" action="<%= generateUrl('propertytype.insert') %>" enctype="multipart/form-data"
+                    method="POST">
+
+                    <div class="kt-portlet__body">
+                        <ul class="nav nav-pills nav-fill" role="tablist">
+                            <%response.languages.map((data)=>{%>
+                                <%if(data.isDefault){%>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-toggle="tab" href="#kt_tabs_<%=data.shortcode%>">
+                                            <%=data.title%>
+                                        </a>
+                                    </li>
+                                    <%}else{%>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#kt_tabs_<%=data.shortcode%>">
+                                                <%=data.title%>
+                                            </a>
+                                        </li>
+                                        <%}%>
+                                            <%})%>
+                        </ul>
+                        <div class="tab-content">
+                            <%
+                                let count = 0;
+                                response.languages.map((language)=>{
+                            %>
+                                <%if(language.shortcode == 'en'){%>
+                                    <div class="tab-pane active" id="kt_tabs_<%=language.shortcode%>" role="tabpanel">
+                                        <div class="form-group row">
+                                            <div class="col-lg-6">
+                                                <label for="propertytype Name" class="control-label">Title</label>
+                                                <input type="text" name="title" id="title" class="form-control" placeholder="Enter Title" value="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                           <div class="col-lg-6">
+                                                <label for="propertytype Description" class="control-label">Description:</label>
+                                                <textarea name="description" id="description" class="form-control" placeholder="Enter Description" rows="6"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% } else{ %>
+                                        <div class="tab-pane" id="kt_tabs_<%=language.shortcode%>" role="tabpanel">
+                                            <div class="form-group row">
+                                                <div class="col-lg-6">
+                                                    <label for="propertytype Title" class="control-label">Title:</label>
+                                                    <input type="text" name="translate[<%=count%>][title]" id="title_<%=count%>" class="form-control" placeholder="Enter Title"
+                                                        value="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                               <div class="col-lg-6">
+                                                    <label for="propertytype Description" class="control-label">Description:</label>
+                                                    <textarea name="translate[<%=count%>][description]" id="description_<%=count%>" class="form-control" placeholder="Enter Description" rows="6"></textarea>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="translate[<%=count%>][language]" value="<%=language.shortcode%>">
+                                        </div>
+                                        <% count++ }%>
+                                    <%})%>
+                        </div>
+                    </div>
+                    <div class="kt-portlet__foot">
+                        <div class="kt-form__actions">
+                            <div class="row">
                                 <div class="col-lg-6">
-                                    <label for="propertytype Name" class="control-label">Title</label>
-                                    <div class="controls">
-                                        <input id="title" name="title" type="text" placeholder="Enter Title" class="form-control required" required data-validation-required-message="This field is required" value="" />
-                                    </div>
-                                </div>
-                            </div>
-                           
-                        </div>
-                        <div class="kt-portlet__foot">
-                            <div class="kt-form__actions">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <button type="submit" class="btn btn-primary">Save</button>
-                                        <a href="<%= generateUrl('propertytype.list') %>" class="btn btn-secondary">Cancel</a>
-                                    </div>
+                                    <a href="<%= generateUrl('propertytype.list') %>" class="btn btn-secondary">Cancel</a>
+                                    <button type="submit" class="btn btn-primary">Save</button>
+
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
