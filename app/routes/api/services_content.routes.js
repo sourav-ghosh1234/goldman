@@ -10,7 +10,7 @@ const request_param = multer();
 /**
  * @api {get} /artofliving/content Service Content
  * @apiVersion 1.0.0
- * @apiGroup Art Of Living
+ * @apiGroup Service Content
  * @apiSuccessExample {json} Success
  * {
   "status": 200,
