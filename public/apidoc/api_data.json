@@ -164,7 +164,7 @@
   },
   {
     "type": "get",
-    "url": "/artofliving/content",
+    "url": "/services-content/content",
     "title": "Service Content",
     "version": "1.0.0",
     "group": "Service_Content",
@@ -179,7 +179,7 @@
     },
     "filename": "app/routes/api/services_content.routes.js",
     "groupTitle": "Service_Content",
-    "name": "GetArtoflivingContent"
+    "name": "GetServicesContentContent"
   },
   {
     "type": "get",
