@@ -22,7 +22,7 @@ class realEstateController {
             let cities = await cityRepo.getAllByField({ status: 'Active', isDeleted: false });
             res.render('real_estate/views/list.ejs', {
                 page_name: 'sale-management',
-                page_title: 'Sale Content',
+                page_title: 'For Sale Content',
                 user: req.user,
                 cities:cities
 
@@ -84,7 +84,7 @@ class realEstateController {
             
             res.render('real_estate/views/add_sale_content.ejs', {
                 page_name: 'sale-management',
-                page_title: 'Create Sale Content',
+                page_title: 'Create For Sale Content',
                 user: req.user,
                 response: result
             });
@@ -144,7 +144,7 @@ class realEstateController {
                 result.salecontent_data = saleContent;
                 res.render('real_estate/views/edit_sale_content.ejs', {
                     page_name: 'sale-management',
-                    page_title: 'Sale Content Edit',
+                    page_title: 'For Sale Content Edit',
                     user: req.user,
                     response: result
                 });
