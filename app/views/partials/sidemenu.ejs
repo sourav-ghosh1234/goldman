@@ -86,7 +86,7 @@
                     </a>
                 </li>         
                 <li class="kt-menu__item " aria-haspopup="true">
-                    <a href="<%= generateUrl('country.list') %>" class="kt-menu__link ">
+                    <a href="<%= generateUrl('country.list') %>" class="kt-menu__link  <%=(page_name == 'country-management') ? 'active' : ''%>">
                         <i class="kt-menu__link-icon fas fa-globe-americas"></i>
                         <span class="kt-menu__link-text">Country</span>
                     </a>
@@ -97,10 +97,30 @@
                         <span class="kt-menu__link-text">City</span>
                     </a>
                 </li>
+                <li class="kt-menu__item kt-menu__item--submenu <%=(page_name == 'sale-management') ? 'kt-menu__item--open' : ''%>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                    <a href="javascript:;" class="kt-menu__link kt-menu__toggle
+                        <%=(page_name == 'sale-management') ? 'active' : ''%>">
+                        <i class="kt-menu__link-icon fas fa-crosshairs"></i>
+
+                        <span class="kt-menu__link-text">Real Estate</span>
+                        <i class="kt-menu__ver-arrow la la-angle-right"></i>
+                    </a>
+                    <div class="kt-menu__submenu " kt-hidden-height="80">
+                        <span class="kt-menu__arrow"></span>
+                        <ul class="kt-menu__subnav">
+                            <li class="kt-menu__item " aria-haspopup="true">
+                                <a href="<%= generateUrl('realestate.sale.list') %>" class="kt-menu__link <%=(page_name == 'sale-management') ? 'active' : ''%>">
+                                    <i class="kt-menu__link-icon fas fa-list"></i>
+                                    <span class="kt-menu__link-text">For Sale Content</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
                 <li class="kt-menu__item kt-menu__item--submenu <%=(page_name == 'propertytype-management' || page_name== 'amenities-management' || page_name== 'characteristics-management' || page_name== 'property-management') ? 'kt-menu__item--open' : ''%>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
                     <a href="javascript:;" class="kt-menu__link kt-menu__toggle
                         <%=(page_name == 'propertytype-management' || page_name== 'amenities-management' || page_name== 'characteristics-management' || page_name== 'property-management') ? 'active' : ''%>">
-                        <i class="kt-menu__link-icon fas fa-crosshairs"></i>
+                        <i class="kt-menu__link-icon fas fa-building"></i>
 
                         <span class="kt-menu__link-text">Property Manage</span>
                         <i class="kt-menu__ver-arrow la la-angle-right"></i>

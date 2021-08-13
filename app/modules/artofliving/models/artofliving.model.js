@@ -16,6 +16,7 @@ const ArtOfLivingSchema = new Schema({
         image: { type: String, default: '' },
         button: { type: String, default: '' }
     }],
+    language: {type:String, default: 'en'},
     translate:[{
         language: {type:String, default: ''},
         pageHeadingTitle: { type: String, default: '' },

@@ -14,7 +14,7 @@ class cityController {
         try {
             let countries = await countryRepo.getAllByField({ status: 'Active', isDeleted: false });
             res.render('city/views/create.ejs', {
-                page_name: 'city-list',
+                page_name: 'city-management',
                 page_title: 'Create City',
                 user: req.user,
                 response: { countries }
@@ -101,7 +101,7 @@ class cityController {
     async list(req, res) {
         try {
             res.render('city/views/list.ejs', {
-                page_name: 'city-list',
+                page_name: 'city-management',
                 page_title: 'City List',
                 user: req.user,
 

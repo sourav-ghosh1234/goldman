@@ -12,7 +12,7 @@ class countryController {
 	async create(req, res) {
 		try {
 			res.render('country/views/create.ejs', {
-				page_name: 'country-list',
+				page_name: 'country-management',
 				page_title: 'Create Country',
 				user: req.user,
 			});
@@ -106,7 +106,7 @@ class countryController {
             try
             {
                 res.render('country/views/list.ejs', {
-                    page_name: 'country-list',
+                    page_name: 'country-management',
                     page_title: 'Country List',
                     user: req.user,
                     
