@@ -8,7 +8,7 @@ const request_param = multer();
 
 
 /**
- * @api {get} /artofliving/content Art Of Living Content
+ * @api {get} /artofliving/content Service Content
  * @apiVersion 1.0.0
  * @apiGroup Art Of Living
  * @apiSuccessExample {json} Success

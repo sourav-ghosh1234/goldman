@@ -21,7 +21,7 @@
   {
     "type": "get",
     "url": "/artofliving/content",
-    "title": "Art Of Living Content",
+    "title": "Service Content",
     "version": "1.0.0",
     "group": "Art_Of_Living",
     "success": {
