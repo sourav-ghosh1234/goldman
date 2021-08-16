@@ -14,7 +14,7 @@ class ContactUsController {
             if (contactSave) {
                 let mailOptions = {
                     from: `Admin<${process.env.MAIL_USERNAME}>`,
-                    to: 'subrata.kayal@webskitters.com', //setting.setting_value,
+                    to: setting.setting_value,
                     subject: 'Contact Us | Goldman Prestige',
                     html: `Hello Admin,<br>
                     <p>Contact details.</p>
