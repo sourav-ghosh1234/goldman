@@ -18,7 +18,7 @@ class contactusController {
         try {
             res.render('contactus/views/list.ejs', {
                 page_name: 'contactus-list',
-                page_title: 'Contact Request List',
+                page_title: 'Contact List',
                 user: req.user,
 
             });
@@ -30,7 +30,7 @@ class contactusController {
     async getAll(req, res) {
         try {
             let contactus = await contactusRepo.getAll(req);
-            //console.log("contactus>>", contactus)
+            // console.log("contactus>>", contactus)
 
             if (_.has(req.body, 'sort')) {
                 var sortOrder = req.body.sort.sort;
@@ -50,7 +50,7 @@ class contactusController {
         try {
             res.render('contactus/views/create.ejs', {
                 page_name: 'contactus-list',
-                page_title: 'Create Contact Request',
+                page_title: 'Create Contact Us',
                 user: req.user,
             });
         } catch (e) {
@@ -62,7 +62,7 @@ class contactusController {
         try {
             let contactusSave = await contactusRepo.save(req.body);
             if (contactusSave) {
-                req.flash('success', "Contact Request created successfully.");
+                req.flash('success', "Contact created successfully.");
                 res.redirect(namedRouter.urlFor('contactus.list'));
             }
         } catch (e) {
@@ -82,12 +82,12 @@ class contactusController {
                 result.contactus_data = contactus;
                 res.render('contactus/views/edit.ejs', {
                     page_name: 'contactus-management',
-                    page_title: 'Edit Contact Request',
+                    page_title: 'Edit Contact',
                     user: req.user,
                     response: result
                 });
             } else {
-                req.flash('error', "Sorry Contact Request not found!");
+                req.flash('error', "Sorry Contact not found!");
                 res.redirect(namedRouter.urlFor('contactus.list'));
             }
         } catch (e) {
@@ -104,7 +104,7 @@ class contactusController {
             //  let contactus = await contactusRepo.getByField({'contactus_name':req.body.contactus_name,_id:{$ne:contactusId}});
             let contactusUpdate = await contactusRepo.updateById(req.body, contactusId)
             if (contactusUpdate) {
-                req.flash('success', "Contact Request updated successfully");
+                req.flash('success', "Contact updated successfully");
                 res.redirect(namedRouter.urlFor('contactus.list'));
             }
         } catch (e) {
@@ -122,10 +122,10 @@ class contactusController {
             if (!_.isEmpty(contactus)) {
                 let contactusStatus = (contactus.status == "Active") ? "Inactive" : "Active";
                 let contactusUpdate = await contactusRepo.updateById({ "status": contactusStatus }, req.params.id);
-                req.flash('success', "Contact Request status has changed successfully");
+                req.flash('success', "Contact status has changed successfully");
                 res.redirect(namedRouter.urlFor('contactus.list'));
             } else {
-                req.flash('error', "Sorry Contact Request not found");
+                req.flash('error', "Sorry Contact not found");
                 res.redirect(namedRouter.urlFor('contactus.list'));
             }
         } catch (e) {
@@ -141,7 +141,7 @@ class contactusController {
             //let contactusDelete = await contactusRepo.delete(req.params.id)
             let contactusDelete = await contactusRepo.updateById({ "isDeleted": true }, req.params.id);
             if (!_.isEmpty(contactusDelete)) {
-                req.flash('success', 'Contact Request removed successfully');
+                req.flash('success', 'Contact removed successfully');
                 res.redirect(namedRouter.urlFor('contactus.list'));
             }
         } catch (e) {

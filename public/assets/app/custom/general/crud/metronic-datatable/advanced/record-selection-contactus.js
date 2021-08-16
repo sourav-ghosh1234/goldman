@@ -31,27 +31,27 @@ var KTDatatableContcatUs = function() {
         columns: [
 
             {
-                field: 'firstName',
+                field: 'name',
                 title: 'Name',
                 width: 110,
                 template: function(row) {
-                    return `${row.firstName} ${row.lastName}`;
+                    return `${row.name}`;
                 },
             },
             {
                 field: 'email',
                 title: 'Email',
-                width: 280,
+                width: 200,
                 template: function(row) {
                     return `${row.email}`;
                 },
             },
             {
-                field: 'contactNo',
+                field: 'phone',
                 title: 'Conatct No',
                 width: 110,
                 template: function(row) {
-                    return `${row.dialCode || ''}${row.contactNo}`;
+                    return `${row.phone}`;
                 },
             },
             {
@@ -77,17 +77,8 @@ var KTDatatableContcatUs = function() {
                 overflow: 'visible',
                 textAlign: 'left',
                 autoHide: false,
-                //template: function(row) {
-                //	return '\
-                //	\<a href="http://'+window.location.host+'/country/edit/'+row._id+'" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Edit">\
-                //	<i class="flaticon-edit"></i>\
-                //	</a>';
-                //},
                 template: function(row) {
                     return '\
-						\<a href="http://' + window.location.host + '/contactus/edit/' + row._id + '" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Edit">\
-						<i class="flaticon-edit"></i>\
-						</a>\
 						\<a id="del-' + row._id + '" href="javascript:;" class="btn btn-sm btn-clean btn-icon btn-icon-sm ktManagerDelete" title="Delete">\
 						<i class="flaticon-delete"></i>\
 						</a>\
