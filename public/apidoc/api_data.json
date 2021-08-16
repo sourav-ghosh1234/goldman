@@ -112,6 +112,59 @@
     "name": "PostContactSave"
   },
   {
+    "type": "post",
+    "url": "/contact-us/save",
+    "title": "Store",
+    "version": "1.0.0",
+    "group": "Contact_Us",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "name",
+            "description": "<p>User Name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "email",
+            "description": "<p>User Email</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "phone",
+            "description": "<p>User Phone</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "message",
+            "description": "<p>User Message</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n    \"status\": 200,\n    \"data\": {\n        \"name\": \"Subrata\",\n        \"email\": \"subrata007@yopmail.com\",\n        \"phone\": \"1234567890\",\n        \"message\": \"This is test message for contact us api\",\n        \"status\": \"Active\",\n        \"isDeleted\": false,\n        \"_id\": \"611a5e17c901c6d4155dcdb8\",\n        \"createdAt\": \"2021-08-16T12:46:15.572Z\",\n        \"updatedAt\": \"2021-08-16T12:46:15.572Z\",\n        \"__v\": 0\n    },\n    \"message\": \"Thank you for contacting us.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/api/contactUs.routes.js",
+    "groupTitle": "Contact_Us",
+    "name": "PostContactUsSave"
+  },
+  {
     "type": "get",
     "url": "/language/list",
     "title": "Language lists",
