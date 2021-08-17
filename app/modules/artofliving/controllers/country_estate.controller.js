@@ -56,6 +56,7 @@ class countryEstateController {
         try {
             const countryEstateId = req.body.id;
             let countryEstate = await countryEstateRepo.getById(countryEstateId);
+            console.log(req.files);
             let imageArr = countryEstate.image;
             if (req.files.length > 0) {
                 req.files.forEach(file => {
@@ -69,11 +70,13 @@ class countryEstateController {
                     } 
                 });
             }
-
+            
             // For delete image //
             if (req.body.delImgIds) {
                 var delimageList = req.body.delImgIds.split(',');
                 imageArr = imageArr.filter(item => !delimageList.includes(item));
+                req.body.image = imageArr; 
+            } else {
                 req.body.image = imageArr; 
             }
             
