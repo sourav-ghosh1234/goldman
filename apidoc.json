@@ -2,7 +2,7 @@
     "name": "Goldman Prestige API documentation",
     "version": "1.0.0",
     "description": "API Goldman Prestige",
-    "url": "http://104.211.229.156:1500/api",
+    "url": "http://104.211.229.156:1510/api",
     "template": {
         "forceLanguage": "en"
     }

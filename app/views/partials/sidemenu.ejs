@@ -207,14 +207,34 @@
                         <span class="kt-menu__link-text">Contact Us Management</span>
                     </a>
                 </li>
-
-                <li class="kt-menu__item " aria-haspopup="true">
-                    <a href="<%= generateUrl('artofliving.edit') %>" class="kt-menu__link <%=(page_name == 'artofliving-management') ? 'active' : ''%>">
-                        <i class="fas fa-calendar-minus"></i>
+               <li class="kt-menu__item kt-menu__item--submenu <%=(page_name == 'artofliving-management' || page_name== 'countryestate-management') ? 'kt-menu__item--open' : ''%>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                    <a href="javascript:;" class="kt-menu__link kt-menu__toggle
+                        <%=(page_name == 'artofliving-management' || page_name== 'countryestate-management') ? 'active' : ''%>">
+                        <i class="kt-menu__link-icon fas fa-building"></i>
                         <span class="kt-menu__link-text">Art Of Living Management</span>
+                        <i class="kt-menu__ver-arrow la la-angle-right"></i>
                     </a>
+                    <div class="kt-menu__submenu " kt-hidden-height="80">
+                        <span class="kt-menu__arrow"></span>
+                        <ul class="kt-menu__subnav">
+                            <li class="kt-menu__item " aria-haspopup="true">
+                                <a href="<%= generateUrl('artofliving.edit') %>" class="kt-menu__link <%=(page_name == 'artofliving-management') ? 'active' : ''%>">
+                                    <i class="kt-menu__link-icon fas fa-list"></i>
+                                    <span class="kt-menu__link-text">Art Of Living</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="kt-menu__subnav">
+                            <li class="kt-menu__item " aria-haspopup="true">
+                                <a href="<%= generateUrl('countryestate.edit') %>" class="kt-menu__link <%=(page_name == 'countryestate-management') ? 'active' : ''%>">
+                                    <i class="kt-menu__link-icon fas fa-list"></i>
+                                    <span class="kt-menu__link-text">Country Estate</span>
+                                </a>
+                            </li>
+                        </ul>
+                     </div>
                 </li>
-                <li class="kt-menu__item " aria-haspopup="true">
+               <li class="kt-menu__item " aria-haspopup="true">
                     <a href="<%= generateUrl('services.content.edit') %>" class="kt-menu__link <%=(page_name == 'service-content-management') ? 'active' : ''%>">
                         <i class="fas fa-calendar-minus"></i>
                         <span class="kt-menu__link-text">Services Content</span>
