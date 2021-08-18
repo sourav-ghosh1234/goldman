@@ -1,4 +1,4 @@
-const countryEstateRepo = require('artofliving/repositories/country_estate.repository');
+const yachtingWorldRepo = require('artofliving/repositories/yachting_world.repository');
 const languageRepo = require('language/repositories/language.repository');
 const express = require('express');
 const routeLabel = require('route-label');
@@ -8,9 +8,9 @@ const querystring = require('querystring');
 const fs = require('fs');
 
 
-class countryEstateController {
+class yachtingWorldController {
     constructor() {
-        this.countryEstate = [];
+        this.yachtingWorld = [];
     }
 
     /*
@@ -22,25 +22,25 @@ class countryEstateController {
             let result = {};
             let languages = await languageRepo.getAllByField({ 'status': 'Active',isDeleted:false});
 			result.languages = languages;
-            let countryEstate = await countryEstateRepo.getByField();
+            let yachtingWorld = await yachtingWorldRepo.getByField();
             
             // This is for language section //
 			var translateArr = [];
-			for (var i = 0; i < countryEstate.translate.length; i++) {
-                translateArr[countryEstate.translate[i].language] = countryEstate.translate[i];
+			for (var i = 0; i < yachtingWorld.translate.length; i++) {
+                translateArr[yachtingWorld.translate[i].language] = yachtingWorld.translate[i];
 			}
-			countryEstate.translate = translateArr
-            if (!_.isEmpty(countryEstate)) {
-                result.countryestate_data = countryEstate;
-                res.render('artofliving/views/edit_country_estate.ejs', {
-                    page_name: 'countryestate-management',
-                    page_title: 'Country Estate Edit',
+			yachtingWorld.translate = translateArr
+            if (!_.isEmpty(yachtingWorld)) {
+                result.yachting_world_data = yachtingWorld;
+                res.render('artofliving/views/edit_yachting_world.ejs', {
+                    page_name: 'yachting-world-management',
+                    page_title: 'Yachting World Edit',
                     user: req.user,
                     response: result
                 });
             } else {
-                req.flash('error', "Sorry Country Estate not found!");
-                res.redirect(namedRouter.urlFor('countryestate.edit'));
+                req.flash('error', "Sorry Yachting World not found!");
+                res.redirect(namedRouter.urlFor('yachting.World.edit'));
             }
         } catch (e) {
             return res.status(500).send({
@@ -54,14 +54,14 @@ class countryEstateController {
     */
     async update(req, res) {
         try {
-            const countryEstateId = req.body.id;
-            let countryEstate = await countryEstateRepo.getById(countryEstateId);
-            let imageArr = countryEstate.image;
+            const yachtingWorldId = req.body.id;
+            let yachtingWorld = await yachtingWorldRepo.getById(yachtingWorldId);
+            let imageArr = yachtingWorld.image;
             if (req.files.length > 0) {
                 req.files.forEach(file => {
                     if (file.fieldname == 'bannerImage') {
-                        if (countryEstate.bannerImage && countryEstate.bannerImage != '' && fs.existsSync(`./public/uploads/country_estate/${countryEstate.bannerImage}`)) {
-                            fs.unlinkSync(`./public/uploads/country_estate/${countryEstate.bannerImage}`);
+                        if (yachtingWorld.bannerImage && yachtingWorld.bannerImage != '' && fs.existsSync(`./public/uploads/yachting_world/${yachtingWorld.bannerImage}`)) {
+                            fs.unlinkSync(`./public/uploads/yachting_world/${yachtingWorld.bannerImage}`);
                         }
                         req.body.bannerImage = file.filename;
                     } else {
@@ -79,10 +79,10 @@ class countryEstateController {
                 req.body.image = imageArr; 
             }
             
-            let countryEstateUpdateById = await countryEstateRepo.updateById(req.body, countryEstateId);
-            if (countryEstateUpdateById) {
-                req.flash('success', "Country Estate Updated Successfully");
-                res.redirect(namedRouter.urlFor('countryestate.edit'));
+            let yachtingWorldUpdateById = await yachtingWorldRepo.updateById(req.body, yachtingWorldId);
+            if (yachtingWorldUpdateById) {
+                req.flash('success', "Vineyard Yachting World Updated Successfully");
+                res.redirect(namedRouter.urlFor('yachting.world.edit'));
             }
         } catch (e) {
             console.log(66, e);
@@ -94,4 +94,4 @@ class countryEstateController {
 
 }
 
-module.exports = new countryEstateController();
+module.exports = new yachtingWorldController();

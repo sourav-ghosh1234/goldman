@@ -207,9 +207,9 @@
                         <span class="kt-menu__link-text">Contact Us Management</span>
                     </a>
                 </li>
-               <li class="kt-menu__item kt-menu__item--submenu <%=(page_name == 'artofliving-management' || page_name== 'countryestate-management') ? 'kt-menu__item--open' : ''%>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+               <li class="kt-menu__item kt-menu__item--submenu <%=(page_name == 'artofliving-management' || page_name== 'countryestate-management' || page_name== 'vineyard-investment-management' || page_name== 'yachting-world') ? 'kt-menu__item--open' : ''%>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
                     <a href="javascript:;" class="kt-menu__link kt-menu__toggle
-                        <%=(page_name == 'artofliving-management' || page_name== 'countryestate-management') ? 'active' : ''%>">
+                        <%=(page_name == 'artofliving-management' || page_name== 'countryestate-management' || page_name== 'vineyard-investment-management' || page_name== 'yachting-world') ? 'active' : ''%>">
                         <i class="kt-menu__link-icon fas fa-building"></i>
                         <span class="kt-menu__link-text">Art Of Living Management</span>
                         <i class="kt-menu__ver-arrow la la-angle-right"></i>
@@ -229,6 +229,22 @@
                                 <a href="<%= generateUrl('countryestate.edit') %>" class="kt-menu__link <%=(page_name == 'countryestate-management') ? 'active' : ''%>">
                                     <i class="kt-menu__link-icon fas fa-list"></i>
                                     <span class="kt-menu__link-text">Country Estate</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="kt-menu__subnav">
+                            <li class="kt-menu__item " aria-haspopup="true">
+                                <a href="<%= generateUrl('vineyard.investment.edit') %>" class="kt-menu__link <%=(page_name == 'vineyard-investment-management') ? 'active' : ''%>">
+                                    <i class="kt-menu__link-icon fas fa-list"></i>
+                                    <span class="kt-menu__link-text">Vineyard Investment</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="kt-menu__subnav">
+                            <li class="kt-menu__item " aria-haspopup="true">
+                                <a href="<%= generateUrl('yachting.world.edit') %>" class="kt-menu__link <%=(page_name == 'yachting-world-management') ? 'active' : ''%>">
+                                    <i class="kt-menu__link-icon fas fa-list"></i>
+                                    <span class="kt-menu__link-text">Yachting World</span>
                                 </a>
                             </li>
                         </ul>

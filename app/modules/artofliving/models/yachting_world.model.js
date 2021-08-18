@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const CountryEstateSchema = new Schema({
+const yachtingWorldSchema = new Schema({
     bannerImage: { type: String, default: '' },
     heading: { type: String, default: '' },
     subHeading: { type: String, default: '' },
     content: { type: String, default: '' },
+    videoLink: { type: String, default: '' },
     imageHeading: { type: String, default: '' },
     image: [{ type: String, default: '' }],
     language: {type:String, default: 'en'},
@@ -19,4 +20,4 @@ const CountryEstateSchema = new Schema({
  }, { timestamps: true });
 
 // create the model for users and expose it to our app
-module.exports = mongoose.model('Country_Estate', CountryEstateSchema);
+module.exports = mongoose.model('Yachting_World', yachtingWorldSchema);
