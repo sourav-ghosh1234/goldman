@@ -11,6 +11,9 @@ const propertyRepo = require('property/repositories/property.repository');
 const propertytypeRepo = require('propertytype/repositories/propertytype.repository');
 const cityRepo = require('city/repositories/city.repository');
 const countryRepo = require('country/repositories/country.repository');
+const languageRepo = require('language/repositories/language.repository');
+const amenitiesRepo = require('amenities/repositories/amenities.repository');
+const characteristicsRepo = require('characteristics/repositories/characteristics.repository');
 
 class PropertyController {
     constructor() {
@@ -19,14 +22,22 @@ class PropertyController {
 
     async create(req, res) {
         try {
+            let result = {};
+            let languages = await languageRepo.getAllByField({
+                'status': 'Active',isDeleted:false
+            });
+            result.languages = languages;
             let propertyTypes = await propertytypeRepo.getAllByField({ isDeleted: false, status: 'Active' });
             let cities = await cityRepo.getAllByField({ isDeleted: false, status: 'Active' });
             let countries = await countryRepo.getAllByField({ isDeleted: false, status: 'Active' });
+            let amenities = await amenitiesRepo.getAllByField({ isDeleted: false, status: 'Active' });
+            let characteristics = await characteristicsRepo.getAllByField({ isDeleted: false, status: 'Active' });
             res.render('property/views/create.ejs', {
                 page_name: 'property-management',
                 page_title: 'Create Property',
                 user: req.user,
-                response: { propertyTypes, cities, countries }
+                response: { propertyTypes, cities, countries, amenities, characteristics },
+                result:result
             });
         } catch (e) {
             throw ({ message: e.message });
