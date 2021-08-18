@@ -18,7 +18,7 @@ const PropertySchema = new Schema({
     rentalPerWeek: { type: Number,default: 0 },
     rentalPerMonth: { type: Number,default: 0 },
     securityBond: { type: Number,default: 0 },
-    priceDisplay: { type: String, default: "priceDisplay", enum: price },
+    priceDisplay: { type: String, default: "priceDisplay", enum: priceDisplay },
     price: { type: Number,default: 0 },
     priceText: { type: String, default: '' },
     availableDate: { type: String, default: '' },
