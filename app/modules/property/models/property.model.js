@@ -58,7 +58,6 @@ const PropertySchema = new Schema({
     },
     characteristics: [{ type: Schema.Types.ObjectId, ref: 'Characteristics',default: null}],
     amenities: [{ type: Schema.Types.ObjectId, ref: 'Amenities',default: null}],
-    title: { type: String, default: '' },
     description: { type: String, default: '' },
     image: { type: String, default: '' },
     imageGallery: [{ type: String, default: '' }],
@@ -67,6 +66,30 @@ const PropertySchema = new Schema({
     DPE: { type: String, default: '' },
     GES: { type: String, default: '' },
     propertyFor: { type: String, default: "sale", enum: propertyFor },
+    language: {type:String, default: 'en'},
+    translate: [{
+        title: { type: String, default: '' },
+        subTitle: { type: String, default: '' },
+        leadAgent: { type: String, default: '' },
+        dualAgent: { type: String, default: '' },
+        priceText: { type: String, default: '' },
+        language: { type: String, default: '' },
+        landlord : {
+            name: { type: String, default: '' },
+            email: { type: String, default: '' },
+            phone: { type: String, default: '' }
+        },
+        propertyAddress : {
+            city: { type: Schema.Types.ObjectId, ref: 'City' },
+            country: { type: Schema.Types.ObjectId, ref: 'Country' },
+            unit: { type: String, default: '' },
+            street_address_number: { type: String, default: '' },
+            street_address: { type: String, default: '' },
+            suburb: { type: String, default: '' },
+            municipality: { type: String, default: '' },
+        },
+        description: { type: String, default: '' }
+      }],
     status: { type: String, default: "Active", enum: status },
     isDeleted: { type: Boolean, default: false, enum: deleted },
     createdAt: { type: Date, default: Date.now },

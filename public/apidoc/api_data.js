@@ -166,6 +166,25 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/static-text",
+    "title": "Footer Static Text",
+    "version": "1.0.0",
+    "group": "Footer_Static_Text",
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n  \"status\": 200,\n  \"data\": [\n    {\n      \"footer_common_text\": \"<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section 1.10.32.</p>\\r\\n\\r\\n<p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from &quot;de Finibus Bonorum et Malorum&quot; by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\\r\\n\",\n      \"copyright_text\": \"© Copyright 2021 GOLDMAN PRESTIGE. All Rights Reserved\",\n      \"follow_us_text\": \"Follow us\",\n      \"isDeleted\": false,\n      \"status\": \"Active\",\n      \"_id\": \"610558451edb21accf5e7f6f\",\n      \"translate\": [\n        {\n          \"footer_common_text\": \"<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section 1.10.32.</p>\\r\\n\\r\\n<p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from &quot;de Finibus Bonorum et Malorum&quot; by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\\r\\n\",\n          \"copyright_text\": \"© Copyright 2021 GOLDMAN PRESTIGE. All Rights Reserved FR\",\n          \"follow_us_text\": \"Follow us FR\",\n          \"_id\": \"610bf3aa30008775bff19a59\",\n          \"language\": \"fr\"\n        },\n        {\n          \"footer_common_text\": \"<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section 1.10.32.</p>\\r\\n\\r\\n<p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from &quot;de Finibus Bonorum et Malorum&quot; by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\\r\\n\",\n          \"copyright_text\": \"© Copyright 2021 GOLDMAN PRESTIGE. All Rights Reserved DE\",\n          \"follow_us_text\": \"Follow us DE\",\n          \"_id\": \"610bf3aa30008775bff19a5a\",\n          \"language\": \"de\"\n        }\n      ],\n      \"updatedAt\": \"2021-08-05T14:20:26.132Z\"\n    }\n  ],\n  \"message\": \"Menu fetched successfully.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/api/staticText.routes.js",
+    "groupTitle": "Footer_Static_Text",
+    "name": "GetStaticText"
+  },
+  {
+    "type": "get",
     "url": "/home/content",
     "title": "Home Content",
     "version": "1.0.0",
