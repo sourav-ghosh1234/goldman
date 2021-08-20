@@ -165,6 +165,186 @@ namedRouter.get("api.artofliving.content", '/artofliving/content', async (req, r
     }
 });
 
+/**
+ * @api {get} /artofliving/country-estates Country Estates Content
+ * @apiVersion 1.0.0
+ * @apiGroup Art Of Living
+ * @apiSuccessExample {json} Success
+ * {
+  "status": 200,
+  "data": {
+    "_id": "611b75081edb21accf52e3fe",
+    "bannerImage": "bannerImage_1629190947439_7682_1.png",
+    "heading": "Test",
+    "subHeading": "Testm Sub Head",
+    "content": "<p>Test Content</p>\r\n",
+    "imageHeading": "Image Heading",
+    "image": [
+      "image_1629191656384_41i74R163ZL.jpeg"
+    ],
+    "language": "en",
+    "translate": [
+      {
+        "language": "fr",
+        "heading": "Test FR",
+        "subHeading": "Test Sub FR",
+        "content": "<p>Test Content FR</p>\r\n",
+        "imageHeading": "Image Heading FR",
+        "_id": "611b9c9c42cf5b0ba7bc26c8"
+      },
+      {
+        "language": "de",
+        "heading": "Test DE",
+        "subHeading": "Test Sub DE",
+        "content": "<p>Test Content DE</p>\r\n",
+        "imageHeading": "Image Heading DE",
+        "_id": "611b9c9c42cf5b0ba7bc26c9"
+      }
+    ],
+    "createdAt": "2021-08-16T10:18:10.138Z",
+    "updatedAt": "2021-08-17T11:25:16.521Z",
+    "__v": 0
+  },
+  "message": "Text fetched successfully."
+}
+*/
+
+namedRouter.get("api.artofliving.country.estates", '/artofliving/country-estates', async (req, res) => {
+  try {
+      const success = await artoflivingController.getCountryEstates(req, res);
+      res.status(success.status).send(success);
+  } catch (error) {
+      res.status(error.status).send(error);
+  }
+});
+
+
+/**
+ * @api {get} /artofliving/yachting-world Yachting World Content
+ * @apiVersion 1.0.0
+ * @apiGroup Art Of Living
+ * @apiSuccessExample {json} Success
+ * {
+  "status": 200,
+  "data": {
+    "_id": "611bd8481edb21accf69f842",
+    "bannerImage": "bannerImage_1629216787909_pattern9.jpg",
+    "heading": "Test fff",
+    "subHeading": "Testm Sub Head",
+    "content": "<p>Test Content</p>\r\n",
+    "videoLink": "youtube1.com",
+    "imageHeading": "Image Heading",
+    "image": [
+      
+    ],
+    "language": "en",
+    "translate": [
+      {
+        "language": "fr",
+        "heading": "Test FR",
+        "subHeading": "Test Sub FR",
+        "content": "<p>Test Content FR</p>\r\n",
+        "imageHeading": "Image Heading FR",
+        "_id": "611be013fdc7cc145e1baa2e"
+      },
+      {
+        "language": "de",
+        "heading": "Test DE",
+        "subHeading": "Test Sub DE",
+        "content": "<p>Test Content DE</p>\r\n",
+        "imageHeading": "Image Heading DE",
+        "_id": "611be013fdc7cc145e1baa2f"
+      }
+    ],
+    "createdAt": "2021-08-16T10:18:10.138Z",
+    "updatedAt": "2021-08-17T16:13:07.961Z",
+    "__v": 0,
+    "boat_charter_service": [
+      {
+        "bannerImage": "bannerImage_1629216787909_pattern9.jpg",
+        "forMoreInfo": "Testm Sub Head",
+        "contactUs": "contact",
+        "heading": "Test",
+        "content": "<p>test here</p>\r\n",
+        "contactInfo": "<p>test info</p>\r\n",
+        "language": "en",
+        "status": "Active",
+        "isDeleted": false,
+        "_id": "611e67e41edb21accfcfbb25",
+        "translate": [
+          {
+            "language": "fr",
+            "forMoreInfo": "",
+            "contactUs": "",
+            "heading": "dffggg",
+            "content": "<p>ffff</p>\r\n",
+            "contactInfo": "",
+            "_id": "611f6a9ad709bd2d7066e495"
+          },
+          {
+            "language": "de",
+            "forMoreInfo": "",
+            "contactUs": "",
+            "heading": "",
+            "content": "",
+            "contactInfo": "",
+            "_id": "611f6a9ad709bd2d7066e496"
+          }
+        ],
+        "createdAt": "2021-08-16T10:18:10.138Z",
+        "updatedAt": "2021-08-20T08:54:10.219Z",
+        "__v": 0
+      },
+      {
+        "bannerImage": "bannerImage_1629447309327_pattern6.jpg",
+        "forMoreInfo": "For More Info",
+        "contactUs": "Contact Us",
+        "heading": "Test Boat",
+        "content": "Test",
+        "contactInfo": "Contact Info",
+        "language": "en",
+        "status": "Active",
+        "isDeleted": false,
+        "_id": "611f648d86a960253184e710",
+        "translate": [
+          {
+            "language": "fr",
+            "forMoreInfo": "",
+            "contactUs": "",
+            "heading": "",
+            "content": "",
+            "contactInfo": "",
+            "_id": "611f648d86a960253184e711"
+          },
+          {
+            "language": "de",
+            "forMoreInfo": "",
+            "contactUs": "",
+            "heading": "",
+            "content": "",
+            "contactInfo": "",
+            "_id": "611f648d86a960253184e712"
+          }
+        ],
+        "createdAt": "2021-08-20T08:15:09.383Z",
+        "updatedAt": "2021-08-20T08:15:09.383Z",
+        "__v": 0
+      }
+    ]
+  },
+  "message": "Text fetched successfully."
+}
+*/
+
+namedRouter.get("api.artofliving.yachting.world", '/artofliving/yachting-world', async (req, res) => {
+  try {
+      const success = await artoflivingController.getCountryEstates(req, res);
+      res.status(success.status).send(success);
+  } catch (error) {
+      res.status(error.status).send(error);
+  }
+});
+
 
 // Export the express.Router() instance
 module.exports = router;

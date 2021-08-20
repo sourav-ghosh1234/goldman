@@ -20,6 +20,44 @@
   },
   {
     "type": "get",
+    "url": "/artofliving/country-estates",
+    "title": "Country Estates Content",
+    "version": "1.0.0",
+    "group": "Art_Of_Living",
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n  \"status\": 200,\n  \"data\": {\n    \"_id\": \"611b75081edb21accf52e3fe\",\n    \"bannerImage\": \"bannerImage_1629190947439_7682_1.png\",\n    \"heading\": \"Test\",\n    \"subHeading\": \"Testm Sub Head\",\n    \"content\": \"<p>Test Content</p>\\r\\n\",\n    \"imageHeading\": \"Image Heading\",\n    \"image\": [\n      \"image_1629191656384_41i74R163ZL.jpeg\"\n    ],\n    \"language\": \"en\",\n    \"translate\": [\n      {\n        \"language\": \"fr\",\n        \"heading\": \"Test FR\",\n        \"subHeading\": \"Test Sub FR\",\n        \"content\": \"<p>Test Content FR</p>\\r\\n\",\n        \"imageHeading\": \"Image Heading FR\",\n        \"_id\": \"611b9c9c42cf5b0ba7bc26c8\"\n      },\n      {\n        \"language\": \"de\",\n        \"heading\": \"Test DE\",\n        \"subHeading\": \"Test Sub DE\",\n        \"content\": \"<p>Test Content DE</p>\\r\\n\",\n        \"imageHeading\": \"Image Heading DE\",\n        \"_id\": \"611b9c9c42cf5b0ba7bc26c9\"\n      }\n    ],\n    \"createdAt\": \"2021-08-16T10:18:10.138Z\",\n    \"updatedAt\": \"2021-08-17T11:25:16.521Z\",\n    \"__v\": 0\n  },\n  \"message\": \"Text fetched successfully.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/api/artofliving.routes.js",
+    "groupTitle": "Art_Of_Living",
+    "name": "GetArtoflivingCountryEstates"
+  },
+  {
+    "type": "get",
+    "url": "/artofliving/yachting-world",
+    "title": "Yachting World Content",
+    "version": "1.0.0",
+    "group": "Art_Of_Living",
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n  \"status\": 200,\n  \"data\": {\n    \"_id\": \"611bd8481edb21accf69f842\",\n    \"bannerImage\": \"bannerImage_1629216787909_pattern9.jpg\",\n    \"heading\": \"Test fff\",\n    \"subHeading\": \"Testm Sub Head\",\n    \"content\": \"<p>Test Content</p>\\r\\n\",\n    \"videoLink\": \"youtube1.com\",\n    \"imageHeading\": \"Image Heading\",\n    \"image\": [\n      \n    ],\n    \"language\": \"en\",\n    \"translate\": [\n      {\n        \"language\": \"fr\",\n        \"heading\": \"Test FR\",\n        \"subHeading\": \"Test Sub FR\",\n        \"content\": \"<p>Test Content FR</p>\\r\\n\",\n        \"imageHeading\": \"Image Heading FR\",\n        \"_id\": \"611be013fdc7cc145e1baa2e\"\n      },\n      {\n        \"language\": \"de\",\n        \"heading\": \"Test DE\",\n        \"subHeading\": \"Test Sub DE\",\n        \"content\": \"<p>Test Content DE</p>\\r\\n\",\n        \"imageHeading\": \"Image Heading DE\",\n        \"_id\": \"611be013fdc7cc145e1baa2f\"\n      }\n    ],\n    \"createdAt\": \"2021-08-16T10:18:10.138Z\",\n    \"updatedAt\": \"2021-08-17T16:13:07.961Z\",\n    \"__v\": 0,\n    \"boat_charter_service\": [\n      {\n        \"bannerImage\": \"bannerImage_1629216787909_pattern9.jpg\",\n        \"forMoreInfo\": \"Testm Sub Head\",\n        \"contactUs\": \"contact\",\n        \"heading\": \"Test\",\n        \"content\": \"<p>test here</p>\\r\\n\",\n        \"contactInfo\": \"<p>test info</p>\\r\\n\",\n        \"language\": \"en\",\n        \"status\": \"Active\",\n        \"isDeleted\": false,\n        \"_id\": \"611e67e41edb21accfcfbb25\",\n        \"translate\": [\n          {\n            \"language\": \"fr\",\n            \"forMoreInfo\": \"\",\n            \"contactUs\": \"\",\n            \"heading\": \"dffggg\",\n            \"content\": \"<p>ffff</p>\\r\\n\",\n            \"contactInfo\": \"\",\n            \"_id\": \"611f6a9ad709bd2d7066e495\"\n          },\n          {\n            \"language\": \"de\",\n            \"forMoreInfo\": \"\",\n            \"contactUs\": \"\",\n            \"heading\": \"\",\n            \"content\": \"\",\n            \"contactInfo\": \"\",\n            \"_id\": \"611f6a9ad709bd2d7066e496\"\n          }\n        ],\n        \"createdAt\": \"2021-08-16T10:18:10.138Z\",\n        \"updatedAt\": \"2021-08-20T08:54:10.219Z\",\n        \"__v\": 0\n      },\n      {\n        \"bannerImage\": \"bannerImage_1629447309327_pattern6.jpg\",\n        \"forMoreInfo\": \"For More Info\",\n        \"contactUs\": \"Contact Us\",\n        \"heading\": \"Test Boat\",\n        \"content\": \"Test\",\n        \"contactInfo\": \"Contact Info\",\n        \"language\": \"en\",\n        \"status\": \"Active\",\n        \"isDeleted\": false,\n        \"_id\": \"611f648d86a960253184e710\",\n        \"translate\": [\n          {\n            \"language\": \"fr\",\n            \"forMoreInfo\": \"\",\n            \"contactUs\": \"\",\n            \"heading\": \"\",\n            \"content\": \"\",\n            \"contactInfo\": \"\",\n            \"_id\": \"611f648d86a960253184e711\"\n          },\n          {\n            \"language\": \"de\",\n            \"forMoreInfo\": \"\",\n            \"contactUs\": \"\",\n            \"heading\": \"\",\n            \"content\": \"\",\n            \"contactInfo\": \"\",\n            \"_id\": \"611f648d86a960253184e712\"\n          }\n        ],\n        \"createdAt\": \"2021-08-20T08:15:09.383Z\",\n        \"updatedAt\": \"2021-08-20T08:15:09.383Z\",\n        \"__v\": 0\n      }\n    ]\n  },\n  \"message\": \"Text fetched successfully.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/api/artofliving.routes.js",
+    "groupTitle": "Art_Of_Living",
+    "name": "GetArtoflivingYachtingWorld"
+  },
+  {
+    "type": "get",
     "url": "/contact/content",
     "title": "Contact Content",
     "version": "1.0.0",
