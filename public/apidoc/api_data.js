@@ -39,6 +39,25 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/artofliving/vineyards-investment",
+    "title": "Vineyards Investment Content",
+    "version": "1.0.0",
+    "group": "Art_Of_Living",
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n  \"status\": 200,\n  \"data\": {\n    \"_id\": \"611bb2441edb21accf604491\",\n    \"bannerImage\": \"bannerImage_1629206904526_pattern1.jpg\",\n    \"heading\": \"Test fff\",\n    \"subHeading\": \"Testm Sub Head\",\n    \"content\": \"<p>Test Content</p>\\r\\n\",\n    \"imageHeading\": \"Image Heading\",\n    \"image\": [\n      \"image_1629206904533_pattern6.jpg\",\n      \"image_1629206904533_pattern7.jpg\",\n      \"image_1629206904535_pattern8.jpg\"\n    ],\n    \"language\": \"en\",\n    \"translate\": [\n      {\n        \"language\": \"fr\",\n        \"heading\": \"Test FR\",\n        \"subHeading\": \"Test Sub FR\",\n        \"content\": \"<p>Test Content FR</p>\\r\\n\",\n        \"imageHeading\": \"Image Heading FR\",\n        \"_id\": \"611bb978470a870ff7545753\"\n      },\n      {\n        \"language\": \"de\",\n        \"heading\": \"Test DE\",\n        \"subHeading\": \"Test Sub DE\",\n        \"content\": \"<p>Test Content DE</p>\\r\\n\",\n        \"imageHeading\": \"Image Heading DE\",\n        \"_id\": \"611bb978470a870ff7545754\"\n      }\n    ],\n    \"createdAt\": \"2021-08-16T10:18:10.138Z\",\n    \"updatedAt\": \"2021-08-17T13:28:24.582Z\",\n    \"__v\": 0\n  },\n  \"message\": \"Text fetched successfully.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/api/artofliving.routes.js",
+    "groupTitle": "Art_Of_Living",
+    "name": "GetArtoflivingVineyardsInvestment"
+  },
+  {
+    "type": "get",
     "url": "/artofliving/yachting-world",
     "title": "Yachting World Content",
     "version": "1.0.0",

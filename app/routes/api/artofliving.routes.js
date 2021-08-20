@@ -338,7 +338,63 @@ namedRouter.get("api.artofliving.country.estates", '/artofliving/country-estates
 
 namedRouter.get("api.artofliving.yachting.world", '/artofliving/yachting-world', async (req, res) => {
   try {
-      const success = await artoflivingController.getCountryEstates(req, res);
+      const success = await artoflivingController.getYachtingWorld(req, res);
+      res.status(success.status).send(success);
+  } catch (error) {
+      res.status(error.status).send(error);
+  }
+});
+
+
+/**
+ * @api {get} /artofliving/vineyards-investment Vineyards Investment Content
+ * @apiVersion 1.0.0
+ * @apiGroup Art Of Living
+ * @apiSuccessExample {json} Success
+ * {
+  "status": 200,
+  "data": {
+    "_id": "611bb2441edb21accf604491",
+    "bannerImage": "bannerImage_1629206904526_pattern1.jpg",
+    "heading": "Test fff",
+    "subHeading": "Testm Sub Head",
+    "content": "<p>Test Content</p>\r\n",
+    "imageHeading": "Image Heading",
+    "image": [
+      "image_1629206904533_pattern6.jpg",
+      "image_1629206904533_pattern7.jpg",
+      "image_1629206904535_pattern8.jpg"
+    ],
+    "language": "en",
+    "translate": [
+      {
+        "language": "fr",
+        "heading": "Test FR",
+        "subHeading": "Test Sub FR",
+        "content": "<p>Test Content FR</p>\r\n",
+        "imageHeading": "Image Heading FR",
+        "_id": "611bb978470a870ff7545753"
+      },
+      {
+        "language": "de",
+        "heading": "Test DE",
+        "subHeading": "Test Sub DE",
+        "content": "<p>Test Content DE</p>\r\n",
+        "imageHeading": "Image Heading DE",
+        "_id": "611bb978470a870ff7545754"
+      }
+    ],
+    "createdAt": "2021-08-16T10:18:10.138Z",
+    "updatedAt": "2021-08-17T13:28:24.582Z",
+    "__v": 0
+  },
+  "message": "Text fetched successfully."
+}
+*/
+
+namedRouter.get("api.artofliving.vineyards.investment", '/artofliving/vineyards-investment', async (req, res) => {
+  try {
+      const success = await artoflivingController.getVineyardsInvestment(req, res);
       res.status(success.status).send(success);
   } catch (error) {
       res.status(error.status).send(error);
