@@ -312,6 +312,44 @@
   },
   {
     "type": "get",
+    "url": "/news",
+    "title": "News All",
+    "version": "1.0.0",
+    "group": "News",
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n  \"status\": 200,\n  \"data\": [\n    {\n      \"title\": \"GOLDMAN PRESTIGE Magazine (Spring-Summer 2021)\",\n      \"content\": \"<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of</p>\\r\\n\",\n      \"author_name\": \"GOLDMAN PRESTIGE\",\n      \"date\": \"05/05/2021\",\n      \"image\": \"1627560158796_7682_1.png\",\n      \"isDeleted\": false,\n      \"status\": \"Active\",\n      \"_id\": \"60ffc53ad0e6c234cc04b4ba\",\n      \"createdAt\": \"2021-07-27T08:35:06.342Z\",\n      \"updatedAt\": \"2021-07-29T12:02:39.430Z\"\n    },\n    {\n      \"title\": \"Test News\",\n      \"content\": \"<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\\r\\n\",\n      \"author_name\": \"John Doe\",\n      \"date\": \"03/07/2021\",\n      \"image\": \"1627560241094_contact.png\",\n      \"isDeleted\": false,\n      \"status\": \"Active\",\n      \"_id\": \"610299314f7ee46eab53a83f\",\n      \"createdAt\": \"2021-07-29T12:04:01.331Z\",\n      \"updatedAt\": \"2021-07-29T13:39:53.961Z\"\n    }\n  ],\n  \"message\": \"News fetched successfully.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/api/news.routes.js",
+    "groupTitle": "News",
+    "name": "GetNews"
+  },
+  {
+    "type": "get",
+    "url": "/news/:id",
+    "title": "News Details",
+    "version": "1.0.0",
+    "group": "News",
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n  \"status\": 200,\n  \"data\": {\n    \"_id\": \"60ffc53ad0e6c234cc04b4ba\",\n    \"title\": \"GOLDMAN PRESTIGE Magazine (Spring-Summer 2021)\",\n    \"content\": \"<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of</p>\\r\\n\",\n    \"author_name\": \"GOLDMAN PRESTIGE\",\n    \"date\": \"05/05/2021\",\n    \"image\": \"1627560158796_7682_1.png\",\n    \"isDeleted\": false,\n    \"status\": \"Active\",\n    \"createdAt\": \"2021-07-27T08:35:06.342Z\",\n    \"updatedAt\": \"2021-07-29T12:02:39.430Z\"\n  },\n  \"message\": \"News fetched successfully.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/api/news.routes.js",
+    "groupTitle": "News",
+    "name": "GetNewsId"
+  },
+  {
+    "type": "get",
     "url": "/services-content/content",
     "title": "Service Content",
     "version": "1.0.0",
