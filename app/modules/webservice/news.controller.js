@@ -26,7 +26,7 @@ class newsController {
 			let getContent = await newsRepo.getById(newsId);
 			if (!_.isEmpty(getContent)) {
 				return { status: 200, data: getContent, message: 'News fetched successfully.' }
-			}
+			}  
 			else {
 				return { status: 201, data: [], message: 'There are no data at this moment.' }
 			}
