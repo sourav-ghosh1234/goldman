@@ -10,12 +10,14 @@ const yachtingWorldSchema = new Schema({
     imageHeading: { type: String, default: '' },
     image: [{ type: String, default: '' }],
     language: {type:String, default: 'en'},
+    boatCharterHeading: { type: String, default: '' },
     translate:[{
         language: {type:String, default: ''},
         heading: { type: String, default: '' },
         subHeading: { type: String, default: '' },
         content: { type: String, default: '' },
         imageHeading: { type: String, default: '' },
+        boatCharterHeading: { type: String, default: '' }
     }],
  }, { timestamps: true });
 
