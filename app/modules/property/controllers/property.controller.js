@@ -6,7 +6,7 @@ const fs = require('fs');
 const gm = require('gm').subClass({
     imageMagick: true
 });
-
+const userRepo = require('user/repositories/user.repository');
 const propertyRepo = require('property/repositories/property.repository');
 const propertytypeRepo = require('propertytype/repositories/propertytype.repository');
 const cityRepo = require('city/repositories/city.repository');
@@ -27,6 +27,7 @@ class PropertyController {
                 'status': 'Active',isDeleted:false
             });
             result.languages = languages;
+            let agents = await userRepo.getAllWithoutPaginate({ 'roleDetails.role': 'agent', isDeleted: false, isActive: true });
             let propertyTypes = await propertytypeRepo.getAllByField({ isDeleted: false, status: 'Active' });
             let cities = await cityRepo.getAllByField({ isDeleted: false, status: 'Active' });
             let countries = await countryRepo.getAllByField({ isDeleted: false, status: 'Active' });
@@ -36,7 +37,7 @@ class PropertyController {
                 page_name: 'property-management',
                 page_title: 'Create Property',
                 user: req.user,
-                response: { propertyTypes, cities, countries, amenities, characteristics },
+                response: { propertyTypes, cities, countries, amenities, characteristics,agents },
                 result:result
             });
         } catch (e) {

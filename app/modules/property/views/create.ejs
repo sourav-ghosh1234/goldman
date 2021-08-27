@@ -122,11 +122,13 @@
                                                         <div class="col-lg-6">
                                                             <label>Land Agent</label>
                                                             <select name="landAgent" id="landAgent" class="form-control required">
-									                            <option value="">Select</option>
-                                                                <option value="1">Agent One</option>
-                                                                <option value="2">Agent Two</option>
-                                                                <option value="3">Agent Three</option>
-								                            </select>
+                                                                <option value="">Select Agent</option>
+                                                                    <% if(response.agents) {%>
+                                                                        <% response.agents.forEach(agent => {%>
+                                                                            <option value="<%= agent._id %>"><%= agent.full_name %></option>
+                                                                        <% }); %>
+                                                                    <% } %>
+                                                            </select>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label>Dual Agent</label>

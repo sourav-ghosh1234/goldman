@@ -106,6 +106,46 @@ var KTFormControls = function() {
         });
     };
 
+    var agentFrmValidation = function() {
+        $("#frmAgent").validate({
+            // define validation rules
+            rules: {
+                full_name: {
+                    required: true,
+                    letterswithbasicpunc: true
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                phone: {
+                    required: true
+                }
+            },
+            messages: {
+                full_name: {
+                    required: "Please enter your full name",
+                    letterswithbasicpunc: "Please enter alphabets only"
+                },
+                email: {
+                    required: "Please enter your email",
+                    email: "Please enter valid email"
+                },
+                phone: {
+                    required: "Please enter your phone number"
+                }
+            },
+            //display error alert on form submit  
+            invalidHandler: function(event, validator) {
+                KTUtil.scrollTop();
+            },
+
+            submitHandler: function(form) {
+                form[0].submit();
+            }
+        });
+    };
+
     var editCMSValidation = function() {
         $("#frmEditCMS").validate({
 
@@ -134,263 +174,6 @@ var KTFormControls = function() {
                 KTUtil.scrollTop();
             },
 
-            submitHandler: function(form) {
-                form[0].submit();
-            }
-        });
-    };
-
-    var commissionerAddValidation = function() {
-        $('#commissionerAddForm').validate({
-            rules: {
-                first_name: {
-                    required: true
-                },
-                last_name: {
-                    required: true
-                },
-                address: {
-                    required: true
-                },
-                profile_image: {
-                    required: true
-                },
-                user_name: {
-                    required: true
-                },
-                email: {
-                    required: true,
-                    email: true
-                },
-                phone: {
-                    required: true
-                },
-                password: {
-                    required: true,
-                },
-            },
-            messages: {
-                first_name: {
-                    required: 'First Name is Required'
-                },
-                last_name: {
-                    required: 'Last Name is Required'
-                },
-                address: {
-                    required: 'Address is Required'
-                },
-                profile_image: {
-                    required: 'Profile Image is Required'
-                },
-                user_name: {
-                    required: 'User Name is Required'
-                },
-                email: {
-                    required: 'Email is Required',
-                    email: 'Please enter valid email'
-                },
-                phone: {
-                    required: 'Phone is Required'
-                },
-                password: {
-                    required: 'Password is Required'
-                },
-            },
-            invalidHandler: function(event, validate) {
-
-            },
-            submitHandler: function(form) {
-                form[0].submit();
-            }
-        });
-    };
-
-    var commissionerEditValidation = function() {
-        $('#commissionerValidation').validate({
-            rules: {
-                first_name: {
-                    required: true
-                },
-                last_name: {
-                    required: true
-                },
-                address: {
-                    required: true
-                },
-                user_name: {
-                    required: true
-                },
-                email: {
-                    required: true,
-                    email: true
-                },
-                phone: {
-                    required: true
-                },
-            },
-            messages: {
-                first_name: {
-                    required: 'First Name is Required'
-                },
-                last_name: {
-                    required: 'Last Name is Required'
-                },
-                address: {
-                    required: 'Address is Required'
-                },
-                user_name: {
-                    required: 'User Name is Required'
-                },
-                email: {
-                    required: 'Email is Required',
-                    email: 'Please enter valid email'
-                },
-                phone: {
-                    required: 'Phone is Required'
-                },
-            },
-            invalidHandler: function(event, validate) {
-
-            },
-            submitHandler: function(form) {
-                form[0].submit();
-            }
-        });
-    };
-
-    var memberAddValidation = function() {
-        $('#memberAddFrm').validate({
-            rules: {
-                first_name: {
-                    required: true
-                },
-                last_name: {
-                    required: true
-                },
-                address: {
-                    required: true
-                },
-                profile_image: {
-                    required: true
-                },
-                user_name: {
-                    required: true
-                },
-                email: {
-                    required: true,
-                    email: true
-                },
-                phone: {
-                    required: true
-                },
-                password: {
-                    required: true,
-                },
-            },
-            messages: {
-                first_name: {
-                    required: 'First Name is Required'
-                },
-                last_name: {
-                    required: 'Last Name is Required'
-                },
-                address: {
-                    required: 'Address is Required'
-                },
-                profile_image: {
-                    required: 'Profile Image is Required'
-                },
-                user_name: {
-                    required: 'User Name is Required'
-                },
-                email: {
-                    required: 'Email is Required',
-                    email: 'Please enter valid email'
-                },
-                phone: {
-                    required: 'Phone is Required'
-                },
-                password: {
-                    required: 'Password is Required'
-                },
-            },
-            invalidHandler: function(event, validate) {
-
-            },
-            submitHandler: function(form) {
-                form[0].submit();
-            }
-        });
-    };
-
-    var memberEditValidation = function() {
-        $('#memberEditFrm').validate({
-            rules: {
-                first_name: {
-                    required: true
-                },
-                last_name: {
-                    required: true
-                },
-                address: {
-                    required: true
-                },
-                user_name: {
-                    required: true
-                },
-                email: {
-                    required: true,
-                    email: true
-                },
-                phone: {
-                    required: true
-                },
-            },
-            messages: {
-                first_name: {
-                    required: 'First Name is Required'
-                },
-                last_name: {
-                    required: 'Last Name is Required'
-                },
-                address: {
-                    required: 'Address is Required'
-                },
-                user_name: {
-                    required: 'User Name is Required'
-                },
-                email: {
-                    required: 'Email is Required',
-                    email: 'Please enter valid email'
-                },
-                phone: {
-                    required: 'Phone is Required'
-                },
-            },
-            invalidHandler: function(event, validate) {
-
-            },
-            submitHandler: function(form) {
-                form[0].submit();
-            }
-        });
-    };
-
-    var sportAddValidation = function() {
-        $('#frmsport').validate({
-            rules: {
-                title: {
-                    required: true
-                },
-            },
-            messages: {
-                title: {
-                    required: 'Title is Required'
-                },
-            },
-            invalidHandler: function(event, validate) {
-
-            },
             submitHandler: function(form) {
                 form[0].submit();
             }
@@ -464,44 +247,6 @@ var KTFormControls = function() {
         });
     };
 
-    var commissionerfeeEditValidation = function() {
-        $('#frmcommissionerfee').validate({
-            rules: {
-                amount: {
-                    required: true
-                },
-            },
-            messages: {
-                amount: {
-                    required: 'Amount is Required'
-                },
-            },
-            invalidHandler: function(event, validate) {},
-            submitHandler: function(form) {
-                form[0].submit();
-            }
-        });
-    };
-
-    var leaguefeeEditValidation = function() {
-        $('#frmleaguefee').validate({
-            rules: {
-                amount: {
-                    required: true
-                },
-            },
-            messages: {
-                amount: {
-                    required: 'Amount is Required'
-                },
-            },
-            invalidHandler: function(event, validate) {},
-            submitHandler: function(form) {
-                form[0].submit();
-            }
-        });
-    };
-
     var editContactInfo = function() {
         $("#editContactinfos").validate({
             rules: {
@@ -520,124 +265,6 @@ var KTFormControls = function() {
                 KTUtil.scrollTop();
             },
 
-            submitHandler: function(form) {
-                form[0].submit();
-            }
-        });
-    };
-
-    var playerAddValidation = function() {
-        $('#playerAddFrm').validate({
-            rules: {
-                first_name: {
-                    required: true
-                },
-                last_name: {
-                    required: true
-                },
-                address: {
-                    required: true
-                },
-                profile_image: {
-                    required: true
-                },
-                user_name: {
-                    required: true
-                },
-                email: {
-                    required: true,
-                    email: true
-                },
-                phone: {
-                    required: true
-                },
-                password: {
-                    required: true
-                },
-            },
-            messages: {
-                first_name: {
-                    required: 'First Name is Required'
-                },
-                last_name: {
-                    required: 'Last Name is Required'
-                },
-                address: {
-                    required: 'Address is Required'
-                },
-                profile_image: {
-                    required: 'Profile Image is Required'
-                },
-                user_name: {
-                    required: 'User Name is Required'
-                },
-                email: {
-                    required: 'Email is Required',
-                    email: 'Please enter valid email'
-                },
-                phone: {
-                    required: 'Phone is Required'
-                },
-                password: {
-                    required: 'Password is Required'
-                },
-            },
-            invalidHandler: function(event, validate) {
-
-            },
-            submitHandler: function(form) {
-                form[0].submit();
-            }
-        });
-    };
-
-    var playerEditValidation = function() {
-        $('#playerEditFrm').validate({
-            rules: {
-                first_name: {
-                    required: true
-                },
-                last_name: {
-                    required: true
-                },
-                address: {
-                    required: true
-                },
-                user_name: {
-                    required: true
-                },
-                email: {
-                    required: true,
-                    email: true
-                },
-                phone: {
-                    required: true
-                },
-            },
-            messages: {
-                first_name: {
-                    required: 'First Name is Required'
-                },
-                last_name: {
-                    required: 'Last Name is Required'
-                },
-                address: {
-                    required: 'Address is Required'
-                },
-                user_name: {
-                    required: 'User Name is Required'
-                },
-                email: {
-                    required: 'Email is Required',
-                    email: 'Please enter valid email'
-                },
-                phone: {
-                    required: 'Phone is Required'
-                },
-            },
-            invalidHandler: function(event, validate) {
-
-            },
             submitHandler: function(form) {
                 form[0].submit();
             }
@@ -1106,20 +733,12 @@ var KTFormControls = function() {
         init: function() {
             myProfileValidation();
             changePasswordValidation();
-            commissionerAddValidation();
-            commissionerEditValidation();
-            memberAddValidation();
-            memberEditValidation();
             editSetting();
+            agentFrmValidation();
             editCMSValidation();
-            sportAddValidation();
             notificationAddValidation();
             notificationEditValidation();
-            commissionerfeeEditValidation();
-            leaguefeeEditValidation();
             editContactInfo();
-            playerAddValidation();
-            playerEditValidation();
             frmServiceValidation();
             frmCreateArtValidation();
             editArtFrmValidation();

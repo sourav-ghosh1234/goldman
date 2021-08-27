@@ -119,6 +119,85 @@ const userRepository = {
         }
     },
 
+    getAllAgent: async (req) => {
+        try {
+           
+            var conditions = {};
+            var and_clauses = [];
+
+            and_clauses.push({
+                "isDeleted": false
+            });
+            and_clauses.push({
+                "user_role.role": req.body.role
+            });
+
+            if (_.isObject(req.body.query) && _.has(req.body.query, 'generalSearch')) {
+                and_clauses.push({
+                    $or: [
+                        { 'full_name': { $regex: req.body.query.generalSearch, $options: 'i' } },
+                        { 'email': { $regex: req.body.query.generalSearch, $options: 'i' } },
+                        { 'phone': { $regex: req.body.query.generalSearch, $options: 'i' } }
+                        
+                    ]
+                });
+            }
+            if (_.isObject(req.body.query) && _.has(req.body.query, 'Status')) {
+                (req.body.query.Status == 'Active') ? and_clauses.push({
+                    "isActive": true
+                }) : and_clauses.push({
+                    "isActive": false
+                });
+                //and_clauses.push({"isActive": req.body.query.Status});
+            }
+            
+            conditions['$and'] = and_clauses;
+
+            var sortOperator = {
+                "$sort": {}
+            };
+            if (_.has(req.body, 'sort')) {
+                var sortField = req.body.sort.field;
+                if (req.body.sort.sort == 'desc') {
+                    var sortOrder = -1;
+                } else if (req.body.sort.sort == 'asc') {
+                    var sortOrder = 1;
+                }
+
+                sortOperator["$sort"][sortField] = sortOrder;
+            } else {
+                sortOperator["$sort"]['_id'] = -1;
+            }
+
+            var aggregate = User.aggregate([{
+                $lookup: {
+                    "from": "roles",
+                    "localField": "role",
+                    "foreignField": "_id",
+                    "as": "user_role"
+                }
+            },
+            {
+                "$unwind": "$user_role"
+            },
+            {
+                $match: conditions
+            },
+                sortOperator
+            ]);
+
+            var options = {
+                page: req.body.pagination.page,
+                limit: req.body.pagination.perpage
+            };
+            let allUsers = await User.aggregatePaginate(aggregate, options);
+            return allUsers;
+        } catch (e) {
+            console.log(114, e);
+            throw (e);
+        }
+    },
+
     getByFieldWithRole: async(params) => {
 
         try {

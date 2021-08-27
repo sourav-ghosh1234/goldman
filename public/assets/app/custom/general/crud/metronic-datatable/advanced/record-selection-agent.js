@@ -1,6 +1,6 @@
 "use strict";
 // Class definition
-var KTDatatableAgency = function() {
+var KTDatatableAgent = function() {
     // Private functions
     var options = {
         // datasource definition
@@ -8,7 +8,7 @@ var KTDatatableAgency = function() {
             type: 'remote',
             source: {
                 read: {
-                    url: `${location.protocol}//${window.location.host}/player/getall`,
+                    url: `${location.protocol}//${window.location.host}/agent/getall`,
                 },
             },
             pageSize: 10,
@@ -40,51 +40,31 @@ var KTDatatableAgency = function() {
                 width:70,
                 template: function(row) {
                     if (row.profile_image != '') {
-                        return `<img src="/uploads/player/${row.profile_image}" class="img-responsive" width="50px">`;
+                        return `<img src="/uploads/user/profile_pic/${row.profile_image}" class="img-responsive" width="50px">`;
                     } else {
                         return '<img src="/uploads/no-image.png" class="img-responsive" width="50px">';
                     }
                 },
             },
            {
-                field: 'first_name',
+                field: 'full_name',
                 title: 'Name',
                 sortable: true,
                 width:120,
                 template: function(row) {
-                    return row.first_name +" "+row.last_name;
+                    return row.full_name;
                 },
             },
             {
                 field: 'email',
                 title: 'Contact Info',
                 sortable: true,
-                width:140,
+                width:200,
                 // callback function support for column rendering
                 template: function(row) {
                     return "<b>Email:</b> "+row.email+"<br><b>Phone:</b> "+row.phone;
                 },
             },
-            {
-                field: 'user_name',
-                title: 'Username',
-                sortable: true,
-                width:130,
-                template: function(row) {
-                    return row.user_name;
-                },
-            },
-           
-           /*  {
-                field: 'phone',
-                title: 'Phone',
-                sortable: true,
-                width: 80,
-                // callback function support for column rendering
-                template: function(row) {
-                    return row.phone;
-                },
-            }, */
             {
                 field: 'isActive',
                 title: 'Status',
@@ -116,7 +96,7 @@ var KTDatatableAgency = function() {
                 autoHide: false,
                 template: function(row) {
                     return '\
-                    \<a href="' + location.protocol + "//" + window.location.host + '/player/edit/' + row._id + '" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Edit">\
+                    \<a href="' + location.protocol + "//" + window.location.host + '/agent/edit/' + row._id + '" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Edit">\
                         <i class="flaticon-edit"></i>\
                     </a>\
                     \<a id="del-' + row._id + '" href="javascript:;" class="btn btn-sm btn-clean btn-icon btn-icon-sm ktDelete" title="Delete">\
@@ -135,18 +115,14 @@ var KTDatatableAgency = function() {
             input: $('#generalSearch'),
         };
 
-        var datatable = $('#playerRecordSelection').KTDatatable(options);
+        var datatable = $('#agentRecordSelection').KTDatatable(options);
 
         $('#kt_form_status').on('change', function() {
             datatable.search($(this).val(), 'Status');
         });
 
-        $('#kt_form_type').on('change', function() {
-            datatable.search($(this).val().toLowerCase(), 'Type');
-        });
-
        
-        $('#kt_form_status,#kt_form_type').selectpicker();
+        $('#kt_form_status').selectpicker();
 
         datatable.on(
             'kt-datatable--on-check kt-datatable--on-uncheck kt-datatable--on-layout-updated',
@@ -194,7 +170,7 @@ var KTDatatableAgency = function() {
             }).then(function(result) {
 
                 if (result.value) {
-                    window.location.href = `${window.location.protocol}//${window.location.host}/player/status-change/${elemID}`;
+                    window.location.href = `${window.location.protocol}//${window.location.host}/agent/status-change/${elemID}`;
                 }
             });
         })
@@ -211,7 +187,7 @@ var KTDatatableAgency = function() {
                 reverseButtons: true
             }).then(function(result) {
                 if (result.value) {
-                    window.location.href = `${location.protocol}//${window.location.host}/player/delete/${elemID}`;
+                    window.location.href = `${location.protocol}//${window.location.host}/agent/delete/${elemID}`;
                 }
             });
         });
@@ -226,5 +202,5 @@ var KTDatatableAgency = function() {
 }();
 
 jQuery(document).ready(function() {
-    KTDatatableAgency.init();
+    KTDatatableAgent.init();
 });

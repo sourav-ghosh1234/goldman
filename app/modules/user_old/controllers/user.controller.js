@@ -3,7 +3,6 @@ const User = require('user/models/user.model');
 const userRepo = require('user/repositories/user.repository');
 const roleRepo = require('role/repositories/role.repository');
 const cmsRepo = require('cms/repositories/cms.repository');
-const notificationRepo = require('notification/repositories/notification.repository');
 
 const express = require('express');
 const routeLabel = require('route-label');
