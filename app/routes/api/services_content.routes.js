@@ -156,5 +156,103 @@ namedRouter.get("api.services.content", '/services-content/content', async (req,
 });
 
 
+/**
+ * @api {get} /services/properties-private Exclusive properties & private office
+ * @apiVersion 1.0.0
+ * @apiGroup Service Content
+ * @apiSuccessExample {json} Success
+ * {
+  "status": 200,
+  "data": {
+    "_id": "612cda2c1edb21accf0f0f98",
+    "bannerImage": "bannerImage_1630330354478_photo-1505843513577-22bb7d21e455.jpeg",
+    "heading": "Exclusive properties & private office",
+    "subHeading": "Your investment projects in France and internationally",
+    "content": "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<br />\r\n<br />\r\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<br />\r\n<br />\r\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\r\n",
+    "imageHeading": "The world of BARNES Exclusive properties & private office",
+    "image": [
+      "image_1630330354483_download_(1).jpeg",
+      "image_1630330354483_pexels-photo-186077.jpeg",
+      "image_1630330354484_photo-1560518883-ce09059eeffa.jpeg",
+      "image_1630330354484_slide1.png"
+    ],
+    "language": "en",
+    "translate": [
+      {
+        "language": "fr",
+        "heading": "Propriétés exclusives & bureau privé",
+        "subHeading": "Vos projets d'investissement en France et à l'international",
+        "content": "<p>FR Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<br />\r\n<br />\r\nFR Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<br />\r\n<br />\r\nFR Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\r\n",
+        "imageHeading": "L'univers BARNES Propriétés exclusives & bureau privé",
+        "_id": "612cddf26769eb72b0406c01"
+      }
+    ],
+    "createdAt": "2021-08-16T10:18:10.138Z",
+    "updatedAt": "2021-08-30T13:32:34.543Z",
+    "__v": 0
+  },
+  "message": "Text fetched successfully."
+}
+*/
+
+namedRouter.get("api.services.properties.private", '/services/properties-private', async (req, res) => {
+  try {
+      const success = await servicesContentController.getPropertiesPrivate(req, res);
+      res.status(success.status).send(success);
+  } catch (error) {
+      res.status(error.status).send(error);
+  }
+});
+
+
+/**
+ * @api {get} /services/investment-realty Investment Realty
+ * @apiVersion 1.0.0
+ * @apiGroup Service Content
+ * @apiSuccessExample {json} Success
+ * {
+  "status": 200,
+  "data": {
+    "_id": "612ce2571edb21accf0ffdda",
+    "bannerImage": "bannerImage_1630332023838_l22.png",
+    "heading": "Investment Realty",
+    "subHeading": "Our expertise in commercial and residential building transactions",
+    "content": "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<br />\r\n<br />\r\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<br />\r\n<br />\r\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\r\n",
+    "imageHeading": "The world of BARNES Investment realty",
+    "image": [
+      "image_1630332023847_l11.png",
+      "image_1630332023850_large-beautiful-bedroom.jpeg",
+      "image_1630332023852_pexels-photo-186077.jpeg",
+      "image_1630332023853_photo-1505843513577-22bb7d21e455.jpeg"
+    ],
+    "language": "en",
+    "translate": [
+      {
+        "language": "fr",
+        "heading": "Investissement immobilier",
+        "subHeading": "Notre expertise en transactions immobilières commerciales et résidentielles",
+        "content": "<p>FR Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<br />\r\n<br />\r\nFR Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<br />\r\n<br />\r\nFR Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\r\n",
+        "imageHeading": "L'univers de BARNES Investment Realty",
+        "_id": "612ce477dd593a7f28ef914a"
+      }
+    ],
+    "createdAt": "2021-08-16T10:18:10.138Z",
+    "updatedAt": "2021-08-30T14:00:23.909Z",
+    "__v": 0
+  },
+  "message": "Text fetched successfully."
+}
+*/
+
+namedRouter.get("api.services.investment.realty", '/services/investment-realty', async (req, res) => {
+  try {
+      const success = await servicesContentController.getInvestmentRealty(req, res);
+      res.status(success.status).send(success);
+  } catch (error) {
+      res.status(error.status).send(error);
+  }
+});
+
+
 // Export the express.Router() instance
 module.exports = router;
