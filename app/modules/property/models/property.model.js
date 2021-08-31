@@ -13,7 +13,7 @@ const PropertySchema = new Schema({
     subTitle: { type: String, default: '' },
     propertyType: { type: Schema.Types.ObjectId, ref: 'PropertyType',default: null },
     establishedNew: { type: String, default: "established", enum: EstablishedNew },
-    leadAgent: { type: String, default: '' },
+    landAgent: { type: String, default: '' },
     dualAgent: { type: String, default: '' },
     rentalPerWeek: { type: Number,default: 0 },
     rentalPerMonth: { type: Number,default: 0 },
@@ -35,6 +35,7 @@ const PropertySchema = new Schema({
         street_address: { type: String, default: '' },
         suburb: { type: String, default: '' },
         municipality: { type: String, default: '' },
+        suburb : { type: String, default: '' }
     },
     totalRooms: { type: Number,default: 0 },
     noOfBedRooms: { type: Number,default: 0 },

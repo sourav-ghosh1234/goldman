@@ -156,6 +156,7 @@ const menuRepository = {
                     "$group": {
                         "_id": "$_id",
                         "title": { "$first": "$title" },
+                        "link": { "$first": "$link" },
                         "translate": { "$first": "$translate" },
                         "menu_order": { "$first": "$menu_order" },
                         "child_details": { "$addToSet": "$child_details" }
@@ -169,13 +170,15 @@ const menuRepository = {
                         preserveNullAndEmptyArrays: true
                     }
                 },
+                {$sort:{"child_details.menu_order":1}},
                 {
                     "$group": {
                         "_id": "$_id",
                         "title": { "$first": "$title" },
+                        "link": { "$first": "$link" },
                         "translate": { "$first": "$translate" },
                         "menu_order": { "$first": "$menu_order" },
-                        "child_details": { "$addToSet": "$child_details" }
+                        "child_details": { "$push": "$child_details" }
 
                     }
                 },

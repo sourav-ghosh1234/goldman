@@ -49,7 +49,6 @@ class adminuserController {
                         req.body.profile_image = req.files[i].filename;
                     }
                 }
-                req.body.isVerified = true;
                 let saveadminuser = await adminuserRepo.save(req.body);
 
                 // let fullName = req.body.first_name + ' ' + req.body.last_name;

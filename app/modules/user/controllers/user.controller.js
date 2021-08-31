@@ -3,8 +3,6 @@ const UserModel = require('user/models/user.model');
 const userRepo = require('user/repositories/user.repository');
 const roleRepo = require('role/repositories/role.repository');
 const cmsRepo = require('cms/repositories/cms.repository');
-
-const notificationRepo = require('notification/repositories/notification.repository');
 const mailer = require('../../../helper/mailer.js');
 
 const express = require('express');
@@ -103,22 +101,16 @@ class UserController {
             // let userCount = await userRepo.getCount({ "role": { "$ne": mongoose.Types.ObjectId(role._id) }, "isDeleted": false, "isActive": true });
 
             let cmsCount = await cmsRepo.getCmsCount({ "isDeleted": false });
-            let commissioners = await userRepo.getAllWithoutPaginate({ isDeleted: false, 'roleDetails.role': 'commissioner' });
             let members = await userRepo.getAllWithoutPaginate({ isDeleted: false, 'roleDetails.role': 'user' });
+            let agents = await userRepo.getAllWithoutPaginate({ isDeleted: false, 'roleDetails.role': 'agent' });
            
-            let notifications = await notificationRepo.getAllWithoutPaginate({ isDeleted: false });
-           
-
-
             res.render('user/views/dashboard.ejs', {
                 page_name: 'user-dashboard',
                 page_title: 'Dashboard',
                 user: req.user,
                 cmsCount: (cmsCount >0)?cmsCount:0,
                 memberCount:(members.length >0 )?members.length:0,
-                commissionerCount:(commissioners.length >0 )?commissioners.length:0,
-                
-                notificationCount: (notifications.length > 0) ? notifications.length : 0,
+                agentCount:(agents.length >0 )?agents.length:0
                 
             });
 
@@ -547,7 +539,6 @@ class UserController {
                     if (req.files.length > 0) {
                         req.body.profile_image = req.files[0].filename;
                     }
-                    req.body.isVerified = true;
                     pass = req.body.password;
                     let usermodel = new UserModel();
                   //  console.log("usermodel>>", usermodel)

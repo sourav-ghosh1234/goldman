@@ -105,18 +105,26 @@
                                             </div>
                                         </div>
                                      </div>
+                                     <div class="form-group row">
+                                        <div class="col-lg-6">
+                                            <label>Boat Hire & Yacht Charter Service Heading:</label>
+                                            <input type="text" name="boatCharterHeading" id="boatCharterHeading" class="form-control" placeholder="Enter Heading" value="<%= response.yachting_world_data.boatCharterHeading%>">
+                                        </div>
+                                    </div>
                                 </div>
                                 <% }else{
                                     let heading = ''
                                     let subHeading = '' 
                                     let content = ''  
                                     let imageHeading = '' 
+                                    let boatCharterHeading = ''
                                     
                                     if(_.has(response.yachting_world_data.translate,language.shortcode)) {
                                         heading =  response.yachting_world_data.translate[language.shortcode].heading
                                         subHeading =  response.yachting_world_data.translate[language.shortcode].subHeading
                                         content =  response.yachting_world_data.translate[language.shortcode].content
                                         imageHeading =  response.yachting_world_data.translate[language.shortcode].imageHeading
+                                        boatCharterHeading = response.yachting_world_data.translate[language.shortcode].boatCharterHeading
                                     }
                                 %>
                                 <div class="tab-pane" id="kt_tabs_<%=language.shortcode%>" role="tabpanel">
@@ -140,6 +148,12 @@
                                         <div class="col-lg-6">
                                             <label>Image Heading:</label>
                                             <input type="text" name="translate[<%=count%>][imageHeading]" id="imageHeading_<%=count%>" class="form-control" placeholder="Enter Image Heading" value="<%=imageHeading%>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-lg-6">
+                                            <label>Boat Hire & Yacht Charter Service Heading:</label>
+                                            <input type="text" name="translate[<%=count%>][boatCharterHeading]" id="boatCharterHeading_<%=count%>" class="form-control" placeholder="Enter Heading" value="<%=boatCharterHeading%>">
                                         </div>
                                     </div>
                                    <input type="hidden" name="translate[<%=count%>][language]" value="<%=language.shortcode%>">

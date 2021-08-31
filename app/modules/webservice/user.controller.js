@@ -194,18 +194,10 @@ class userController {
             }
             let role = await roleRepo.getByField({ '_id': user.role });
             if (req.files.length > 0) {
-                /* if (role.role == 'commissioner') {
-                    req.body.logo = req.files[0].filename;
-                    if (user.logo && user.logo != '' && fs.existsSync(`./public/uploads/user/${user.logo}`)) {
-                        fs.unlinkSync(`./public/uploads/user/${user.logo}`);
-                    }
-                } 
-                else { */
-                    req.body.profile_image = req.files[0].filename;
-                    if (user.profile_image && user.profile_image != '' && fs.existsSync(`./public/uploads/user/${user.profile_image}`)) {
-                        fs.unlinkSync(`./public/uploads/user/${user.profile_image}`);
-                    }
-               // }
+                req.body.profile_image = req.files[0].filename;
+                if (user.profile_image && user.profile_image != '' && fs.existsSync(`./public/uploads/user/${user.profile_image}`)) {
+                    fs.unlinkSync(`./public/uploads/user/${user.profile_image}`);
+                }
             }
             else{
                 req.body.profile_image = user.profile_image;

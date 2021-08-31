@@ -1,0 +1,78 @@
+<% layout(layout_directory+'/mainLayout') -%>
+
+    <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+        <div class="kt-subheader__main">
+            <h3 class="kt-subheader__title">
+                <%= page_title %>
+            </h3>
+            <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+            <!-- <div class="kt-subheader__breadcrumbs">
+			<a href="<%= generateUrl('user.dashboard') %>" class="kt-subheader__breadcrumbs-home">Dashboard</a>
+			<span class="kt-subheader__breadcrumbs-separator"></span>
+			<span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active"><%= page_title %></span>
+		</div> -->
+        </div>
+    </div>
+
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="kt-portlet">
+                    <form class="kt-form kt-form--label-right" id="frmAgent" action="<%= generateUrl('agent.insert') %>" method="POST" enctype='multipart/form-data'>
+                        <div class="kt-portlet__body">
+
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label for="agent Name" class="control-label">Name</label>
+                                    <div class="controls">
+                                        <input id="full_name" name="full_name" type="text" placeholder="Enter Name" class="form-control required" required data-validation-required-message="This field is required" value="" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="agent Phone" class="control-label">Phone</label>
+                                    <div class="controls">
+                                        <input id="phone" name="phone" type="text" placeholder="Enter Phone Number" class="form-control required" required data-validation-required-message="This field is required" value="" />
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label for="agent Email" class="control-label">Email</label>
+                                    <div class="controls">
+                                        <input id="email" name="email" type="text" placeholder="Enter Email" class="form-control required" required data-validation-required-message="This field is required" value="" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="agent Email" class="control-label">Address</label>
+                                    <div class="controls">
+                                        <input id="address" name="address" type="text" placeholder="Enter Address" class="form-control" value="" />
+                                    </div>
+                                </div>
+                             </div>
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label>Profile Image</label>
+                                    <input type="file" name="profile_image" id="profile_image" class="form-control imagepicker">
+                                </div>
+                                <div class="col-lg-6">
+                                    <img class="pickedImage" height="125px" src="">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="kt-portlet__foot">
+                            <div class="kt-form__actions">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <a href="<%= generateUrl('agent.listing') %>" class="btn btn-secondary">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

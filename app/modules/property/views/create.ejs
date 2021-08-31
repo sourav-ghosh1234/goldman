@@ -68,15 +68,15 @@
 										<div class="kt-portlet__body">
 											<div class="tab-content">
 												<div class="tab-pane active" id="kt_portlet_base_demo_2_3_tab_content" role="tabpanel">
-                                                    <h5>Status Change </h5>
+                                                    <h5>Property For</h5>
                                                     <hr>
 													<div class="form-group row">
                                                         <div class="col-lg-6">
-                                                            <label>Status:</label>
-                                                            <select name="status" id="status" class="form-control required">
-									                            <option value="">Select status</option>
-                                                                <option value="Active">Active</option>
-                                                                <option value="Inactive">Inactive</option>
+                                                            <label>Type:</label>
+                                                            <select name="propertyFor" id="propertyFor" class="form-control required">
+									                            <option value="">Select</option>
+                                                                <option value="sale">Sale</option>
+                                                                <option value="rent">Rent</option>
 								                            </select>
                                                         </div>
                                                     </div>
@@ -100,7 +100,7 @@
 									                            <% if(response.propertyTypes) {%>
 										                            <% response.propertyTypes.forEach(propertyType => {%>
 											                            <option value="<%= propertyType._id %>"><%= propertyType.title %></option>
-										                            <% }); %>
+										                            <% })%>
 									                            <% } %>
 								                            </select>
                                                         </div>
@@ -108,11 +108,11 @@
                                                             <label>New or Established</label>
                                                             <div class="kt-radio-inline">
                                                                 <label class="kt-radio">
-                                                                    <input type="radio" name="establishedNew"> Established Property
+                                                                    <input type="radio" name="establishedNew" value="established"> Established Property
                                                                     <span></span>
                                                                 </label>
                                                                 <label class="kt-radio">
-                                                                <input type="radio" name="establishedNew"> New Construction
+                                                                <input type="radio" name="establishedNew" value="new"> New Construction
                                                                     <span></span>
                                                                 </label>
                                                             </div>
@@ -121,7 +121,14 @@
                                                     <div class="form-group row">
                                                         <div class="col-lg-6">
                                                             <label>Land Agent</label>
-                                                            <input type="text" name="leadAgent" id="leadAgent" class="form-control required" required placeholder="Enter lead agent">
+                                                            <select name="landAgent" id="landAgent" class="form-control required">
+                                                                <option value="">Select Agent</option>
+                                                                    <% if(response.agents) {%>
+                                                                        <% response.agents.forEach(agent => {%>
+                                                                            <option value="<%= agent._id %>"><%= agent.full_name %></option>
+                                                                        <% }); %>
+                                                                    <% } %>
+                                                            </select>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label>Dual Agent</label>
@@ -188,22 +195,6 @@
                                                     <hr>
                                                     <div class="form-group row">
                                                         <div class="col-lg-6">
-                                                            <label>Unit</label>
-                                                            <input type="number" name="propertyAddress[unit]" id="phone" class="form-control required" required placeholder="Enter unit">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <div class="col-lg-6">
-                                                            <label>Street Address Number</label>
-                                                            <input type="number" name="propertyAddress[street_address_number]" id="street_address_number" class="form-control required" required placeholder="Enter street number">
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <label>Street Address</label>
-                                                            <input type="text" name="propertyAddress[street_address]" id="street_address" class="form-control required" required placeholder="Enter street address">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <div class="col-lg-6">
                                                             <label>Country:</label>
                                                             <select name="propertyAddress[country]" id="country" class="form-control required">
 									                        <option value="">Select Country</option>
@@ -226,8 +217,27 @@
 								                            </select>
                                                         </div>
                                                     </div>
-                                                    
-												</div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-3">
+                                                            <label>Street Address Number</label>
+                                                            <input type="number" name="propertyAddress[street_address_number]" id="street_address_number" class="form-control required" required placeholder="Enter street number">
+                                                        </div>
+                                                        <div class="col-lg-9">
+                                                            <label>Street Address</label>
+                                                            <input type="text" name="propertyAddress[street_address]" id="street_address" class="form-control required" required placeholder="Enter street address">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-6">
+                                                            <label>Unit</label>
+                                                            <input type="number" name="propertyAddress[unit]" id="phone" class="form-control required" required placeholder="Enter unit">
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <label>Suburb</label>
+                                                            <input type="text" name="propertyAddress[suburb]" id="suburb" class="form-control required" required placeholder="Enter suburb">
+                                                        </div>
+                                                    </div>
+                                                </div>
 												<div class="tab-pane" id="kt_portlet_base_demo_2_2_tab_content" role="tabpanel">
 													<div class="form-group row">
                                                         <div class="col-lg-6">
@@ -334,7 +344,7 @@
 													    </div>
                                                     </div>
                                                        
-                                                    </div>
+                                                </div>
 												</div>
 												<div class="tab-pane" id="kt_portlet_base_demo_2_1_tab_content" role="tabpanel">
 													<div class="form-group row">
@@ -360,13 +370,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                    <div class="kt-form__actions">
-                                                        <div class="row">
-                                                            <div class="col-lg-6">
-                                                                <button type="submit" class="btn btn-primary">Save</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    
                                                 </div>
                                                 
 											</div>
@@ -405,85 +409,26 @@
 										<div class="kt-portlet__body">
 											<div class="tab-content">
 												<div class="tab-pane active" id="kt_portlet_base_demo_2_3_tab_content<%=language.shortcode%>" role="tabpanel">
-                                                    <h5>Status Change </h5>
-                                                    <hr>
-													<div class="form-group row">
-                                                        <div class="col-lg-6">
-                                                            <label>Status:</label>
-                                                            <select name="status" id="status" class="form-control required">
-									                            <option value="">Select status</option>
-                                                                <option value="Active">Active</option>
-                                                                <option value="Inactive">Inactive</option>
-								                            </select>
-                                                        </div>
-                                                    </div>
                                                     <h5>About The Listing </h5>
                                                     <hr>
                                                     <div class="form-group row">
                                                         <div class="col-lg-6">
                                                             <label>Title</label>
-                                                            <input type="text" name="translate[<%=count%>][title]" id="title" class="form-control required" required placeholder="Enter title">
+                                                            <input type="text" name="translate[<%=count%>][title]" id="title_<%=count%>" class="form-control required" required placeholder="Enter title">
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label>Sub Title</label>
-                                                            <input type="text" name="translate[<%=count%>][subTitle]" id="subTitle" class="form-control required" required placeholder="Enter sub title">
+                                                            <input type="text" name="translate[<%=count%>][subTitle]" id="subTitle_<%=count%>" class="form-control required" required placeholder="Enter sub title">
                                                         </div>
                                                     </div>
-                                                    <div class="form-group row">
-                                                        <div class="col-lg-6">
-                                                            <label>Property Type:</label>
-                                                            <select name="translate[<%=count%>][propertyType]" id="propertyType" class="form-control required">
-									                            <option value="">Select Property Type</option>
-									                            <% if(response.propertyTypes) {%>
-										                            <% response.propertyTypes.forEach(propertyType => {%>
-											                            <option value="<%= propertyType._id %>"><%= propertyType.title %></option>
-										                            <% }); %>
-									                            <% } %>
-								                            </select>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <label>New or Established</label>
-                                                            <div class="kt-radio-inline">
-                                                                <label class="kt-radio">
-                                                                    <input type="radio" name="translate[<%=count%>][establishedNew]"> Established Property
-                                                                    <span></span>
-                                                                </label>
-                                                                <label class="kt-radio">
-                                                                <input type="radio" name="translate[<%=count%>][establishedNew]"> New Construction
-                                                                    <span></span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <div class="col-lg-6">
-                                                            <label>Land Agent</label>
-                                                            <input type="text" name="translate[<%=count%>][leadAgent]" id="leadAgent" class="form-control required" required placeholder="Enter lead agent">
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <label>Dual Agent</label>
-                                                            <input type="text" name="translate[<%=count%>][dualAgent]" id="dualAgent" class="form-control required" required placeholder="Enter dual agent">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <div class="col-lg-6">
-                                                            <label>Rental Per Week</label>
-                                                            <input type="number" name="translate[<%=count%>][rentalPerWeek]" id="rentalPerWeek" class="form-control required" required placeholder="Enter rental per week">
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <label>Rental Per Calendar Month</label>
-                                                            <input type="number" name="translate[<%=count%>][rentalPerMonth]" id="rentalPerMonth" class="form-control required" required placeholder="Enter rental per month">
-                                                        </div>
-                                                    </div>
-
                                                     <div class="form-group row">
                                                         <div class="col-lg-6">
                                                             <label>Security Bond</label>
-                                                            <input type="number" name="translate[<%=count%>][securityBond]" id="securityBond" class="form-control required" required placeholder="Enter security bond">
+                                                            <input type="number" name="translate[<%=count%>][securityBond]" id="securityBond_<%=count%>" class="form-control required" required placeholder="Enter security bond">
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label>Price Display:</label>
-                                                            <select name="translate[<%=count%>][priceDisplay]" id="priceDisplay" class="form-control required">
+                                                            <select name="translate[<%=count%>][priceDisplay]" id="priceDisplay_<%=count%>" class="form-control required">
 									                            <option value="">Select Price Display</option>
 									                            <option value="price">Price</option>
                                                                 <option value="text">Text</option>
@@ -493,31 +438,31 @@
                                                     <div class="form-group row">
                                                         <div class="col-lg-6">
                                                             <label>Price</label>
-                                                            <input type="number" name="translate[<%=count%>][price]" id="price" class="form-control required" required placeholder="Enter price">
+                                                            <input type="number" name="translate[<%=count%>][price]" id="price_<%=count%>" class="form-control required" required placeholder="Enter price">
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label>Price Text</label>
-                                                            <input type="text" name="translate[<%=count%>][priceText]" id="priceText" class="form-control required" required placeholder="Enter price text">
+                                                            <input type="text" name="translate[<%=count%>][priceText]" id="priceText_<%=count%>" class="form-control required" required placeholder="Enter price text">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="col-lg-6">
                                                             <label>Available Date</label>
-                                                            <input type="text" name="translate[<%=count%>][availableDate]" id="availableDate" class="form-control required" required placeholder="Enter available date">
+                                                            <input type="text" name="translate[<%=count%>][availableDate]" id="availableDate_<%=count%>" class="form-control required" required placeholder="Enter available date">
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label>Name</label>
-                                                            <input type="text" name="translate[<%=count%>][landlord][name]" id="name" class="form-control required" required placeholder="Enter name">
+                                                            <input type="text" name="translate[<%=count%>][landlord][name]" id="name_<%=count%>" class="form-control required" required placeholder="Enter name">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="col-lg-6">
                                                             <label>Email</label>
-                                                            <input type="text" name="translate[<%=count%>][landlord][email]" id="email" class="form-control required" required placeholder="Enter name">
+                                                            <input type="text" name="translate[<%=count%>][landlord][email]" id="email_<%=count%>" class="form-control required" required placeholder="Enter name">
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label>Phone Number</label>
-                                                            <input type="number" name="translate[<%=count%>][landlord][phone]" id="phone" class="form-control required" required placeholder="Enter phone">
+                                                            <input type="number" name="translate[<%=count%>][landlord][phone]" id="phone_<%=count%>" class="form-control required" required placeholder="Enter phone">
                                                         </div>
                                                         
                                                     </div>
@@ -525,24 +470,8 @@
                                                     <hr>
                                                     <div class="form-group row">
                                                         <div class="col-lg-6">
-                                                            <label>Unit</label>
-                                                            <input type="number" name="propertyAddress[unit]" id="phone" class="form-control required" required placeholder="Enter unit">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <div class="col-lg-2">
-                                                            <label>Street Address Number</label>
-                                                            <input type="number" name="propertyAddress[street_address_number]" id="street_address_number" class="form-control required" required placeholder="Enter street number">
-                                                        </div>
-                                                        <div class="col-lg-10">
-                                                            <label>Street Address</label>
-                                                            <input type="text" name="propertyAddress[street_address]" id="street_address" class="form-control required" required placeholder="Enter street address">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <div class="col-lg-6">
                                                             <label>Country:</label>
-                                                            <select name="propertyAddress[country]" id="country" class="form-control required">
+                                                            <select name="translate[<%=count%>][propertyAddress][country]" id="country_<%=count%>" class="form-control required">
 									                        <option value="">Select Country</option>
 									                            <% if(response.countries) {%>
 										                            <% response.countries.forEach(country => {%>
@@ -553,7 +482,7 @@
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label>City:</label>
-                                                            <select name="propertyAddress[city]" id="city" class="form-control required">
+                                                            <select name="translate[<%=count%>][propertyAddress][city]" id="city_<%=count%>" class="form-control required">
 									                        <option value="">Select City</option>
 									                            <% if(response.cities) {%>
 										                            <% response.cities.forEach(city => {%>
@@ -563,65 +492,40 @@
 								                            </select>
                                                         </div>
                                                     </div>
-                                                    
-												</div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-3">
+                                                            <label>Street Address Number</label>
+                                                            <input type="number" name="translate[<%=count%>][propertyAddress][street_address_number]" id="street_address_number_<%=count%>" class="form-control required" required placeholder="Enter street number">
+                                                        </div>
+                                                        <div class="col-lg-9">
+                                                            <label>Street Address</label>
+                                                            <input type="text" name="translate[<%=count%>][propertyAddress][street_address]" id="street_address_<%=count%>" class="form-control required" required placeholder="Enter street address">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-6">
+                                                            <label>Unit</label>
+                                                            <input type="number" name="translate[<%=count%>][propertyAddress][unit]" id="phone_<%=count%>" class="form-control required" required placeholder="Enter unit">
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <label>Suburb</label>
+                                                            <input type="text" name="translate[<%=count%>][propertyAddress][suburb]" id="suburb_<%=count%>" class="form-control required" required placeholder="Enter suburb">
+                                                        </div>
+                                                    </div>
+                                                </div>
 												<div class="tab-pane" id="kt_portlet_base_demo_2_2_tab_content<%=language.shortcode%>" role="tabpanel">
 													<div class="form-group row">
-                                                        <div class="col-lg-6">
-                                                            <label>Total Room</label>
-                                                            <input type="number" name="translate[<%=count%>][totalRooms]" id="totalRooms" class="form-control required" required placeholder="Enter total rooms">
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <label>No Of Bedroom</label>
-                                                            <input type="number" name="translate[<%=count%>][noOfBedRooms]" id="noOfBedRooms" class="form-control required" required placeholder="Enter bed rooms">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <div class="col-lg-6">
-                                                            <label>No Of Bathrooms</label>
-                                                            <input type="number" name="translate[<%=count%>][noOfBathRooms]" id="noOfBathRooms" class="form-control required" required placeholder="Enter bath rooms">
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <label>No Of Kitchen</label>
-                                                            <input type="number" name="translate[<%=count%>][noOfKitchens]" id="noOfKitchens" class="form-control required" required placeholder="Enter kitchens">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <div class="col-lg-6">
-                                                            <label>Total Floor</label>
-                                                            <input type="number" name="translate[<%=count%>][totalFloors]" id="totalFloors" class="form-control required" required placeholder="Enter floors">
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <label>Floor</label>
-                                                            <input type="text" name="translate[<%=count%>][floor]" id="floor" class="form-control required" required placeholder="Enter floor">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <div class="col-lg-4">
-                                                            <label>Parking Garage Spaces</label>
-                                                            <input type="number" name="parking[garage_spaces]" id="totalFloors" class="form-control required" required placeholder="Enter garage spaces">
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <label>Parking Carport Spaces</label>
-                                                            <input type="number" name="parking[carport_spaces]" id="totalFloors" class="form-control required" required placeholder="Enter carport spaces">
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <label>Parking Open Spaces</label>
-                                                            <input type="number" name="parking[open_spaces]" id="totalFloors" class="form-control required" required placeholder="Enter open spaces">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
                                                         <div class="col-lg-5">
                                                             <label>Living Areas</label>
-                                                            <input type="number" name="translate[<%=count%>][totalArea]" id="totalArea" class="form-control required" required placeholder="Enter living areas">
+                                                            <input type="number" name="translate[<%=count%>][totalArea]" id="totalArea_<%=count%>" class="form-control required" required placeholder="Enter living areas">
                                                         </div>
                                                         <div class="col-lg-5">
                                                             <label>House Size</label>
-                                                            <input type="number" name="houseSize[size]" id="houseSize" class="form-control required" required placeholder="Enter house size">
+                                                            <input type="number" name="translate[<%=count%>][houseSize][size]" id="houseSize_<%=count%>" class="form-control required" required placeholder="Enter house size">
                                                         </div>
                                                         <div class="col-lg-2">
                                                             <label>Size Unit</label>
-                                                            <select name="houseSize[sizeBy]" id="sizeBy" class="form-control required">
+                                                            <select name="translate[<%=count%>][houseSize][sizeBy]" id="sizeBy_<%=count%>" class="form-control required">
                                                                 <option value="">Select Unit</option>
                                                                 <option value="squares">Squares</option>
                                                             </select>
@@ -630,78 +534,22 @@
                                                     <div class="form-group row">
                                                         <div class="col-lg-5">
                                                             <label>Land Size</label>
-                                                            <input type="number" name="landSize[size]" id="landSize" class="form-control required" required placeholder="Enter house size">
+                                                            <input type="number" name="translate[<%=count%>][landSize][size]" id="landSize_<%=count%>" class="form-control required" required placeholder="Enter house size">
                                                         </div>
                                                         <div class="col-lg-2">
                                                             <label>Size Unit</label>
-                                                            <select name="landSize[sizeBy]" id="landSizeBy" class="form-control required">
+                                                            <select name="translate[<%=count%>][landSize][sizeBy]" id="landSizeBy_<%=count%>" class="form-control required">
                                                                 <option value="">Select Unit</option>
                                                                 <option value="squares">Squares</option>
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group row">
-                                                        <div class="col-lg-12">
-                                                            <label>Characteristics</label>
-                                                            <div class="kt-checkbox-inline">
-                                                                <% if(response.characteristics) {%>
-										                            <% response.characteristics.forEach(characteristy => {%>
-                                                                        <label class="kt-checkbox">
-															                <input type="checkbox" name="translate[<%=count%>][characteristics]" value="<%=characteristy._id%>"> <%=characteristy.title%>
-															                <span></span>
-														                </label>
-										                            <% }); %>
-									                            <% } %>
-													    </div>
-                                                    </div>
-                                                       
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <div class="col-lg-12">
-                                                            <label>Amenities</label>
-                                                            <div class="kt-checkbox-inline">
-                                                                <% if(response.amenities) {%>
-										                            <% response.amenities.forEach(amenity => {%>
-                                                                        <label class="kt-checkbox">
-															                <input type="checkbox" name="translate[<%=count%>][amenities]" value="<%=amenity._id%>"> <%=amenity.title%>
-															                <span></span>
-														                </label>
-										                            <% }); %>
-									                            <% } %>
-													    </div>
-                                                    </div>
-                                                       
-                                                    </div>
-												</div>
+                                                  </div>
 												<div class="tab-pane" id="kt_portlet_base_demo_2_1_tab_content<%=language.shortcode%>" role="tabpanel">
 													<div class="form-group row">
                                                         <div class="col-lg-12">
                                                             <label>Description:</label>
-                                                            <textarea name="translate[<%=count%>][description]" id="description" cols="30" rows="5" class="form-control"></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                    <div class="col-lg-12">
-                                                        <h5 class="pull-left">Image Gallery</h5>
-                                                        <button class="btn btn-info btn-rounded pull-right addGallery">Add</button>
-                                                    </div>
-                                                    <div class="col-lg-12">&nbsp;</div>
-                                                        <div class="gallery-item-wrapper col-lg-12">
-                                                            <div class="form-group row gallery">
-                                                                <div class="col-lg-5">
-                                                                    <input type="file" name="translate[<%=count%>][gallery_0]" id="image" class="form-control imagepickerWithPreviewId" data-previewelement="gallery0Preview">
-                                                                </div>
-                                                            <div class="col-lg-5">
-                                                                <img class="galleryImage" id="gallery0Preview" height="80px" src="">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                    <div class="kt-form__actions">
-                                                        <div class="row">
-                                                            <div class="col-lg-6">
-                                                                <button type="submit" class="btn btn-primary">Save</button>
-                                                            </div>
+                                                            <textarea name="translate[<%=count%>][description]" id="description_<%=count%>" cols="30" rows="5" class="form-control"></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -715,6 +563,16 @@
                                         <%})%>
                             </div>
                         </div>
+                        <div class="kt-portlet__foot">
+						<div class="kt-form__actions">
+							<div class="row">
+								<div class="col-lg-6">
+									<a href="<%= generateUrl('property.list') %>" class="btn btn-secondary">Cancel</a>
+									<button type="submit" class="btn btn-primary">Save</button>
+								</div>
+							</div>
+						</div>
+					</div>
                     </form>
                 </div>
             </div>

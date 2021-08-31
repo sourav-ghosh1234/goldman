@@ -23,12 +23,8 @@ var UserSchema = new Schema({
     register_type: { type: String, default: 'normal', enum: registertype },
     deviceToken: { type: String, default: '' },
     deviceType: { type: String, default: '' },
-
-
-    isVerified: { type: Boolean, default: false, enum: [true, false] },
     isDeleted: { type: Boolean, default: false, enum: deleted },
     isActive: { type: Boolean, default: true, enum: [true, false] },
-    isBlock: { type: Boolean, default: false, enum: [true, false] },
 }, { timestamps: true, versionKey: false });
 
 // generating a hash

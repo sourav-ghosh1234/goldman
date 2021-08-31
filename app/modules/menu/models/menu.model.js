@@ -8,6 +8,7 @@ const MenuSchema = new Schema({
   title: { type: String },
   parent_id: { type: Schema.Types.ObjectId, ref: 'Menu', default: null },
   slug: { type: String, default: '' },
+  link: { type: String, default: '' },
   menu_type: { type: String, enum: ['header', 'footer'] },
   menu_order: { type: Number, default: 0 },
   language: {type:String, default: 'en'},

@@ -20,6 +20,63 @@
   },
   {
     "type": "get",
+    "url": "/artofliving/country-estates",
+    "title": "Country Estates Content",
+    "version": "1.0.0",
+    "group": "Art_Of_Living",
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n  \"status\": 200,\n  \"data\": {\n    \"_id\": \"611b75081edb21accf52e3fe\",\n    \"bannerImage\": \"bannerImage_1629190947439_7682_1.png\",\n    \"heading\": \"Test\",\n    \"subHeading\": \"Testm Sub Head\",\n    \"content\": \"<p>Test Content</p>\\r\\n\",\n    \"imageHeading\": \"Image Heading\",\n    \"image\": [\n      \"image_1629191656384_41i74R163ZL.jpeg\"\n    ],\n    \"language\": \"en\",\n    \"translate\": [\n      {\n        \"language\": \"fr\",\n        \"heading\": \"Test FR\",\n        \"subHeading\": \"Test Sub FR\",\n        \"content\": \"<p>Test Content FR</p>\\r\\n\",\n        \"imageHeading\": \"Image Heading FR\",\n        \"_id\": \"611b9c9c42cf5b0ba7bc26c8\"\n      },\n      {\n        \"language\": \"de\",\n        \"heading\": \"Test DE\",\n        \"subHeading\": \"Test Sub DE\",\n        \"content\": \"<p>Test Content DE</p>\\r\\n\",\n        \"imageHeading\": \"Image Heading DE\",\n        \"_id\": \"611b9c9c42cf5b0ba7bc26c9\"\n      }\n    ],\n    \"createdAt\": \"2021-08-16T10:18:10.138Z\",\n    \"updatedAt\": \"2021-08-17T11:25:16.521Z\",\n    \"__v\": 0\n  },\n  \"message\": \"Text fetched successfully.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/api/artofliving.routes.js",
+    "groupTitle": "Art_Of_Living",
+    "name": "GetArtoflivingCountryEstates"
+  },
+  {
+    "type": "get",
+    "url": "/artofliving/vineyards-investment",
+    "title": "Vineyards Investment Content",
+    "version": "1.0.0",
+    "group": "Art_Of_Living",
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n  \"status\": 200,\n  \"data\": {\n    \"_id\": \"611bb2441edb21accf604491\",\n    \"bannerImage\": \"bannerImage_1629206904526_pattern1.jpg\",\n    \"heading\": \"Test fff\",\n    \"subHeading\": \"Testm Sub Head\",\n    \"content\": \"<p>Test Content</p>\\r\\n\",\n    \"imageHeading\": \"Image Heading\",\n    \"image\": [\n      \"image_1629206904533_pattern6.jpg\",\n      \"image_1629206904533_pattern7.jpg\",\n      \"image_1629206904535_pattern8.jpg\"\n    ],\n    \"language\": \"en\",\n    \"translate\": [\n      {\n        \"language\": \"fr\",\n        \"heading\": \"Test FR\",\n        \"subHeading\": \"Test Sub FR\",\n        \"content\": \"<p>Test Content FR</p>\\r\\n\",\n        \"imageHeading\": \"Image Heading FR\",\n        \"_id\": \"611bb978470a870ff7545753\"\n      },\n      {\n        \"language\": \"de\",\n        \"heading\": \"Test DE\",\n        \"subHeading\": \"Test Sub DE\",\n        \"content\": \"<p>Test Content DE</p>\\r\\n\",\n        \"imageHeading\": \"Image Heading DE\",\n        \"_id\": \"611bb978470a870ff7545754\"\n      }\n    ],\n    \"createdAt\": \"2021-08-16T10:18:10.138Z\",\n    \"updatedAt\": \"2021-08-17T13:28:24.582Z\",\n    \"__v\": 0\n  },\n  \"message\": \"Text fetched successfully.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/api/artofliving.routes.js",
+    "groupTitle": "Art_Of_Living",
+    "name": "GetArtoflivingVineyardsInvestment"
+  },
+  {
+    "type": "get",
+    "url": "/artofliving/yachting-world",
+    "title": "Yachting World Content",
+    "version": "1.0.0",
+    "group": "Art_Of_Living",
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n  \"status\": 200,\n  \"data\": {\n    \"_id\": \"611bd8481edb21accf69f842\",\n    \"bannerImage\": \"bannerImage_1629216787909_pattern9.jpg\",\n    \"heading\": \"Test fff\",\n    \"subHeading\": \"Testm Sub Head\",\n    \"content\": \"<p>Test Content</p>\\r\\n\",\n    \"videoLink\": \"youtube1.com\",\n    \"imageHeading\": \"Image Heading\",\n    \"image\": [\n      \n    ],\n    \"language\": \"en\",\n    \"translate\": [\n      {\n        \"language\": \"fr\",\n        \"heading\": \"Test FR\",\n        \"subHeading\": \"Test Sub FR\",\n        \"content\": \"<p>Test Content FR</p>\\r\\n\",\n        \"imageHeading\": \"Image Heading FR\",\n        \"_id\": \"611be013fdc7cc145e1baa2e\"\n      },\n      {\n        \"language\": \"de\",\n        \"heading\": \"Test DE\",\n        \"subHeading\": \"Test Sub DE\",\n        \"content\": \"<p>Test Content DE</p>\\r\\n\",\n        \"imageHeading\": \"Image Heading DE\",\n        \"_id\": \"611be013fdc7cc145e1baa2f\"\n      }\n    ],\n    \"createdAt\": \"2021-08-16T10:18:10.138Z\",\n    \"updatedAt\": \"2021-08-17T16:13:07.961Z\",\n    \"__v\": 0,\n    \"boat_charter_service\": [\n      {\n        \"bannerImage\": \"bannerImage_1629216787909_pattern9.jpg\",\n        \"forMoreInfo\": \"Testm Sub Head\",\n        \"contactUs\": \"contact\",\n        \"heading\": \"Test\",\n        \"content\": \"<p>test here</p>\\r\\n\",\n        \"contactInfo\": \"<p>test info</p>\\r\\n\",\n        \"language\": \"en\",\n        \"status\": \"Active\",\n        \"isDeleted\": false,\n        \"_id\": \"611e67e41edb21accfcfbb25\",\n        \"translate\": [\n          {\n            \"language\": \"fr\",\n            \"forMoreInfo\": \"\",\n            \"contactUs\": \"\",\n            \"heading\": \"dffggg\",\n            \"content\": \"<p>ffff</p>\\r\\n\",\n            \"contactInfo\": \"\",\n            \"_id\": \"611f6a9ad709bd2d7066e495\"\n          },\n          {\n            \"language\": \"de\",\n            \"forMoreInfo\": \"\",\n            \"contactUs\": \"\",\n            \"heading\": \"\",\n            \"content\": \"\",\n            \"contactInfo\": \"\",\n            \"_id\": \"611f6a9ad709bd2d7066e496\"\n          }\n        ],\n        \"createdAt\": \"2021-08-16T10:18:10.138Z\",\n        \"updatedAt\": \"2021-08-20T08:54:10.219Z\",\n        \"__v\": 0\n      },\n      {\n        \"bannerImage\": \"bannerImage_1629447309327_pattern6.jpg\",\n        \"forMoreInfo\": \"For More Info\",\n        \"contactUs\": \"Contact Us\",\n        \"heading\": \"Test Boat\",\n        \"content\": \"Test\",\n        \"contactInfo\": \"Contact Info\",\n        \"language\": \"en\",\n        \"status\": \"Active\",\n        \"isDeleted\": false,\n        \"_id\": \"611f648d86a960253184e710\",\n        \"translate\": [\n          {\n            \"language\": \"fr\",\n            \"forMoreInfo\": \"\",\n            \"contactUs\": \"\",\n            \"heading\": \"\",\n            \"content\": \"\",\n            \"contactInfo\": \"\",\n            \"_id\": \"611f648d86a960253184e711\"\n          },\n          {\n            \"language\": \"de\",\n            \"forMoreInfo\": \"\",\n            \"contactUs\": \"\",\n            \"heading\": \"\",\n            \"content\": \"\",\n            \"contactInfo\": \"\",\n            \"_id\": \"611f648d86a960253184e712\"\n          }\n        ],\n        \"createdAt\": \"2021-08-20T08:15:09.383Z\",\n        \"updatedAt\": \"2021-08-20T08:15:09.383Z\",\n        \"__v\": 0\n      }\n    ]\n  },\n  \"message\": \"Text fetched successfully.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/api/artofliving.routes.js",
+    "groupTitle": "Art_Of_Living",
+    "name": "GetArtoflivingYachtingWorld"
+  },
+  {
+    "type": "get",
     "url": "/contact/content",
     "title": "Contact Content",
     "version": "1.0.0",
@@ -252,6 +309,44 @@
     "filename": "app/routes/api/menu.routes.js",
     "groupTitle": "Menu",
     "name": "GetMenuMenu_type"
+  },
+  {
+    "type": "get",
+    "url": "/news",
+    "title": "News All",
+    "version": "1.0.0",
+    "group": "News",
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n  \"status\": 200,\n  \"data\": [\n    {\n      \"title\": \"GOLDMAN PRESTIGE Magazine (Spring-Summer 2021)\",\n      \"content\": \"<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of</p>\\r\\n\",\n      \"author_name\": \"GOLDMAN PRESTIGE\",\n      \"date\": \"05/05/2021\",\n      \"image\": \"1627560158796_7682_1.png\",\n      \"isDeleted\": false,\n      \"status\": \"Active\",\n      \"_id\": \"60ffc53ad0e6c234cc04b4ba\",\n      \"createdAt\": \"2021-07-27T08:35:06.342Z\",\n      \"updatedAt\": \"2021-07-29T12:02:39.430Z\"\n    },\n    {\n      \"title\": \"Test News\",\n      \"content\": \"<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\\r\\n\",\n      \"author_name\": \"John Doe\",\n      \"date\": \"03/07/2021\",\n      \"image\": \"1627560241094_contact.png\",\n      \"isDeleted\": false,\n      \"status\": \"Active\",\n      \"_id\": \"610299314f7ee46eab53a83f\",\n      \"createdAt\": \"2021-07-29T12:04:01.331Z\",\n      \"updatedAt\": \"2021-07-29T13:39:53.961Z\"\n    }\n  ],\n  \"message\": \"News fetched successfully.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/api/news.routes.js",
+    "groupTitle": "News",
+    "name": "GetNews"
+  },
+  {
+    "type": "get",
+    "url": "/news/:id",
+    "title": "News Details",
+    "version": "1.0.0",
+    "group": "News",
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n  \"status\": 200,\n  \"data\": {\n    \"_id\": \"60ffc53ad0e6c234cc04b4ba\",\n    \"title\": \"GOLDMAN PRESTIGE Magazine (Spring-Summer 2021)\",\n    \"content\": \"<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of</p>\\r\\n\",\n    \"author_name\": \"GOLDMAN PRESTIGE\",\n    \"date\": \"05/05/2021\",\n    \"image\": \"1627560158796_7682_1.png\",\n    \"isDeleted\": false,\n    \"status\": \"Active\",\n    \"createdAt\": \"2021-07-27T08:35:06.342Z\",\n    \"updatedAt\": \"2021-07-29T12:02:39.430Z\"\n  },\n  \"message\": \"News fetched successfully.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/api/news.routes.js",
+    "groupTitle": "News",
+    "name": "GetNewsId"
   },
   {
     "type": "get",

@@ -40,26 +40,12 @@
                         <span class="kt-menu__link-text">User Management</span>
                     </a>
                 </li>
-
-                <!-- <li class="kt-menu__item kt-menu__item--submenu <%=(page_name == 'commissioner-management' || page_name == 'member-management') ? 'kt-menu__item--open' : ''%>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
-                    <a href="javascript:;" class="kt-menu__link kt-menu__toggle <%=(page_name == 'commissioner-management' || page_name == 'member-management') ? 'active' : ''%>">
-                        <i class="kt-menu__link-icon fas fa-users"></i>
-                        <span class="kt-menu__link-text">User Management</span>
-                        <i class="kt-menu__ver-arrow la la-angle-right"></i>
+                <li class="kt-menu__item " aria-haspopup="true">
+                    <a href="<%= generateUrl('agent.listing') %>" class="kt-menu__link <%=(page_name == 'agent-management') ? 'active' : ''%>">
+                        <i class="kt-menu__link-icon fas fa-user-secret"></i>
+                        <span class="kt-menu__link-text">Agent Management</span>
                     </a>
-                    <div class="kt-menu__submenu " kt-hidden-height="80">
-                        <span class="kt-menu__arrow"></span>
-                        <ul class="kt-menu__subnav">
-                            
-                           
-                        </ul>
-                    </div>
-                </li> -->
-
-
-
-
-
+                </li>
                 <li class="kt-menu__item " aria-haspopup="true">
                     <a href="<%= generateUrl('setting.listing') %>" class="kt-menu__link <%=(page_name == 'setting-management') ? 'active' : ''%>">
                         <i class="kt-menu__link-icon fa fa-bars"></i>
@@ -207,9 +193,9 @@
                         <span class="kt-menu__link-text">Contact Us Management</span>
                     </a>
                 </li>
-               <li class="kt-menu__item kt-menu__item--submenu <%=(page_name == 'artofliving-management' || page_name== 'countryestate-management' || page_name== 'vineyard-investment-management' || page_name== 'yachting-world') ? 'kt-menu__item--open' : ''%>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+               <li class="kt-menu__item kt-menu__item--submenu <%=(page_name == 'artofliving-management' || page_name== 'countryestate-management' || page_name== 'vineyard-investment-management' || page_name== 'yachting-world' || page_name=='boat-charter-service-management') ? 'kt-menu__item--open' : ''%>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
                     <a href="javascript:;" class="kt-menu__link kt-menu__toggle
-                        <%=(page_name == 'artofliving-management' || page_name== 'countryestate-management' || page_name== 'vineyard-investment-management' || page_name== 'yachting-world') ? 'active' : ''%>">
+                        <%=(page_name == 'artofliving-management' || page_name== 'countryestate-management' || page_name== 'vineyard-investment-management' || page_name== 'yachting-world' || page_name=='boat-charter-service-management') ? 'active' : ''%>">
                         <i class="kt-menu__link-icon fas fa-building"></i>
                         <span class="kt-menu__link-text">Art Of Living Management</span>
                         <i class="kt-menu__ver-arrow la la-angle-right"></i>
@@ -248,6 +234,14 @@
                                 </a>
                             </li>
                         </ul>
+                        <ul class="kt-menu__subnav">
+                            <li class="kt-menu__item " aria-haspopup="true">
+                                <a href="<%= generateUrl('yachting.world.boat.charter.list') %>" class="kt-menu__link <%=(page_name == 'boat-charter-service-management') ? 'active' : ''%>">
+                                    <i class="kt-menu__link-icon fas fa-list"></i>
+                                    <span class="kt-menu__link-text">Boat & Charter</span>
+                                </a>
+                            </li>
+                        </ul>
                      </div>
                 </li>
                <li class="kt-menu__item " aria-haspopup="true">
@@ -269,47 +263,6 @@
                         <span class="kt-menu__link-text">CMS</span>
                     </a>
                 </li>
-
-                <!-- <li class="kt-menu__item " aria-haspopup="true">
-                    <a href="<%= generateUrl('notification.list') %>" class="kt-menu__link <%=(page_name == 'notification-management') ? 'active' : ''%>">
-                        <i class="fas  fa-envelope"></i>
-                        <span class="kt-menu__link-text">Notification Management</span>
-                    </a>
-                </li> -->
-
-
-
-
-
-                <!--  <li class="kt-menu__item " aria-haspopup="true">
-                    <a href="<%= generateUrl('contactinfo.listing') %>"
-                        class="kt-menu__link <%=(page_name == 'contactinfo-management') ? 'active' : ''%>">
-                        <i class="far fa-id-card"></i>
-                        <span class="kt-menu__link-text">Contact Info Management</span>
-                    </a>
-                </li>
- -->
-
-
-
-
-                <!--  <li class="kt-menu__item kt-menu__item--submenu <%=(page_name == 'revenue-management' || page_name == 'revenue-management') ? 'kt-menu__item--open kt-menu__item--active' : ''%>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
-                    <a href="javascript:;" class="kt-menu__link kt-menu__toggle <%=(page_name == 'revenue-management' || page_name == 'revenue-management') ? 'active' : ''%>">
-                        <i class="kt-menu__link-icon fas fa-sort-amount-up"></i>
-                        <span class="kt-menu__link-text">Revenue Management</span>
-                        <i class="kt-menu__ver-arrow la la-angle-right"></i>
-                    </a>
-                    <div class="kt-menu__submenu " kt-hidden-height="80">
-                        <span class="kt-menu__arrow"></span>
-                        <ul class="kt-menu__subnav">
-                            
-                        </ul>
-                    </div>
-                </li> -->
-
-
-
-
 
             </ul>
         </div>
