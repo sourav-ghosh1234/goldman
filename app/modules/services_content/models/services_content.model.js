@@ -11,7 +11,8 @@ const ServiceContentSchema = new Schema({
         title: { type: String, default: '' },
         description: { type: String, default: '' },
         image: { type: String, default: '' },
-        button: { type: String, default: '' }
+        button: { type: String, default: '' },
+        link: { type: String, default: '' }
     }],
     language: {type:String, default: 'en'},
     translate:[{
