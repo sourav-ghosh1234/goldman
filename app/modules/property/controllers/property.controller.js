@@ -48,13 +48,8 @@ class PropertyController {
     async store(req, res) {
         try {
             let property = await propertyRepo.getByField({ 'title': { $regex: req.body.title, $options: 'i' }, 'isDeleted': false });
-
             if (_.isEmpty(property)) {
                 if (req.files.length > 0) {
-                    // gm('./public/uploads/property/' + req.files[0].filename).resize(200, 200, '!').write('./public/uploads/property/thumb/' + req.files[0].filename, function(err, result) {
-                    //     if (!err) console.log('done');
-                    // });
-                    // req.body.image = req.files[0].filename;
                     req.body.imageGallery = [];
                     req.files.forEach(file => {
                         if (file.fieldname.search('gallery') != -1) {

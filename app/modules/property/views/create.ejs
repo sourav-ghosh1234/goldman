@@ -100,7 +100,7 @@
 									                            <% if(response.propertyTypes) {%>
 										                            <% response.propertyTypes.forEach(propertyType => {%>
 											                            <option value="<%= propertyType._id %>"><%= propertyType.title %></option>
-										                            <% }); %>
+										                            <% })%>
 									                            <% } %>
 								                            </select>
                                                         </div>
@@ -108,11 +108,11 @@
                                                             <label>New or Established</label>
                                                             <div class="kt-radio-inline">
                                                                 <label class="kt-radio">
-                                                                    <input type="radio" name="establishedNew"> Established Property
+                                                                    <input type="radio" name="establishedNew" value="established"> Established Property
                                                                     <span></span>
                                                                 </label>
                                                                 <label class="kt-radio">
-                                                                <input type="radio" name="establishedNew"> New Construction
+                                                                <input type="radio" name="establishedNew" value="new"> New Construction
                                                                     <span></span>
                                                                 </label>
                                                             </div>
@@ -344,7 +344,7 @@
 													    </div>
                                                     </div>
                                                        
-                                                    </div>
+                                                </div>
 												</div>
 												<div class="tab-pane" id="kt_portlet_base_demo_2_1_tab_content" role="tabpanel">
 													<div class="form-group row">
@@ -370,13 +370,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                    <div class="kt-form__actions">
-                                                        <div class="row">
-                                                            <div class="col-lg-6">
-                                                                <button type="submit" class="btn btn-primary">Save</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    
                                                 </div>
                                                 
 											</div>
@@ -558,13 +552,6 @@
                                                             <textarea name="translate[<%=count%>][description]" id="description_<%=count%>" cols="30" rows="5" class="form-control"></textarea>
                                                         </div>
                                                     </div>
-                                                   <div class="kt-form__actions">
-                                                        <div class="row">
-                                                            <div class="col-lg-6">
-                                                                <button type="submit" class="btn btn-primary">Save</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                 </div>
 											</div>
 										</div>
@@ -576,6 +563,16 @@
                                         <%})%>
                             </div>
                         </div>
+                        <div class="kt-portlet__foot">
+						<div class="kt-form__actions">
+							<div class="row">
+								<div class="col-lg-6">
+									<a href="<%= generateUrl('property.list') %>" class="btn btn-secondary">Cancel</a>
+									<button type="submit" class="btn btn-primary">Save</button>
+								</div>
+							</div>
+						</div>
+					</div>
                     </form>
                 </div>
             </div>
