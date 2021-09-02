@@ -24,7 +24,7 @@ class PropertyController {
         try {
             let result = {};
             let languages = await languageRepo.getAllByField({
-                'status': 'Active',isDeleted:false
+                'status': 'Active', isDeleted: false
             });
             result.languages = languages;
             let agents = await userRepo.getAllWithoutPaginate({ 'roleDetails.role': 'agent', isDeleted: false, isActive: true });
@@ -37,8 +37,8 @@ class PropertyController {
                 page_name: 'property-management',
                 page_title: 'Create Property',
                 user: req.user,
-                response: { propertyTypes, cities, countries, amenities, characteristics,agents },
-                result:result
+                response: { propertyTypes, cities, countries, amenities, characteristics, agents },
+                result: result
             });
         } catch (e) {
             throw ({ message: e.message });
@@ -54,12 +54,12 @@ class PropertyController {
                     req.files.forEach(file => {
                         if (file.fieldname.search('gallery') != -1) {
                             let fileIndex = file.fieldname.split('_')[1];
-                            gm('./public/uploads/property/' + file.filename).resize(200, 200, '!').write('./public/uploads/property/thumb/' + file.filename, function(err, result) {
+                            gm('./public/uploads/property/' + file.filename).resize(200, 200, '!').write('./public/uploads/property/thumb/' + file.filename, function (err, result) {
                                 if (!err) console.log('done');
                             });
                             req.body.imageGallery[fileIndex] = file.filename;
                         } else {
-                            gm('./public/uploads/property/' + file.filename).resize(200, 200, '!').write('./public/uploads/property/thumb/' + file.filename, function(err, result) {
+                            gm('./public/uploads/property/' + file.filename).resize(200, 200, '!').write('./public/uploads/property/thumb/' + file.filename, function (err, result) {
                                 if (!err) console.log('done');
                             });
                             req.body[file.fieldname] = file.filename;
@@ -90,9 +90,9 @@ class PropertyController {
     async edit(req, res) {
         try {
             let result = {};
-            
 
-            let languages = await languageRepo.getAllByField({ 'status': 'Active', 'isDeleted':false});
+
+            let languages = await languageRepo.getAllByField({ 'status': 'Active', 'isDeleted': false });
             result.languages = languages;
             let property = await propertyRepo.getById(req.params.id);
 
@@ -102,7 +102,7 @@ class PropertyController {
             }
             property.translate = translateArr;
 
-            
+
 
             let agents = await userRepo.getAllWithoutPaginate({ 'roleDetails.role': 'agent', isDeleted: false, isActive: true });
             let propertyTypes = await propertytypeRepo.getAllByField({ isDeleted: false, status: 'Active' });
@@ -110,6 +110,9 @@ class PropertyController {
             let countries = await countryRepo.getAllByField({ isDeleted: false, status: 'Active' });
             let amenities = await amenitiesRepo.getAllByField({ isDeleted: false, status: 'Active' });
             let characteristics = await characteristicsRepo.getAllByField({ isDeleted: false, status: 'Active' });
+
+            // console.log(property, 'property===')
+
             if (!_.isEmpty(property)) {
                 result.property_data = property;
                 console.log(result);
@@ -117,7 +120,7 @@ class PropertyController {
                     page_name: 'property-management',
                     page_title: 'Edit Property',
                     user: req.user,
-                    response: { result, propertyTypes, cities, countries, amenities, characteristics,agents }
+                    response: { result, propertyTypes, cities, countries, amenities, characteristics, agents }
                     //response: { property_data: property, propertyTypes, cities, countries }
                 });
             } else {
@@ -138,39 +141,74 @@ class PropertyController {
             let property = await propertyRepo.getByField({ 'title': { $regex: req.body.title, $options: 'i' }, _id: { $ne: propertyId } });
             if (_.isEmpty(property)) {
                 let propertyData = await propertyRepo.getById(propertyId);
-                req.body.imageGallery = propertyData.imageGallery;
+                // req.body.imageGallery = propertyData.imageGallery;
+                let imageArray = propertyData.imageGallery;
+
                 if (req.files && req.files.length > 0) {
-
-                    req.files.forEach(file => {
-                        if (file.fieldname.search('gallery') != -1) {
-                            let fileIndex = file.fieldname.split('_')[1];
-                            if (propertyData.imageGallery[fileIndex] && propertyData.imageGallery[fileIndex] != '' && fs.existsSync(`./public/uploads/property/${propertyData.imageGallery[fileIndex]}`)) {
-                                fs.unlinkSync(`./public/uploads/property/${propertyData.imageGallery[fileIndex]}`);
-                            }
-                            if (fs.existsSync('./public/uploads/property/thumb/' + propertyData.imageGallery[fileIndex]) && propertyData.imageGallery[fileIndex] != '') {
-                                fs.unlinkSync('./public/uploads/property/thumb/' + propertyData.imageGallery[fileIndex]);
-                            }
-                            gm('./public/uploads/property/' + file.filename).resize(200, 200, '!').write('./public/uploads/property/thumb/' + file.filename, function(err, result) {
-                                if (!err) console.log('done');
-                            });
-
-                            req.body.imageGallery[fileIndex] = file.filename;
-                        } else {
-                            if (propertyData[file.fieldname] && propertyData[file.fieldname] != '' && fs.existsSync(`./public/uploads/property/${propertyData[file.fieldname]}`)) {
-                                fs.unlinkSync(`./public/uploads/property/${propertyData[file.fieldname]}`);
-                            }
-                            if (fs.existsSync('./public/uploads/property/thumb/' + propertyData[file.fieldname]) && propertyData[file.fieldname] != '') {
-                                fs.unlinkSync('./public/uploads/property/thumb/' + propertyData[file.fieldname]);
-                            }
-                            gm('./public/uploads/property/' + file.filename).resize(200, 200, '!').write('./public/uploads/property/thumb/' + file.filename, function(err, result) {
-                                if (!err) console.log('done');
-                            });
-                            req.body[file.fieldname] = file.filename;
-                        }
-                    });
+                    for (let i in req.files) {
+                        imageArray.push(req.files[i].filename);
+                        gm('./public/uploads/property/' + req.files[i].filename).resize(200, 200, '!').write('./public/uploads/property/thumb/' + req.files[i].filename, function (err, result) {
+                            if (!err) console.log('done');
+                        });
+                    }
                 }
 
+                if (req.body.delImgIds) {
+                    var delimageList = req.body.delImgIds.split(',');
+                    imageArray = imageArray.filter(item => !delimageList.includes(item));
+                    req.body.imageGallery = imageArray;
+
+                    for (let i in delimageList) {
+                        if(fs.existsSync(`./public/uploads/property/${delimageList[i]}`)){
+                            fs.unlinkSync('./public/uploads/property/' + delimageList[i]);
+                        }
+                        if(fs.existsSync(`./public/uploads/property/thumb/${delimageList[i]}`)){
+                            fs.unlinkSync('./public/uploads/property/thumb/' + delimageList[i]);
+                        }
+                    }
+                } else {
+                    req.body.imageGallery = imageArray;
+                }
+
+                if (req.body.priceDisplay == 'price') {
+                    req.body.priceText = '';
+                } else {
+                    req.body.price = 0;
+                }
+
+                // if (req.files && req.files.length > 0) {
+                //     req.files.forEach(file => {
+
+                //         if (file.fieldname.search('gallery') != -1) {
+                //             let fileIndex = file.fieldname.split('_')[1];
+                //             if (propertyData.imageGallery[fileIndex] && propertyData.imageGallery[fileIndex] != '' && fs.existsSync(`./public/uploads/property/${propertyData.imageGallery[fileIndex]}`)) {
+                //                 fs.unlinkSync(`./public/uploads/property/${propertyData.imageGallery[fileIndex]}`);
+                //             }
+                //             if (fs.existsSync('./public/uploads/property/thumb/' + propertyData.imageGallery[fileIndex]) && propertyData.imageGallery[fileIndex] != '') {
+                //                 fs.unlinkSync('./public/uploads/property/thumb/' + propertyData.imageGallery[fileIndex]);
+                //             }
+                //             gm('./public/uploads/property/' + file.filename).resize(200, 200, '!').write('./public/uploads/property/thumb/' + file.filename, function (err, result) {
+                //                 if (!err) console.log('done');
+                //             });
+
+                //             req.body.imageGallery[fileIndex] = file.filename;
+                //         } else {
+                //             if (propertyData[file.fieldname] && propertyData[file.fieldname] != '' && fs.existsSync(`./public/uploads/property/${propertyData[file.fieldname]}`)) {
+                //                 fs.unlinkSync(`./public/uploads/property/${propertyData[file.fieldname]}`);
+                //             }
+                //             if (fs.existsSync('./public/uploads/property/thumb/' + propertyData[file.fieldname]) && propertyData[file.fieldname] != '') {
+                //                 fs.unlinkSync('./public/uploads/property/thumb/' + propertyData[file.fieldname]);
+                //             }
+                //             gm('./public/uploads/property/' + file.filename).resize(200, 200, '!').write('./public/uploads/property/thumb/' + file.filename, function (err, result) {
+                //                 if (!err) console.log('done');
+                //             });
+                //             req.body[file.fieldname] = file.filename;
+                //         }
+                //     });
+                // }
+
                 let propertyUpdate = await propertyRepo.updateById(req.body, propertyId);
+
                 if (propertyUpdate) {
                     req.flash('success', "Property updated successfully");
                     res.redirect(namedRouter.urlFor('property.list'));
@@ -206,26 +244,26 @@ class PropertyController {
 
 
     async getAll(req, res) {
-            try {
-                let property = await propertyRepo.getAll(req);
+        try {
+            let property = await propertyRepo.getAll(req);
 
-                if (_.has(req.body, 'sort')) {
-                    var sortOrder = req.body.sort.sort;
-                    var sortField = req.body.sort.field;
-                } else {
-                    var sortOrder = -1;
-                    var sortField = '_id';
-                }
-                let meta = { "page": req.body.pagination.page, "pages": property.pageCount, "perpage": req.body.pagination.perpage, "total": property.totalCount, "sort": sortOrder, "field": sortField };
-                return { status: 200, meta: meta, data: property.data, message: `Data fetched succesfully.` };
-            } catch (e) {
-                return { status: 500, data: [], message: e.message };
+            if (_.has(req.body, 'sort')) {
+                var sortOrder = req.body.sort.sort;
+                var sortField = req.body.sort.field;
+            } else {
+                var sortOrder = -1;
+                var sortField = '_id';
             }
+            let meta = { "page": req.body.pagination.page, "pages": property.pageCount, "perpage": req.body.pagination.perpage, "total": property.totalCount, "sort": sortOrder, "field": sortField };
+            return { status: 200, meta: meta, data: property.data, message: `Data fetched succesfully.` };
+        } catch (e) {
+            return { status: 500, data: [], message: e.message };
         }
-        /*
-        // @Method: status_change
-        // @Description: property status change action
-        */
+    }
+    /*
+    // @Method: status_change
+    // @Description: property status change action
+    */
     async changeStatus(req, res) {
         try {
             let property = await propertyRepo.getById(req.params.id);

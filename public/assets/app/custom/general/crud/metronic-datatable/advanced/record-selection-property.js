@@ -1,6 +1,6 @@
 "use strict";
 // Class definition
-var KTDatatableCms = function() {
+var KTDatatableCms = function () {
     // Private functions
     var options = {
         // datasource definition
@@ -31,19 +31,49 @@ var KTDatatableCms = function() {
         pagination: true,
         // columns definition
 
-        columns: [{
+        columns: [
+            {
                 field: 'image',
                 title: 'Image',
-                width: 200,
-                template: function(row) {
-                    return `<img src="/uploads/property/${row.image}" alt="" height="80" width="80">`
+                width: 80,
+                sortable: false,
+                template: function (row) {
+                    if (row.imageGallery != null && row.imageGallery.length > 0) {
+                        return `<img src="/uploads/property/${row.imageGallery[0]}" alt="" height="80" width="80">`
+                    }
+                },
+            },
+            {
+                field: 'landAgent',
+                title: 'Land Agent',
+                width: 120,
+                sortable: false,
+                template: function (row) {
+                    if (row.landAgent != null && row.landAgent != '') {
+                        return row.landAgent.full_name;
+                    }else{
+                        return 'NA'
+                    }
+                },
+            },
+            {
+                field: 'propertyType',
+                title: 'Property',
+                width: 120,
+                sortable: false,
+                template: function (row) {
+                    if (row.propertyType != null && row.propertyType != '') {
+                        return row.propertyType.title;
+                    }else{
+                        return 'NA'
+                    }
                 },
             },
             {
                 field: 'title',
                 title: 'Title',
-                width: 200,
-                template: function(row) {
+                width: 120,
+                template: function (row) {
                     return row.title;
                 },
             },
@@ -51,15 +81,15 @@ var KTDatatableCms = function() {
                 field: 'price',
                 title: 'Price',
                 width: 80,
-                template: function(row) {
-                    return `${row.price} $`;
+                template: function (row) {
+                    return `$ ${row.price}`;
                 },
             },
             {
                 field: 'totalArea',
-                title: 'Title',
-                width: 80,
-                template: function(row) {
+                title: 'Total Area',
+                width: 120,
+                template: function (row) {
                     return `${row.totalArea} Sq. Ft.`;
                 },
             },
@@ -67,8 +97,9 @@ var KTDatatableCms = function() {
                 field: 'status',
                 title: 'Status',
                 width: 130,
+                sortable: false,
                 // callback function support for column rendering
-                template: function(row) {
+                template: function (row) {
                     var status = {
                         "Active": { 'title': "Active", 'class': 'kt-badge--brand' },
                         "Inactive": { 'title': "Inactive", 'class': ' kt-badge--danger' },
@@ -86,7 +117,7 @@ var KTDatatableCms = function() {
                 overflow: 'visible',
                 textAlign: 'left',
                 autoHide: false,
-                template: function(row) {
+                template: function (row) {
                     return '\
 						\<a href="http://' + window.location.host + '/property/edit/' + row._id + '" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Edit">\
 						<i class="flaticon-edit"></i>\
@@ -101,7 +132,7 @@ var KTDatatableCms = function() {
     };
 
     // basic demo
-    var cmsSelector = function() {
+    var cmsSelector = function () {
 
         options.search = {
             input: $('#generalSearch'),
@@ -109,11 +140,11 @@ var KTDatatableCms = function() {
 
         var datatable = $('#propertyRecordSelection').KTDatatable(options);
 
-        $('#kt_form_status').on('change', function() {
+        $('#kt_form_status').on('change', function () {
             datatable.search($(this).val(), 'Status');
         });
 
-        $('#kt_form_type').on('change', function() {
+        $('#kt_form_type').on('change', function () {
             datatable.search($(this).val().toLowerCase(), 'Type');
         });
 
@@ -121,7 +152,7 @@ var KTDatatableCms = function() {
 
         datatable.on(
             'kt-datatable--on-check kt-datatable--on-uncheck kt-datatable--on-layout-updated',
-            function(e) {
+            function (e) {
                 var checkedNodes = datatable.rows('.kt-datatable__row--active').nodes();
                 var count = checkedNodes.length;
                 $('#kt_datatable_selected_number').html(count);
@@ -132,13 +163,13 @@ var KTDatatableCms = function() {
                 }
             });
 
-        $('#kt_modal_fetch_id').on('show.bs.modal', function(e) {
+        $('#kt_modal_fetch_id').on('show.bs.modal', function (e) {
             var ids = datatable.rows('.kt-datatable__row--active').
-            nodes().
-            find('.kt-checkbox--single > [type="checkbox"]').
-            map(function(i, chk) {
-                return $(chk).val();
-            });
+                nodes().
+                find('.kt-checkbox--single > [type="checkbox"]').
+                map(function (i, chk) {
+                    return $(chk).val();
+                });
             var c = document.createDocumentFragment();
             for (var i = 0; i < ids.length; i++) {
                 var li = document.createElement('li');
@@ -147,11 +178,11 @@ var KTDatatableCms = function() {
                 c.appendChild(li);
             }
             $(e.target).find('.kt-datatable_selected_ids').append(c);
-        }).on('hide.bs.modal', function(e) {
+        }).on('hide.bs.modal', function (e) {
             $(e.target).find('.kt-datatable_selected_ids').empty();
         });
 
-        $(document).on('click', '.ktManagerDelete', function() {
+        $(document).on('click', '.ktManagerDelete', function () {
             var elemID = $(this).attr('id').replace('del-', '');
             swal.fire({
                 title: 'Are you sure?',
@@ -161,7 +192,7 @@ var KTDatatableCms = function() {
                 confirmButtonText: 'Yes, delete it!',
                 cancelButtonText: 'No, cancel!',
                 reverseButtons: true
-            }).then(function(result) {
+            }).then(function (result) {
                 if (result.value) {
                     window.location.href = `http://${window.location.host}/property/delete/${elemID}`;
                 }
@@ -169,7 +200,7 @@ var KTDatatableCms = function() {
         });
 
 
-        $(document).on('click', '.KTLanguageStatusUpdate', function() {
+        $(document).on('click', '.KTLanguageStatusUpdate', function () {
             var elemID = $(this).data('id');
             swal.fire({
                 title: 'Are you sure?',
@@ -179,7 +210,7 @@ var KTDatatableCms = function() {
                 confirmButtonText: 'Yes, change it!',
                 cancelButtonText: 'No, cancel!',
                 reverseButtons: true
-            }).then(function(result) {
+            }).then(function (result) {
                 if (result.value) {
                     window.location.href = `http://${window.location.host}/property/status-change/${elemID}`;
                 }
@@ -189,12 +220,12 @@ var KTDatatableCms = function() {
 
     return {
         // public functions
-        init: function() {
+        init: function () {
             cmsSelector();
         },
     };
 }();
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function () {
     KTDatatableCms.init();
 });
