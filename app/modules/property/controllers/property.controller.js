@@ -90,17 +90,35 @@ class PropertyController {
     async edit(req, res) {
         try {
             let result = {};
+            
+
+            let languages = await languageRepo.getAllByField({ 'status': 'Active', 'isDeleted':false});
+            result.languages = languages;
             let property = await propertyRepo.getById(req.params.id);
+
+            var translateArr = [];
+            for (var i = 0; i < property.translate.length; i++) {
+                translateArr[property.translate[i].language] = property.translate[i]
+            }
+            property.translate = translateArr;
+
+            
+
+            let agents = await userRepo.getAllWithoutPaginate({ 'roleDetails.role': 'agent', isDeleted: false, isActive: true });
             let propertyTypes = await propertytypeRepo.getAllByField({ isDeleted: false, status: 'Active' });
             let cities = await cityRepo.getAllByField({ isDeleted: false, status: 'Active' });
             let countries = await countryRepo.getAllByField({ isDeleted: false, status: 'Active' });
+            let amenities = await amenitiesRepo.getAllByField({ isDeleted: false, status: 'Active' });
+            let characteristics = await characteristicsRepo.getAllByField({ isDeleted: false, status: 'Active' });
             if (!_.isEmpty(property)) {
                 result.property_data = property;
+                console.log(result);
                 res.render('property/views/edit.ejs', {
                     page_name: 'property-management',
                     page_title: 'Edit Property',
                     user: req.user,
-                    response: { property_data: property, propertyTypes, cities, countries }
+                    response: { result, propertyTypes, cities, countries, amenities, characteristics,agents }
+                    //response: { property_data: property, propertyTypes, cities, countries }
                 });
             } else {
                 req.flash('error', "Sorry Property not found!");

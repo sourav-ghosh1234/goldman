@@ -16,166 +16,574 @@
             <div class="col-lg-12">
                 <div class="kt-portlet">
                     <form class="kt-form kt-form--label-right" id="editPropertyFrm" action="<%= generateUrl('property.update') %>" method="POST" enctype="multipart/form-data">
+
+
                         <div class="kt-portlet__body">
-                            <div class="form-group row">
-                                <div class="col-lg-6">
-                                    <label>Title:</label>
-                                    <input type="text" name="title" id="title" class="form-control required" required placeholder="Enter Title" value="<%= response.property_data.title %>">
-                                </div>
-                                <div class="col-lg-6">
-                                    <label>Price:</label>
-                                    <input type="number" name="price" id="price" class="form-control required" required placeholder="Enter Price" value="<%= response.property_data.price %>">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-lg-6">
-                                    <label for="image" class="control-label">Image</label>
-                                    <div class="controls">
-                                        <input id="image" name="image" type="file" placeholder="Enter Title" accept="image/*" class="form-control imagepickerWithPreviewId" data-previewelement="imagePreview" />
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <% if(response.property_data.image != '') {%>
-                                        <img class="image" id="imagePreview" height="80px" src="/uploads/property/<%= response.property_data.image %>">
-                                        <% } else { %>
-                                            <img class="image" id="imagePreview" height="80px" src="">
-                                            <% } %>
-                                </div>
-                            </div>
 
-                            <div class="form-group row">
-                                <!--  -->
-                                <div class="col-lg-12">
-                                    <h5 class="pull-left">Image Gallery</h5>
-                                    <button class="btn btn-info btn-rounded pull-right addGallery">Add</button>
-                                </div>
-                                <div class="col-lg-12">&nbsp;</div>
-                                <div class="gallery-item-wrapper col-lg-12">
-                                    <% if(response.property_data.imageGallery.length > 0) {%>
-                                        <% response.property_data.imageGallery.map((imageItem, index) => { %>
-                                            <div class="form-group row gallery">
-                                                <div class="col-lg-5">
-                                                    <input type="file" name="gallery_<%= index %>" id="image" class="form-control imagepickerWithPreviewId" data-previewelement="gallery<%= index %>Preview">
-                                                </div>
-                                                <input type="hidden" name="imageGallery[<%= index %>][image]" value="<%=imageItem%>">
-                                                <div class="col-lg-5">
-                                                    <% if(imageItem != '') {%>
-                                                        <img class="galleryImage" id="gallery<%= index %>Preview" height="80px" src="/uploads/property/<%= imageItem %>">
-                                                        <!-- <input type="hidden" name="photosAndVideos[gallery][0]"> -->
-                                                        <% } else { %>
-                                                            <img class="galleryImage" id="gallery0Preview" height="80px" src="">
-                                                            <% } %>
-                                                </div>
-                                                <% if(index != 0) {%>
-                                                    <div class="col-lg-2"><button class="btn btn-danger btn-rounded pull-right removeGallery" id="item<%= index %>">Remove</button></div>
-                                                    <% } %>
-                                            </div>
-                                            <% }) %>
-                                                <% } else { %>
-                                                    <div class="form-group row gallery">
-                                                        <div class="col-lg-5">
-                                                            <input type="file" name="gallery_0" id="image" class="form-control imagepickerWithPreviewId" data-previewelement="gallery0Preview">
+                            <ul class="nav nav-pills nav-fill" role="tablist">
+                                <%response.result.languages.map((data)=>{%>
+                                <%if(data.isDefault){%>
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab"
+                                        href="#kt_tabs_<%=data.shortcode%>"><%=data.title%></a>
+                                </li>
+                                <%}else{%>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#kt_tabs_<%=data.shortcode%>"><%=data.title%></a>
+                                </li>
+                                <%}%>
+                                            <%})%>
+                            </ul>
+                            <div class="tab-content">
+                                <%
+                                    let count = 0;
+                                    response.result.languages.map((language)=>{
+                                %>
+                                    <%if(language.shortcode == 'en'){%>
+                                        <div class="tab-pane active" id="kt_tabs_<%=language.shortcode%>" role="tabpanel">
+                                            
+                                            <div class="kt-portlet kt-portlet--tabs">
+										<div class="kt-portlet__head">
+											<div class="kt-portlet__head-toolbar">
+												<ul class="nav nav-tabs nav-tabs-line nav-tabs-line-danger nav-tabs-line-2x nav-tabs-line-right nav-tabs-bold" role="tablist">
+													<li class="nav-item">
+														<a class="nav-link active" data-toggle="tab" href="#kt_portlet_base_demo_2_3_tab_content" role="tab">
+															<i class="fa fa-dolly" aria-hidden="true"></i>Listing Details
+														</a>
+													</li>
+													<li class="nav-item">
+														<a class="nav-link" data-toggle="tab" href="#kt_portlet_base_demo_2_2_tab_content" role="tab">
+															<i class="fab fa-dribbble" aria-hidden="true"></i>Property Details
+														</a>
+													</li>
+													<li class="nav-item">
+														<a class="nav-link" data-toggle="tab" href="#kt_portlet_base_demo_2_1_tab_content" role="tab">
+															<i class="fab fa-gitter" aria-hidden="true"></i>Images and Copy
+														</a>
+													</li>
+												</ul>
+											</div>
+										</div>
+										<div class="kt-portlet__body">
+											<div class="tab-content">
+												<div class="tab-pane active" id="kt_portlet_base_demo_2_3_tab_content" role="tabpanel">
+                                                    <h5>Property For</h5>
+                                                    <hr>
+													<div class="form-group row">
+                                                        <div class="col-lg-6">
+                                                            <label>Type:</label>
+                                                            <select name="propertyFor" id="propertyFor" class="form-control required">
+									                            <option value="">Select</option>
+                                                                <option value="sale" <%= (response.result.property_data.propertyFor == 'sale')?'Selected':'' %> >Sale</option>
+                                                                <option value="rent" <%= (response.result.property_data.propertyFor == 'rent')?'Selected':''%> >Rent</option>
+								                            </select>
                                                         </div>
-                                                        <div class="col-lg-5">
-                                                            <img class="galleryImage" id="gallery0Preview" height="80px" src="">
-                                                        </div>
-                                                        <div class="col-lg-2"><button class="btn btn-danger btn-rounded pull-right removeGallery" id="item0">Remove</button></div>
                                                     </div>
-                                                    <% } %>
-                                </div>
-                                <!--  -->
-                            </div>
+                                                    <h5>About The Listing </h5>
+                                                    <hr>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-6">
+                                                            <label>Title</label>
+                                                            <input type="text" name="title" id="title" class="form-control required" required placeholder="Enter title" value="<%=response.result.property_data.title%>">
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <label>Sub Title</label>
+                                                            <input type="text" name="subTitle" id="subTitle" class="form-control required" required placeholder="Enter sub title" value="<%=response.result.property_data.subTitle%>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-6">
+                                                            <label>Property Type:</label>
+                                                            <select name="propertyType" id="propertyType" class="form-control required">
+									                            <option value="">Select Property Type</option>
+									                            <% if(response.propertyTypes) {%>
+										                            <% response.propertyTypes.forEach(propertyType => {%>
+											                            <option value="<%= propertyType._id %>" <%= (response.result.property_data.propertyType != null && response.result.property_data.propertyType.toString() == propertyType._id.toString())?'Selected':'' %> ><%= propertyType.title %></option>
+										                            <% })%>
+									                            <% } %>
+								                            </select>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <label>New or Established</label>
+                                                            <div class="kt-radio-inline">
+                                                                <label class="kt-radio">
+                                                                    <input type="radio" name="establishedNew" value="established" <%= (response.result.property_data.establishedNew == 'established')?'Checked':'' %>> Established Property
+                                                                    <span></span>
+                                                                </label>
+                                                                <label class="kt-radio">
+                                                                <input type="radio" name="establishedNew" value="new" <%= (response.result.property_data.establishedNew == 'new')?'Checked':'' %>> New Construction
+                                                                    <span></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-6">
+                                                            <label>Land Agent</label>
+                                                            <select name="landAgent" id="landAgent" class="form-control required">
+                                                                <option value="">Select Agent</option>
+                                                                    <% if(response.agents) {%>
+                                                                        <% response.agents.forEach(agent => {%>
+                                                                            <option value="<%= agent._id %>" <%= (response.result.property_data.landAgent != null && response.result.property_data.landAgent.toString() == agent._id.toString())?'Selected':'' %>><%= agent.full_name %></option>
+                                                                        <% }); %>
+                                                                    <% } %>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <label>Dual Agent</label>
+                                                            <input type="text" name="dualAgent" id="dualAgent" class="form-control required" required placeholder="Enter dual agent" value="<%=response.result.property_data.dualAgent%>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-6">
+                                                            <label>Rental Per Week</label>
+                                                            <input type="number" name="rentalPerWeek" id="rentalPerWeek" class="form-control required" required placeholder="Enter rental per week" value="<%=response.result.property_data.rentalPerWeek%>">
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <label>Rental Per Calendar Month</label>
+                                                            <input type="number" name="rentalPerMonth" id="rentalPerMonth" class="form-control required" required placeholder="Enter rental per month" value="<%=response.result.property_data.rentalPerMonth%>">
+                                                        </div>
+                                                    </div>
 
-                            <div class="form-group row">
-                                <div class="col-lg-12">
-                                    <label>Description:</label>
-                                    <textarea name="description" id="description" cols="30" rows="5" class="form-control"><%= response.property_data.description %></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-lg-6">
-                                    <label>Property Type:</label>
-                                    <select name="propertyType" id="propertyType" class="form-control required">
-                                        <option value="">Select Property Type</option>
-                                        <% if(response.propertyTypes) {%>
-                                            <% response.propertyTypes.forEach(propertyType => {%>
-                                                <option value="<%= propertyType._id %>" <%= String(propertyType._id) == String(response.property_data.propertyType) ? 'selected' : '' %> ><%= propertyType.title %></option>
-                                            <% }); %>
-                                        <% } %>
-							        </select>
-                                </div>
-                                <div class="col-lg-6">
-                                    <label>Total Area:</label>
-                                    <input type="number" name="totalArea" id="totalArea" class="form-control required" required placeholder="Enter Total Area" value="<%= response.property_data.totalArea %>">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-lg-6">
-                                    <label>Number of Rooms:</label>
-                                    <input type="number" name="noOfRooms" id="noOfRooms" class="form-control required" required placeholder="Enter Number of Bed Rooms" value="<%= response.property_data.noOfRooms %>">
-                                </div>
-                                <div class="col-lg-6">
-                                    <label>Year Built:</label>
-                                    <input type="number" name="yearBuilt" id="yearBuilt" class="form-control required" required placeholder="Enter Number of Kitchens" value="<%= response.property_data.yearBuilt %>">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-lg-6">
-                                    <label>Number of Bed Rooms:</label>
-                                    <input type="number" name="noOfBedRooms" id="noOfBedRooms" class="form-control required" required placeholder="Enter Number of Bed Rooms" value="<%= response.property_data.noOfBedRooms %>">
-                                </div>
-                                <div class="col-lg-6">
-                                    <label>Number of Kitchens:</label>
-                                    <input type="number" name="noOfKitchens" id="noOfKitchens" class="form-control required" required placeholder="Enter Number of Kitchens" value="<%= response.property_data.noOfKitchens %>">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-lg-6 ">
-                                    <label>Number of Bathrooms:</label>
-                                    <input type="number" name="noOfBathrooms" id="noOfBathrooms" class="form-control required" required placeholder="Enter Number of Bathrooms" value="<%= response.property_data.noOfBathrooms %>">
-                                </div>
-                                <div class="col-lg-6">
-                                    <label>Address:</label>
-                                    <input type="text" name="address" id="address" class="form-control required" required placeholder="Enter Address" value="<%= response.property_data.address %>">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-lg-6">
-                                    <label>City:</label>
-                                    <select name="city" id="city" class="form-control required">
-                                        <option value="">Select City</option>
-                                        <% if(response.cities) {%>
-                                            <% response.cities.forEach(city => {%>
-                                                <option value="<%= city._id %>" <%= String(city._id) == String(response.property_data.city) ? 'selected' : '' %> ><%= city.city %></option>
-                                            <% }); %>
-                                        <% } %>
-                                    </select>
-                                </div>
-                                <div class="col-lg-6">
-                                    <label>Country:</label>
-                                    <select name="country" id="country" class="form-control required">
-                                        <option value="">Select Country</option>
-                                        <% if(response.countries) {%>
-                                            <% response.countries.forEach(country => {%>
-                                                <option value="<%= country._id %>" <%= String(country._id) == String(response.property_data.country) ? 'selected' : '' %> ><%= country.country_name %></option>
-                                            <% }); %>
-                                        <% } %>
-                                    </select>
-                                </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-6">
+                                                            <label>Security Bond</label>
+                                                            <input type="number" name="securityBond" id="securityBond" class="form-control required" required placeholder="Enter security bond" value="<%=response.result.property_data.securityBond%>">
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <label>Price Display:</label>
+                                                            <select name="priceDisplay" id="priceDisplay" class="form-control required">
+									                            <option value="">Select Price Display</option>
+									                            <option value="price" <%= (response.result.property_data.priceDisplay == 'price')?'Selected':'' %>>Price</option>
+                                                                <option value="text" <%= (response.result.property_data.priceDisplay == 'text')?'Selected':'' %>>Text</option>
+								                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-6">
+                                                            <label>Price</label>
+                                                            <input type="number" name="price" id="price" class="form-control required" required placeholder="Enter price" value="<%=response.result.property_data.price%>">
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <label>Price Text</label>
+                                                            <input type="text" name="priceText" id="priceText" class="form-control required" required placeholder="Enter price text" value="<%=response.result.property_data.priceText%>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-6">
+                                                            <label>Available Date</label>
+                                                            <input type="text" name="availableDate" id="availableDate" class="form-control required" required placeholder="Enter available date" value="<%=response.result.property_data.availableDate%>">
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <label>Name</label>
+                                                            <input type="text" name="landlord[name]" id="name" class="form-control required" required placeholder="Enter name" value="<%=response.result.property_data.landlord.name%>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-6">
+                                                            <label>Email</label>
+                                                            <input type="text" name="landlord[email]" id="email" class="form-control required" required placeholder="Enter email" value="<%=response.result.property_data.landlord.email%>">
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <label>Phone Number</label>
+                                                            <input type="number" name="landlord[phone]" id="phone" class="form-control required" required placeholder="Enter phone" value="<%=response.result.property_data.landlord.phone%>">
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <h5>Property Address </h5>
+                                                    <hr>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-6">
+                                                            <label>Country:</label>
+                                                            <select name="propertyAddress[country]" id="country" class="form-control required">
+									                        <option value="">Select Country</option>
+									                            <% if(response.countries) {%>
+										                            <% response.countries.forEach(country => {%>
+											                            <option value="<%= country._id %>" <%= (response.result.property_data.propertyAddress.country != null && response.result.property_data.propertyAddress.country.toString() == country._id.toString())?'Selected':'' %>><%= country.country_name %></option>
+										                            <% }); %>
+									                            <% } %>
+								                            </select>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <label>City:</label>
+                                                            <select name="propertyAddress[city]" id="city" class="form-control required">
+									                        <option value="">Select City</option>
+									                            <% if(response.cities) {%>
+										                            <% response.cities.forEach(city => {%>
+											                            <option value="<%= city._id %>" <%= (response.result.property_data.propertyAddress.city != null && response.result.property_data.propertyAddress.city.toString() == city._id.toString())?'Selected':'' %>><%= city.city %></option>
+										                            <% }); %>
+									                            <% } %>
+								                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-3">
+                                                            <label>Street Address Number</label>
+                                                            <input type="number" name="propertyAddress[street_address_number]" id="street_address_number" class="form-control required" required placeholder="Enter street number" value="<%=response.result.property_data.propertyAddress.street_address_number%>">
+                                                        </div>
+                                                        <div class="col-lg-9">
+                                                            <label>Street Address</label>
+                                                            <input type="text" name="propertyAddress[street_address]" id="street_address" class="form-control required" required placeholder="Enter street address" value="<%=response.result.property_data.propertyAddress.street_address%>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-6">
+                                                            <label>Unit</label>
+                                                            <input type="number" name="propertyAddress[unit]" id="unit" class="form-control required" required placeholder="Enter unit" value="<%=response.result.property_data.propertyAddress.unit%>">
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <label>Suburb</label>
+                                                            <input type="text" name="propertyAddress[suburb]" id="suburb" class="form-control required" required placeholder="Enter suburb" value="<%=response.result.property_data.propertyAddress.suburb%>">
+                                                        </div>
+                                                    </div>
+                                                </div>
+												<div class="tab-pane" id="kt_portlet_base_demo_2_2_tab_content" role="tabpanel">
+													<div class="form-group row">
+                                                        <div class="col-lg-6">
+                                                            <label>Total Room</label>
+                                                            <input type="number" name="totalRooms" id="totalRooms" class="form-control required" required placeholder="Enter total rooms" value="<%=response.result.property_data.totalRooms%>">
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <label>Bed Room</label>
+                                                            <input type="number" name="noOfBedRooms" id="noOfBedRooms" class="form-control required" required placeholder="Enter bed rooms" value="<%=response.result.property_data.noOfBedRooms%>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-6">
+                                                            <label>Bath Rooms</label>
+                                                            <input type="number" name="noOfBathRooms" id="noOfBathRooms" class="form-control required" required placeholder="Enter bath rooms" value="<%=response.result.property_data.noOfBathRooms%>">
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <label>Kitchen</label>
+                                                            <input type="number" name="noOfKitchens" id="noOfKitchens" class="form-control required" required placeholder="Enter kitchens" value="<%=response.result.property_data.noOfKitchens%>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-6">
+                                                            <label>Total Floor</label>
+                                                            <input type="number" name="totalFloors" id="totalFloors" class="form-control required" required placeholder="Enter floors" value="<%=response.result.property_data.totalFloors%>">
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <label>Floor</label>
+                                                            <input type="text" name="floor" id="floor" class="form-control required" required placeholder="Enter floor" value="<%=response.result.property_data.floor%>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-4">
+                                                            <label>Parking Garage Spaces</label>
+                                                            <input type="number" name="parking[garage_spaces]" id="garage_spaces" class="form-control required" required placeholder="Enter garage spaces" value="<%=response.result.property_data.parking.garage_spaces%>">
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <label>Parking Carport Spaces</label>
+                                                            <input type="number" name="parking[carport_spaces]" id="carport_spaces" class="form-control required" required placeholder="Enter carport spaces" value="<%=response.result.property_data.parking.carport_spaces%>">
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <label>Parking Open Spaces</label>
+                                                            <input type="number" name="parking[open_spaces]" id="open_spaces" class="form-control required" required placeholder="Enter open spaces" value="<%=response.result.property_data.parking.open_spaces%>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-5">
+                                                            <label>Living Areas</label>
+                                                            <input type="number" name="totalArea" id="totalArea" class="form-control required" required placeholder="Enter living areas" value="<%=response.result.property_data.totalArea%>">
+                                                        </div>
+                                                        <div class="col-lg-5">
+                                                            <label>House Size</label>
+                                                            <input type="number" name="houseSize[size]" id="houseSize" class="form-control required" required placeholder="Enter house size" value="<%=response.result.property_data.houseSize.size%>">
+                                                        </div>
+                                                        <div class="col-lg-2">
+                                                            <label>Size Unit</label>
+                                                            <select name="houseSize[sizeBy]" id="sizeBy" class="form-control required">
+                                                                <option value="">Select Unit</option>
+                                                                <option value="squares" <%=(response.result.property_data.houseSize.sizeBy == 'squares')?'Selected':''%>>Squares</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-5">
+                                                            <label>Land Size</label>
+                                                            <input type="number" name="landSize[size]" id="landSize" class="form-control required" required placeholder="Enter house size" value="<%=response.result.property_data.landSize.size%>">
+                                                        </div>
+                                                        <div class="col-lg-2">
+                                                            <label>Size Unit</label>
+                                                            <select name="landSize[sizeBy]" id="landSizeBy" class="form-control required">
+                                                                <option value="">Select Unit</option>
+                                                                <option value="squares" <%=(response.result.property_data.landSize.sizeBy == 'squares')?'Selected':''%>>Squares</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-12">
+                                                            <label>Characteristics</label>
+                                                            <div class="kt-checkbox-inline">
+                                                                <% if(response.characteristics) {%>
+										                            <% response.characteristics.forEach(characteristy => {%>
+                                                                        <label class="kt-checkbox">
+															                <input type="checkbox" name="characteristics" value="<%=characteristy._id%>" <%=(utils.inArray(response.result.property_data.characteristics, characteristy._id))?'Checked':'' %> > <%=characteristy.title%>
+															                <span></span>
+														                </label>
+										                            <% }); %>
+									                            <% } %>
+													    </div>
+                                                    </div>
+                                                       
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-12">
+                                                            <label>Amenities</label>
+                                                            <div class="kt-checkbox-inline">
+                                                                <% if(response.amenities) {%>
+										                            <% response.amenities.forEach(amenity => {%>
+                                                                        <label class="kt-checkbox">
+															                <input type="checkbox" name="amenities" value="<%=amenity._id%>" <%=(utils.inArray(response.result.property_data.amenities, amenity._id))?'Checked':'' %> > <%=amenity.title%>
+															                <span></span>
+														                </label>
+										                            <% }); %>
+									                            <% } %>
+													    </div>
+                                                    </div>
+                                                       
+                                                </div>
+												</div>
+												<div class="tab-pane" id="kt_portlet_base_demo_2_1_tab_content" role="tabpanel">
+													<div class="form-group row">
+                                                        <div class="col-lg-12">
+                                                            <label>Description:</label>
+                                                            <textarea name="description" id="description" cols="30" rows="5" class="form-control"><%=response.result.property_data.description%></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                    <div class="col-lg-12">
+                                                        <h5 class="pull-left">Image Gallery</h5>
+                                                        <button class="btn btn-info btn-rounded pull-right addGallery">Add</button>
+                                                    </div>
+                                                    <div class="col-lg-12">&nbsp;</div>
+                                                        <div class="gallery-item-wrapper col-lg-12">
+                                                            <div class="form-group row gallery">
+                                                                <div class="col-lg-5">
+                                                                    <input type="file" name="gallery_0" id="image" class="form-control imagepickerWithPreviewId" data-previewelement="gallery0Preview">
+                                                                </div>
+                                                            <div class="col-lg-5">
+                                                                <img class="galleryImage" id="gallery0Preview" height="80px" src="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">&nbsp;</div>
+                                                    <div class="gallery-item-wrapper col-lg-12">
+                                                        
+                                                    </div>
+                                                </div>
+                                                    
+                                                </div>
+                                                
+											</div>
+										</div>
+                                        
+									</div>
+
+
+
+                                        </div>
+                                        <% } else{ 
+                                            let footer_common_text = '';
+                                            let copyright_text = '';
+                                            let follow_us_text = '';
+                    
+                                            
+                                        %>
+                                            <div class="tab-pane" id="kt_tabs_<%=language.shortcode%>" role="tabpanel">
+                                                
+                                                <div class="kt-portlet kt-portlet--tabs">
+										<div class="kt-portlet__head">
+											<div class="kt-portlet__head-toolbar">
+												<ul class="nav nav-tabs nav-tabs-line nav-tabs-line-danger nav-tabs-line-2x nav-tabs-line-right nav-tabs-bold" role="tablist">
+													<li class="nav-item">
+														<a class="nav-link active" data-toggle="tab" href="#kt_portlet_base_demo_2_3_tab_content<%=language.shortcode%>" role="tab">
+															<i class="fa fa-dolly" aria-hidden="true"></i>Listing Details
+														</a>
+													</li>
+													<li class="nav-item">
+														<a class="nav-link" data-toggle="tab" href="#kt_portlet_base_demo_2_2_tab_content<%=language.shortcode%>" role="tab">
+															<i class="fab fa-dribbble" aria-hidden="true"></i>Property Details
+														</a>
+													</li>
+													<li class="nav-item">
+														<a class="nav-link" data-toggle="tab" href="#kt_portlet_base_demo_2_1_tab_content<%=language.shortcode%>" role="tab">
+															<i class="fab fa-gitter" aria-hidden="true"></i>Images and Copy
+														</a>
+													</li>
+												</ul>
+											</div>
+										</div>
+										<div class="kt-portlet__body">
+											<div class="tab-content">
+												<div class="tab-pane active" id="kt_portlet_base_demo_2_3_tab_content<%=language.shortcode%>" role="tabpanel">
+                                                    <h5>About The Listing </h5>
+                                                    <hr>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-6">
+                                                            <label>Title</label>
+                                                            <input type="text" name="translate[<%=count%>][title]" id="title_<%=count%>" class="form-control required" required placeholder="Enter title">
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <label>Sub Title</label>
+                                                            <input type="text" name="translate[<%=count%>][subTitle]" id="subTitle_<%=count%>" class="form-control required" required placeholder="Enter sub title">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-6">
+                                                            <label>Security Bond</label>
+                                                            <input type="number" name="translate[<%=count%>][securityBond]" id="securityBond_<%=count%>" class="form-control required" required placeholder="Enter security bond">
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <label>Price Display:</label>
+                                                            <select name="translate[<%=count%>][priceDisplay]" id="priceDisplay_<%=count%>" class="form-control required">
+									                            <option value="">Select Price Display</option>
+									                            <option value="price">Price</option>
+                                                                <option value="text">Text</option>
+								                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-6">
+                                                            <label>Price</label>
+                                                            <input type="number" name="translate[<%=count%>][price]" id="price_<%=count%>" class="form-control required" required placeholder="Enter price">
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <label>Price Text</label>
+                                                            <input type="text" name="translate[<%=count%>][priceText]" id="priceText_<%=count%>" class="form-control required" required placeholder="Enter price text">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-6">
+                                                            <label>Available Date</label>
+                                                            <input type="text" name="translate[<%=count%>][availableDate]" id="availableDate_<%=count%>" class="form-control required" required placeholder="Enter available date">
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <label>Name</label>
+                                                            <input type="text" name="translate[<%=count%>][landlord][name]" id="name_<%=count%>" class="form-control required" required placeholder="Enter name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-6">
+                                                            <label>Email</label>
+                                                            <input type="text" name="translate[<%=count%>][landlord][email]" id="email_<%=count%>" class="form-control required" required placeholder="Enter name">
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <label>Phone Number</label>
+                                                            <input type="number" name="translate[<%=count%>][landlord][phone]" id="phone_<%=count%>" class="form-control required" required placeholder="Enter phone">
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <h5>Property Address </h5>
+                                                    <hr>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-6">
+                                                            <label>Country:</label>
+                                                            <select name="translate[<%=count%>][propertyAddress][country]" id="country_<%=count%>" class="form-control required">
+									                        <option value="">Select Country</option>
+									                            <% if(response.countries) {%>
+										                            <% response.countries.forEach(country => {%>
+											                            <option value="<%= country._id %>"><%= country.country_name %></option>
+										                            <% }); %>
+									                            <% } %>
+								                            </select>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <label>City:</label>
+                                                            <select name="translate[<%=count%>][propertyAddress][city]" id="city_<%=count%>" class="form-control required">
+									                        <option value="">Select City</option>
+									                            <% if(response.cities) {%>
+										                            <% response.cities.forEach(city => {%>
+											                            <option value="<%= city._id %>"><%= city.city %></option>
+										                            <% }); %>
+									                            <% } %>
+								                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-3">
+                                                            <label>Street Address Number</label>
+                                                            <input type="number" name="translate[<%=count%>][propertyAddress][street_address_number]" id="street_address_number_<%=count%>" class="form-control required" required placeholder="Enter street number">
+                                                        </div>
+                                                        <div class="col-lg-9">
+                                                            <label>Street Address</label>
+                                                            <input type="text" name="translate[<%=count%>][propertyAddress][street_address]" id="street_address_<%=count%>" class="form-control required" required placeholder="Enter street address">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-6">
+                                                            <label>Unit</label>
+                                                            <input type="number" name="translate[<%=count%>][propertyAddress][unit]" id="phone_<%=count%>" class="form-control required" required placeholder="Enter unit">
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <label>Suburb</label>
+                                                            <input type="text" name="translate[<%=count%>][propertyAddress][suburb]" id="suburb_<%=count%>" class="form-control required" required placeholder="Enter suburb">
+                                                        </div>
+                                                    </div>
+                                                </div>
+												<div class="tab-pane" id="kt_portlet_base_demo_2_2_tab_content<%=language.shortcode%>" role="tabpanel">
+													<div class="form-group row">
+                                                        <div class="col-lg-5">
+                                                            <label>Living Areas</label>
+                                                            <input type="number" name="translate[<%=count%>][totalArea]" id="totalArea_<%=count%>" class="form-control required" required placeholder="Enter living areas">
+                                                        </div>
+                                                        <div class="col-lg-5">
+                                                            <label>House Size</label>
+                                                            <input type="number" name="translate[<%=count%>][houseSize][size]" id="houseSize_<%=count%>" class="form-control required" required placeholder="Enter house size">
+                                                        </div>
+                                                        <div class="col-lg-2">
+                                                            <label>Size Unit</label>
+                                                            <select name="translate[<%=count%>][houseSize][sizeBy]" id="sizeBy_<%=count%>" class="form-control required">
+                                                                <option value="">Select Unit</option>
+                                                                <option value="squares">Squares</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-5">
+                                                            <label>Land Size</label>
+                                                            <input type="number" name="translate[<%=count%>][landSize][size]" id="landSize_<%=count%>" class="form-control required" required placeholder="Enter house size">
+                                                        </div>
+                                                        <div class="col-lg-2">
+                                                            <label>Size Unit</label>
+                                                            <select name="translate[<%=count%>][landSize][sizeBy]" id="landSizeBy_<%=count%>" class="form-control required">
+                                                                <option value="">Select Unit</option>
+                                                                <option value="squares">Squares</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                  </div>
+												<div class="tab-pane" id="kt_portlet_base_demo_2_1_tab_content<%=language.shortcode%>" role="tabpanel">
+													<div class="form-group row">
+                                                        <div class="col-lg-12">
+                                                            <label>Description:</label>
+                                                            <textarea name="translate[<%=count%>][description]" id="description_<%=count%>" cols="30" rows="5" class="form-control"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+											</div>
+										</div>
+									</div>
+                                               
+                                                <input type="hidden" name="translate[<%=count%>][language]" value="<%=language.shortcode%>">
+                                            </div>
+                                            <% count++ }%>
+                                        <%})%>
                             </div>
                         </div>
-                        <!-- hidden user id -->
-                        <input type="hidden" name="property_id" value="<%=response.property_data._id%>">
                         <div class="kt-portlet__foot">
-                            <div class="kt-form__actions">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <a href="<%= generateUrl('property.list') %>" class="btn btn-secondary">Cancel</a>
-                                        <button type="submit" class="btn btn-primary">Update</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+						<div class="kt-form__actions">
+							<div class="row">
+								<div class="col-lg-6">
+                                    <input type="hidden" name="property_id" value="<%=response.result.property_data._id%>">
+									<a href="<%= generateUrl('property.list') %>" class="btn btn-secondary">Cancel</a>
+									<button type="submit" class="btn btn-primary">Save</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
                     </form>
                 </div>
             </div>
