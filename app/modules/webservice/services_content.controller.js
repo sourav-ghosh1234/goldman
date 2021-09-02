@@ -77,6 +77,30 @@ class serviceContentController {
     }
   }
 
+
+  async getLifeAnnuities(req, res) {
+    try {
+      let lifeAnnuities = await lifeAnnuitiesRepo.getByField({});
+      if (lifeAnnuities) {
+        return {
+          status: 200,
+          data: lifeAnnuities,
+          message: 'Text fetched successfully.'
+        }
+      } else {
+        return {
+          status: 201,
+          data: [],
+          message: 'There are no data at this moment.'
+        }
+      }
+    } catch (error) {
+      return res.status(500).send({
+        message: error.message
+      });
+    }
+  }
+
 }
 
 module.exports = new serviceContentController();
