@@ -1,5 +1,6 @@
 const Property = require('property/models/property.model');
 const perPage = config.PAGINATION_PERPAGE;
+const mongoose = require('mongoose');
 
 class PropertyRepository {
     constructor() { }
@@ -11,17 +12,31 @@ class PropertyRepository {
             and_clauses.push({ "isDeleted": false });
 
             if (_.isObject(req.body.query) && _.has(req.body.query, 'generalSearch')) {
-                    and_clauses.push({
-                        $or: [
-                            { 'title': { $regex: req.body.query.generalSearch, $options: 'i' } },
-                            { 'landAgent.full_name': { $regex: req.body.query.generalSearch, $options: 'i' } },
-                            { 'propertyType.title':{ $regex: req.body.query.generalSearch, $options: 'i' } }
-                        ]
-                    });
+                and_clauses.push({
+                    $or: [
+                        { 'title': { $regex: req.body.query.generalSearch, $options: 'i' } },
+                        { 'landAgent.full_name': { $regex: req.body.query.generalSearch, $options: 'i' } },
+                        { 'propertyType.title': { $regex: req.body.query.generalSearch, $options: 'i' } }
+                    ]
+                });
             }
+
             if (_.isObject(req.body.query) && _.has(req.body.query, 'Status')) {
                 and_clauses.push({ "status": req.body.query.Status });
             }
+
+            if (_.isObject(req.body.query) && _.has(req.body.query, 'propertyType')) {
+                and_clauses.push({ "propertyType._id": mongoose.Types.ObjectId(req.body.query.propertyType) });
+            }
+
+            if (_.isObject(req.body.query) && _.has(req.body.query, 'landAgent')) {
+                and_clauses.push({ "landAgent._id": mongoose.Types.ObjectId(req.body.query.landAgent) });
+            }
+
+            if (_.isObject(req.body.query) && _.has(req.body.query, 'propertyFor')) {
+                and_clauses.push({ "propertyFor": req.body.query.propertyFor });
+            }
+
             conditions['$and'] = and_clauses;
 
             var sortOperator = { "$sort": {} };
