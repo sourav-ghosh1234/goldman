@@ -2,6 +2,7 @@ const serviceContentRepo = require('services_content/repositories/services_conte
 const propertiesPrivateRepo = require('services_content/repositories/properties_private.repository');
 const investmentRealtyRepo = require('services_content/repositories/investment_realty.repository');
 const lifeAnnuitiesRepo = require('services_content/repositories/life_annuities.repository');
+const renovationInteriorRepo = require('services_content/repositories/renovation_interior.repository');
 
 class serviceContentController {
   constructor() { }
@@ -85,6 +86,29 @@ class serviceContentController {
         return {
           status: 200,
           data: lifeAnnuities,
+          message: 'Text fetched successfully.'
+        }
+      } else {
+        return {
+          status: 201,
+          data: [],
+          message: 'There are no data at this moment.'
+        }
+      }
+    } catch (error) {
+      return res.status(500).send({
+        message: error.message
+      });
+    }
+  }
+
+  async getRenovationInterior(req, res) {
+    try {
+      let renovationInterior = await renovationInteriorRepo.getByField({});
+      if (renovationInterior) {
+        return {
+          status: 200,
+          data: renovationInterior,
           message: 'Text fetched successfully.'
         }
       } else {

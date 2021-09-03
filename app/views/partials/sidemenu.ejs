@@ -245,9 +245,9 @@
                      </div>
                 </li>
 
-                <li class="kt-menu__item kt-menu__item--submenu <%=(page_name == 'service-content-management' || page_name== 'Exclusive-properties-management' || page_name=='investment-realty-management' || page_name=='life-annuities-management') ? 'kt-menu__item--open' : ''%>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                <li class="kt-menu__item kt-menu__item--submenu <%=(page_name == 'service-content-management' || page_name== 'Exclusive-properties-management' || page_name=='investment-realty-management' || page_name=='life-annuities-management' || page_name=='renovation-interior-management') ? 'kt-menu__item--open' : ''%>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
                     <a href="javascript:;" class="kt-menu__link kt-menu__toggle
-                        <%=(page_name == 'service-content-management' || page_name== 'Exclusive-properties-management' || page_name=='investment-realty-management' || page_name=='life-annuities-management') ? 'active' : ''%>">
+                        <%=(page_name == 'service-content-management' || page_name== 'Exclusive-properties-management' || page_name=='investment-realty-management' || page_name=='life-annuities-management' || page_name=='renovation-interior-management') ? 'active' : ''%>">
                         <i class="kt-menu__link-icon fas fa-building"></i>
                         <span class="kt-menu__link-text">Service Content Management</span>
                         <i class="kt-menu__ver-arrow la la-angle-right"></i>
@@ -283,6 +283,14 @@
                                 <a href="<%= generateUrl('life.annuities.edit') %>" class="kt-menu__link <%=(page_name == 'life-annuities-management') ? 'active' : ''%>">
                                     <i class="kt-menu__link-icon fas fa-list"></i>
                                     <span class="kt-menu__link-text">Life Annuities</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="kt-menu__subnav">
+                            <li class="kt-menu__item " aria-haspopup="true">
+                                <a href="<%= generateUrl('renovation.interior.edit') %>" class="kt-menu__link <%=(page_name == 'renovation-interior-management') ? 'active' : ''%>">
+                                    <i class="kt-menu__link-icon fas fa-list"></i>
+                                    <span class="kt-menu__link-text">Renovation-Interior</span>
                                 </a>
                             </li>
                         </ul>
