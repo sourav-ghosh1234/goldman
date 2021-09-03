@@ -48,7 +48,7 @@ var KTDatatableCms = function () {
             {
                 field: 'landAgent',
                 title: 'Land Agent',
-                width: 120,
+                width: 100,
                 sortable: false,
                 template: function (row) {
                     if (row.landAgent != null && row.landAgent != '') {
@@ -92,35 +92,16 @@ var KTDatatableCms = function () {
             {
                 field: 'title',
                 title: 'Title',
-                width: 120,
+                width: 180,
                 template: function (row) {
-                    return row.title;
+                    return row.title+`<br>$${row.price.toFixed(2)}`+`<br>${row.totalArea} Sq. Ft.`;
                 },
             },
-            {
-                field: 'price',
-                title: 'Price',
-                width: 80,
-                template: function (row) {
-                    if (row.price != null && row.price != '') {
-                        return `$${row.price}`;
-                    } else {
-                        return '$0';
-                    }
-                },
-            },
-            {
-                field: 'totalArea',
-                title: 'Total Area',
-                width: 120,
-                template: function (row) {
-                    return `${row.totalArea} Sq. Ft.`;
-                },
-            },
+            
             {
                 field: 'status',
                 title: 'Status',
-                width: 130,
+                width: 70,
                 sortable: false,
                 // callback function support for column rendering
                 template: function (row) {
