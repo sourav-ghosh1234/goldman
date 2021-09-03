@@ -349,6 +349,59 @@
     "name": "GetNewsId"
   },
   {
+    "type": "post",
+    "url": "/property/list",
+    "title": "Property List",
+    "version": "1.0.0",
+    "group": "Property",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "number",
+            "optional": false,
+            "field": "page",
+            "description": "<p>Page</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "number",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>Limit</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "property_for",
+            "description": "<p>Property For</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "property_type",
+            "description": "<p>Property Type Id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n    \"status\": 200,\n    \"data\": [\n        {\n            \"_id\": \"6130f45b3aa7dd72e6fb7be8\",\n            \"landlord\": {\n                \"name\": \"Dev Test\",\n                \"email\": \"Dev Test\",\n                \"phone\": \"3242342134\"\n            },\n            \"propertyAddress\": {\n                \"country\": \"60b4f7a3026424da73e8aba4\",\n                \"city\": \"61238136c0b2e90c83939865\",\n                \"street_address_number\": \"12312\",\n                \"street_address\": \"Dev Test\",\n                \"unit\": \"24\",\n                \"suburb\": \"Dev Test\"\n            },\n            \"parking\": {\n                \"garage_spaces\": 234,\n                \"carport_spaces\": 44,\n                \"open_spaces\": 44\n            },\n            \"houseSize\": {\n                \"size\": 23,\n                \"sizeBy\": \"squares\"\n            },\n            \"landSize\": {\n                \"size\": 34,\n                \"sizeBy\": \"squares\"\n            },\n            \"title\": \"Dev Test\",\n            \"subTitle\": \"Dev Test\",\n            \"propertyType\": {\n                \"_id\": \"60be1fc0fde29e4322dafab2\",\n                \"isDeleted\": false,\n                \"status\": \"Active\",\n                \"title\": \"Townhouse and villa\",\n                \"language\": \"en\",\n                \"translate\": [\n                    {\n                        \"title\": \"Property FR\",\n                        \"description\": \"House FR\",\n                        \"language\": \"fr\",\n                        \"_id\": \"6123834cc0b2e90c8393986a\"\n                    },\n                    {\n                        \"title\": \"Property DE\",\n                        \"description\": \"House DE\",\n                        \"language\": \"de\",\n                        \"_id\": \"6123834cc0b2e90c8393986b\"\n                    }\n                ],\n                \"__v\": 0,\n                \"description\": \"Townhouse and villa\",\n                \"updatedAt\": \"2021-08-23T11:15:24.618Z\"\n            },\n            \"establishedNew\": \"established\",\n            \"landAgent\": {\n                \"_id\": \"6128f78c9336c987a798a5a4\",\n                \"first_name\": \"\",\n                \"last_name\": \"\",\n                \"full_name\": \"Agent Two\",\n                \"email\": \"agent2@mail.com\",\n                \"phone\": \"273839404\",\n                \"password\": \"\",\n                \"profile_image\": \"1630074764552_7682_1.png\",\n                \"user_name\": \"\",\n                \"address\": \"test address\",\n                \"social_id\": \"\",\n                \"register_type\": \"normal\",\n                \"deviceToken\": \"\",\n                \"deviceType\": \"\",\n                \"isDeleted\": false,\n                \"isActive\": true,\n                \"role\": \"6128ce4c1edb21accfdc29df\",\n                \"createdAt\": \"2021-08-27T14:32:44.654Z\",\n                \"updatedAt\": \"2021-08-27T14:32:44.654Z\"\n            },\n            \"dualAgent\": \"Dev Test\",\n            \"rentalPerWeek\": 45,\n            \"rentalPerMonth\": 45,\n            \"securityBond\": 3421,\n            \"priceDisplay\": \"price\",\n            \"price\": 2312,\n            \"priceText\": \"\",\n            \"availableDate\": \"20/02/2022\",\n            \"totalRooms\": 5,\n            \"noOfBedRooms\": 3,\n            \"noOfBathRooms\": 1,\n            \"noOfKitchens\": 1,\n            \"totalFloors\": 5,\n            \"floor\": \"23\",\n            \"totalArea\": \"44\",\n            \"characteristics\": [\n                \"612388bbc0b2e90c83939885\"\n            ],\n            \"amenities\": [\n                \"61238882c0b2e90c8393987f\"\n            ],\n            \"description\": \"Dev Test\",\n            \"image\": \"\",\n            \"imageGallery\": [\n                \"1630598235556_03_Marina.jpg\"\n            ],\n            \"yearBuilt\": 0,\n            \"WC\": 0,\n            \"DPE\": \"\",\n            \"GES\": \"\",\n            \"propertyFor\": \"sale\",\n            \"language\": \"en\",\n            \"status\": \"Active\",\n            \"isDeleted\": false,\n            \"translate\": [\n                {\n                    \"landlord\": {\n                        \"name\": \"Dev Test\",\n                        \"email\": \"\",\n                        \"phone\": \"\"\n                    },\n                    \"propertyAddress\": {\n                        \"unit\": \"2342\",\n                        \"street_address_number\": \"3424\",\n                        \"street_address\": \"Dev Test\",\n                        \"suburb\": \"Dev Test\",\n                        \"municipality\": \"\"\n                    },\n                    \"houseSize\": {\n                        \"size\": \"345345\",\n                        \"sizeBy\": \"squares\"\n                    },\n                    \"landSize\": {\n                        \"size\": \"345345\",\n                        \"sizeBy\": \"squares\"\n                    },\n                    \"title\": \"Dev Test\",\n                    \"subTitle\": \"Dev Test\",\n                    \"leadAgent\": \"\",\n                    \"dualAgent\": \"\",\n                    \"priceText\": \"Dev Test\",\n                    \"language\": \"fr\",\n                    \"totalArea\": \"45354\",\n                    \"description\": \"Dev Test\",\n                    \"_id\": \"6130f6b63aa7dd72e6fb7df0\"\n                }\n            ],\n            \"createdAt\": \"2021-09-02T15:57:15.665Z\",\n            \"__v\": 0\n        }\n    ],\n    \"pageCount\": 1,\n    \"totalCount\": 1,\n    \"message\": \"Property fetched successfully.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/api/property.routes.js",
+    "groupTitle": "Property",
+    "name": "PostPropertyList"
+  },
+  {
     "type": "get",
     "url": "/services-content/content",
     "title": "Service Content",
