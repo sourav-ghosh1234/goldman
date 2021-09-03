@@ -61,7 +61,7 @@ var KTDatatableCms = function () {
             {
                 field: 'propertyType',
                 title: 'Property',
-                width: 150,
+                width: 140,
                 sortable: false,
                 template: function (row) {
                     if (row.propertyType != null && row.propertyType != '') {
