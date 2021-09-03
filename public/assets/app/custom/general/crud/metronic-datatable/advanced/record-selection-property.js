@@ -61,7 +61,7 @@ var KTDatatableCms = function () {
             {
                 field: 'propertyType',
                 title: 'Property',
-                width: 120,
+                width: 150,
                 sortable: false,
                 template: function (row) {
                     if (row.propertyType != null && row.propertyType != '') {
@@ -94,15 +94,7 @@ var KTDatatableCms = function () {
                 title: 'Title',
                 width: 120,
                 template: function (row) {
-                    return row.title;
-                },
-            },
-            {
-                field: 'price',
-                title: 'Price',
-                width: 80,
-                template: function (row) {
-                    return `$${row.price}`;
+                    return row.title+'<br>'+`$${row.price.toFixed(2)}`;
                 },
             },
             {
