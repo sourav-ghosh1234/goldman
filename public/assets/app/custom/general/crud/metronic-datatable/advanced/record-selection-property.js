@@ -102,7 +102,11 @@ var KTDatatableCms = function () {
                 title: 'Price',
                 width: 80,
                 template: function (row) {
-                    return `$${row.price}`;
+                    if (row.price != null && row.price != '') {
+                        return `$${row.price}`;
+                    } else {
+                        return '$0';
+                    }
                 },
             },
             {

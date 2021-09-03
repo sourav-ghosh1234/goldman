@@ -50,10 +50,16 @@ namedRouter.post("contactinfo.getall", '/contactinfo/getall', async (req, res) =
 
 namedRouter.get("contactinfo.edit", "/contactinfo/edit/:id", contactinfoController.edit);
 
+
 /*
 // @Route: Update contactinfo Action
 */
 namedRouter.post("contactinfo.update", '/contactinfo/update', request_param.any(), contactinfoController.update);
+
+
+namedRouter.get("contactinfo.delete", '/contactinfo/delete/:id', contactinfoController.destroy);
+
+namedRouter.get("contactinfo.statusChange", '/contactinfo/status-change/:id', request_param.any(), contactinfoController.changeStatus);
 
 
 // Export the express.Router() instance
