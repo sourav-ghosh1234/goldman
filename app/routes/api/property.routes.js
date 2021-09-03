@@ -185,158 +185,285 @@ namedRouter.post("api.property.list", '/property/list', request_param.any(), asy
  * @apiVersion 1.0.0
  * @apiGroup Property
  * @apiSuccessExample {json} Success
- * {
+ *{
     "status": 200,
     "data": [
         {
-            "_id": "612e48ce9c9232380f5ef1ad",
+            "_id": "6130f45b3aa7dd72e6fb7be8",
             "landlord": {
-                "name": "gbjhbh",
-                "email": "test@yopmail.com",
-                "phone": "1234567890"
+                "name": "Dev Test",
+                "email": "Dev Test",
+                "phone": "3242342134"
             },
             "propertyAddress": {
-                "country": "60b4fd33b86e3eca18590369",
-                "city": "61169e68fda0501a65f1e5e6",
-                "street_address_number": "20",
-                "street_address": "jgvghjv",
-                "unit": "768",
-                "suburb": "kghbk"
+                "country": {
+                    "_id": "60b4f7a3026424da73e8aba4",
+                    "code": "+1",
+                    "country_name": "Japan",
+                    "status": "Active",
+                    "isDeleted": false,
+                    "createdAt": "2019-04-15T08:24:40.827Z",
+                    "updatedAt": "2020-10-22T06:14:39.804Z"
+                },
+                "city": {
+                    "_id": "61238136c0b2e90c83939865",
+                    "city": "Perth",
+                    "status": "Active",
+                    "isDeleted": false,
+                    "countryId": "60b4fd33b86e3eca18590369",
+                    "createdAt": "2021-08-23T11:06:30.176Z",
+                    "__v": 0
+                },
+                "street_address_number": "12312",
+                "street_address": "Dev Test",
+                "unit": "24",
+                "suburb": "Indore, Madhya Pradesh, India"
             },
             "parking": {
-                "garage_spaces": 45,
-                "carport_spaces": 65,
-                "open_spaces": 1234
+                "garage_spaces": 234,
+                "carport_spaces": 44,
+                "open_spaces": 44
             },
             "houseSize": {
-                "size": 1234,
+                "size": 23,
                 "sizeBy": "squares"
             },
             "landSize": {
-                "size": 1234,
+                "size": 34,
                 "sizeBy": "squares"
             },
-            "title": "Test Property",
-            "subTitle": "sdfsdf",
+            "title": "Dev Test",
+            "subTitle": "Dev Test",
             "propertyType": {
-                "_id": "60b50317d506b6d2142eabdf",
+                "_id": "60be1fc0fde29e4322dafab2",
                 "isDeleted": false,
                 "status": "Active",
-                "title": "Apartment and unit",
+                "title": "Townhouse and villa",
                 "language": "en",
                 "translate": [
                     {
-                        "title": "Apartment FR",
-                        "description": "Apartment FR",
+                        "title": "Property FR",
+                        "description": "House FR",
                         "language": "fr",
-                        "_id": "61238364c0b2e90c8393986c"
+                        "_id": "6123834cc0b2e90c8393986a"
                     },
                     {
-                        "title": "Apartment DE",
-                        "description": "Apartment DE",
+                        "title": "Property DE",
+                        "description": "House DE",
                         "language": "de",
-                        "_id": "61238364c0b2e90c8393986d"
+                        "_id": "6123834cc0b2e90c8393986b"
                     }
                 ],
                 "__v": 0,
-                "description": "Apartment and unit",
-                "updatedAt": "2021-08-23T11:15:48.659Z"
+                "description": "Townhouse and villa",
+                "updatedAt": "2021-08-23T11:15:24.618Z"
             },
             "establishedNew": "established",
             "landAgent": {
-                "_id": "6128dc1703e0436b87fc3b7d",
+                "_id": "6128f78c9336c987a798a5a4",
                 "first_name": "",
                 "last_name": "",
-                "full_name": "Agent One",
-                "email": "agent@mail.com",
-                "phone": "1234556678",
+                "full_name": "Agent Two",
+                "email": "agent2@mail.com",
+                "phone": "273839404",
                 "password": "",
-                "profile_image": "1630069488376_default-pattern.jpg",
+                "profile_image": "1630074764552_7682_1.png",
                 "user_name": "",
-                "address": "533 kings highway, Brooklyn New York 11223",
+                "address": "test address",
                 "social_id": "",
                 "register_type": "normal",
                 "deviceToken": "",
                 "deviceType": "",
-                "isVerified": false,
                 "isDeleted": false,
                 "isActive": true,
-                "isBlock": false,
                 "role": "6128ce4c1edb21accfdc29df",
-                "createdAt": "2021-08-27T12:35:35.938Z",
-                "updatedAt": "2021-08-27T13:05:12.531Z"
+                "createdAt": "2021-08-27T14:32:44.654Z",
+                "updatedAt": "2021-08-27T14:32:44.654Z"
             },
-            "dualAgent": "fgdf",
-            "rentalPerWeek": 45645,
-            "rentalPerMonth": 45645,
-            "securityBond": 12,
+            "dualAgent": "Dev Test",
+            "rentalPerWeek": 45,
+            "rentalPerMonth": 45,
+            "securityBond": 3421,
             "priceDisplay": "price",
-            "price": 452,
+            "price": 2312,
             "priceText": "",
             "availableDate": "20/02/2022",
             "totalRooms": 5,
-            "noOfBedRooms": 2,
-            "noOfBathRooms": 2,
+            "noOfBedRooms": 3,
+            "noOfBathRooms": 1,
             "noOfKitchens": 1,
-            "totalFloors": 56,
-            "floor": "456",
-            "totalArea": "1234",
+            "totalFloors": 5,
+            "floor": "23",
+            "totalArea": "44",
             "characteristics": [
-                "612388bbc0b2e90c83939885"
+                {
+                    "_id": "612388bbc0b2e90c83939885",
+                    "description": "City view",
+                    "language": "en",
+                    "isDeleted": false,
+                    "status": "Active",
+                    "title": "City view",
+                    "translate": [
+                        {
+                            "title": "",
+                            "description": "",
+                            "language": "fr",
+                            "_id": "612388bbc0b2e90c83939886"
+                        },
+                        {
+                            "title": "",
+                            "description": "",
+                            "language": "de",
+                            "_id": "612388bbc0b2e90c83939887"
+                        }
+                    ],
+                    "__v": 0
+                },
+                {
+                    "_id": "61152a410c85891243a58c21",
+                    "description": "Oceanview",
+                    "language": "en",
+                    "isDeleted": false,
+                    "status": "Active",
+                    "title": "Oceanview",
+                    "translate": [
+                        {
+                            "title": "Caretaker FR",
+                            "description": "",
+                            "language": "fr",
+                            "_id": "612388cec0b2e90c83939888"
+                        },
+                        {
+                            "title": "Caretaker DE",
+                            "description": "",
+                            "language": "de",
+                            "_id": "612388cec0b2e90c83939889"
+                        }
+                    ],
+                    "__v": 0
+                }
             ],
             "amenities": [
-                "61238852c0b2e90c83939879"
+                {
+                    "_id": "612388a3c0b2e90c83939882",
+                    "title": "Cafe and restaurant",
+                    "icon": "",
+                    "description": "Cafe and restaurant",
+                    "language": "en",
+                    "isDeleted": false,
+                    "status": "Active",
+                    "translate": [
+                        {
+                            "title": "",
+                            "description": "",
+                            "language": "fr",
+                            "_id": "612388a3c0b2e90c83939883"
+                        },
+                        {
+                            "title": "",
+                            "description": "",
+                            "language": "de",
+                            "_id": "612388a3c0b2e90c83939884"
+                        }
+                    ],
+                    "__v": 0
+                },
+                {
+                    "_id": "61238882c0b2e90c8393987f",
+                    "title": "public transport",
+                    "icon": "",
+                    "description": "public transport",
+                    "language": "en",
+                    "isDeleted": false,
+                    "status": "Active",
+                    "translate": [
+                        {
+                            "title": "",
+                            "description": "",
+                            "language": "fr",
+                            "_id": "61238882c0b2e90c83939880"
+                        },
+                        {
+                            "title": "",
+                            "description": "",
+                            "language": "de",
+                            "_id": "61238882c0b2e90c83939881"
+                        }
+                    ],
+                    "__v": 0
+                },
+                {
+                    "_id": "612383cfc0b2e90c83939872",
+                    "title": "Spa & Sauna",
+                    "icon": "",
+                    "description": "Spa & Sauna",
+                    "language": "en",
+                    "isDeleted": false,
+                    "status": "Active",
+                    "translate": [
+                        {
+                            "title": "",
+                            "description": "",
+                            "language": "fr",
+                            "_id": "612383cfc0b2e90c83939873"
+                        },
+                        {
+                            "title": "",
+                            "description": "",
+                            "language": "de",
+                            "_id": "612383cfc0b2e90c83939874"
+                        }
+                    ],
+                    "__v": 0
+                }
             ],
-            "description": "Test",
+            "description": "Dev Test",
             "image": "",
             "imageGallery": [
-                "1630593182798_london-town-garden.jpg",
-                "1630593182806_KLK-IMAGES-826x550-Hunting.jpg",
-                "1630593182807_Desktop-free-building-wallpaper.jpg",
-                "1630593182837_03_Marina.jpg"
+                "1630598235556_03_Marina.jpg"
             ],
             "yearBuilt": 0,
             "WC": 0,
             "DPE": "",
             "GES": "",
-            "propertyFor": "rent",
+            "propertyFor": "sale",
             "language": "en",
             "status": "Active",
             "isDeleted": false,
             "translate": [
                 {
                     "landlord": {
-                        "name": "Test",
+                        "name": "Dev Test",
                         "email": "",
                         "phone": ""
                     },
                     "propertyAddress": {
-                        "unit": "234",
-                        "street_address_number": "2332",
-                        "street_address": "lorem Test",
-                        "suburb": "Test",
+                        "unit": "2342",
+                        "street_address_number": "3424",
+                        "street_address": "Dev Test",
+                        "suburb": "Dev Test",
                         "municipality": ""
                     },
                     "houseSize": {
-                        "size": "21313",
-                        "sizeBy": ""
-                    },
-                    "landSize": {
-                        "size": "123123",
+                        "size": "345345",
                         "sizeBy": "squares"
                     },
-                    "title": "Test",
-                    "subTitle": "sub Test qq",
+                    "landSize": {
+                        "size": "345345",
+                        "sizeBy": "squares"
+                    },
+                    "title": "Dev Test",
+                    "subTitle": "Dev Test",
                     "leadAgent": "",
                     "dualAgent": "",
-                    "priceText": "Test Text",
+                    "priceText": "Dev Test",
                     "language": "fr",
-                    "totalArea": "45896",
-                    "description": "Test Desc..",
-                    "_id": "6131ceb27853887489f852b5"
+                    "totalArea": "45354",
+                    "description": "Dev Test",
+                    "_id": "613203b76973ab5e178dfd98"
                 }
             ],
-            "createdAt": "2021-08-31T15:20:46.200Z",
+            "createdAt": "2021-09-02T15:57:15.665Z",
             "__v": 0
         }
     ],

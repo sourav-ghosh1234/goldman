@@ -247,37 +247,23 @@ class PropertyRepository {
         try {
             var conditions = {};
             var and_clauses = [];
-            
+
             and_clauses.push({ "isDeleted": false, status: 'Active' });
 
             and_clauses.push(req);
 
             conditions['$and'] = and_clauses;
 
-            var aggregate = await Property.aggregate([
-                {
-                    $lookup: {
-                        from: "users",
-                        localField: "landAgent",
-                        foreignField: "_id",
-                        as: "landAgent",
-                    },
-                },
-                { $unwind: { path: "$landAgent", preserveNullAndEmptyArrays: true } },
-                {
-                    $lookup: {
-                        from: "propertytypes",
-                        localField: "propertyType",
-                        foreignField: "_id",
-                        as: "propertyType",
-                    },
-                },
-                { $unwind: { path: "$propertyType", preserveNullAndEmptyArrays: true } },
-                { $match: conditions },
-            ]);
-
-            return aggregate;
-
+            let PropertyDetails = await Property.find(conditions)
+                .populate("landAgent")
+                .populate("propertyType")
+                .populate("propertyAddress.country")
+                .populate("propertyAddress.city")
+                .populate("characteristics")
+                .populate("amenities")
+                .lean()
+                .exec();
+            return PropertyDetails;
         } catch (error) {
             return error;
         }
