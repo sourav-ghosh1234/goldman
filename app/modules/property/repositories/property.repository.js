@@ -2,7 +2,7 @@ const Property = require('property/models/property.model');
 const perPage = config.PAGINATION_PERPAGE;
 
 class PropertyRepository {
-    constructor() {}
+    constructor() { }
 
     async getAll(req) {
         try {
@@ -11,7 +11,13 @@ class PropertyRepository {
             and_clauses.push({ "isDeleted": false });
 
             if (_.isObject(req.body.query) && _.has(req.body.query, 'generalSearch')) {
-                and_clauses.push({ 'title': { $regex: req.body.query.generalSearch, $options: 'i' } });
+                    and_clauses.push({
+                        $or: [
+                            { 'title': { $regex: req.body.query.generalSearch, $options: 'i' } },
+                            { 'landAgent.full_name': { $regex: req.body.query.generalSearch, $options: 'i' } },
+                            { 'propertyType.title':{ $regex: req.body.query.generalSearch, $options: 'i' } }
+                        ]
+                    });
             }
             if (_.isObject(req.body.query) && _.has(req.body.query, 'Status')) {
                 and_clauses.push({ "status": req.body.query.Status });
@@ -32,6 +38,24 @@ class PropertyRepository {
             }
 
             var aggregate = Property.aggregate([
+                {
+                    $lookup: {
+                        from: "users",
+                        localField: "landAgent",
+                        foreignField: "_id",
+                        as: "landAgent",
+                    },
+                },
+                { $unwind: { path: "$landAgent", preserveNullAndEmptyArrays: true } },
+                {
+                    $lookup: {
+                        from: "propertytypes",
+                        localField: "propertyType",
+                        foreignField: "_id",
+                        as: "propertyType",
+                    },
+                },
+                { $unwind: { path: "$propertyType", preserveNullAndEmptyArrays: true } },
                 { $match: conditions },
                 sortOperator
             ]);
@@ -48,7 +72,8 @@ class PropertyRepository {
 
     async getAllArt(params) {
         try {
-            const _params = {...params,
+            const _params = {
+                ...params,
                 "isDeleted": false,
             };
             return await Property.find(_params).lean().exec();
@@ -67,7 +92,8 @@ class PropertyRepository {
 
     async getByField(params) {
         try {
-            const _params = {...params,
+            const _params = {
+                ...params,
                 "isDeleted": false,
             };
             return await Property.findOne(_params).lean().exec();
@@ -78,7 +104,8 @@ class PropertyRepository {
 
     async getAllByField(params) {
         try {
-            const _params = {...params,
+            const _params = {
+                ...params,
                 "isDeleted": false,
             };
             return await Property.find(_params).lean().exec();
@@ -90,9 +117,9 @@ class PropertyRepository {
     async updateById(data, id) {
         try {
             return await Property.findByIdAndUpdate(id, data, {
-                    new: true,
-                    upsert: true
-                })
+                new: true,
+                upsert: true
+            })
                 .lean().exec();
         } catch (error) {
             return error;
@@ -118,7 +145,8 @@ class PropertyRepository {
 
     async getActiveArt(params) {
         try {
-            const _params = {...params,
+            const _params = {
+                ...params,
                 "isDeleted": false,
             };
             return await Property.find(_params).sort({ "title": 1 }).lean().exec();
