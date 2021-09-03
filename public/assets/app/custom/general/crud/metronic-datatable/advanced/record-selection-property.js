@@ -40,6 +40,8 @@ var KTDatatableCms = function () {
                 template: function (row) {
                     if (row.imageGallery != null && row.imageGallery.length > 0) {
                         return `<img src="/uploads/property/${row.imageGallery[0]}" alt="" height="80" width="80">`
+                    } else {
+                        return `<img src="/uploads/noImage.png" alt="" height="80" width="80">`
                     }
                 },
             },
@@ -51,7 +53,7 @@ var KTDatatableCms = function () {
                 template: function (row) {
                     if (row.landAgent != null && row.landAgent != '') {
                         return row.landAgent.full_name;
-                    }else{
+                    } else {
                         return 'NA'
                     }
                 },
@@ -64,7 +66,25 @@ var KTDatatableCms = function () {
                 template: function (row) {
                     if (row.propertyType != null && row.propertyType != '') {
                         return row.propertyType.title;
-                    }else{
+                    } else {
+                        return 'NA'
+                    }
+                },
+            },
+            {
+                field: 'propertyFor',
+                title: 'Type',
+                width: 80,
+                sortable: true,
+                template: function (row) {
+                    if (row.propertyFor != null && row.propertyFor != '') {
+                        if (row.propertyFor == 'sale') {
+                            return 'Sale';
+                        }
+                        if (row.propertyFor == 'rent') {
+                            return 'Rent';
+                        }
+                    } else {
                         return 'NA'
                     }
                 },
@@ -82,7 +102,7 @@ var KTDatatableCms = function () {
                 title: 'Price',
                 width: 80,
                 template: function (row) {
-                    return `$ ${row.price}`;
+                    return `$${row.price}`;
                 },
             },
             {
@@ -144,11 +164,26 @@ var KTDatatableCms = function () {
             datatable.search($(this).val(), 'Status');
         });
 
+
+        $('#kt_form_agent').on('change', function () {
+            datatable.search($(this).val(), 'landAgent');
+        });
+
+
+        $('#kt_form_property').on('change', function () {
+            datatable.search($(this).val(), 'propertyType');
+        });
+
+
+        $('#kt_form_propertyFor').on('change', function () {
+            datatable.search($(this).val(), 'propertyFor');
+        });
+
         $('#kt_form_type').on('change', function () {
             datatable.search($(this).val().toLowerCase(), 'Type');
         });
 
-        $('#kt_form_status,#kt_form_type').selectpicker();
+        $('#kt_form_status,#kt_form_type,#kt_form_agent,#kt_form_property,#kt_form_propertyFor').selectpicker();
 
         datatable.on(
             'kt-datatable--on-check kt-datatable--on-uncheck kt-datatable--on-layout-updated',

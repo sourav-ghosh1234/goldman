@@ -159,10 +159,10 @@ class PropertyController {
                     req.body.imageGallery = imageArray;
 
                     for (let i in delimageList) {
-                        if(fs.existsSync(`./public/uploads/property/${delimageList[i]}`)){
+                        if (fs.existsSync(`./public/uploads/property/${delimageList[i]}`)) {
                             fs.unlinkSync('./public/uploads/property/' + delimageList[i]);
                         }
-                        if(fs.existsSync(`./public/uploads/property/thumb/${delimageList[i]}`)){
+                        if (fs.existsSync(`./public/uploads/property/thumb/${delimageList[i]}`)) {
                             fs.unlinkSync('./public/uploads/property/thumb/' + delimageList[i]);
                         }
                     }
@@ -231,11 +231,21 @@ class PropertyController {
     */
     async list(req, res) {
         try {
+
+            let response = {};
+
+            let landAgent = await userRepo.getAllWithoutPaginate({ 'roleDetails.role': 'agent', isDeleted: false, isActive: true });
+
+            let propertyType = await propertytypeRepo.getAllByField({ isDeleted: false, status: 'Active' });
+
+            response.landAgent = landAgent;
+            response.propertyType = propertyType;
+
             res.render('property/views/list.ejs', {
                 page_name: 'property-management',
                 page_title: 'Property List',
                 user: req.user,
-
+                response: response
             });
         } catch (e) {
             return res.status(500).send({ message: e.message });
