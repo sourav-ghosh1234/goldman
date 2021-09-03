@@ -120,7 +120,48 @@ class ContactinfoController {
         } catch (e) {
             throw e;
         }
+    };
+
+
+    /*
+ // @Method: status_change
+ // @Description: contactus status change action
+ */
+    async changeStatus(req, res) {
+        try {
+            let contactus = await contactinfoRepo.getById(req.params.id);
+            if (!_.isEmpty(contactus)) {
+                let contactusStatus = (contactus.status == "Active") ? "Inactive" : "Active";
+                let contactusUpdate = await contactinfoRepo.updateById({ "status": contactusStatus }, req.params.id);
+                req.flash('success', "Contact status has changed successfully");
+                res.redirect(namedRouter.urlFor('contactinfo.listing'));
+            } else {
+                req.flash('error', "Sorry Contact not found");
+                res.redirect(namedRouter.urlFor('contactinfo.listing'));
+            }
+        } catch (e) {
+            return res.status(500).send({ message: e.message });
+        }
+    };
+
+
+    /* @Method: delete
+// @Description: contactus delete
+*/
+    async destroy(req, res) {
+        try {
+            //let contactusDelete = await contactusRepo.delete(req.params.id)
+            let contactusDelete = await contactinfoRepo.updateById({ "isDeleted": true }, req.params.id);
+            if (!_.isEmpty(contactusDelete)) {
+                req.flash('success', 'Contact removed successfully');
+                res.redirect(namedRouter.urlFor('contactinfo.listing'));
+            }
+        } catch (e) {
+            return res.status(500).send({ message: e.message });
+        }
     }
+
+
 
 }
 

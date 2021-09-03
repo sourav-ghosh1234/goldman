@@ -860,8 +860,6 @@
         function changeDisplayPrice(event) {
             let priceVal = document.getElementById('priceDisplay').value;
             if (priceVal == 'price') {
-                document.getElementById('priceVal').setAttribute('required', true);
-                document.getElementById('priceTextVal').removeAttribute('required');
 
                 document.getElementById('priceVal').style = 'display : block';
                 document.getElementById('priceTextVal').style = 'display : none';
@@ -870,8 +868,6 @@
             }
 
             if (priceVal == 'text') {
-                document.getElementById('priceTextVal').setAttribute('required', true);
-                document.getElementById('priceVal').removeAttribute('required');
 
                 document.getElementById('priceTextVal').style = 'display : block';
                 document.getElementById('priceVal').style = 'display : none';
@@ -885,8 +881,6 @@
         let priceVal = document.getElementById('priceDisplay').value;
 
         if (priceVal == 'price') {
-            document.getElementById('priceVal').setAttribute('required', true);
-            document.getElementById('priceTextVal').removeAttribute('required');
 
             document.getElementById('priceVal').style = 'display : block';
             document.getElementById('priceTextVal').style = 'display : none';
@@ -894,8 +888,6 @@
         }
 
         if (priceVal == 'text') {
-            document.getElementById('priceTextVal').setAttribute('required', true);
-            document.getElementById('priceVal').removeAttribute('required');
 
             document.getElementById('priceTextVal').style = 'display : block';
             document.getElementById('priceVal').style = 'display : none';

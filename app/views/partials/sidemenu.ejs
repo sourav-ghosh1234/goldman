@@ -193,6 +193,14 @@
                         <span class="kt-menu__link-text">Contact Us Management</span>
                     </a>
                 </li>
+
+                  <li class="kt-menu__item " aria-haspopup="true">
+                    <a href="<%= generateUrl('contactinfo.listing') %>" class="kt-menu__link <%=(page_name == 'contactinfo-management') ? 'active' : ''%>">
+                        <i class="fas fa-envelope"></i>
+                        <span class="kt-menu__link-text">Contact Information</span>
+                    </a>
+                </li>
+
                <li class="kt-menu__item kt-menu__item--submenu <%=(page_name == 'artofliving-management' || page_name== 'countryestate-management' || page_name== 'vineyard-investment-management' || page_name== 'yachting-world' || page_name=='boat-charter-service-management') ? 'kt-menu__item--open' : ''%>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
                     <a href="javascript:;" class="kt-menu__link kt-menu__toggle
                         <%=(page_name == 'artofliving-management' || page_name== 'countryestate-management' || page_name== 'vineyard-investment-management' || page_name== 'yachting-world' || page_name=='boat-charter-service-management') ? 'active' : ''%>">

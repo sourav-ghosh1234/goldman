@@ -428,9 +428,6 @@ var KTFormControls = function() {
                 title: {
                     required: true
                 },
-                price: {
-                    required: true
-                },
                 image: {
                     required: true
                 },
@@ -465,9 +462,6 @@ var KTFormControls = function() {
             messages: {
                 title: {
                     required: 'Title is Required',
-                },
-                price: {
-                    required: 'Price is Required',
                 },
                 image: {
                     required: 'Image is Required',
@@ -513,9 +507,6 @@ var KTFormControls = function() {
                 title: {
                     required: true
                 },
-                price: {
-                    required: true
-                },
                 description: {
                     required: true
                 },
@@ -547,9 +538,6 @@ var KTFormControls = function() {
             messages: {
                 title: {
                     required: 'Title is Required',
-                },
-                price: {
-                    required: 'Price is Required',
                 },
                 description: {
                     required: 'Description is Required',

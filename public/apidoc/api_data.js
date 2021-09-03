@@ -170,6 +170,101 @@ define({ "api": [
   },
   {
     "type": "post",
+    "url": "/contact-info/save",
+    "title": "Store",
+    "version": "1.0.0",
+    "group": "Contact_Info",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "isFirstVisit",
+            "description": "<p>First Visit [&quot;Yes&quot;,&quot;No&quot;]</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "isAlreadyClient",
+            "description": "<p>Already Client [&quot;Yes&quot;,&quot;No&quot;]</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "prefix",
+            "description": "<p>Prefix [&quot;Mr&quot;,&quot;Mrs&quot;]</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "first_name",
+            "description": "<p>User First Name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "last_name",
+            "description": "<p>User Last Name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "email",
+            "description": "<p>User Email</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "phone_number",
+            "description": "<p>User Phone</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "phone_code",
+            "description": "<p>Phone Code</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "want_to_do",
+            "description": "<p>want To Do</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "message",
+            "description": "<p>User Message</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n    \"status\": 200,\n    \"data\": {\n        \"isFirstVisit\": \"Yes\",\n        \"isAlreadyClient\": \"No\",\n        \"prefix\": \"Mr\",\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\",\n        \"email\": \"john@yopmail.com\",\n        \"code\": \"+91\",\n        \"phone\": \"2185784124\",\n        \"want_to_do\": \"Test\",\n        \"message\": \"Test\",\n        \"status\": \"Active\",\n        \"isDeleted\": false,\n        \"_id\": \"6132229fa90257e8824f2529\",\n        \"__v\": 0\n    },\n    \"message\": \"Thank you for contacting us.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/api/contactInfo.routes.js",
+    "groupTitle": "Contact_Info",
+    "name": "PostContactInfoSave"
+  },
+  {
+    "type": "post",
     "url": "/contact-us/save",
     "title": "Store",
     "version": "1.0.0",

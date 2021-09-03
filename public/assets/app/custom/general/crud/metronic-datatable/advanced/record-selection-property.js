@@ -94,7 +94,19 @@ var KTDatatableCms = function () {
                 title: 'Title',
                 width: 120,
                 template: function (row) {
-                    return row.title+'<br>'+`$${row.price.toFixed(2)}`;
+                    return row.title;
+                },
+            },
+            {
+                field: 'price',
+                title: 'Price',
+                width: 80,
+                template: function (row) {
+                    if (row.price != null && row.price != '') {
+                        return `$${row.price}`;
+                    } else {
+                        return '$0';
+                    }
                 },
             },
             {

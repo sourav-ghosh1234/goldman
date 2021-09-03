@@ -6,11 +6,18 @@ const mongooseAggregatePaginate = require('mongoose-aggregate-paginate');
 const status = ["Active", "Inactive"];
 
 const ContactinfoSchema = new Schema({
-  contactinfo_name: {type: String,default: ''},
-  contactinfo_slug: {type: String,default: ''},
-  contactinfo_value: {type: String,default: ''},
-  status: {type: String,default: 'Active',enum: status},
-  isDeleted: {type: Boolean,default: false,enum: [true, false]},
+  isFirstVisit: { type: String, default: 'No', enum: ['Yes', 'No'] },
+  isAlreadyClient: { type: String, default: 'No', enum: ['Yes', 'No'] },
+  prefix: { type: String, default: 'Mr', enum: ['Mr', 'Mrs'] },
+  first_name: { type: String, default: '' },
+  last_name: { type: String, default: '' },
+  email: { type: String, default: '' },
+  phone_code: { type: String, default: '' },
+  phone_number: { type: String, default: '' },
+  want_to_do: { type: String, default: '' },
+  message: { type: String, default: '' },
+  status: { type: String, default: 'Active', enum: status },
+  isDeleted: { type: Boolean, default: false, enum: [true, false] },
 });
 
 // For pagination

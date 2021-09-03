@@ -206,13 +206,13 @@
                                                                 <div class="col-lg-6" id="priceVal">
                                                                     <label>Price</label>
                                                                     <input type="number" name="price" id="price"
-                                                                        class="form-control required" required
+                                                                        class="form-control" 
                                                                         placeholder="Enter price">
                                                                 </div>
                                                                 <div class="col-lg-6" id="priceTextVal">
                                                                     <label>Price Text</label>
                                                                     <input type="text" name="priceText" id="priceText"
-                                                                        class="form-control required" required
+                                                                        class="form-control"
                                                                         placeholder="Enter price text">
                                                                 </div>
                                                             </div>
@@ -710,8 +710,6 @@
         function changeDisplayPrice(event) {
             let priceVal = document.getElementById('priceDisplay').value;
             if (priceVal == 'price') {
-                document.getElementById('priceVal').setAttribute('required', true);
-                document.getElementById('priceTextVal').removeAttribute('required');
 
                 document.getElementById('priceVal').style = 'display : block';
                 document.getElementById('priceTextVal').style = 'display : none';
@@ -720,8 +718,6 @@
             }
 
             if (priceVal == 'text') {
-                document.getElementById('priceTextVal').setAttribute('required', true);
-                document.getElementById('priceVal').removeAttribute('required');
 
                 document.getElementById('priceTextVal').style = 'display : block';
                 document.getElementById('priceVal').style = 'display : none';
