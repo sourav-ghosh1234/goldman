@@ -243,6 +243,46 @@ class PropertyRepository {
         }
     }
 
+    async getPropertyDetails(req) {
+        try {
+            var conditions = {};
+            var and_clauses = [];
+            
+            and_clauses.push({ "isDeleted": false, status: 'Active' });
+
+            and_clauses.push(req);
+
+            conditions['$and'] = and_clauses;
+
+            var aggregate = await Property.aggregate([
+                {
+                    $lookup: {
+                        from: "users",
+                        localField: "landAgent",
+                        foreignField: "_id",
+                        as: "landAgent",
+                    },
+                },
+                { $unwind: { path: "$landAgent", preserveNullAndEmptyArrays: true } },
+                {
+                    $lookup: {
+                        from: "propertytypes",
+                        localField: "propertyType",
+                        foreignField: "_id",
+                        as: "propertyType",
+                    },
+                },
+                { $unwind: { path: "$propertyType", preserveNullAndEmptyArrays: true } },
+                { $match: conditions },
+            ]);
+
+            return aggregate;
+
+        } catch (error) {
+            return error;
+        }
+    }
+
 }
 
 module.exports = new PropertyRepository();

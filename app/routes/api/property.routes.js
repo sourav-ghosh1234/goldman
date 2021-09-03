@@ -179,5 +179,179 @@ namedRouter.post("api.property.list", '/property/list', request_param.any(), asy
     }
 });
 
+
+/**
+ * @api {get} /property/details/:id Property Details By id
+ * @apiVersion 1.0.0
+ * @apiGroup Property
+ * @apiParam {string} _id Property Id
+ * @apiSuccessExample {json} Success
+ * {
+    "status": 200,
+    "data": [
+        {
+            "_id": "612e48ce9c9232380f5ef1ad",
+            "landlord": {
+                "name": "gbjhbh",
+                "email": "test@yopmail.com",
+                "phone": "1234567890"
+            },
+            "propertyAddress": {
+                "country": "60b4fd33b86e3eca18590369",
+                "city": "61169e68fda0501a65f1e5e6",
+                "street_address_number": "20",
+                "street_address": "jgvghjv",
+                "unit": "768",
+                "suburb": "kghbk"
+            },
+            "parking": {
+                "garage_spaces": 45,
+                "carport_spaces": 65,
+                "open_spaces": 1234
+            },
+            "houseSize": {
+                "size": 1234,
+                "sizeBy": "squares"
+            },
+            "landSize": {
+                "size": 1234,
+                "sizeBy": "squares"
+            },
+            "title": "Test Property",
+            "subTitle": "sdfsdf",
+            "propertyType": {
+                "_id": "60b50317d506b6d2142eabdf",
+                "isDeleted": false,
+                "status": "Active",
+                "title": "Apartment and unit",
+                "language": "en",
+                "translate": [
+                    {
+                        "title": "Apartment FR",
+                        "description": "Apartment FR",
+                        "language": "fr",
+                        "_id": "61238364c0b2e90c8393986c"
+                    },
+                    {
+                        "title": "Apartment DE",
+                        "description": "Apartment DE",
+                        "language": "de",
+                        "_id": "61238364c0b2e90c8393986d"
+                    }
+                ],
+                "__v": 0,
+                "description": "Apartment and unit",
+                "updatedAt": "2021-08-23T11:15:48.659Z"
+            },
+            "establishedNew": "established",
+            "landAgent": {
+                "_id": "6128dc1703e0436b87fc3b7d",
+                "first_name": "",
+                "last_name": "",
+                "full_name": "Agent One",
+                "email": "agent@mail.com",
+                "phone": "1234556678",
+                "password": "",
+                "profile_image": "1630069488376_default-pattern.jpg",
+                "user_name": "",
+                "address": "533 kings highway, Brooklyn New York 11223",
+                "social_id": "",
+                "register_type": "normal",
+                "deviceToken": "",
+                "deviceType": "",
+                "isVerified": false,
+                "isDeleted": false,
+                "isActive": true,
+                "isBlock": false,
+                "role": "6128ce4c1edb21accfdc29df",
+                "createdAt": "2021-08-27T12:35:35.938Z",
+                "updatedAt": "2021-08-27T13:05:12.531Z"
+            },
+            "dualAgent": "fgdf",
+            "rentalPerWeek": 45645,
+            "rentalPerMonth": 45645,
+            "securityBond": 12,
+            "priceDisplay": "price",
+            "price": 452,
+            "priceText": "",
+            "availableDate": "20/02/2022",
+            "totalRooms": 5,
+            "noOfBedRooms": 2,
+            "noOfBathRooms": 2,
+            "noOfKitchens": 1,
+            "totalFloors": 56,
+            "floor": "456",
+            "totalArea": "1234",
+            "characteristics": [
+                "612388bbc0b2e90c83939885"
+            ],
+            "amenities": [
+                "61238852c0b2e90c83939879"
+            ],
+            "description": "Test",
+            "image": "",
+            "imageGallery": [
+                "1630593182798_london-town-garden.jpg",
+                "1630593182806_KLK-IMAGES-826x550-Hunting.jpg",
+                "1630593182807_Desktop-free-building-wallpaper.jpg",
+                "1630593182837_03_Marina.jpg"
+            ],
+            "yearBuilt": 0,
+            "WC": 0,
+            "DPE": "",
+            "GES": "",
+            "propertyFor": "rent",
+            "language": "en",
+            "status": "Active",
+            "isDeleted": false,
+            "translate": [
+                {
+                    "landlord": {
+                        "name": "Test",
+                        "email": "",
+                        "phone": ""
+                    },
+                    "propertyAddress": {
+                        "unit": "234",
+                        "street_address_number": "2332",
+                        "street_address": "lorem Test",
+                        "suburb": "Test",
+                        "municipality": ""
+                    },
+                    "houseSize": {
+                        "size": "21313",
+                        "sizeBy": ""
+                    },
+                    "landSize": {
+                        "size": "123123",
+                        "sizeBy": "squares"
+                    },
+                    "title": "Test",
+                    "subTitle": "sub Test qq",
+                    "leadAgent": "",
+                    "dualAgent": "",
+                    "priceText": "Test Text",
+                    "language": "fr",
+                    "totalArea": "45896",
+                    "description": "Test Desc..",
+                    "_id": "6131ceb27853887489f852b5"
+                }
+            ],
+            "createdAt": "2021-08-31T15:20:46.200Z",
+            "__v": 0
+        }
+    ],
+    "message": "Property details fetched successfully."
+}
+ **/
+namedRouter.get("api.property.details", '/property/details/:id', request_param.any(), async (req, res) => {
+    try {
+        const success = await propertyController.propertyDetails(req, res);
+        res.status(success.status).send(success);
+    } catch (error) {
+        res.status(error.status).send(error.message);
+    }
+});
+
 // Export the express.Router() instance
 module.exports = router;
