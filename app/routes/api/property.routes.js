@@ -12,7 +12,7 @@ const request_param = multer();
  * @apiGroup Property
  * @apiParam {number} page Page
  * @apiParam {number} limit Limit
- * @apiParam {string} property_for Property For
+ * @apiParam {string} property_for Property For ["sale", "rent"] 
  * @apiParam {string} property_type Property Type Id
  * @apiSuccessExample {json} Success
  * {

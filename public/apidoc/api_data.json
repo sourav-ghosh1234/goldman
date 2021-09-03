@@ -376,7 +376,7 @@
             "type": "string",
             "optional": false,
             "field": "property_for",
-            "description": "<p>Property For</p>"
+            "description": "<p>Property For [&quot;sale&quot;, &quot;rent&quot;]</p>"
           },
           {
             "group": "Parameter",
