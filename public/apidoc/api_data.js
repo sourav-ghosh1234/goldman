@@ -354,19 +354,6 @@ define({ "api": [
     "title": "Property Details By id",
     "version": "1.0.0",
     "group": "Property",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "_id",
-            "description": "<p>Property Id</p>"
-          }
-        ]
-      }
-    },
     "success": {
       "examples": [
         {

@@ -184,7 +184,6 @@ namedRouter.post("api.property.list", '/property/list', request_param.any(), asy
  * @api {get} /property/details/:id Property Details By id
  * @apiVersion 1.0.0
  * @apiGroup Property
- * @apiParam {string} _id Property Id
  * @apiSuccessExample {json} Success
  * {
     "status": 200,
