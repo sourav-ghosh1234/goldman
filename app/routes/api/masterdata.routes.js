@@ -123,5 +123,96 @@ namedRouter.get("api.property-type.list", '/property-type/list', async (req, res
     }
 });
 
+
+/**
+ * @api {get} /characteristic/list Characteristic List
+ * @apiVersion 1.0.0
+ * @apiGroup Master
+ * @apiSuccessExample {json} Success
+ * {
+    "status": 200,
+    "data": [
+        {
+            "description": "Parkview",
+            "language": "en",
+            "isDeleted": false,
+            "status": "Active",
+            "_id": "612388e0c0b2e90c8393988a",
+            "title": "Parkview",
+            "translate": [
+                {
+                    "title": "",
+                    "description": "",
+                    "language": "fr",
+                    "_id": "612388e0c0b2e90c8393988b"
+                },
+                {
+                    "title": "",
+                    "description": "",
+                    "language": "de",
+                    "_id": "612388e0c0b2e90c8393988c"
+                }
+            ],
+            "__v": 0
+        }
+    ],
+    "message": "Characteristics fetched successfully."
+}
+*/
+namedRouter.get("api.characteristic.list", '/characteristic/list', async (req, res) => {
+    try {
+        const success = await masterController.characteristicData(req, res);
+        res.status(success.status).send(success);
+    } catch (error) {
+        res.status(error.status).send(error);
+    }
+});
+
+
+/**
+ * @api {get} /amenitie/list Amenitie List
+ * @apiVersion 1.0.0
+ * @apiGroup Master
+ * @apiSuccessExample {json} Success
+ * {
+    "status": 200,
+    "data": [
+        {
+            "title": "Cafe and restaurant",
+            "icon": "",
+            "description": "Cafe and restaurant",
+            "language": "en",
+            "isDeleted": false,
+            "status": "Active",
+            "_id": "612388a3c0b2e90c83939882",
+            "translate": [
+                {
+                    "title": "",
+                    "description": "",
+                    "language": "fr",
+                    "_id": "612388a3c0b2e90c83939883"
+                },
+                {
+                    "title": "",
+                    "description": "",
+                    "language": "de",
+                    "_id": "612388a3c0b2e90c83939884"
+                }
+            ],
+            "__v": 0
+        }
+    ],
+    "message": "Amenities fetched successfully."
+}
+*/
+namedRouter.get("api.amenitie.list", '/amenitie/list', async (req, res) => {
+    try {
+        const success = await masterController.amenitieData(req, res);
+        res.status(success.status).send(success);
+    } catch (error) {
+        res.status(error.status).send(error);
+    }
+});
+
 // Export the express.Router() instance
 module.exports = router;
