@@ -598,6 +598,34 @@
             "group": "Parameter",
             "type": "string",
             "optional": false,
+            "field": "country",
+            "description": "<p>Country Id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "number",
+            "optional": false,
+            "field": "price",
+            "description": "<p>Price</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "number",
+            "optional": false,
+            "field": "bed_room",
+            "description": "<p>Bed Rooms</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "number",
+            "optional": false,
+            "field": "total_area",
+            "description": "<p>Total Area</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
             "field": "search_text",
             "description": "<p>Search Text [title, subtitle, suburb etc.]</p>"
           }

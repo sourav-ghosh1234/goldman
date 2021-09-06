@@ -48,7 +48,7 @@ const PropertySchema = new Schema({
         carport_spaces: { type: Number, default: 0 },
         open_spaces: { type: Number, default: 0 },
     },
-    totalArea: { type: String, default: '' },
+    totalArea: { type: Number, default: 0 },
     houseSize: {
         size: { type: Number, default: 0 },
         sizeBy: { type: String, default: '' },

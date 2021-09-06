@@ -14,6 +14,10 @@ const request_param = multer();
  * @apiParam {number} limit Limit
  * @apiParam {string} property_for Property For ["sale", "rent"] 
  * @apiParam {string} property_type Property Type Id
+ * @apiParam {string} country Country Id
+ * @apiParam {number} price Price
+ * @apiParam {number} bed_room Bed Rooms
+ * @apiParam {number} total_area Total Area
  * @apiParam {string} search_text Search Text [title, subtitle, suburb etc.]
  * @apiSuccessExample {json} Success
  * {
