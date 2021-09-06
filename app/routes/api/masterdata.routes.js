@@ -47,7 +47,7 @@ namedRouter.get("api.city.list", '/city/list', async (req, res) => {
 
 
 /**
- * @api {get} /country/list country List
+ * @api {get} /country/list Country List
  * @apiVersion 1.0.0
  * @apiGroup Master
  * @apiSuccessExample {json} Success
