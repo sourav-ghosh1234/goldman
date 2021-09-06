@@ -272,16 +272,114 @@ class PropertyRepository {
 
             conditions['$and'] = and_clauses;
 
-            let PropertyDetails = await Property.find(conditions)
-                .populate("landAgent")
-                .populate("propertyType")
-                .populate("propertyAddress.country")
-                .populate("propertyAddress.city")
-                .populate("characteristics")
-                .populate("amenities")
-                .lean()
-                .exec();
-            return PropertyDetails;
+            let aggregate = await Property.aggregate([
+                { $match:  conditions},
+                {
+                    $lookup:{
+                        'from':'users',
+                        'localField':'landAgent',
+                        'foreignField':'_id',
+                        'as':'landAgentDetails'
+                    }
+                },
+                { $unwind: { path: '$landAgentDetails' } },
+                {
+                    $lookup:{
+                        'from':'propertytypes',
+                        'localField':'propertyType',
+                        'foreignField':'_id',
+                        'as':'propertyTypeDetails'
+                    }
+                },
+                { $unwind: { path: '$propertyTypeDetails' } },
+                {
+                    $lookup:{
+                        'from':'characteristics',
+                        'localField':'characteristics',
+                        'foreignField':'_id',
+                        'as':'characteristicsDetails'
+                    }
+                },
+                { $unwind: { path: '$characteristicsDetails' } },
+                {
+                    $lookup:{
+                        'from':'amenities',
+                        'localField':'amenities',
+                        'foreignField':'_id',
+                        'as':'amenitiesDetails'
+                    }
+                },
+                { $unwind: { path: '$amenitiesDetails' } },
+                {
+                    $lookup:{
+                        'from':'countries',
+                        'localField':'propertyAddress.country',
+                        'foreignField':'_id',
+                        'as':'countriesDetails'
+                    }
+                },
+                { $unwind: { path: '$countriesDetails' } },
+                {
+                    $lookup:{
+                        'from':'cities',
+                        'localField':'propertyAddress.city',
+                        'foreignField':'_id',
+                        'as':'cityDetails'
+                    }
+                },
+                { $unwind: { path: '$cityDetails' } },
+                {
+                    $group:{
+                        '_id':'$_id',
+                        'landlord':{$first:'$landlord'},
+                        'propertyAddress':{$first: {
+                            'country': '$countriesDetails.country_name',
+                            'city': '$cityDetails.city',
+                            'street_address_number': '$propertyAddress.street_address_number',
+                            'street_address': '$propertyAddress.street_address',
+                            'unit': '$unit',
+                            'suburb': '$propertyAddress.suburb',
+                        }},
+                        'parking':{$first:'$parking'},
+                        'houseSize':{$first:'$houseSize'},
+                        'landSize':{$first:'$landSize'},
+                        'title':{$first:'$title'},
+                        'subTitle':{$first:'$subTitle'},
+                        'propertyType':{$first:'$propertyTypeDetails.title'},
+                        'establishedNew':{$first:'$establishedNew'},
+                        'landAgent':{$first:'$landAgentDetails.full_name'},
+                        'dualAgent':{$first:'$dualAgent'},
+                        'rentalPerWeek':{$first:'$rentalPerWeek'},
+                        'rentalPerMonth':{$first:'$rentalPerMonth'},
+                        'securityBond':{$first:'$securityBond'},
+                        'priceDisplay':{$first:'$priceDisplay'},
+                        'price':{$first:'$price'},
+                        'priceText':{$first:'$priceText'},
+                        'availableDate':{$first:'$availableDate'},
+                        'totalRooms':{$first:'$totalRooms'},
+                        'noOfBedRooms':{$first:'$noOfBedRooms'},
+                        'noOfBathRooms':{$first:'$noOfBathRooms'},
+                        'noOfKitchens':{$first:'$noOfKitchens'},
+                        'totalFloors':{$first:'$totalFloors'},
+                        'floor':{$first:'$floor'},
+                        'totalArea':{$first:'$totalArea'},
+                        'characteristics':{$addToSet:'$characteristicsDetails.title'},
+                        'amenities':{$addToSet:'$amenitiesDetails.title'},
+                        'description':{$first:'$description'},
+                        'image':{$first:'$image'},
+                        'imageGallery':{$first:'$imageGallery'},
+
+                        'yearBuilt':{$first:'$yearBuilt'},
+                        'WC':{$first:'$WC'},
+                        'DPE':{$first:'$DPE'},
+                        'GES':{$first:'$GES'},
+                        'propertyFor':{$first:'$propertyFor'},
+
+                        'translate':{$first:'$translate'},
+                    }
+                }
+            ]);
+            return aggregate;
         } catch (error) {
             return error;
         }

@@ -29,10 +29,10 @@ class newsController {
             let property_id = mongoose.Types.ObjectId(req.params.id);
 
             if (property_id == null || property_id == '') {
-                return { status: 201, data: {}, message: 'Something went wrong!' }
+                return { status: 201, data: {}, message: 'Missing property id!' }
             }
 
-            let PropertyData = await propertyRepo.getPropertyDetails({ _id: property_id });
+            let PropertyData = await propertyRepo.getPropertyDetails({ _id:  mongoose.Types.ObjectId(property_id) });
 
             if (!_.isEmpty(PropertyData)) {
                 return {

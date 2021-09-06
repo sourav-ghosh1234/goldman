@@ -189,282 +189,110 @@ namedRouter.post("api.property.list", '/property/list', request_param.any(), asy
     "status": 200,
     "data": [
         {
-            "_id": "6130f45b3aa7dd72e6fb7be8",
+            "_id": "612e48ce9c9232380f5ef1ad",
             "landlord": {
-                "name": "Dev Test",
-                "email": "Dev Test",
-                "phone": "3242342134"
+                "name": "Rimma PIGNET",
+                "email": "rimma@yopmail.com",
+                "phone": "590590353899"
             },
             "propertyAddress": {
-                "country": {
-                    "_id": "60b4f7a3026424da73e8aba4",
-                    "code": "+1",
-                    "country_name": "Japan",
-                    "status": "Active",
-                    "isDeleted": false,
-                    "createdAt": "2019-04-15T08:24:40.827Z",
-                    "updatedAt": "2020-10-22T06:14:39.804Z"
-                },
-                "city": {
-                    "_id": "61238136c0b2e90c83939865",
-                    "city": "Perth",
-                    "status": "Active",
-                    "isDeleted": false,
-                    "countryId": "60b4fd33b86e3eca18590369",
-                    "createdAt": "2021-08-23T11:06:30.176Z",
-                    "__v": 0
-                },
-                "street_address_number": "12312",
-                "street_address": "Dev Test",
-                "unit": "24",
-                "suburb": "Indore, Madhya Pradesh, India"
+                "country": "Australia",
+                "city": "Melbourne",
+                "street_address_number": "19",
+                "street_address": "rue du Roi Oscar II, Gustavia",
+                "suburb": "Saint-Barthélemy, France"
             },
             "parking": {
-                "garage_spaces": 234,
-                "carport_spaces": 44,
-                "open_spaces": 44
+                "garage_spaces": 45,
+                "carport_spaces": 65,
+                "open_spaces": 1234
             },
             "houseSize": {
-                "size": 23,
+                "size": 1234,
                 "sizeBy": "squares"
             },
             "landSize": {
-                "size": 34,
+                "size": 12615,
                 "sizeBy": "squares"
             },
-            "title": "Dev Test",
-            "subTitle": "Dev Test",
-            "propertyType": {
-                "_id": "60be1fc0fde29e4322dafab2",
-                "isDeleted": false,
-                "status": "Active",
-                "title": "Townhouse and villa",
-                "language": "en",
-                "translate": [
-                    {
-                        "title": "Property FR",
-                        "description": "House FR",
-                        "language": "fr",
-                        "_id": "6123834cc0b2e90c8393986a"
-                    },
-                    {
-                        "title": "Property DE",
-                        "description": "House DE",
-                        "language": "de",
-                        "_id": "6123834cc0b2e90c8393986b"
-                    }
-                ],
-                "__v": 0,
-                "description": "Townhouse and villa",
-                "updatedAt": "2021-08-23T11:15:24.618Z"
-            },
+            "title": "Three bedroom Villa in Flamands",
+            "subTitle": "HOUSE FOR SALE 12615 SQ FT SAINT-BARTHÉLEMY - € 5,300,000",
+            "propertyType": "Townhouse and villa",
             "establishedNew": "established",
-            "landAgent": {
-                "_id": "6128f78c9336c987a798a5a4",
-                "first_name": "",
-                "last_name": "",
-                "full_name": "Agent Two",
-                "email": "agent2@mail.com",
-                "phone": "273839404",
-                "password": "",
-                "profile_image": "1630074764552_7682_1.png",
-                "user_name": "",
-                "address": "test address",
-                "social_id": "",
-                "register_type": "normal",
-                "deviceToken": "",
-                "deviceType": "",
-                "isDeleted": false,
-                "isActive": true,
-                "role": "6128ce4c1edb21accfdc29df",
-                "createdAt": "2021-08-27T14:32:44.654Z",
-                "updatedAt": "2021-08-27T14:32:44.654Z"
-            },
-            "dualAgent": "Dev Test",
-            "rentalPerWeek": 45,
-            "rentalPerMonth": 45,
-            "securityBond": 3421,
+            "landAgent": "Agent One",
+            "dualAgent": "0",
+            "rentalPerWeek": 0,
+            "rentalPerMonth": 0,
+            "securityBond": 0,
             "priceDisplay": "price",
-            "price": 2312,
+            "price": 5300000,
             "priceText": "",
             "availableDate": "20/02/2022",
             "totalRooms": 5,
-            "noOfBedRooms": 3,
-            "noOfBathRooms": 1,
+            "noOfBedRooms": 2,
+            "noOfBathRooms": 2,
             "noOfKitchens": 1,
-            "totalFloors": 5,
-            "floor": "23",
-            "totalArea": "44",
+            "totalFloors": 12615,
+            "floor": "456",
+            "totalArea": "12615",
             "characteristics": [
-                {
-                    "_id": "612388bbc0b2e90c83939885",
-                    "description": "City view",
-                    "language": "en",
-                    "isDeleted": false,
-                    "status": "Active",
-                    "title": "City view",
-                    "translate": [
-                        {
-                            "title": "",
-                            "description": "",
-                            "language": "fr",
-                            "_id": "612388bbc0b2e90c83939886"
-                        },
-                        {
-                            "title": "",
-                            "description": "",
-                            "language": "de",
-                            "_id": "612388bbc0b2e90c83939887"
-                        }
-                    ],
-                    "__v": 0
-                },
-                {
-                    "_id": "61152a410c85891243a58c21",
-                    "description": "Oceanview",
-                    "language": "en",
-                    "isDeleted": false,
-                    "status": "Active",
-                    "title": "Oceanview",
-                    "translate": [
-                        {
-                            "title": "Caretaker FR",
-                            "description": "",
-                            "language": "fr",
-                            "_id": "612388cec0b2e90c83939888"
-                        },
-                        {
-                            "title": "Caretaker DE",
-                            "description": "",
-                            "language": "de",
-                            "_id": "612388cec0b2e90c83939889"
-                        }
-                    ],
-                    "__v": 0
-                }
+                "City view",
+                "Oceanview"
             ],
             "amenities": [
-                {
-                    "_id": "612388a3c0b2e90c83939882",
-                    "title": "Cafe and restaurant",
-                    "icon": "",
-                    "description": "Cafe and restaurant",
-                    "language": "en",
-                    "isDeleted": false,
-                    "status": "Active",
-                    "translate": [
-                        {
-                            "title": "",
-                            "description": "",
-                            "language": "fr",
-                            "_id": "612388a3c0b2e90c83939883"
-                        },
-                        {
-                            "title": "",
-                            "description": "",
-                            "language": "de",
-                            "_id": "612388a3c0b2e90c83939884"
-                        }
-                    ],
-                    "__v": 0
-                },
-                {
-                    "_id": "61238882c0b2e90c8393987f",
-                    "title": "public transport",
-                    "icon": "",
-                    "description": "public transport",
-                    "language": "en",
-                    "isDeleted": false,
-                    "status": "Active",
-                    "translate": [
-                        {
-                            "title": "",
-                            "description": "",
-                            "language": "fr",
-                            "_id": "61238882c0b2e90c83939880"
-                        },
-                        {
-                            "title": "",
-                            "description": "",
-                            "language": "de",
-                            "_id": "61238882c0b2e90c83939881"
-                        }
-                    ],
-                    "__v": 0
-                },
-                {
-                    "_id": "612383cfc0b2e90c83939872",
-                    "title": "Spa & Sauna",
-                    "icon": "",
-                    "description": "Spa & Sauna",
-                    "language": "en",
-                    "isDeleted": false,
-                    "status": "Active",
-                    "translate": [
-                        {
-                            "title": "",
-                            "description": "",
-                            "language": "fr",
-                            "_id": "612383cfc0b2e90c83939873"
-                        },
-                        {
-                            "title": "",
-                            "description": "",
-                            "language": "de",
-                            "_id": "612383cfc0b2e90c83939874"
-                        }
-                    ],
-                    "__v": 0
-                }
+                "Pool",
+                "Gym",
+                "Spa & Sauna",
+                "Cafe and restaurant"
             ],
-            "description": "Dev Test",
+            "description": "Ideally situated near Gustavia on the way to Flamand beaches, close to Hôtel Cheval Blanc, villa Datcha with its modern architecture will meet your needs. The three bedrooms are totally independent, each with its own terrasse with long chairs and ocean view. The spacious living with the large kitchen incorporated is easy to live with friends. From its infinity pool you will enjoy the beautiful sunsets. The listed price is inclusive of agency fees, at the seller's cost.",
             "image": "",
             "imageGallery": [
-                "1630598235556_03_Marina.jpg"
+                "1630684328299_71885108606cd717eb8ff2.26011386_4c42ae094d_1920.jpg",
+                "1630684328442_143380515606cd734971899.66823608_368dd234b0_1919.jpg",
+                "1630684328535_210988754606cd798d79f57.30333454_81da227e15_1920.jpg",
+                "1630684328573_783539319606cd76dbdcc80.80546837_2bc103868c_1920.jpg",
+                "1630684328581_1390255606606cd70acf7620.14323576_20f8e31b47_1920.jpg",
+                "1630684328627_1807853483606cd74600e256.71679732_56f7fec71f_1920.jpg"
             ],
             "yearBuilt": 0,
             "WC": 0,
             "DPE": "",
             "GES": "",
-            "propertyFor": "sale",
-            "language": "en",
-            "status": "Active",
-            "isDeleted": false,
+            "propertyFor": "rent",
             "translate": [
                 {
                     "landlord": {
-                        "name": "Dev Test",
+                        "name": "Test",
                         "email": "",
                         "phone": ""
                     },
                     "propertyAddress": {
-                        "unit": "2342",
-                        "street_address_number": "3424",
-                        "street_address": "Dev Test",
-                        "suburb": "Dev Test",
+                        "unit": "234",
+                        "street_address_number": "2332",
+                        "street_address": "lorem Test",
+                        "suburb": "Test",
                         "municipality": ""
                     },
                     "houseSize": {
-                        "size": "345345",
-                        "sizeBy": "squares"
+                        "size": "21313",
+                        "sizeBy": ""
                     },
                     "landSize": {
-                        "size": "345345",
+                        "size": "123123",
                         "sizeBy": "squares"
                     },
-                    "title": "Dev Test",
-                    "subTitle": "Dev Test",
+                    "title": "Test",
+                    "subTitle": "sub Test qq",
                     "leadAgent": "",
                     "dualAgent": "",
-                    "priceText": "Dev Test",
+                    "priceText": "Test Text",
                     "language": "fr",
-                    "totalArea": "45354",
-                    "description": "Dev Test",
-                    "_id": "613203b76973ab5e178dfd98"
+                    "totalArea": "45896",
+                    "description": "Test Desc..",
+                    "_id": "613244a8d84b191b5f4a8dcd"
                 }
-            ],
-            "createdAt": "2021-09-02T15:57:15.665Z",
-            "__v": 0
+            ]
         }
     ],
     "message": "Property details fetched successfully."
