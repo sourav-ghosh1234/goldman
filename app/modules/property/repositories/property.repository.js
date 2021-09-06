@@ -230,6 +230,24 @@ class PropertyRepository {
                     },
                 },
                 { $unwind: { path: "$propertyType", preserveNullAndEmptyArrays: true } },
+                {
+                    $lookup: {
+                        from: "cities",
+                        localField: "propertyAddress.city",
+                        foreignField: "_id",
+                        as: "city",
+                    },
+                },
+                { $unwind: { path: "$city", preserveNullAndEmptyArrays: true } },
+                {
+                    $lookup: {
+                        from: "countries",
+                        localField: "propertyAddress.country",
+                        foreignField: "_id",
+                        as: "country",
+                    },
+                },
+                { $unwind: { path: "$country", preserveNullAndEmptyArrays: true } },
                 { $match: conditions },
                 sortOperator
             ]);
