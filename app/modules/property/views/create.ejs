@@ -206,8 +206,7 @@
                                                                 <div class="col-lg-6" id="priceVal">
                                                                     <label>Price</label>
                                                                     <input type="number" name="price" id="price"
-                                                                        class="form-control" 
-                                                                        placeholder="Enter price">
+                                                                        class="form-control" placeholder="Enter price">
                                                                 </div>
                                                                 <div class="col-lg-6" id="priceTextVal">
                                                                     <label>Price Text</label>
@@ -309,6 +308,26 @@
                                                                         required placeholder="Enter suburb">
                                                                 </div>
                                                             </div>
+
+                                                            <div class="form-group row">
+                                                                <div class="col-lg-12">
+                                                                    <label>Image</label>
+                                                                    <div class="form-group row gallery">
+                                                                        <div class="col-lg-5">
+                                                                            <input type="file" name="image"
+                                                                                id="image"
+                                                                                class="form-control required propertyimagepickerWithPreviewId"
+                                                                                data-previewelement="propertyimage" required>
+                                                                        </div>
+                                                                        <div class="col-lg-5">
+                                                                            <img class="galleryImage"
+                                                                                id="propertyimage" height="80px"
+                                                                                src="">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
                                                         </div>
                                                         <div class="tab-pane" id="kt_portlet_base_demo_2_2_tab_content"
                                                             role="tabpanel">
@@ -704,7 +723,7 @@
             </div>
         </div>
     </div>
-    
+
 
     <script>
         function changeDisplayPrice(event) {

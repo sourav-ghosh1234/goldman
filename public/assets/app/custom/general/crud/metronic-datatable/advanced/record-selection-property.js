@@ -38,8 +38,8 @@ var KTDatatableCms = function () {
                 width: 80,
                 sortable: false,
                 template: function (row) {
-                    if (row.imageGallery != null && row.imageGallery.length > 0) {
-                        return `<img src="/uploads/property/${row.imageGallery[0]}" alt="" height="80" width="80">`
+                    if (row.image != null && row.image != '') {
+                        return `<img src="/uploads/property/${row.image}" alt="" height="80" width="80">`
                     } else {
                         return `<img src="/uploads/noImage.png" alt="" height="80" width="80">`
                     }
@@ -94,10 +94,10 @@ var KTDatatableCms = function () {
                 title: 'Title',
                 width: 180,
                 template: function (row) {
-                    return row.title+`<br>$${row.price.toFixed(2)}`+`<br>${row.totalArea} Sq. Ft.`;
+                    return row.title + `<br>$${row.price ? row.price.toFixed(1) : 0}` + `<br>${row.totalArea} Sq. Ft.`;
                 },
             },
-            
+
             {
                 field: 'status',
                 title: 'Status',

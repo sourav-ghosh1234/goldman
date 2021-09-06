@@ -55,6 +55,38 @@ $(document).on('change', '.imagepickerWithPreviewId', function(e) {
     };
 });
 
+
+
+$(document).on('change', '.propertyimagepickerWithPreviewId', function(e) {
+    var imagePreview = $(this).data("previewelement");
+    console.log(imagePreview,'imagePreview')
+    var previewElement = `#${imagePreview}`
+    var reader = new FileReader();
+    if (e.target.files[0].type != 'image/png' &&
+        e.target.files[0].type != 'image/jpeg' &&
+        e.target.files[0].type != 'image/jpg') {
+        swal.fire(
+            'Error!',
+            'Please select image',
+            'error'
+        )
+        $(".propertyimagepickerWithPreviewId").val('');
+        $(previewElement).attr('src', '');
+        $(previewElement).hide();
+        return false;
+    }
+    //Read the contents of Image File.
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = function(e) {
+        $(previewElement).show();
+        //Initiate the JavaScript Image object.
+        var image = new Image();
+        //Set the Base64 string return from FileReader as source.
+        image.src = e.target.result;
+        $(previewElement).attr('src', e.target.result);
+    };
+});
+
 $(document).on('click', '.addBanner', function(e) {
     e.preventDefault();
     let numOfItems = $('.banner').length;
