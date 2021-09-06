@@ -375,6 +375,63 @@
   },
   {
     "type": "get",
+    "url": "/city/list",
+    "title": "City List",
+    "version": "1.0.0",
+    "group": "Master",
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n    \"status\": 200,\n    \"data\": [\n        {\n            \"_id\": \"60c73b101257932fd09232f2\",\n            \"city\": \"Adelaide\",\n            \"status\": \"Active\",\n            \"isDeleted\": false,\n            \"countryId\": {\n                \"_id\": \"60b4fd33b86e3eca18590369\",\n                \"country_name\": \"Australia\",\n                \"code\": \"\",\n                \"status\": \"Active\",\n                \"isDeleted\": false,\n                \"createdAt\": \"2021-05-31T15:13:55.131Z\",\n                \"__v\": 0\n            },\n            \"createdAt\": \"2021-06-14T11:18:40.981Z\",\n            \"__v\": 0\n        }\n    ],\n    \"message\": \"City fetched successfully.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/api/masterdata.routes.js",
+    "groupTitle": "Master",
+    "name": "GetCityList"
+  },
+  {
+    "type": "get",
+    "url": "/country/list",
+    "title": "country List",
+    "version": "1.0.0",
+    "group": "Master",
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n    \"status\": 200,\n    \"data\": [\n        {\n            \"_id\": \"60b4f7a3026424da73e8aba4\",\n            \"code\": \"+1\",\n            \"country_name\": \"Japan\",\n            \"status\": \"Active\",\n            \"isDeleted\": false,\n            \"createdAt\": \"2019-04-15T08:24:40.827Z\",\n            \"updatedAt\": \"2020-10-22T06:14:39.804Z\"\n        }\n    ],\n    \"message\": \"Country fetched successfully.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/api/masterdata.routes.js",
+    "groupTitle": "Master",
+    "name": "GetCountryList"
+  },
+  {
+    "type": "get",
+    "url": "/property-type/list",
+    "title": "Property Type List",
+    "version": "1.0.0",
+    "group": "Master",
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n    \"status\": 200,\n    \"data\": [\n        {\n            \"title\": \"Apartment and unit\",\n            \"description\": \"Apartment and unit\",\n            \"language\": \"en\",\n            \"isDeleted\": false,\n            \"status\": \"Active\",\n            \"_id\": \"60b50317d506b6d2142eabdf\",\n            \"translate\": [\n                {\n                    \"title\": \"Apartment FR\",\n                    \"description\": \"Apartment FR\",\n                    \"language\": \"fr\",\n                    \"_id\": \"61238364c0b2e90c8393986c\"\n                },\n                {\n                    \"title\": \"Apartment DE\",\n                    \"description\": \"Apartment DE\",\n                    \"language\": \"de\",\n                    \"_id\": \"61238364c0b2e90c8393986d\"\n                }\n            ],\n            \"__v\": 0,\n            \"updatedAt\": \"2021-08-23T11:15:48.659Z\"\n        }\n    ],\n    \"message\": \"Property Type fetched successfully.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/api/masterdata.routes.js",
+    "groupTitle": "Master",
+    "name": "GetPropertyTypeList"
+  },
+  {
+    "type": "get",
     "url": "/menu/:menu_type",
     "title": "Get Header & Footer Menu",
     "version": "1.0.0",

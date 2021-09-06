@@ -2,7 +2,7 @@ const City = require('city/models/city.model');
 const perPage = config.PAGINATION_PERPAGE;
 
 class CityRepository {
-    constructor() {}
+    constructor() { }
 
     async getAll(req) {
         try {
@@ -52,14 +52,15 @@ class CityRepository {
         }
     }
 
-
-
     async getAllCity(params) {
         try {
-            const _params = {...params,
+            const _params = {
+                ...params,
                 "isDeleted": false,
             };
-            return await City.find(_params).lean().exec();
+            return await City.find(_params)
+                .populate('countryId')
+                .lean().exec();
         } catch (error) {
             return error;
         }
@@ -75,7 +76,8 @@ class CityRepository {
 
     async getByField(params) {
         try {
-            const _params = {...params,
+            const _params = {
+                ...params,
                 "isDeleted": false,
             };
             return await City.findOne(_params).lean().exec();
@@ -86,7 +88,8 @@ class CityRepository {
 
     async getAllByField(params) {
         try {
-            const _params = {...params,
+            const _params = {
+                ...params,
                 "isDeleted": false,
             };
             return await City.find(_params).lean().exec();
@@ -98,9 +101,9 @@ class CityRepository {
     async updateById(data, id) {
         try {
             return await City.findByIdAndUpdate(id, data, {
-                    new: true,
-                    upsert: true
-                })
+                new: true,
+                upsert: true
+            })
                 .lean().exec();
         } catch (error) {
             return error;
@@ -126,7 +129,8 @@ class CityRepository {
 
     async getActiveCountry(params) {
         try {
-            const _params = {...params,
+            const _params = {
+                ...params,
                 "isDeleted": false,
             };
             return await City.find(_params).sort({ "country_name": 1 }).lean().exec();
