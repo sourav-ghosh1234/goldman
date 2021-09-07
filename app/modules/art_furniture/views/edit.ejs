@@ -1,0 +1,233 @@
+<% layout(layout_directory+'/mainLayout') -%>
+
+    <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+        <div class="kt-subheader__main">
+            <h3 class="kt-subheader__title">
+                <%= page_title %>
+            </h3>
+            <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+        </div>
+    </div>
+
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="kt-portlet">
+                    <form class="kt-form kt-form--label-right" id="frmEditArtoFLiving" action="<%= generateUrl('art_furniture.update') %>" method="POST" enctype="multipart/form-data">
+                        
+                        <div class="kt-portlet__body">
+                            <ul class="nav nav-pills nav-fill" role="tablist">
+                                <%response.languages.map((data)=>{%>
+                                <%if(data.isDefault){%>
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab"
+                                        href="#kt_tabs_<%=data.shortcode%>"><%=data.title%></a>
+                                </li>
+                                <%}else{%>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#kt_tabs_<%=data.shortcode%>"><%=data.title%></a>
+                                </li>
+                                <%}%>
+                            <%})%>
+                            </ul>
+                            <div class="tab-content">
+                                <%
+                                        let count = 0;
+                                        response.languages.map((language)=>{
+                                    %>
+                                <%if(language.shortcode == 'en'){%>
+                                <div class="tab-pane active" id="kt_tabs_<%=language.shortcode%>" role="tabpanel">
+                                    
+                                    <div class="form-group row">
+                                        <div class="col-lg-6">
+                                            <label>Page Heading Title:</label>
+                                            <input type="text" name="pageHeadingTitle" id="pageHeadingTitle" class="form-control" placeholder="Enter Page Haeding Title" value="<%= response.art_furniture_data.pageHeadingTitle%>">
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label>Page Heading Main Title:</label>
+                                            <input type="text" name="pageHeadingMainTitle" id="pageHeadingMainTitle" class="form-control" placeholder="Enter Page heading Main Title" value="<%= response.art_furniture_data.pageHeadingMainTitle%>">
+                                        </div>
+                                    </div>
+        
+                                    <div class="form-group row">
+                                        <div class="col-lg-12">
+                                            <label>Page Heading Content:</label>
+                                            <textarea class="ckeditor form-control" name="pageHeadingContent" id="pageHeadingContent" placeholder="Enter Page Heading Description" rows="6"><%= response.art_furniture_data.pageHeadingContent%></textarea>
+                                        </div>
+                                    </div>
+        
+                                    <div class="form-group row">
+                                        <div class="col-lg-12 gallery-pages">
+                                            <label for="image" class="control-label">Images</label>
+                                            <div class="row mix-grid">
+                                                <% 
+                                                if(response.art_furniture_data.image.length >0) {
+                                                    for(var i=0; i< response.art_furniture_data.image.length; i++) { %>
+                                                    <div class="col-md-2" id="banner_<%=i%>">
+                                                        <div class="hover-effect">
+                                                            <div class="img"><img src="/uploads/art_furniture/<%= response.art_furniture_data.image[i] %>" alt="" class="img-responsive" height="80px"/></div>
+                                                            <div class="info"><a href="javascript:delImg('<%=i%>','<%=response.art_furniture_data.image[i]%>')" class="mix-link"><i class="fas fa-trash-alt" style="color:red"></i></a></div>
+                                                        </div>
+                                                    </div>
+                                                    <% } } %>
+                                            </div>
+                                        </div>    
+                                        <div class="col-lg-6">
+                                            <div class="controls">
+                                                <input id="image" name="image" type="file" placeholder="Image" accept="image/*" class="form-control imagepickerWithPreviewId" data-previewelement="pageHeadingImagePreview" multiple />
+                                            </div>
+                                        </div>
+                                     </div>
+                                     <div class="form-group row">
+                                        <div class="col-lg-6">
+                                            <label>Page Heading Button Text:</label>
+                                            <input type="text" name="pageHeadingButtonText" id="pageHeadingButtonText" class="form-control" placeholder="Enter Page Heading Button Text" value="<%= response.art_furniture_data.pageHeadingButtonText%>">
+                                        </div>
+                                    </div>
+                                    <% if(response.art_furniture_data.sections.length > 0) {%>
+                                        <% response.art_furniture_data.sections.forEach((content, index) => {%>
+                                            <div class="form-group row">
+                                                <div class="col-lg-6">
+                                                    <label>Section Title:</label>
+                                                    <input type="text" name="sections[<%= index %>][title]" id="sections<%= index %>title" class="form-control" placeholder="Enter Section Title" value="<%= content.title %>">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-lg-12">
+                                                    <label>Section Description:</label>
+                                                    <textarea class="ckeditor form-control" name="sections[<%= index %>][description]" id="sections[<%= index %>]" placeholder="Enter Section Description" rows="6"><%= content.description %></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-lg-6">
+                                                    <label for="pageHeadingImage" class="control-label">Section Image</label>
+                                                    <div class="controls">
+                                                        <input id="sections<%= index %>Image" name="sectionImage_<%= index %>" type="file" placeholder="Enter Title" accept="image/*" class="form-control imagepickerWithPreviewId" data-previewelement="sections<%= index %>ImagePreview" />
+                                                    </div>
+                                                    <input type="hidden" name="sections[<%= index %>][image]" value="<%=content.image%>">
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <% if ( content.image != '' ) {%>
+                                                        <img class="sections<%= index %>Image" id="sections<%= index %>ImagePreview" height="80px" src="/uploads/art_furniture/<%= content.image %>">
+                                                        <% } else { %>
+                                                            <img class="sections<%= index %>Image" id="sections<%= index %>ImagePreview" height="80px" src="">
+                                                            <% }  %>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-lg-6">
+                                                    <label>Button:</label>
+                                                    <input type="text" name="sections[<%= index %>][button]" id="sections<%= index %>button" class="form-control" placeholder="Enter Button" value="<%= content.button %>">
+                                                </div>
+                                            </div>
+                                            <% }) %>
+                                            <% } %>
+                                        <div class="form-group row">
+                                            <div class="col-lg-6">
+                                                <label>Contact Us More Info Button Text:</label>
+                                                <input type="text" name="contactButtonText" id="contactButtonText" class="form-control" placeholder="Enter Buuton" value="<%= response.art_furniture_data.contactButtonText%>">
+                                            </div>
+                                        </div>   
+                                </div>
+                                <% }else{
+                                    let pageHeadingTitle = ''
+                                    let pageHeadingMainTitle = '' 
+                                    let pageHeadingContent = ''  
+                                    let pageHeadingButtonText = '' 
+                                    let contactButtonText = ''
+
+                                    if(_.has(response.art_furniture_data.translate,language.shortcode)) {
+                                        pageHeadingTitle =  response.art_furniture_data.translate[language.shortcode].pageHeadingTitle
+                                        pageHeadingMainTitle =  response.art_furniture_data.translate[language.shortcode].pageHeadingMainTitle
+                                        pageHeadingContent =  response.art_furniture_data.translate[language.shortcode].pageHeadingContent
+                                        pageHeadingButtonText =  response.art_furniture_data.translate[language.shortcode].pageHeadingButtonText
+                                        contactButtonText = response.art_furniture_data.translate[language.shortcode].contactButtonText
+                                    }
+                                %>
+                                <div class="tab-pane" id="kt_tabs_<%=language.shortcode%>" role="tabpanel">
+                                    <div class="form-group row">
+                                        <div class="col-lg-6">
+                                            <label>Page Heading Title:</label>
+                                            <input type="text" name="translate[<%=count%>][pageHeadingTitle]" id="pageHeadingTitle" class="form-control" placeholder="Enter Page Haeding Title" value="<%=pageHeadingTitle%>">
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label>Page Heading Main Title:</label>
+                                            <input type="text" name="translate[<%=count%>][pageHeadingMainTitle]" id="pageHeadingMainTitle" class="form-control" placeholder="Enter Page heading Main Title" value="<%=pageHeadingMainTitle%>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-lg-12">
+                                            <label>Page Heading Content:</label>
+                                            <textarea class="ckeditor form-control" name="translate[<%=count%>][pageHeadingContent]" id="pageHeadingContent" placeholder="Enter Page Heading Description" rows="6"><%=pageHeadingContent%></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-lg-6">
+                                            <label>Page Heading Button Text:</label>
+                                            <input type="text" name="translate[<%=count%>][pageHeadingButtonText]" id="pageHeadingButtonText" class="form-control" placeholder="Enter Page Heading Button Text" value="<%=pageHeadingButtonText%>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-lg-6">
+                                            <label>Contact Us More Info Button Text:</label>
+                                            <input type="text" name="translate[<%=count%>][contactButtonText]" id="contactButtonText" class="form-control" placeholder="Enter Buuton" value="<%= contactButtonText%>">
+                                        </div>
+                                    </div>  
+                                    
+                                    <% 
+                                    let sectionTitle = ''
+                                    let sectionDescription = '' 
+                                    let sectionButton = ''  
+                                    
+                                    for(var s=0; s<5; s++) {
+                                    if(_.has(response.art_furniture_data.translate,language.shortcode) && response.art_furniture_data.translate[language.shortcode].sections.length > 0) {
+                                        sectionTitle = _.has(response.art_furniture_data.translate[language.shortcode].sections[s],'title')?response.art_furniture_data.translate[language.shortcode].sections[s].title:''
+                                        sectionDescription = _.has(response.art_furniture_data.translate[language.shortcode].sections[s],'description')?response.art_furniture_data.translate[language.shortcode].sections[s].description:''
+                                        sectionButton = _.has(response.art_furniture_data.translate[language.shortcode].sections[s],'button')?response.art_furniture_data.translate[language.shortcode].sections[s].button:''
+                                    } 
+                                   %>
+                                        
+                                            <div class="form-group row">
+                                                <div class="col-lg-6">
+                                                    <label>Section Title:</label>
+                                                    <input type="text" name="translate[<%=count%>][sections][<%= s %>][title]" id="sections<%= s %>title" class="form-control" placeholder="Enter Section Title" value="<%= sectionTitle %>">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-lg-12">
+                                                    <label>Section Description:</label>
+                                                    <textarea class="ckeditor form-control" name="translate[<%=count%>][sections][<%= s %>][description]" id="sections[<%= s %>]description" placeholder="Enter Section Description" rows="6"><%= sectionDescription %></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-lg-6">
+                                                    <label>Button:</label>
+                                                    <input type="text" name="translate[<%=count%>][sections][<%= s %>][button]" id="sections<%= s %>button" class="form-control" placeholder="Enter Button" value="<%= sectionButton %>">
+                                                </div>
+                                            </div>
+                                            
+                                    <% } %>
+                                    <input type="hidden" name="translate[<%=count%>][language]" value="<%=language.shortcode%>">
+                                </div>
+                                <% count++ }%>
+                                <%})%>
+                            </div>
+                            <!-- hidden user id -->
+                        </div>
+                        <div class="kt-portlet__foot">
+                            <div class="kt-form__actions">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <input type="hidden" name="id" value="<%= response.art_furniture_data._id%>">
+                                        <input type="hidden" name="delImgIds" id="delImgIds" value="">
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <a href="<%= generateUrl('art_furniture.edit') %>" class="btn btn-secondary">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
