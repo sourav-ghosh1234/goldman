@@ -19,6 +19,9 @@ const request_param = multer();
  * @apiParam {number} bed_room Bed Rooms
  * @apiParam {number} total_area Total Area
  * @apiParam {string} search_text Search Text [title, subtitle, suburb etc.]
+ * @apiParam {array} amenities Amenities
+ * @apiParam {array} characteristics Characteristics
+ * @apiParam {object} sort Sort [e.g : { "field":"price","sort":"asc"}]
  * @apiSuccessExample {json} Success
  * {
     "status": 200,

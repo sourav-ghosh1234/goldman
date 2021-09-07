@@ -628,6 +628,27 @@
             "optional": false,
             "field": "search_text",
             "description": "<p>Search Text [title, subtitle, suburb etc.]</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "array",
+            "optional": false,
+            "field": "amenities",
+            "description": "<p>Amenities</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "array",
+            "optional": false,
+            "field": "characteristics",
+            "description": "<p>Characteristics</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "object",
+            "optional": false,
+            "field": "sort",
+            "description": "<p>Sort [e.g : { &quot;field&quot;:&quot;price&quot;,&quot;sort&quot;:&quot;asc&quot;}]</p>"
           }
         ]
       }

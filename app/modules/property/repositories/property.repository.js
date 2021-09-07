@@ -208,6 +208,22 @@ class PropertyRepository {
                 and_clauses.push({ "noOfBedRooms": { $gte: parseInt(req.body.bed_room) } });
             }
         
+            if (_.isObject(req.body) && _.has(req.body, 'amenities') && !_.isEmpty(req.body.amenities)) {
+                let ameArr=[];
+                for(let i in req.body.amenities){
+                    ameArr.push(mongoose.Types.ObjectId(req.body.amenities[i]))
+                }
+                and_clauses.push({ "amenities": { $in: ameArr } });
+            }
+
+            if (_.isObject(req.body) && _.has(req.body, 'characteristics') && !_.isEmpty(req.body.characteristics)) {
+                let charArr=[];
+                for(let i in req.body.characteristics){
+                    charArr.push(mongoose.Types.ObjectId(req.body.characteristics[i]))
+                }
+                and_clauses.push({ "characteristics": { $in: charArr } });
+            }
+
             if (_.isObject(req.body) && _.has(req.body, 'total_area')) {
                 and_clauses.push({ "totalArea": { $lte: parseInt(req.body.total_area) } });
             }
@@ -231,6 +247,7 @@ class PropertyRepository {
             conditions['$and'] = and_clauses;
 
             var sortOperator = { "$sort": {} };
+
             if (_.has(req.body, 'sort')) {
                 var sortField = req.body.sort.field;
                 if (req.body.sort.sort == 'desc') {
@@ -242,6 +259,9 @@ class PropertyRepository {
             } else {
                 sortOperator["$sort"]['_id'] = -1;
             }
+
+            console.log(sortOperator, 'sortOperator',req.body.sort)
+
 
             var aggregate = Property.aggregate([
                 {
