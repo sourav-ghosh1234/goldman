@@ -214,5 +214,6 @@ namedRouter.get("api.amenitie.list", '/amenitie/list', async (req, res) => {
     }
 });
 
+
 // Export the express.Router() instance
 module.exports = router;

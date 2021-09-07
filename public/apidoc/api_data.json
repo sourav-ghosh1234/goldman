@@ -1,5 +1,51 @@
 [
   {
+    "type": "post",
+    "url": "/art-of-furniture/list",
+    "title": "Art Of Furniture List",
+    "version": "1.0.0",
+    "group": "Art_Of_Furniture",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "number",
+            "optional": false,
+            "field": "page",
+            "description": "<p>Page</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "number",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>Limit</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "slug",
+            "description": "<p>Category Slug [living-room, bedroom, dining-room, ourdoor, house-of-europe]</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n    \"status\": 200,\n    \"data\": [\n        {\n            \"_id\": \"6137569300734a6b6a253cbe\",\n            \"title\": \"New Service\",\n            \"company_name\": \"New Service\",\n            \"category\": \"613722cb87378713e2306bf5\",\n            \"price\": 4532,\n            \"dimensions\": \"New Service\",\n            \"colour\": \"New Service\",\n            \"description\": \"New Service\",\n            \"image\": \"1631022949632_Desktop-free-building-wallpaper.jpg\",\n            \"imageGallery\": [\n                \"1631016595849_business-structure-which-type-is-best-for-your-business.png\",\n                \"1631022949660_KLK-IMAGES-826x550-Hunting.jpg\"\n            ],\n            \"language\": \"en\",\n            \"status\": \"Active\",\n            \"isDeleted\": false,\n            \"translate\": [\n                {\n                    \"title\": \"Test 5 FR\",\n                    \"description\": \"<p>Test 5 FR</p>\\r\\n\",\n                    \"company_name\": \"Test 5 FR\",\n                    \"language\": \"fr\",\n                    \"_id\": \"613772b4c3e7be8d2f667dcc\"\n                }\n            ],\n            \"createdAt\": \"2021-09-07T12:09:55.910Z\",\n            \"__v\": 0,\n            \"categoryDetails\": {\n                \"_id\": \"613722cb87378713e2306bf5\",\n                \"name\": \"Ourdoor\",\n                \"status\": \"Active\",\n                \"isDeleted\": false,\n                \"createdAt\": \"2019-04-15T08:24:40.827Z\",\n                \"updatedAt\": \"2020-10-21T14:05:01.039Z\",\n                \"slug\": \"ourdoor\"\n            }\n        }\n    ],\n    \"pageCount\": 1,\n    \"totalCount\": 1,\n    \"message\": \"Art Of Furniture fetched successfully.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/api/artoffurniture.routes.js",
+    "groupTitle": "Art_Of_Furniture",
+    "name": "PostArtOfFurnitureList"
+  },
+  {
     "type": "get",
     "url": "/artofliving/content",
     "title": "Art Of Living Content",
