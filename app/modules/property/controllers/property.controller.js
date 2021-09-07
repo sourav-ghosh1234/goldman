@@ -58,7 +58,6 @@ class PropertyController {
                             gm('./public/uploads/property/' + file.filename).resize(200, 200, '!').write('./public/uploads/property/thumb/' + file.filename, function (err, result) {
                                 if (!err) console.log('done');
                             });
-                            // req.body.imageGallery[fileIndex] = file.filename;
                             req.body.imageGallery.push(file.filename);
                         } else {
                             gm('./public/uploads/property/' + file.filename).resize(200, 200, '!').write('./public/uploads/property/thumb/' + file.filename, function (err, result) {
@@ -105,16 +104,12 @@ class PropertyController {
             }
             property.translate = translateArr;
 
-
-
             let agents = await userRepo.getAllWithoutPaginate({ 'roleDetails.role': 'agent', isDeleted: false, isActive: true });
             let propertyTypes = await propertytypeRepo.getAllByField({ isDeleted: false, status: 'Active' });
             let cities = await cityRepo.getAllByField({ isDeleted: false, status: 'Active' });
             let countries = await countryRepo.getAllByField({ isDeleted: false, status: 'Active' });
             let amenities = await amenitiesRepo.getAllByField({ isDeleted: false, status: 'Active' });
             let characteristics = await characteristicsRepo.getAllByField({ isDeleted: false, status: 'Active' });
-
-            // console.log(property, 'property===')
 
             if (!_.isEmpty(property)) {
                 result.property_data = property;
