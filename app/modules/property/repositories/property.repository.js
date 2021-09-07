@@ -260,9 +260,6 @@ class PropertyRepository {
                 sortOperator["$sort"]['_id'] = -1;
             }
 
-            console.log(sortOperator, 'sortOperator',req.body.sort)
-
-
             var aggregate = Property.aggregate([
                 {
                     $lookup: {

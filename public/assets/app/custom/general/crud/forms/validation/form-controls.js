@@ -636,6 +636,68 @@ var KTFormControls = function() {
         });
     };
 
+
+    var artOfFurnitureFrmAddValidation = function() {
+        $('#frmArtOfFurniture').validate({
+            rules: {
+                title: {
+                    required: true
+                },
+                company_name: {
+                    required: true
+                },
+                category: {
+                    required: true
+                },
+                price: {
+                    required: true
+                },
+                dimensions: {
+                    required: true
+                },
+                colour:{
+                    required: true
+                },
+                description: {
+                    required: true
+                },
+                image: {
+                    required: true
+                }
+            },
+            messages: {
+                title: {
+                    required: 'This field is required.'
+                },
+                company_name: {
+                    required: 'This field is required.'
+                },
+                category: {
+                    required: 'This field is required.'
+                },
+                price: {
+                    required: 'This field is required.'
+                },
+                dimensions: {
+                    required: 'This field is required.'
+                },
+                colour:{
+                    required: 'This field is required.'
+                },
+                description: {
+                    required: 'This field is required.'
+                },
+                image: {
+                    required: "This field is required."
+                },
+            },
+            invalidHandler: function(event, validate) {},
+            submitHandler: function(form) {
+                form[0].submit();
+            }
+        });
+    };
+
     var newsFrmEditValidation = function() {
         $('#frmEditNews').validate({
             rules: {
@@ -739,6 +801,7 @@ var KTFormControls = function() {
             newsFrmEditValidation();
             amenitiesAddFrmEditValidation();
             amenitiesEditFrmEditValidation();
+            artOfFurnitureFrmAddValidation();
         }
     };
 }();
