@@ -6,6 +6,7 @@ const multer = require('multer');
 const artOfFurnitureController = require('webservice/artoffurniture.controller');
 const request_param = multer();
 
+
 /**
  * @api {post} /art-of-furniture/list Art Of Furniture List
  * @apiVersion 1.0.0
@@ -70,6 +71,65 @@ namedRouter.post("api.art-of-furniture.list", '/art-of-furniture/list', async (r
     }
 });
 
+
+/**
+ * @api {get} /art-of-furniture/details/:id Art Of Furniture Details By id
+ * @apiVersion 1.0.0
+ * @apiGroup Art Of Furniture
+ * @apiSuccessExample {json} Success
+ *{
+    "status": 200,
+    "data": [
+        {
+            "_id": "613755ea00734a6b6a253c9e",
+            "title": "Test",
+            "company_name": "Test",
+            "category": "613722a887378713e2306bf4",
+            "price": 4432,
+            "dimensions": "Test",
+            "colour": "Test",
+            "description": "Test",
+            "image": "1631029637402_03_Marina.jpg",
+            "imageGallery": [
+                "1631016426466_shutterstock.png",
+                "1631016426506_03_Marina.jpg"
+            ],
+            "language": "en",
+            "status": "Active",
+            "isDeleted": false,
+            "translate": [
+                {
+                    "title": "Test FR",
+                    "description": "<p>Test FR</p>\r\n",
+                    "company_name": "Test FR",
+                    "language": "fr",
+                    "_id": "613789855ccd54a236d94a96"
+                }
+            ],
+            "createdAt": "2021-09-07T12:07:06.610Z",
+            "__v": 0,
+            "categoryDetails": {
+                "_id": "613722a887378713e2306bf4",
+                "name": "Dining room",
+                "status": "Active",
+                "isDeleted": false,
+                "createdAt": "2019-04-15T08:24:40.827Z",
+                "updatedAt": "2020-10-21T14:05:01.039Z",
+                "slug": "dining-room"
+            }
+        }
+    ],
+    "message": "Art Of Furniture fetched successfully."
+}
+ **/
+namedRouter.get("api.art-of-furniture.details", '/art-of-furniture/details/:id', request_param.any(), async (req, res) => {
+    try {
+        const success = await artOfFurnitureController.getArtFurnitureDetails(req, res);
+        res.status(success.status).send(success);
+    } catch (error) {
+        res.status(error.status).send(error.message);
+    }
+});
 
 // Export the express.Router() instance
 module.exports = router;

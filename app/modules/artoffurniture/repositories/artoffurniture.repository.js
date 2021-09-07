@@ -166,7 +166,7 @@ class ArtOfFurnitureRepository {
     }
 
 
-    async getAllArtFurniture(req){
+    async getAllArtOfFurniture(req){
         try {
 			var conditions = {};
 			var and_clauses = [];
@@ -213,6 +213,39 @@ class ArtOfFurnitureRepository {
 			var options = { page: req.body.page, limit: req.body.limit };
 			let allArt = await ArtOfFurniture.aggregatePaginate(aggregate, options);
 			return allArt;
+		}
+		catch (e) {
+			throw (e);
+		}
+    }
+
+
+    async getArtOfFurnitureDetails(param){
+        try {
+			var conditions = {};
+			var and_clauses = [];
+			and_clauses.push({ "isDeleted": false,'status':'Active' });
+	
+            and_clauses.push(param);
+
+            console.log(and_clauses,'and_clauses')
+
+			conditions['$and'] = and_clauses;
+
+
+			var aggregate = await ArtOfFurniture.aggregate([
+				{ $match: conditions },
+                {
+                    $lookup: {
+                        from: "furniture_categories",
+                        localField: "category",
+                        foreignField: "_id",
+                        as: "categoryDetails",
+                    },
+                },
+                { $unwind: { path: "$categoryDetails", preserveNullAndEmptyArrays: true } },
+				]);
+			return aggregate;
 		}
 		catch (e) {
 			throw (e);

@@ -1,5 +1,24 @@
 [
   {
+    "type": "get",
+    "url": "/art-of-furniture/details/:id",
+    "title": "Art Of Furniture Details By id",
+    "version": "1.0.0",
+    "group": "Art_Of_Furniture",
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n    \"status\": 200,\n    \"data\": [\n        {\n            \"_id\": \"613755ea00734a6b6a253c9e\",\n            \"title\": \"Test\",\n            \"company_name\": \"Test\",\n            \"category\": \"613722a887378713e2306bf4\",\n            \"price\": 4432,\n            \"dimensions\": \"Test\",\n            \"colour\": \"Test\",\n            \"description\": \"Test\",\n            \"image\": \"1631029637402_03_Marina.jpg\",\n            \"imageGallery\": [\n                \"1631016426466_shutterstock.png\",\n                \"1631016426506_03_Marina.jpg\"\n            ],\n            \"language\": \"en\",\n            \"status\": \"Active\",\n            \"isDeleted\": false,\n            \"translate\": [\n                {\n                    \"title\": \"Test FR\",\n                    \"description\": \"<p>Test FR</p>\\r\\n\",\n                    \"company_name\": \"Test FR\",\n                    \"language\": \"fr\",\n                    \"_id\": \"613789855ccd54a236d94a96\"\n                }\n            ],\n            \"createdAt\": \"2021-09-07T12:07:06.610Z\",\n            \"__v\": 0,\n            \"categoryDetails\": {\n                \"_id\": \"613722a887378713e2306bf4\",\n                \"name\": \"Dining room\",\n                \"status\": \"Active\",\n                \"isDeleted\": false,\n                \"createdAt\": \"2019-04-15T08:24:40.827Z\",\n                \"updatedAt\": \"2020-10-21T14:05:01.039Z\",\n                \"slug\": \"dining-room\"\n            }\n        }\n    ],\n    \"message\": \"Art Of Furniture fetched successfully.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/api/artoffurniture.routes.js",
+    "groupTitle": "Art_Of_Furniture",
+    "name": "GetArtOfFurnitureDetailsId"
+  },
+  {
     "type": "post",
     "url": "/art-of-furniture/list",
     "title": "Art Of Furniture List",
