@@ -136,7 +136,11 @@ var KTDatatableCms = function () {
             datatable.search($(this).val().toLowerCase(), 'Type');
         });
 
-        $('#kt_form_status,#kt_form_type').selectpicker();
+        $('#kt_form_category').on('change', function () {
+            datatable.search($(this).val().toLowerCase(), 'category_id');
+        });
+
+        $('#kt_form_status,#kt_form_type,#kt_form_category').selectpicker();
 
         datatable.on(
             'kt-datatable--on-check kt-datatable--on-uncheck kt-datatable--on-layout-updated',

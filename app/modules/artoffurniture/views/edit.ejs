@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="kt-portlet">
-                    <form class="kt-form kt-form--label-right" id="frmArtOfFurniture" action="<%= generateUrl('artoffurniture.store') %>" method="POST" enctype="multipart/form-data">
+                    <form class="kt-form kt-form--label-right" id="frmArtOfFurnitureEdit" action="<%= generateUrl('artoffurniture.update') %>" method="POST" enctype="multipart/form-data">
                         
                         <div class="kt-portlet__body">
                             <ul class="nav nav-pills nav-fill" role="tablist">
@@ -40,11 +40,11 @@
                                     <div class="form-group row">
                                         <div class="col-lg-6">
                                             <label>Title:</label>
-                                            <input type="text" name="title" id="title" class="form-control required"  required placeholder="Enter Title" >
+                                            <input type="text" name="title" id="title" class="form-control required"  required placeholder="Enter Title" value="<%=result.artoffurniture_data.title%>">
                                         </div>
                                         <div class="col-lg-6">
                                             <label>Company Name:</label>
-                                            <input type="text" name="company_name" id="company_name" class="form-control required" required placeholder="Enter Company Name">
+                                            <input type="text" name="company_name" id="company_name" class="form-control required" required placeholder="Enter Company Name" value="<%=result.artoffurniture_data.company_name%>">
                                         </div>
                                     </div>
 
@@ -58,7 +58,12 @@
 												<%
 													response.furnitureCategory.forEach(ele=>
 													{%>
-													<option value="<%= ele._id %>">
+													<option value="<%= ele._id %>" 
+														<%=(result.artoffurniture_data.category
+                                                                                    !=null &&
+                                                                                    result.artoffurniture_data.category.toString()==ele._id.toString())?'Selected':''
+                                                                                    %>
+																					>
 														<%= ele.name %>
 													</option>
 													<% })%>
@@ -67,26 +72,26 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <label>Price:</label>
-                                            <input type="number" name="price" id="price" class="form-control required" required placeholder="Enter Price">
+                                            <input type="number" name="price" id="price" class="form-control required" required placeholder="Enter Price" value="<%=result.artoffurniture_data.price%>">
                                         </div>
                                     </div>
 
 									<div class="form-group row">
                                         <div class="col-lg-6">
                                             <label>Dimensions:</label>
-                                            <input class=" form-control required" name="dimensions" required id="dimensions" placeholder="Enter Dimensions" />
+                                            <input class=" form-control required" name="dimensions" required id="dimensions" placeholder="Enter Dimensions" value="<%=result.artoffurniture_data.dimensions%>">
                                         </div>
 
 										<div class="col-lg-6">
                                             <label>Colour:</label>
-                                            <input class=" form-control" name="colour" id="colour" placeholder="Enter Colour" class=" form-control required" />
+                                            <input class=" form-control" name="colour" id="colour" placeholder="Enter Colour" class=" form-control required" value="<%=result.artoffurniture_data.colour%>">
                                         </div>
                                     </div>
         
                                     <div class="form-group row">
                                         <div class="col-lg-12">
                                             <label>Description:</label>
-                                            <textarea class=" form-control required"  name="description" id="description" placeholder="Enter Description" rows="6"></textarea>
+                                            <textarea class=" form-control required"  name="description" id="description" placeholder="Enter Description" rows="6"><%=result.artoffurniture_data.description%></textarea>
                                         </div>
                                     </div>
 								
@@ -97,13 +102,13 @@
 												<div class="col-lg-5">
 													<input type="file" name="image"
 														id="image" accept="image/*"
-														class="form-control required propertyimagepickerWithPreviewId"
-														data-previewelement="propertyimage" required>
+														class="form-control propertyimagepickerWithPreviewId"
+														data-previewelement="propertyimage" >
 												</div>
 												<div class="col-lg-5">
 													<img class="galleryImage"
 														id="propertyimage" height="80px"
-														src="">
+														src="/uploads/artoffurniture/<%= result.artoffurniture_data.image %>">
 												</div>
 											</div>
 										</div>
@@ -131,31 +136,72 @@
 												</div>
 											</div>
 										</div>
+
+										<div class="col-lg-12">&nbsp;</div>
+                                                                <div class="col-lg-12">
+                                                                    <div class="row mix-grid">
+                                                                        <%
+                                                                            if(result.artoffurniture_data.imageGallery.length>
+                                                                            0) {
+                                                                            for(var i=0; i<
+                                                                                result.artoffurniture_data.imageGallery.length;
+                                                                                i++) { %>
+                                                                                <div class="col-md-2"
+                                                                                    id="banner_<%=i%>">
+                                                                                    <div class="hover-effect">
+                                                                                        <div class="img">
+                                                                                            <img src="/uploads/artoffurniture/<%= result.artoffurniture_data.imageGallery[i] %>"
+                                                                                                alt=""
+                                                                                                class="img-responsive"
+                                                                                                height="80px" />
+                                                                                        </div>
+                                                                                        <div class="info"><a
+                                                                                                href="javascript:delImg('<%=i%>','<%=result.artoffurniture_data.imageGallery[i]%>')"
+                                                                                                class="mix-link"><i
+                                                                                                    class="fas fa-trash-alt"
+                                                                                                    style="color:red"></i>
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <% } } %>
+                                                                    </div>
+
+                                                                </div>
 									</div>
                                 </div>
-                                <% }else{%>
+                                <% }else{
+									let title='';
+									let company_name='';
+									let description='';
+
+									if(_.has(result.artoffurniture_data.translate,language.shortcode)) {
+										title = result.artoffurniture_data.translate[language.shortcode].title;
+										company_name = result.artoffurniture_data.translate[language.shortcode].company_name;
+										description = result.artoffurniture_data.translate[language.shortcode].description;
+									}%>
                                 <div class="tab-pane" id="kt_tabs_<%=language.shortcode%>" role="tabpanel">
                                     <div class="form-group row">
                                         <div class="col-lg-6">
                                             <label>Title:</label>
-                                            <input type="text" name="translate[<%=count%>][title]" id="title_<%=count%>" class="form-control" placeholder="Enter Title" >
+                                            <input type="text" name="translate[<%=count%>][title]" id="title_<%=count%>" class="form-control" placeholder="Enter Title" value="<%=title%>" >
                                         </div>
                                         <div class="col-lg-6">
                                             <label>Company Name:</label>
-                                            <input type="text" name="translate[<%=count%>][company_name]" id="company_name_<%=count%>" class="form-control" placeholder="Enter Company Name" >
+                                            <input type="text" name="translate[<%=count%>][company_name]" id="company_name_<%=count%>" class="form-control" placeholder="Enter Company Name" value="<%=company_name%>">
                                          </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-lg-12">
                                             <label>Description:</label>
-                                            <textarea class="ckeditor form-control" name="translate[<%=count%>][description]" id="description_<%=count%>" placeholder="Enter Description" rows="6"></textarea>
+                                            <textarea class="ckeditor form-control" name="translate[<%=count%>][description]" id="description_<%=count%>" placeholder="Enter Description" rows="6"><%=description%></textarea>
                                         </div>
                                     </div>
 									<input type="hidden" name="translate[<%=count%>][language]"
 									value="<%=language.shortcode%>">
                                 </div>
                                 <% count++ }%>
-                                <%})%>
+								<%})%>
                             </div>
                             <!-- hidden user id -->
                         </div>
@@ -164,7 +210,7 @@
                                 <div class="row">
                                     <div class="col-lg-6">
 										<input type="hidden" name="art_furniture_id"
-										value="<%=response.result.artoffurniture_data._id%>">
+										value="<%=result.artoffurniture_data._id%>">
 									<input type="hidden" name="delImgIds" id="delImgIds" value="">
                                         <button type="submit" class="btn btn-primary">Update</button>
                                         <a href="<%= generateUrl('artoffurniture.list') %>" class="btn btn-secondary">Cancel</a>

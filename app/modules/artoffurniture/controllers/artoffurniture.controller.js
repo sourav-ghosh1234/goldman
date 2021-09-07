@@ -5,7 +5,6 @@ const routeLabel = require('route-label');
 const router = express.Router();
 const namedRouter = routeLabel(router);
 const fs = require('fs');
-const { Console } = require('console');
 const gm = require('gm').subClass({
     imageMagick: true
 });
@@ -28,8 +27,6 @@ class ArtController {
 
             result.languages = languages;
 
-            console.log(result.languages,furnitureCategory);
-
 			res.render('artoffurniture/views/create.ejs', {
 				page_name: 'artoffurniture-management',
 				page_title: 'Create Art Of Furniture',
@@ -49,7 +46,6 @@ class ArtController {
 			
 			if (_.isEmpty(art)) {
                 if (req.files.length > 0) {
-                   console.log(req.files,'req.files',req.body)
                    req.body.imageGallery = [];
                    req.files.forEach(file => {
                        if (file.fieldname.search('gallery') != -1) {
@@ -67,8 +63,6 @@ class ArtController {
                    });
                 }
 				let artSave = await artOfFurnitureRepo.save(req.body); 
-
-                console.log(artSave,'artSave')
 
 				if(artSave){
 					req.flash('success', "Art of furniture created successfully.");
@@ -102,7 +96,11 @@ class ArtController {
             let artOfFurnitureInfo = await artOfFurnitureRepo.getById(req.params.id);
 
             let colourData = [];
-
+            var translateArr = [];
+            for (var i = 0; i < artOfFurnitureInfo.translate.length; i++) {
+                translateArr[artOfFurnitureInfo.translate[i].language] = artOfFurnitureInfo.translate[i]
+            }
+            artOfFurnitureInfo.translate = translateArr;
             result.languages = languages;
 
             if (!_.isEmpty(artOfFurnitureInfo)) {
@@ -129,23 +127,63 @@ class ArtController {
     */
     async update (req, res){
         try {
-            const artId = req.body.art_id;
-           let art =  await artOfFurnitureRepo.getByField({ 'title': { $regex: req.body.title, $options: 'i' } ,_id:{$ne:artId}});
-            if (_.isEmpty(art)) {
-                let artData = await artOfFurnitureRepo.getById(artId);
-                if (req.files.length > 0) {
+            const artId = req.body.art_furniture_id;
+           let artData =  await artOfFurnitureRepo.getByField({ 'title': { $regex: req.body.title, $options: 'i' } ,_id:{$ne:artId}});
 
+           console.log(artData,artId,'==============')
 
-                 
+            if (_.isEmpty(artData)) {
+                let artFurnitureData = await artOfFurnitureRepo.getById(artId);
+
+                let imageArray = artFurnitureData.imageGallery;
+
+                console.log(req.body,'req.body+++++++++++',artFurnitureData)
+
+                if (req.files && req.files.length > 0) {
+
+                    req.files.forEach(file => {
+                        if (file.fieldname.search('gallery') != -1) {
+                            let fileIndex = file.fieldname.split('_')[1];
+                            gm('./public/uploads/artoffurniture/' + file.filename).resize(200, 200, '!').write('./public/uploads/artoffurniture/thumb/' + file.filename, function (err, result) {
+                                if (!err) console.log('done');
+                            });
+                            imageArray.push(file.filename);
+                        } else {
+                            gm('./public/uploads/artoffurniture/' + file.filename).resize(200, 200, '!').write('./public/uploads/artoffurniture/thumb/' + file.filename, function (err, result) {
+                                if (!err) console.log('done');
+                            });
+                            req.body[file.fieldname] = file.filename;
+                            if (artFurnitureData.image != null && artFurnitureData.image != '' && fs.existsSync(`./public/uploads/artoffurniture/${artFurnitureData.image}`)) {
+                                fs.unlinkSync('./public/uploads/artoffurniture/' + artFurnitureData.image);
+                            }
+                        }
+                    });
+                }
+
+                if (req.body.delImgIds) {
+                    var delimageList = req.body.delImgIds.split(',');
+                    imageArray = imageArray.filter(item => !delimageList.includes(item));
+                    req.body.imageGallery = imageArray;
+
+                    for (let i in delimageList) {
+                        if (fs.existsSync(`./public/uploads/artoffurniture/${delimageList[i]}`)) {
+                            fs.unlinkSync('./public/uploads/artoffurniture/' + delimageList[i]);
+                        }
+                        if (fs.existsSync(`./public/uploads/artoffurniture/thumb/${delimageList[i]}`)) {
+                            fs.unlinkSync('./public/uploads/artoffurniture/thumb/' + delimageList[i]);
+                        }
+                    }
+                } else {
+                    req.body.imageGallery = imageArray;
                 }
                     let artUpdate = await artOfFurnitureRepo.updateById(req.body,artId)
                     if(artUpdate) {
-                        req.flash('success', "Art updated successfully");
+                        req.flash('success', "Art of furniture updated successfully");
                         res.redirect(namedRouter.urlFor('artoffurniture.list'));
                     }
                     
                 }else{
-                req.flash('error', "Art is already available!");
+                req.flash('error', "Art of furniture is already available!");
                 res.redirect(namedRouter.urlFor('artoffurniture.edit', { id: artId }));
             }    
         }catch(e){
@@ -160,10 +198,14 @@ class ArtController {
     async list (req, res){
             try
             {
+                let response = {};
+                let furnitureCategory = await furnitureCategoryRepo.getAllByField({'isDeleted':false,'status':'Active'});
+                response.CategoryData = furnitureCategory;
                 res.render('artoffurniture/views/list.ejs', {
                     page_name: 'artoffurniture-management',
                     page_title: 'Art Of Furniture List',
                     user: req.user,
+                    response:response
                     
                 });
         } catch(e){
@@ -201,7 +243,7 @@ class ArtController {
 			if(!_.isEmpty(art)){
 				let artStatus = (art.status == "Active") ? "Inactive" : "Active";
 				let artUpdate= await artOfFurnitureRepo.updateById({"status": artStatus }, req.params.id);
-				req.flash('success', "Art status has changed successfully" );
+				req.flash('success', "Art of furniture status has changed successfully" );
 				res.redirect(namedRouter.urlFor('artoffurniture.list'));
 			}
 			else {
@@ -229,7 +271,7 @@ class ArtController {
                         fs.unlinkSync('./public/uploads/art/thumb/' + artDelete.image);
                     }
                 }
-                req.flash('success','Art removed successfully');
+                req.flash('success','Art of furniture removed successfully');
                 res.redirect(namedRouter.urlFor('artoffurniture.list'));
             } 
         }catch(e){

@@ -1,5 +1,6 @@
 const ArtOfFurniture = require('artoffurniture/models/artoffurniture.model');
 const perPage = config.PAGINATION_PERPAGE;
+const mongoose = require('mongoose');
 
 class ArtOfFurnitureRepository {
     constructor() {}
@@ -24,6 +25,12 @@ class ArtOfFurnitureRepository {
 			if (_.isObject(req.body.query) && _.has(req.body.query, 'Status')) {
 				and_clauses.push({ "status": req.body.query.Status });
 			}
+
+            
+            if (_.isObject(req.body.query) && _.has(req.body.query, 'category_id')) {
+				and_clauses.push({ "category":  mongoose.Types.ObjectId(req.body.query.category_id) });
+			}
+
 			conditions['$and'] = and_clauses;
 	
 			var sortOperator = { "$sort": {} };
