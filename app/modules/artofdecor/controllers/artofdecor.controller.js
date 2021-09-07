@@ -34,7 +34,7 @@ class artOfDecorController {
                 result.artofdecor_data = artofdecor;
                 res.render('artofdecor/views/edit.ejs', {
                     page_name: 'artofdecor-management',
-                    page_title: 'Home Content Edit',
+                    page_title: 'Art Decor Edit',
                     user: req.user,
                     response: result
                 });
@@ -75,12 +75,13 @@ class artOfDecorController {
             if (req.body.delImgIds) {
                 var delimageList = req.body.delImgIds.split(',');
                 imageArr = imageArr.filter(item => !delimageList.includes(item));
-                req.body.image = imageArr; 
+                
             }
-            
+            req.body.image = imageArr; 
+
             let artOfDecorUpdateById = await artofdecorRepo.updateById(req.body, artofDecorId);
             if (artOfDecorUpdateById) {
-                req.flash('success', "Art Of Living Updated Successfully");
+                req.flash('success', "Art Of Decor Updated Successfully");
                 res.redirect(namedRouter.urlFor('artofdecor.edit'));
             }
         } catch (e) {
