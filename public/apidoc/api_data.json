@@ -375,44 +375,6 @@
   },
   {
     "type": "get",
-    "url": "/amenitie/list",
-    "title": "Amenitie List",
-    "version": "1.0.0",
-    "group": "Master",
-    "success": {
-      "examples": [
-        {
-          "title": "Success",
-          "content": "{\n    \"status\": 200,\n    \"data\": [\n        {\n            \"title\": \"Cafe and restaurant\",\n            \"icon\": \"\",\n            \"description\": \"Cafe and restaurant\",\n            \"language\": \"en\",\n            \"isDeleted\": false,\n            \"status\": \"Active\",\n            \"_id\": \"612388a3c0b2e90c83939882\",\n            \"translate\": [\n                {\n                    \"title\": \"\",\n                    \"description\": \"\",\n                    \"language\": \"fr\",\n                    \"_id\": \"612388a3c0b2e90c83939883\"\n                },\n                {\n                    \"title\": \"\",\n                    \"description\": \"\",\n                    \"language\": \"de\",\n                    \"_id\": \"612388a3c0b2e90c83939884\"\n                }\n            ],\n            \"__v\": 0\n        }\n    ],\n    \"message\": \"Amenities fetched successfully.\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "app/routes/api/masterdata.routes.js",
-    "groupTitle": "Master",
-    "name": "GetAmenitieList"
-  },
-  {
-    "type": "get",
-    "url": "/characteristic/list",
-    "title": "Characteristic List",
-    "version": "1.0.0",
-    "group": "Master",
-    "success": {
-      "examples": [
-        {
-          "title": "Success",
-          "content": "{\n    \"status\": 200,\n    \"data\": [\n        {\n            \"description\": \"Parkview\",\n            \"language\": \"en\",\n            \"isDeleted\": false,\n            \"status\": \"Active\",\n            \"_id\": \"612388e0c0b2e90c8393988a\",\n            \"title\": \"Parkview\",\n            \"translate\": [\n                {\n                    \"title\": \"\",\n                    \"description\": \"\",\n                    \"language\": \"fr\",\n                    \"_id\": \"612388e0c0b2e90c8393988b\"\n                },\n                {\n                    \"title\": \"\",\n                    \"description\": \"\",\n                    \"language\": \"de\",\n                    \"_id\": \"612388e0c0b2e90c8393988c\"\n                }\n            ],\n            \"__v\": 0\n        }\n    ],\n    \"message\": \"Characteristics fetched successfully.\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "app/routes/api/masterdata.routes.js",
-    "groupTitle": "Master",
-    "name": "GetCharacteristicList"
-  },
-  {
-    "type": "get",
     "url": "/city/list",
     "title": "City List",
     "version": "1.0.0",
@@ -433,7 +395,7 @@
   {
     "type": "get",
     "url": "/country/list",
-    "title": "Country List",
+    "title": "country List",
     "version": "1.0.0",
     "group": "Master",
     "success": {
@@ -593,62 +555,6 @@
             "optional": false,
             "field": "property_type",
             "description": "<p>Property Type Id</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "country",
-            "description": "<p>Country Id</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "number",
-            "optional": false,
-            "field": "price",
-            "description": "<p>Price</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "number",
-            "optional": false,
-            "field": "bed_room",
-            "description": "<p>Bed Rooms</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "number",
-            "optional": false,
-            "field": "total_area",
-            "description": "<p>Total Area</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "search_text",
-            "description": "<p>Search Text [title, subtitle, suburb etc.]</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "array",
-            "optional": false,
-            "field": "amenities",
-            "description": "<p>Amenities</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "array",
-            "optional": false,
-            "field": "characteristics",
-            "description": "<p>Characteristics</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "object",
-            "optional": false,
-            "field": "sort",
-            "description": "<p>Sort [e.g : { &quot;field&quot;:&quot;price&quot;,&quot;sort&quot;:&quot;asc&quot;}]</p>"
           }
         ]
       }
