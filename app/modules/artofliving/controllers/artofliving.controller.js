@@ -75,8 +75,9 @@ class artOfLivingController {
             if (req.body.delImgIds) {
                 var delimageList = req.body.delImgIds.split(',');
                 imageArr = imageArr.filter(item => !delimageList.includes(item));
-                req.body.image = imageArr; 
+                
             }
+            req.body.image = imageArr; 
             
             let artOfLivingUpdateById = await artoflivingRepo.updateById(req.body, artOfLivingId);
             if (artOfLivingUpdateById) {
