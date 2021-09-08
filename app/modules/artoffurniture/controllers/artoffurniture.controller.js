@@ -130,14 +130,10 @@ class ArtController {
             const artId = req.body.art_furniture_id;
            let artData =  await artOfFurnitureRepo.getByField({ 'title': { $regex: req.body.title, $options: 'i' } ,_id:{$ne:artId}});
 
-           console.log(artData,artId,'==============')
-
             if (_.isEmpty(artData)) {
                 let artFurnitureData = await artOfFurnitureRepo.getById(artId);
 
                 let imageArray = artFurnitureData.imageGallery;
-
-                console.log(req.body,'req.body+++++++++++',artFurnitureData)
 
                 if (req.files && req.files.length > 0) {
 
