@@ -16,7 +16,7 @@ const ColorRepository = {
             if (_.isObject(req.body.query) && _.has(req.body.query, 'generalSearch')) {
                 and_clauses.push({
                     $or: [{
-                        'title': {
+                        'name': {
                             $regex: req.body.query.generalSearch,
                             $options: 'i'
                         }

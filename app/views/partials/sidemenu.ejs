@@ -155,33 +155,26 @@
                         </ul>
                     </div>
                 </li>
-                <li class="kt-menu__item " aria-haspopup="true">
+                <!-- <li class="kt-menu__item " aria-haspopup="true">
                     <a href="<%= generateUrl('estatetype.list') %>" class="kt-menu__link <%=(page_name == 'estatetype-management') ? 'active' : ''%>">
                         <i class="kt-menu__link-icon fas fa-crosshairs"></i>
                         <span class="kt-menu__link-text">Estate Type</span>
                     </a>
-                </li>
+                </li> -->
 
-                <li class="kt-menu__item " aria-haspopup="true">
-                    <a href="<%= generateUrl('artoffurniture.list') %>" class="kt-menu__link <%=(page_name == 'artoffurniture-management') ? 'active' : ''%>">
-                        <i class="fab fa-servicestack"></i>
-                        <span class="kt-menu__link-text">Art of Furniture Management</span>
-                    </a>
-                </li>
-                
-                <li class="kt-menu__item " aria-haspopup="true">
+                <!-- <li class="kt-menu__item " aria-haspopup="true">
                     <a href="<%= generateUrl('services.list') %>" class="kt-menu__link <%=(page_name == 'services-management') ? 'active' : ''%>">
                         <i class="fab fa-servicestack"></i>
                         <span class="kt-menu__link-text">Service Management</span>
                     </a>
-                </li>
+                </li> -->
 
-                <li class="kt-menu__item " aria-haspopup="true">
+                <!-- <li class="kt-menu__item " aria-haspopup="true">
                     <a href="<%= generateUrl('art.list') %>" class="kt-menu__link <%=(page_name == 'art-management') ? 'active' : ''%>">
                         <i class="fas fa-stamp"></i>
                         <span class="kt-menu__link-text">Art Management</span>
                     </a>
-                </li>
+                </li> -->
                 <li class="kt-menu__item " aria-haspopup="true">
                     <a href="<%= generateUrl('news.list') %>" class="kt-menu__link <%=(page_name == 'news-management') ? 'active' : ''%>">
                         <i class="flaticon-edit-1"></i>
@@ -209,25 +202,66 @@
                     </a>
                 </li>
 
-                <li class="kt-menu__item " aria-haspopup="true">
-                    <a href="<%= generateUrl('art_furniture.edit') %>" class="kt-menu__link <%=(page_name == 'art_furniture-management') ? 'active' : ''%>">
-                        <i class="fas fa-couch"></i>
+                <li class="kt-menu__item kt-menu__item--submenu <%=(page_name == 'artoffurniture-management' || page_name== 'art_furniture-management') ? 'kt-menu__item--open' : ''%>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                    <a href="javascript:;" class="kt-menu__link kt-menu__toggle
+                        <%=(page_name== 'artoffurniture-management' || page_name== 'art_furniture-management') ? 'active' : ''%>">
+                        <i class="kt-menu__link-icon fas fa-building"></i>
                         <span class="kt-menu__link-text">Art Of Furniture</span>
+                        <i class="kt-menu__ver-arrow la la-angle-right"></i>
+                    </a>
+                    <div class="kt-menu__submenu " kt-hidden-height="80">
+                        <span class="kt-menu__arrow"></span>
+                        <ul class="kt-menu__subnav">
+                            <li class="kt-menu__item " aria-haspopup="true">
+                                <a href="<%= generateUrl('art_furniture.edit') %>" class="kt-menu__link <%=(page_name == 'art_furniture-management') ? 'active' : ''%>">
+                                    <i class="kt-menu__link-icon fas fa-list"></i>
+                                    <span class="kt-menu__link-text">Content</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="kt-menu__subnav">
+                            <li class="kt-menu__item " aria-haspopup="true">
+                                <a href="<%= generateUrl('artoffurniture.list') %>" class="kt-menu__link <%=(page_name == 'artoffurniture-management') ? 'active' : ''%>">
+                                    <i class="kt-menu__link-icon fas fa-list"></i>
+                                    <span class="kt-menu__link-text">Furnitures</span>
+                                </a>
+                            </li>
+                        </ul>
+                     </div>
+                </li>
+
+                <li class="kt-menu__item kt-menu__item--submenu <%=(page_name== 'artofdecor-management') ? 'kt-menu__item--open' : ''%>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                    <a href="javascript:;" class="kt-menu__link kt-menu__toggle
+                        <%=(page_name== 'artofdecor-management') ? 'active' : ''%>">
+                        <i class="kt-menu__link-icon fas fa-building"></i>
+                        <span class="kt-menu__link-text">Art Of Decor</span>
+                        <i class="kt-menu__ver-arrow la la-angle-right"></i>
+                    </a>
+                    <div class="kt-menu__submenu " kt-hidden-height="80">
+                        <span class="kt-menu__arrow"></span>
+                        <ul class="kt-menu__subnav">
+                            <li class="kt-menu__item " aria-haspopup="true">
+                                <a href="<%= generateUrl('artofdecor.edit') %>" class="kt-menu__link <%=(page_name == 'artofdecor-management') ? 'active' : ''%>">
+                                    <i class="kt-menu__link-icon fas fa-list"></i>
+                                    <span class="kt-menu__link-text">Content</span>
+                                </a>
+                            </li>
+                        </ul>
+                      </div>
+                </li>
+                <li class="kt-menu__item " aria-haspopup="true">
+                    <a href="<%= generateUrl('color.list') %>" class="kt-menu__link <%=(page_name == 'color-management') ? 'active' : ''%>">
+                        <i class="fas fa-list"></i>
+                        <span class="kt-menu__link-text">Color Management</span>
                     </a>
                 </li>
 
-                <li class="kt-menu__item " aria-haspopup="true">
-                    <a href="<%= generateUrl('artofdecor.edit') %>" class="kt-menu__link <%=(page_name == 'artofdecor-management') ? 'active' : ''%>">
-                        <i class="fas fa-gopuram"></i>
-                        <span class="kt-menu__link-text">Art Of Decor</span>
-                    </a>
-                </li> 
 
                <li class="kt-menu__item kt-menu__item--submenu <%=(page_name == 'artofliving-management' || page_name== 'countryestate-management' || page_name== 'vineyard-investment-management' || page_name== 'yachting-world' || page_name=='boat-charter-service-management') ? 'kt-menu__item--open' : ''%>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
                     <a href="javascript:;" class="kt-menu__link kt-menu__toggle
                         <%=(page_name == 'artofliving-management' || page_name== 'countryestate-management' || page_name== 'vineyard-investment-management' || page_name== 'yachting-world' || page_name=='boat-charter-service-management') ? 'active' : ''%>">
                         <i class="kt-menu__link-icon fas fa-building"></i>
-                        <span class="kt-menu__link-text">Art Of Living Management</span>
+                        <span class="kt-menu__link-text">Art Of Living</span>
                         <i class="kt-menu__ver-arrow la la-angle-right"></i>
                     </a>
                     <div class="kt-menu__submenu " kt-hidden-height="80">
@@ -236,7 +270,7 @@
                             <li class="kt-menu__item " aria-haspopup="true">
                                 <a href="<%= generateUrl('artofliving.edit') %>" class="kt-menu__link <%=(page_name == 'artofliving-management') ? 'active' : ''%>">
                                     <i class="kt-menu__link-icon fas fa-list"></i>
-                                    <span class="kt-menu__link-text">Art Of Living</span>
+                                    <span class="kt-menu__link-text">Content</span>
                                 </a>
                             </li>
                         </ul>
@@ -279,7 +313,7 @@
                     <a href="javascript:;" class="kt-menu__link kt-menu__toggle
                         <%=(page_name == 'service-content-management' || page_name== 'Exclusive-properties-management' || page_name=='investment-realty-management' || page_name=='life-annuities-management' || page_name=='service-property-management' || page_name=='renovation-interior-management') ? 'active' : ''%>">
                         <i class="kt-menu__link-icon fas fa-building"></i>
-                        <span class="kt-menu__link-text">Service Content Management</span>
+                        <span class="kt-menu__link-text">Service</span>
                         <i class="kt-menu__ver-arrow la la-angle-right"></i>
                     </a>
                     <div class="kt-menu__submenu " kt-hidden-height="80">
@@ -288,7 +322,7 @@
                             <li class="kt-menu__item " aria-haspopup="true">
                                 <a href="<%= generateUrl('services.content.edit') %>" class="kt-menu__link <%=(page_name == 'service-content-management') ? 'active' : ''%>">
                                     <i class="kt-menu__link-icon fas fa-list"></i>
-                                    <span class="kt-menu__link-text">Service Content</span>
+                                    <span class="kt-menu__link-text">Content</span>
                                 </a>
                             </li>
                         </ul>
@@ -335,18 +369,18 @@
                       </div>
                 </li>
 
-                <li class="kt-menu__item " aria-haspopup="true">
+                <!-- <li class="kt-menu__item " aria-haspopup="true">
                     <a href="<%= generateUrl('pagecontent.list') %>" class="kt-menu__link <%=(page_name == 'pagecontent-management') ? 'active' : ''%>">
                         <i class="fas fa-pen-nib"></i>
                         <span class="kt-menu__link-text">Pagecontent Management</span>
                     </a>
-                </li>
-                <li class="kt-menu__item " aria-haspopup="true">
+                </li> -->
+                <!-- <li class="kt-menu__item " aria-haspopup="true">
                     <a href="<%= generateUrl('cms.list') %>" class="kt-menu__link <%=(page_name == 'cms-management') ? 'active' : ''%>">
                         <i class="kt-menu__link-icon fas fa-server"></i>
                         <span class="kt-menu__link-text">CMS</span>
                     </a>
-                </li>
+                </li> -->
 
             </ul>
         </div>
