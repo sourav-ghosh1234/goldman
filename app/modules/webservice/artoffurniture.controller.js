@@ -1,9 +1,34 @@
+const artFurnitureContentRepo = require('art_furniture/repositories/art_furniture.repository');
 const artOfFurnitureRepo = require('artoffurniture/repositories/artoffurniture.repository');
 const furnitureCategoryRepo = require('furniture_category/repositories/furniture_category.repository');
+const mongoose = require('mongoose');
 
 
 class newsController {
 	constructor() { }
+
+    async getContent(req, res) {
+        try {
+          let art_furnitureStaticText = await artFurnitureContentRepo.getByField({});
+          if (art_furnitureStaticText) {
+            return {
+              status: 200,
+              data: art_furnitureStaticText,
+              message: 'Text fetched successfully.'
+            }
+          } else {
+            return {
+              status: 201,
+              data: [],
+              message: 'There are no data at this moment.'
+            }
+          }
+        } catch (error) {
+          return res.status(500).send({
+            message: error.message
+          });
+        }
+      }
 
 	async getArtFurnitureList(req, res) {
 		try {
@@ -13,7 +38,7 @@ class newsController {
                 if(!_.isEmpty(catInfo)){
                     req.body.category_id=  catInfo._id;
 
-                    let listData = await artOfFurnitureRepo.getAllArtFurniture(req);
+                    let listData = await artOfFurnitureRepo.getAllArtOfFurniture(req);
 
                     if (!_.isEmpty(listData)) {
                         return { status: 200, 
@@ -34,7 +59,33 @@ class newsController {
 		catch (error) {
 			return res.status(500).send({ message: error.message });
 		}
-	}
+	};
+
+
+    async getArtFurnitureDetails(req,res){
+        try{
+            let art_furniture_id = mongoose.Types.ObjectId(req.params.id);
+
+            if (art_furniture_id == null || art_furniture_id == '') {
+                return { status: 201, data: {}, message: 'Missing art of furniture id!' }
+            }
+
+            let artData = await artOfFurnitureRepo.getArtOfFurnitureDetails({_id:art_furniture_id});
+
+            if (!_.isEmpty(artData)) {
+                return {
+                    status: 200,
+                    data: artData,
+                    message: 'Art Of Furniture fetched successfully.'
+                }
+            } else {
+                return { status: 201, data: {}, message: 'No Record Found!' }
+            }
+
+        }catch (error) {
+			return res.status(500).send({ message: error.message });
+		}
+    }
 
 }
 
