@@ -164,6 +164,93 @@ class ArtOfFurnitureRepository {
             return error;
         }
     }
+
+
+    async getAllArtOfFurniture(req){
+        try {
+			var conditions = {};
+			var and_clauses = [];
+			and_clauses.push({ "isDeleted": false,'status':'Active' });
+	
+            
+            if (_.isObject(req.body) && _.has(req.body, 'category_id')) {
+				and_clauses.push({ "category":  mongoose.Types.ObjectId(req.body.category_id) });
+			}
+
+            console.log(and_clauses,req.body)
+
+			conditions['$and'] = and_clauses;
+	
+			var sortOperator = { "$sort": {} };
+			if (_.has(req.body, 'sort')) {
+				var sortField = req.body.sort.field;
+				if (req.body.sort.sort == 'desc') {
+					var sortOrder = -1;
+				}
+				else if (req.body.sort.sort == 'asc') {
+					var sortOrder = 1;
+				}
+				sortOperator["$sort"][sortField] = sortOrder;
+			}
+			else {
+				sortOperator["$sort"]['_id'] = -1;
+			}
+	
+			var aggregate =  ArtOfFurniture.aggregate([
+                {
+                    $lookup: {
+                        from: "furniture_categories",
+                        localField: "category",
+                        foreignField: "_id",
+                        as: "categoryDetails",
+                    },
+                },
+                { $unwind: { path: "$categoryDetails", preserveNullAndEmptyArrays: true } },
+				{ $match: conditions },
+				sortOperator
+				]);
+	
+			var options = { page: req.body.page, limit: req.body.limit };
+			let allArt = await ArtOfFurniture.aggregatePaginate(aggregate, options);
+			return allArt;
+		}
+		catch (e) {
+			throw (e);
+		}
+    }
+
+
+    async getArtOfFurnitureDetails(param){
+        try {
+			var conditions = {};
+			var and_clauses = [];
+			and_clauses.push({ "isDeleted": false,'status':'Active' });
+	
+            and_clauses.push(param);
+
+            console.log(and_clauses,'and_clauses')
+
+			conditions['$and'] = and_clauses;
+
+
+			var aggregate = await ArtOfFurniture.aggregate([
+				{ $match: conditions },
+                {
+                    $lookup: {
+                        from: "furniture_categories",
+                        localField: "category",
+                        foreignField: "_id",
+                        as: "categoryDetails",
+                    },
+                },
+                { $unwind: { path: "$categoryDetails", preserveNullAndEmptyArrays: true } },
+				]);
+			return aggregate;
+		}
+		catch (e) {
+			throw (e);
+		}
+    }
 }
 
 module.exports = new ArtOfFurnitureRepository();

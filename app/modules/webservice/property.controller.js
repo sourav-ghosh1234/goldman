@@ -8,7 +8,7 @@ class newsController {
         try {
             let listData = await propertyRepo.getAllProperty(req);
 
-            if (!_.isEmpty(listData.data)) {
+            if (!_.isEmpty(listData)) {
                 return {
                     status: 200,
                     data: listData.data,
