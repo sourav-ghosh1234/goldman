@@ -9,6 +9,7 @@ const gm = require('gm').subClass({
     imageMagick: true
 });
 const languageRepo = require('language/repositories/language.repository');
+const colorRepo = require('color/repositories/color.repository');
 
 class ArtController {
 	constructor() {
@@ -23,7 +24,7 @@ class ArtController {
             });
             let furnitureCategory = await furnitureCategoryRepo.getAllByField({'isDeleted':false,'status':'Active'});
 
-            let colourData = [];
+            let colourData = await colorRepo.getAllByField({'isDeleted':false,'status':'Active'});
 
             result.languages = languages;
 
@@ -95,7 +96,7 @@ class ArtController {
             let furnitureCategory = await furnitureCategoryRepo.getAllByField({'isDeleted':false,'status':'Active'});
             let artOfFurnitureInfo = await artOfFurnitureRepo.getById(req.params.id);
 
-            let colourData = [];
+            let colourData = await colorRepo.getAllByField({'isDeleted':false,'status':'Active'});;
             var translateArr = [];
             for (var i = 0; i < artOfFurnitureInfo.translate.length; i++) {
                 translateArr[artOfFurnitureInfo.translate[i].language] = artOfFurnitureInfo.translate[i]
