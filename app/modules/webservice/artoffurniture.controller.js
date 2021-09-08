@@ -1,3 +1,4 @@
+const artFurnitureContentRepo = require('art_furniture/repositories/art_furniture.repository');
 const artOfFurnitureRepo = require('artoffurniture/repositories/artoffurniture.repository');
 const furnitureCategoryRepo = require('furniture_category/repositories/furniture_category.repository');
 const mongoose = require('mongoose');
@@ -5,6 +6,29 @@ const mongoose = require('mongoose');
 
 class newsController {
 	constructor() { }
+
+    async getContent(req, res) {
+        try {
+          let art_furnitureStaticText = await artFurnitureContentRepo.getByField({});
+          if (art_furnitureStaticText) {
+            return {
+              status: 200,
+              data: art_furnitureStaticText,
+              message: 'Text fetched successfully.'
+            }
+          } else {
+            return {
+              status: 201,
+              data: [],
+              message: 'There are no data at this moment.'
+            }
+          }
+        } catch (error) {
+          return res.status(500).send({
+            message: error.message
+          });
+        }
+      }
 
 	async getArtFurnitureList(req, res) {
 		try {
