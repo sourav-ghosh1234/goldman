@@ -224,7 +224,7 @@ class ArtController {
 				var sortField = '_id';
 			}
 			let meta = {"page": req.body.pagination.page, "pages": art.pageCount, "perpage": req.body.pagination.perpage, "total": art.totalCount, "sort": sortOrder, "field": sortField};
-			return {status: 200, meta: meta, data:art.data, message: `Data fetched succesfully.`};
+            return {status: 200, meta: meta, data:art.data, message: `Data fetched succesfully.`};
 		}
 		catch(e){
 			return {status: 500,data: [],message: e.message};

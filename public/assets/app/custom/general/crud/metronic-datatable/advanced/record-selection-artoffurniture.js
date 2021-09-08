@@ -60,7 +60,7 @@ var KTDatatableCms = function () {
                 sortable: false,
                 width: 150,
                 template: function (row) {
-                    return row.categoryDetails.name ;
+                    return row.company_name ;
                 },
             },
             {
@@ -79,6 +79,15 @@ var KTDatatableCms = function () {
                 width: 100,
                 template: function (row) {
                     return  '$'+row.price ;
+                }, 
+            },
+            {
+                field: 'colour',
+                title: 'Colour',
+                sortable: true,
+                width: 100,
+                template: function (row) {
+                    return  row.colour.join(",  ");
                 }, 
             },
             {
