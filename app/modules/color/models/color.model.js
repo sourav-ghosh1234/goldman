@@ -10,7 +10,6 @@ const ColorSchema = new Schema({
   language: {type:String, default: 'en'},
   translate: [{
     name: { type: String, default: '' },
-    code: { type: String, default: '' },
     language: { type: String, default: '' }
   }],
   isDeleted: { type: Boolean, default: false, enum: [true, false] },

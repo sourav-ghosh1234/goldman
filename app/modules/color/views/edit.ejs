@@ -64,7 +64,6 @@
                             let code = ''
                             if(_.has(response.color_data.translate,language.shortcode)) {
                                 name =  response.color_data.translate[language.shortcode].name
-                                code =  response.color_data.translate[language.shortcode].code
                             }
                             %>
                                         <div class="tab-pane" id="kt_tabs_<%=language.shortcode%>" role="tabpanel">
@@ -75,14 +74,7 @@
                                                         value="<%=name%>">
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
-                                                <div class="col-lg-6">
-                                                    <label>Code:</label>
-                                                    <input type="text" name="translate[<%=count%>][code]" id="code_<%=count%>" class="form-control" placeholder="Enter Code"
-                                                        value="<%=code%>">
-                                                </div>
-                                            </div>
-                                            <input type="hidden" name="translate[<%=count%>][language]" value="<%=language.shortcode%>">
+                                           <input type="hidden" name="translate[<%=count%>][language]" value="<%=language.shortcode%>">
                                         </div>
                                         <% count++ }%>
                                             <%})%>
