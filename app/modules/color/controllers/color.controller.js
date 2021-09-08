@@ -98,7 +98,7 @@ class colorController {
     async store(req, res) {
         try {
             let colorData = await colorRepo.getByField({
-                'title': req.body.title
+                'name': req.body.name
             });
             if (_.isEmpty(colorData)) {
                 let colorInsert = colorRepo.save(req.body);
@@ -168,7 +168,7 @@ class colorController {
             let data = await colorRepo.getById(colorId);
             var chkTitle = {
                 isDeleted: false,
-                title: req.body.title,
+                name: req.body.name,
                 _id: { $ne: mongoose.Types.ObjectId(colorId) }
             };
 
