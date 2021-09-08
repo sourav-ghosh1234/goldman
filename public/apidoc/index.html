@@ -182,77 +182,6 @@
   </article>
 </script>
 
-<script id="template-article-query-block" type="text/x-handlebars-template">
-  {{#if article.query}}
-    <h2>Query Parameter(s)</h2>
-    <table>
-      <thead>
-        <tr>
-          <th style="width: 30%">{{#if ../_col1}}{{__ ../_col1}}{{else}}{{__ "Field"}}{{/if}}</th>
-          {{#unless this.Type compare=null}}
-            <th style="width: 10%">{{__ "Type"}}</th>
-          {{/unless}}
-          <th style="width: {{#if ../_hasType}}60%{{else}}70%{{/if}}">{{__ "Description"}}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each params}}
-          <tr>
-            <td class="code">{{this.field}}</td>
-            {{#unless this.Type compare=null}}
-              <td>{{this.type}}</td>
-            {{/unless}}
-            <td>{{{nl2br this.description}}}</td>
-          </tr>
-        {{/each}}
-      </tbody>
-    </table>
-  {{/if}}
-</script>
-
-<script id="template-article-body-block" type="text/x-handlebars-template">
-  {{#if article.body}}
-    <h2>Request Body</h2>
-    <table>
-      <thead>
-        <tr>
-          <th style="width: 30%">{{#if ../_col1}}{{__ ../_col1}}{{else}}{{__ "Field"}}{{/if}}</th>
-          {{#unless this.Type compare=null}}
-            <th style="width: 10%">{{__ "Type"}}</th>
-          {{/unless}}
-          <th style="width: {{#if ../_hasType}}60%{{else}}70%{{/if}}">{{__ "Description"}}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each params}}
-          <tr>
-            <td class="code">{{this.field}}</td>
-            {{#unless this.Type compare=null}}
-              <td>{{this.type}}</td>
-            {{/unless}}
-            <td>
-              {{{nl2br this.description}}}
-              {{#if defaultValue}}
-                <p class="default-value">{{__ "Default value:"}} <code>{{{defaultValue}}}</code></p>
-              {{/if}}
-              {{#if size}}
-                <p class="type-size">{{__ "Size range:"}} <code>{{{size}}}</code></p>
-              {{/if}}
-              {{#if allowedValues}}
-                <p class="type-size">{{__ "Allowed values:"}}
-                  {{#each allowedValues}}
-                    <code>{{{this}}}</code>{{#unless @last}}, {{/unless}}
-                  {{/each}}
-                </p>
-              {{/if}}
-            </td>
-          </tr>
-        {{/each}}
-      </tbody>
-    </table>
-  {{/if}}
-</script>
-
 <script id="template-article-param-block" type="text/x-handlebars-template">
   {{#if params}}
     {{#each params.fields}}
@@ -268,7 +197,7 @@
         <tbody>
         {{#each this}}
           <tr>
-            <td class="code">{{{splitFill field "." "&nbsp;&nbsp;"}}}{{#if optional}}<span class="label label-optional">{{__ "optional"}}</span>{{/if}}</td>
+            <td class="code">{{{splitFill field "." "&nbsp;&nbsp;"}}}{{#if optional}} <span class="label label-optional">{{__ "optional"}}</span>{{/if}}</td>
             {{#if ../../_hasType}}
               <td>
                 {{{type}}}
