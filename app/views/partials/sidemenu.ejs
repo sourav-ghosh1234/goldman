@@ -230,7 +230,7 @@
                      </div>
                 </li>
 
-                <li class="kt-menu__item kt-menu__item--submenu <%=(page_name== 'artofdecor-management') ? 'kt-menu__item--open' : ''%>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                <li class="kt-menu__item kt-menu__item--submenu <%=(page_name== 'artofdecor-management' || page_name == 'artDecor-management') ? 'kt-menu__item--open' : ''%>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
                     <a href="javascript:;" class="kt-menu__link kt-menu__toggle
                         <%=(page_name== 'artofdecor-management') ? 'active' : ''%>">
                         <i class="kt-menu__link-icon fas fa-building"></i>
@@ -244,6 +244,14 @@
                                 <a href="<%= generateUrl('artofdecor.edit') %>" class="kt-menu__link <%=(page_name == 'artofdecor-management') ? 'active' : ''%>">
                                     <i class="kt-menu__link-icon fas fa-list"></i>
                                     <span class="kt-menu__link-text">Content</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="kt-menu__subnav">
+                            <li class="kt-menu__item " aria-haspopup="true">
+                                <a href="<%= generateUrl('art-decor.list') %>" class="kt-menu__link <%=(page_name == 'artDecor-management') ? 'active' : ''%>">
+                                    <i class="kt-menu__link-icon fas fa-list"></i>
+                                    <span class="kt-menu__link-text">Decor</span>
                                 </a>
                             </li>
                         </ul>
