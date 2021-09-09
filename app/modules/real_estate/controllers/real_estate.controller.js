@@ -346,6 +346,173 @@ class realEstateController {
         }
     };
 
+
+
+    /* @Method: BuyContentList
+    // @Description: To get all the buy content from DB
+    */
+    async BuyContentList(req, res) {
+        try {
+            let cities = await cityRepo.getAllByField({ status: 'Active', isDeleted: false });
+            res.render('real_estate/views/list_buy_content.ejs', {
+                page_name: 'buy-management',
+                page_title: 'For Buy Content',
+                user: req.user,
+                cities:cities
+
+            });
+        } catch (e) {
+            return res.status(500).send({
+                message: e.message
+            });
+        }
+    };
+
+    async getAllBuyContent(req, res) {
+        try {
+            let buyContent = await realEstateRepo.getAllBuyContent(req);
+            if (_.has(req.body, 'sort')) {
+                var sortOrder = req.body.sort.sort;
+                var sortField = req.body.sort.field;
+            } else {
+                var sortOrder = -1;
+                var sortField = '_id';
+            }
+            let meta = {
+                "page": req.body.pagination.page,
+                "pages": buyContent.pageCount,
+                "perpage": req.body.pagination.perpage,
+                "total": buyContent.totalCount,
+                "sort": sortOrder,
+                "field": sortField
+            };
+            return {
+                status: 200,
+                meta: meta,
+                data: buyContent.data,
+                message: `Data fetched succesfully.`
+            };
+        } catch (e) {
+            return {
+                status: 500,
+                data: [],
+                message: e.message
+            };
+        }
+    }
+
+     /*
+    // @Method: create
+    // @Description:  buy content add page
+    */
+    async createBuyContent(req, res) {
+        try {
+            let result = {};
+            let cities = await cityRepo.getAllByField({ status: 'Active', isDeleted: false });
+            result.cities = cities;
+            let languages = await languageRepo.getAllByField({
+                'status': 'Active',isDeleted:false
+            });
+            result.languages = languages;
+            
+            res.render('real_estate/views/add_buy_content.ejs', {
+                page_name: 'buy-management',
+                page_title: 'Create For Buy Content',
+                user: req.user,
+                response: result
+            });
+        } catch (e) {
+            return res.status(500).send({
+                message: e.message
+            });
+        }
+    };
+
+    /*
+    // @Method: store
+    // @Description:  buy content store
+    */
+    async storeBuyContent(req, res) {
+        try {
+            let buyContentData = await realEstateRepo.getbuyContent({
+                'cityId':req.body.cityId
+            });
+            if (_.isEmpty(buyContentData)) {
+                let buyContentDataInsert = realEstateRepo.saveBuyContent(req.body);
+                if (buyContentDataInsert) {
+                    req.flash('success', "Buy Content Created Successfully");
+                    res.redirect(namedRouter.urlFor('realestate.buy.list'));
+                }
+            } else {
+                req.flash('error', "Buy Content already exist with this city");
+                res.redirect(namedRouter.urlFor('realestate.buy.create'));
+            }
+        } catch (e) {
+            return res.status(500).send({
+                message: e.message
+            });
+        }
+    };
+
+    /*
+    // @Method: editBuyContent
+    // @Description:  Buy update page
+    */
+    async editBuyContent(req, res) {
+        try {
+            let result = {};
+            let cities = await cityRepo.getAllByField({ status: 'Active', isDeleted: false });
+            result.cities = cities;
+            let languages = await languageRepo.getAllByField({ 'status': 'Active',isDeleted:false});
+            result.languages = languages;
+            let buyContent = await realEstateRepo.getBuyContentById(req.params.id);
+            
+            // This is for language section //
+			var translateArr = [];
+			for (var i = 0; i < buyContent.translate.length; i++) {
+                translateArr[buyContent.translate[i].language] = buyContent.translate[i];
+			}
+			buyContent.translate = translateArr
+            if (!_.isEmpty(buyContent)) {
+                result.buycontent_data = buyContent;
+                res.render('real_estate/views/edit_buy_content.ejs', {
+                    page_name: 'buy-management',
+                    page_title: 'For Buy Content Edit',
+                    user: req.user,
+                    response: result
+                });
+            } else {
+                req.flash('error', "Sorry Home Content not found!");
+                res.redirect(namedRouter.urlFor('realestate.buy.edit',{'id':req.params.id}));
+            }
+        } catch (e) {
+            return res.status(500).send({
+                message: e.message
+            });
+        }
+    };
+
+    /* @Method: update
+    // @Description: coupon update action
+    */
+    async updateBuyContent(req, res) {
+        try {
+            const buyContentId = req.body.id;
+            let buyContent = await realEstateRepo.getBuyContentById(buyContentId);
+            let buyContentUpdateById = await realEstateRepo.updateBuyContentById(req.body, buyContentId);
+            if (buyContentUpdateById) {
+                req.flash('success', "Buy Content Updated Successfully");
+                res.redirect(namedRouter.urlFor('realestate.buy.list'));
+            }
+        } catch (e) {
+            console.log(66, e);
+            return res.status(500).send({
+                message: e.message
+            });
+        }
+    };
+    
+
 }
 
 module.exports = new realEstateController();
