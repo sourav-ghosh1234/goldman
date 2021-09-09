@@ -93,12 +93,10 @@
                                                                     <select name="propertyFor" id="propertyFor"
                                                                         class="form-control required">
                                                                         <option value="">Select</option>
-                                                                        <option value="sale"
-                                                                            <%=(response.result.property_data.propertyFor=='sale'
-                                                                            )?'Selected':'' %> >Sale</option>
-                                                                        <option value="rent"
-                                                                            <%=(response.result.property_data.propertyFor=='rent'
-                                                                            )?'Selected':''%> >Rent</option>
+                                                                        <option value="sale"<%=(response.result.property_data.propertyFor=='sale')?'Selected':'' %> >Sale</option>
+                                                                        <option value="rent"<%=(response.result.property_data.propertyFor=='rent')?'Selected':''%> >Rent</option>
+                                                                        <option value="buy" <%=(response.result.property_data.propertyFor=='buy')?'Selected':''%>>Buy</option>
+                                                                        <option value="new_devlopment" <%=(response.result.property_data.propertyFor=='new_devlopment')?'Selected':''%>>New Devlopment</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
