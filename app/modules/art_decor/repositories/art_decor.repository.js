@@ -1,8 +1,8 @@
-const ArtOfFurniture = require('artoffurniture/models/artoffurniture.model');
+const ArtOfDecor = require('art_decor/models/art_decor.model');
 const perPage = config.PAGINATION_PERPAGE;
 const mongoose = require('mongoose');
 
-class ArtOfFurnitureRepository {
+class artOfDecorRepository {
     constructor() {}
 
 	async getAll(req) {
@@ -16,7 +16,6 @@ class ArtOfFurnitureRepository {
                     $or: [
                         { 'title': { $regex: req.body.query.generalSearch, $options: 'i' } },
                         { 'company_name': { $regex: req.body.query.generalSearch, $options: 'i' } },
-                        { 'categoryDetails.name': { $regex: req.body.query.generalSearch, $options: 'i' } },
                         {'description':{ $regex: req.body.query.generalSearch, $options: 'i' }}
                     ]
                 });
@@ -27,9 +26,9 @@ class ArtOfFurnitureRepository {
 			}
 
             
-            if (_.isObject(req.body.query) && _.has(req.body.query, 'category_id')) {
-				and_clauses.push({ "category":  mongoose.Types.ObjectId(req.body.query.category_id) });
-			}
+            // if (_.isObject(req.body.query) && _.has(req.body.query, 'category_id')) {
+			// 	and_clauses.push({ "category":  mongoose.Types.ObjectId(req.body.query.category_id) });
+			// }
 
 			conditions['$and'] = and_clauses;
 	
@@ -48,16 +47,16 @@ class ArtOfFurnitureRepository {
 				sortOperator["$sort"]['_id'] = -1;
 			}
 	
-			var aggregate =  ArtOfFurniture.aggregate([
-                {
-                    $lookup: {
-                        from: "furniture_categories",
-                        localField: "category",
-                        foreignField: "_id",
-                        as: "categoryDetails",
-                    },
-                },
-                { $unwind: { path: "$categoryDetails", preserveNullAndEmptyArrays: true } },
+			var aggregate =  ArtOfDecor.aggregate([
+                // {
+                //     $lookup: {
+                //         from: "furniture_categories",
+                //         localField: "category",
+                //         foreignField: "_id",
+                //         as: "categoryDetails",
+                //     },
+                // },
+                // { $unwind: { path: "$categoryDetails", preserveNullAndEmptyArrays: true } },
                 {
                     $lookup: {
                         from: "colors",
@@ -85,7 +84,7 @@ class ArtOfFurnitureRepository {
 				]);
 	
 			var options = { page: req.body.pagination.page, limit: req.body.pagination.perpage };
-			let allArt = await ArtOfFurniture.aggregatePaginate(aggregate, options);
+			let allArt = await ArtOfDecor.aggregatePaginate(aggregate, options);
 			return allArt;
 		}
 		catch (e) {
@@ -100,7 +99,7 @@ class ArtOfFurnitureRepository {
             const _params = {...params,
                 "isDeleted": false,
             };
-            return await ArtOfFurniture.find(_params).lean().exec();
+            return await ArtOfDecor.find(_params).lean().exec();
         } catch (error) {
             return error;
         }
@@ -108,7 +107,7 @@ class ArtOfFurnitureRepository {
    
     async getById(id) {
         try {
-            return await ArtOfFurniture.findById(id).lean().exec();
+            return await ArtOfDecor.findById(id).lean().exec();
         } catch (error) {
             return error;
         }
@@ -119,7 +118,7 @@ class ArtOfFurnitureRepository {
             const _params = {...params,
                 "isDeleted": false,
             };
-            return await ArtOfFurniture.findOne(_params).lean().exec();
+            return await ArtOfDecor.findOne(_params).lean().exec();
         } catch (error) {
             return error;
         }
@@ -130,7 +129,7 @@ class ArtOfFurnitureRepository {
             const _params = {...params,
                 "isDeleted": false,
             };
-            return await ArtOfFurniture.find(_params).lean().exec();
+            return await ArtOfDecor.find(_params).lean().exec();
         } catch (error) {
             return error;
         }
@@ -138,7 +137,7 @@ class ArtOfFurnitureRepository {
 
     async updateById(data, id) {
         try {
-            return await ArtOfFurniture.findByIdAndUpdate(id, data, {
+            return await ArtOfDecor.findByIdAndUpdate(id, data, {
                     new: true,
                     upsert: true
                 })
@@ -150,7 +149,7 @@ class ArtOfFurnitureRepository {
 
     async getArtCount() {
         try {
-            return await ArtOfFurniture.count({"isDeleted": false,"status":"Active" });
+            return await ArtOfDecor.count({"isDeleted": false,"status":"Active" });
         } catch (error) {
             return error;
         }
@@ -158,7 +157,7 @@ class ArtOfFurnitureRepository {
 
     async save(data) {
         try {
-            const _save = new ArtOfFurniture(data);
+            const _save = new ArtOfDecor(data);
             return await _save.save();
         } catch (error) {
             return error;
@@ -170,7 +169,7 @@ class ArtOfFurnitureRepository {
             const _params = {...params,
                 "isDeleted": false,
             };
-            return await ArtOfFurniture.find(_params).sort({"title":1}).lean().exec();
+            return await ArtOfDecor.find(_params).sort({"title":1}).lean().exec();
         } catch (error) {
             return error;
         }
@@ -178,8 +177,8 @@ class ArtOfFurnitureRepository {
 
     async delete(id) {
         try {
-            await ArtOfFurniture.findById(id).lean().exec();
-            return await ArtOfFurniture.deleteOne({
+            await ArtOfDecor.findById(id).lean().exec();
+            return await ArtOfDecor.deleteOne({
                 _id: id
             }).lean().exec();
         } catch (error) {
@@ -188,7 +187,7 @@ class ArtOfFurnitureRepository {
     }
 
 
-    async getAllArtOfFurniture(req){
+    async getAllArtOfDecor(req){
         try {
 			var conditions = {};
 			var and_clauses = [];
@@ -218,7 +217,7 @@ class ArtOfFurnitureRepository {
 				sortOperator["$sort"]['_id'] = -1;
 			}
 	
-			var aggregate =  ArtOfFurniture.aggregate([
+			var aggregate =  ArtOfDecor.aggregate([
                 {
                     $lookup: {
                         from: "furniture_categories",
@@ -233,7 +232,7 @@ class ArtOfFurnitureRepository {
 				]);
 	
 			var options = { page: req.body.page, limit: req.body.limit };
-			let allArt = await ArtOfFurniture.aggregatePaginate(aggregate, options);
+			let allArt = await ArtOfDecor.aggregatePaginate(aggregate, options);
 			return allArt;
 		}
 		catch (e) {
@@ -242,7 +241,7 @@ class ArtOfFurnitureRepository {
     }
 
 
-    async getArtOfFurnitureDetails(param){
+    async getArtOfDecorDetails(param){
         try {
 			var conditions = {};
 			var and_clauses = [];
@@ -255,7 +254,7 @@ class ArtOfFurnitureRepository {
 			conditions['$and'] = and_clauses;
 
 
-			var aggregate = await ArtOfFurniture.aggregate([
+			var aggregate = await ArtOfDecor.aggregate([
 				{ $match: conditions },
                 {
                     $lookup: {
@@ -275,4 +274,4 @@ class ArtOfFurnitureRepository {
     }
 }
 
-module.exports = new ArtOfFurnitureRepository();
+module.exports = new artOfDecorRepository();

@@ -225,7 +225,7 @@ class PropertyRepository {
             }
 
             if (_.isObject(req.body) && _.has(req.body, 'total_area')) {
-                and_clauses.push({ "totalArea": { $lte: parseInt(req.body.total_area) } });
+                and_clauses.push({ "totalArea": { $gte: parseInt(req.body.total_area) } });
             }
 
             if (_.isObject(req.body) && _.has(req.body, 'search_text') && req.body.search_text.trim() != '') {
@@ -241,8 +241,6 @@ class PropertyRepository {
                     ]
                 });
             }
-
-            console.log(and_clauses, 'and_clauses')
 
             conditions['$and'] = and_clauses;
 

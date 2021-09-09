@@ -8,7 +8,7 @@ var KTDatatableCms = function () {
             type: 'remote',
             source: {
                 read: {
-                    url: `${location.protocol}//${window.location.host}/artoffurniture/getall`,
+                    url: `${location.protocol}//${window.location.host}/art-decor/getall`,
                 },
             },
             pageSize: 10,
@@ -39,7 +39,7 @@ var KTDatatableCms = function () {
                 sortable: false,
                 template: function (row) {
                     if (row.image != null && row.image != '') {
-                        return `<img src="/uploads/artoffurniture/${row.image}" alt="" height="80" width="80">`
+                        return `<img src="/uploads/artdecor/${row.image}" alt="" height="80" width="80">`
                     } else {
                         return `<img src="/uploads/noImage.png" alt="" height="80" width="80">`
                     }
@@ -55,19 +55,10 @@ var KTDatatableCms = function () {
                 },
             },
             {
-                field: 'category_name',
-                title: 'Category',
-                sortable: false,
-                width: 150,
-                template: function (row) {
-                    return row.company_name ;
-                },
-            },
-            {
                 field: 'company_name',
                 title: 'Company Name',
                 sortable: true,
-                width: 150,
+                width: 170,
                 template: function (row) {
                     return row.company_name ;
                 }, 
@@ -116,7 +107,7 @@ var KTDatatableCms = function () {
                 autoHide: false,
                 template: function (row) {
                     return '\
-						\<a href="http://' + window.location.host + '/artoffurniture/edit/' + row._id + '" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Edit">\
+						\<a href="http://' + window.location.host + '/art-decor/edit/' + row._id + '" class="btn btn-sm btn-clean btn-icon btn-icon-sm" title="Edit">\
 						<i class="flaticon-edit"></i>\
 						</a>\
 						\<a id="del-' + row._id + '" href="javascript:;" class="btn btn-sm btn-clean btn-icon btn-icon-sm ktManagerDelete" title="Delete">\
@@ -135,7 +126,7 @@ var KTDatatableCms = function () {
             input: $('#generalSearch'),
         };
 
-        var datatable = $('#artOfFurnitureRecordSelection').KTDatatable(options);
+        var datatable = $('#artOfDecorRecordSelection').KTDatatable(options);
 
         $('#kt_form_status').on('change', function () {
             datatable.search($(this).val(), 'Status');
@@ -195,7 +186,7 @@ var KTDatatableCms = function () {
                 reverseButtons: true
             }).then(function (result) {
                 if (result.value) {
-                    window.location.href = `http://${window.location.host}/artoffurniture/delete/${elemID}`;
+                    window.location.href = `http://${window.location.host}/art-decor/delete/${elemID}`;
                 }
             });
         });
@@ -213,7 +204,7 @@ var KTDatatableCms = function () {
                 reverseButtons: true
             }).then(function (result) {
                 if (result.value) {
-                    window.location.href = `http://${window.location.host}/artoffurniture/status-change/${elemID}`;
+                    window.location.href = `http://${window.location.host}/art-decor/status-change/${elemID}`;
                 }
             });
         })

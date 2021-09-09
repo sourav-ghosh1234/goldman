@@ -1,4 +1,5 @@
 const cmsRepo = require('cms/repositories/cms.repository');
+const languageRepo = require('language/repositories/language.repository');
 const express = require('express');
 const routeLabel = require('route-label');
 const router = express.Router();
@@ -20,7 +21,14 @@ class cmsController {
     async edit(req, res) {
         try {
             let result = {};
+            let languages = await languageRepo.getAllByField({ 'status': 'Active',isDeleted:false});
+			result.languages = languages;
             let cms = await cmsRepo.getById(req.params.id);
+            var translateArr = [];
+			for (var i = 0; i < cms.translate.length; i++) {
+                translateArr[cms.translate[i].language] = cms.translate[i];
+			}
+			cms.translate = translateArr;
             if (!_.isEmpty(cms)) {
                 result.cms_data = cms;
                 res.render('cms/views/edit.ejs', {
@@ -44,7 +52,7 @@ class cmsController {
     // @Description: coupon update action
     */
     async update(req, res) {
-        try {
+        try {          
             const cmsId = req.body.id;
             let coupon = await cmsRepo.getByField({
                 'title': req.body.title,
