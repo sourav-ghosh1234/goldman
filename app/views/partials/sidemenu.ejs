@@ -83,7 +83,7 @@
                         <span class="kt-menu__link-text">City</span>
                     </a>
                 </li>
-                <li class="kt-menu__item kt-menu__item--submenu <%=(page_name == 'sale-management' || page_name == 'rent-management') ? 'kt-menu__item--open' : ''%>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                <li class="kt-menu__item kt-menu__item--submenu <%=(page_name == 'sale-management' || page_name == 'rent-management' || page_name == 'buy-management') ? 'kt-menu__item--open' : ''%>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
                     <a href="javascript:;" class="kt-menu__link kt-menu__toggle
                         <%=(page_name == 'sale-management') ? 'active' : ''%>">
                         <i class="kt-menu__link-icon fas fa-crosshairs"></i>
@@ -106,6 +106,14 @@
                                 <a href="<%= generateUrl('realestate.rent.list') %>" class="kt-menu__link <%=(page_name == 'rent-management') ? 'active' : ''%>">
                                     <i class="kt-menu__link-icon fas fa-list"></i>
                                     <span class="kt-menu__link-text">For Rent Content</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="kt-menu__subnav">
+                            <li class="kt-menu__item " aria-haspopup="true">
+                                <a href="<%= generateUrl('realestate.buy.list') %>" class="kt-menu__link <%=(page_name == 'buy-management') ? 'active' : ''%>">
+                                    <i class="kt-menu__link-icon fas fa-list"></i>
+                                    <span class="kt-menu__link-text">For Buy Content</span>
                                 </a>
                             </li>
                         </ul>
