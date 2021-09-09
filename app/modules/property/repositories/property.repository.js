@@ -242,6 +242,8 @@ class PropertyRepository {
                         { 'propertyAddress.street_address': { $regex: req.body.search_text, $options: 'i' } },
                         { 'landAgent.full_name': { $regex: req.body.search_text, $options: 'i' } },
                         { 'description': { $regex: req.body.search_text, $options: 'i' } },
+                        { 'city.city': { $regex: req.body.search_text, $options: 'i' } },
+                        { 'country.country_name': { $regex: req.body.search_text, $options: 'i' } },
                     ]
                 });
             }
