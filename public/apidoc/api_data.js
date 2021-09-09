@@ -706,6 +706,13 @@ define({ "api": [
           },
           {
             "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "city",
+            "description": "<p>City Id</p>"
+          },
+          {
+            "group": "Parameter",
             "type": "number",
             "optional": false,
             "field": "price",
