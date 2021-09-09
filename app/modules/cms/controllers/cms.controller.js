@@ -23,13 +23,12 @@ class cmsController {
             let result = {};
             let languages = await languageRepo.getAllByField({ 'status': 'Active',isDeleted:false});
 			result.languages = languages;
-            // let cms = await cmsRepo.getByField();
             let cms = await cmsRepo.getById(req.params.id);
             var translateArr = [];
 			for (var i = 0; i < cms.translate.length; i++) {
                 translateArr[cms.translate[i].language] = cms.translate[i];
 			}
-			cms.translate = translateArr
+			cms.translate = translateArr;
             if (!_.isEmpty(cms)) {
                 result.cms_data = cms;
                 res.render('cms/views/edit.ejs', {

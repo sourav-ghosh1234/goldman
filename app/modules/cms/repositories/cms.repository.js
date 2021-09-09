@@ -55,7 +55,7 @@ const cmsRepository = {
     },
 
     getById: async (id) => {
-        let cms = await Cms.findById(id).exec();
+        let cms = await Cms.findById(id).lean().exec();
         try {
             if (!cms) {
                 return null;
