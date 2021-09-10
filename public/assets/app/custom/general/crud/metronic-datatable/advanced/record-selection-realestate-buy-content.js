@@ -46,7 +46,12 @@ var KTDatatableCms = function () {
                 field: 'city',
                 title: 'City',
                 template: function (row) {
-                    return row.cityDetails[0].city;
+                    if(row.cityDetails.length == 0 && row.cityId == null){
+                        return 'Default';
+                    }else{
+                        return row.cityDetails[0].city;
+                    }
+                    
                 }
             },
             {

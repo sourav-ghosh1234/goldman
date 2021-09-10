@@ -816,6 +816,45 @@
   },
   {
     "type": "get",
+    "url": "/real-estate/content",
+    "title": "Real Estate Content",
+    "version": "1.0.0",
+    "group": "Real_Estate",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "type",
+            "description": "<p>Type [buy, rent, sale]</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "cityId",
+            "description": "<p>City Id [Default: '']</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n    \"status\": 200,\n    \"data\": {\n        \"_id\": \"6139bbf80caa6b370c0eaa93\",\n        \"title\": \"Test\",\n        \"description\": \"<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\\r\\n\",\n        \"language\": \"en\",\n        \"isDeleted\": false,\n        \"status\": \"Active\",\n        \"cityId\": \"60c73b101257932fd09232f2\",\n        \"translate\": [\n            {\n                \"language\": \"fr\",\n                \"title\": \"BUY CONTENT FR\",\n                \"description\": \"<p>FR Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.&nbsp;</p>\\r\\n\",\n                \"_id\": \"613a1afc9cf62660bf39a153\"\n            }\n        ],\n        \"createdAt\": \"2021-09-09T07:47:04.099Z\",\n        \"updatedAt\": \"2021-09-09T14:32:28.686Z\",\n        \"__v\": 0\n    },\n    \"message\": \"Records fetched successfully.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/api/real_estate.routes.js",
+    "groupTitle": "Real_Estate",
+    "name": "GetRealEstateContent"
+  },
+  {
+    "type": "get",
     "url": "/services-content/content",
     "title": "Service Content",
     "version": "1.0.0",

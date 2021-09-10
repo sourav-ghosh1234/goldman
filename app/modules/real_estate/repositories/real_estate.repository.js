@@ -58,6 +58,11 @@ const RealEstateRepository = {
                         as: 'cityDetails'
                     }
                 },
+                // {
+                //     $group:{
+                //         '_id':'$_id',
+                //     }
+                // },
                 sortOperator
             ]);
             var options = {

@@ -101,6 +101,9 @@ class realEstateController {
     */
     async storeSaleContent(req, res) {
         try {
+            if(_.has(req.body, "cityId") && req.body.cityId == ''){
+                req.body.cityId = null;
+            }
             let saleContentData = await realEstateRepo.getsaleContent({
                 'cityId':req.body.cityId
             });
@@ -166,13 +169,15 @@ class realEstateController {
         try {
             const saleContentId = req.body.id;
             let saleContent = await realEstateRepo.getSaleContentById(saleContentId);
+            if(_.has(req.body, "cityId") && req.body.cityId == ''){
+                req.body.cityId = null;
+            }
             let saleContentUpdateById = await realEstateRepo.updateSaleContentById(req.body, saleContentId);
             if (saleContentUpdateById) {
                 req.flash('success', "Sale Content Updated Successfully");
                 res.redirect(namedRouter.urlFor('realestate.sale.list'));
             }
         } catch (e) {
-            console.log(66, e);
             return res.status(500).send({
                 message: e.message
             });
@@ -268,6 +273,9 @@ class realEstateController {
     */
     async storeRentContent(req, res) {
         try {
+            if(_.has(req.body, "cityId") && req.body.cityId == ''){
+                req.body.cityId = null;
+            }
             let rentContentData = await realEstateRepo.getrentContent({
                 'cityId':req.body.cityId
             });
@@ -333,13 +341,15 @@ class realEstateController {
         try {
             const rentContentId = req.body.id;
             let rentContent = await realEstateRepo.getRentContentById(rentContentId);
+            if(_.has(req.body, "cityId") && req.body.cityId == ''){
+                req.body.cityId = null;
+            }
             let rentContentUpdateById = await realEstateRepo.updateRentContentById(req.body, rentContentId);
             if (rentContentUpdateById) {
                 req.flash('success', "Rent Content Updated Successfully");
                 res.redirect(namedRouter.urlFor('realestate.rent.list'));
             }
         } catch (e) {
-            console.log(66, e);
             return res.status(500).send({
                 message: e.message
             });
@@ -386,6 +396,7 @@ class realEstateController {
                 "sort": sortOrder,
                 "field": sortField
             };
+            console.log(buyContent.data);
             return {
                 status: 200,
                 meta: meta,
@@ -434,6 +445,9 @@ class realEstateController {
     */
     async storeBuyContent(req, res) {
         try {
+            if(_.has(req.body, "cityId") && req.body.cityId == ''){
+                req.body.cityId = null;
+            }
             let buyContentData = await realEstateRepo.getbuyContent({
                 'cityId':req.body.cityId
             });
@@ -499,13 +513,15 @@ class realEstateController {
         try {
             const buyContentId = req.body.id;
             let buyContent = await realEstateRepo.getBuyContentById(buyContentId);
+            if(_.has(req.body, "cityId") && req.body.cityId == ''){
+                req.body.cityId = null;
+            }
             let buyContentUpdateById = await realEstateRepo.updateBuyContentById(req.body, buyContentId);
             if (buyContentUpdateById) {
                 req.flash('success', "Buy Content Updated Successfully");
                 res.redirect(namedRouter.urlFor('realestate.buy.list'));
             }
         } catch (e) {
-            console.log(66, e);
             return res.status(500).send({
                 message: e.message
             });
