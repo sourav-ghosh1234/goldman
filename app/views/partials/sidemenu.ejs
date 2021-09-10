@@ -203,11 +203,39 @@
                     </a>
                 </li>
 
-                  <li class="kt-menu__item " aria-haspopup="true">
+                  <!-- <li class="kt-menu__item " aria-haspopup="true">
                     <a href="<%= generateUrl('contactinfo.listing') %>" class="kt-menu__link <%=(page_name == 'contactinfo-management') ? 'active' : ''%>">
                         <i class="fas fa-envelope"></i>
                         <span class="kt-menu__link-text">Contact Information</span>
                     </a>
+                </li> -->
+
+                <li class="kt-menu__item kt-menu__item--submenu <%=(page_name== 'contactinfo-management' || page_name == 'contactcontent-management') ? 'kt-menu__item--open' : ''%>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                    <a href="javascript:;" class="kt-menu__link kt-menu__toggle
+                        <%=(page_name== 'contactinfo-management' || page_name == 'contactcontent-management') ? 'active' : ''%>">
+                        <i class="kt-menu__link-icon fas fa-building"></i>
+                        <span class="kt-menu__link-text">Contact</span>
+                        <i class="kt-menu__ver-arrow la la-angle-right"></i>
+                    </a>
+                    <div class="kt-menu__submenu " kt-hidden-height="80">
+                        <span class="kt-menu__arrow"></span>
+                        <ul class="kt-menu__subnav">
+                            <li class="kt-menu__item " aria-haspopup="true">
+                                <a href="<%= generateUrl('contactcontent.edit') %>" class="kt-menu__link <%=(page_name == 'contactcontent-management') ? 'active' : ''%>">
+                                    <i class="kt-menu__link-icon fas fa-list"></i>
+                                    <span class="kt-menu__link-text">Contact Content</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="kt-menu__subnav">
+                            <li class="kt-menu__item " aria-haspopup="true">
+                                <a href="<%= generateUrl('contactinfo.listing') %>" class="kt-menu__link <%=(page_name == 'contactinfo-management') ? 'active' : ''%>">
+                                    <i class="kt-menu__link-icon fas fa-list"></i>
+                                    <span class="kt-menu__link-text">Contact Information</span>
+                                </a>
+                            </li>
+                        </ul>
+                      </div>
                 </li>
 
                 <li class="kt-menu__item kt-menu__item--submenu <%=(page_name == 'artoffurniture-management' || page_name== 'art_furniture-management') ? 'kt-menu__item--open' : ''%>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
