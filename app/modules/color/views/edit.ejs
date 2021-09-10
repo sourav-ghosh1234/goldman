@@ -1,0 +1,99 @@
+<% layout(layout_directory+'/mainLayout') -%>
+
+    <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+        <div class="kt-subheader__main">
+            <h3 class="kt-subheader__title">
+                <%= page_title %>
+            </h3>
+            <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+            <!-- <div class="kt-subheader__breadcrumbs">
+                <a href="<%= generateUrl('user.dashboard') %>" class="kt-subheader__breadcrumbs-home">Dashboard</a>
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">
+                    <%= page_title %>
+                </span>
+            </div> -->
+        </div>
+    </div>
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
+        <div class="row">
+            <div class="kt-portlet">
+                <form class="kt-form kt-form--label-right" id="editColorsFrm" action="<%= generateUrl('color.update') %>" enctype="multipart/form-data"
+                    method="POST">
+
+                    <div class="kt-portlet__body">
+                        <ul class="nav nav-pills nav-fill" role="tablist">
+                            <%response.languages.map((data)=>{%>
+                                <%if(data.isDefault){%>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-toggle="tab" href="#kt_tabs_<%=data.shortcode%>">
+                                            <%=data.title%>
+                                        </a>
+                                    </li>
+                                    <%}else{%>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#kt_tabs_<%=data.shortcode%>">
+                                                <%=data.title%>
+                                            </a>
+                                        </li>
+                                        <%}%>
+                                            <%})%>
+                        </ul>
+                        <div class="tab-content">
+                            <%
+                                let count = 0;
+                                response.languages.map((language)=>{
+                            %>
+                                <%if(language.shortcode == 'en'){%>
+                                    <div class="tab-pane active" id="kt_tabs_<%=language.shortcode%>" role="tabpanel">
+                                        <div class="form-group row">
+                                            <div class="col-lg-6">
+                                                <label>Name:</label>
+                                                <input type="text" name="name" id="name" class="form-control" placeholder="Enter Name" value="<%=response.color_data.name%>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-lg-6">
+                                                <label>Code:</label>
+                                                <input type="text" name="code" id="code" class="form-control" placeholder="Enter Code" value="<%=response.color_data.code%>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%}else{
+                            let name = ''
+                            let code = ''
+                            if(_.has(response.color_data.translate,language.shortcode)) {
+                                name =  response.color_data.translate[language.shortcode].name
+                            }
+                            %>
+                                        <div class="tab-pane" id="kt_tabs_<%=language.shortcode%>" role="tabpanel">
+                                            <div class="form-group row">
+                                                <div class="col-lg-6">
+                                                    <label>Name:</label>
+                                                    <input type="text" name="translate[<%=count%>][name]" id="name_<%=count%>" class="form-control" placeholder="Enter Name"
+                                                        value="<%=name%>">
+                                                </div>
+                                            </div>
+                                           <input type="hidden" name="translate[<%=count%>][language]" value="<%=language.shortcode%>">
+                                        </div>
+                                        <% count++ }%>
+                                            <%})%>
+                        </div>
+                        <!-- hidden user id -->
+                        <input type="hidden" name="id" value="<%=response.color_data._id%>">
+                    </div>
+                    <div class="kt-portlet__foot">
+                        <div class="kt-form__actions">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <a href="<%= generateUrl('color.list') %>" class="btn btn-secondary">Cancel</a>
+                                    <button type="submit" class="btn btn-primary">Update</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

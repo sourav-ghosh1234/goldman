@@ -84,7 +84,7 @@ class CountryRepository {
             const _params = {...params,
                 "isDeleted": false,
             };
-            return await Country.find(_params).lean().exec();
+            return await Country.find(_params).sort({'country_name':1}).lean().exec();
         } catch (error) {
             return error;
         }

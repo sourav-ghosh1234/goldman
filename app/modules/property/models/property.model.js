@@ -6,7 +6,7 @@ const deleted = [true, false];
 const status = ["Active", "Inactive"];
 const EstablishedNew = ["established", "new"];
 const priceDisplay = ["price", "text"];
-const propertyFor = ["sale", "rent"];
+const propertyFor = ["sale","rent","buy","new_devlopment"];
 
 const PropertySchema = new Schema({
     title: { type: String, default: '' },

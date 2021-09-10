@@ -11,7 +11,7 @@ const ArtSchema = new Schema({
   category: {type: Schema.Types.ObjectId, ref: 'Furniture_category', default: null },
   price : { type: Number, default: 0  },
   dimensions : { type: String, default: '' },
-  colour: { type: String, default: '' },
+  colour: [{type: Schema.Types.ObjectId, ref: 'Color', default: null }],
   description : { type: String, default: '' },
   image: { type: String, default: '' },
   imageGallery: [{ type: String, default: '' }],

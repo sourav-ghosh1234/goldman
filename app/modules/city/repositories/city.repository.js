@@ -92,7 +92,7 @@ class CityRepository {
                 ...params,
                 "isDeleted": false,
             };
-            return await City.find(_params).lean().exec();
+            return await City.find(_params).sort({'city':1}).lean().exec();
         } catch (error) {
             return error;
         }

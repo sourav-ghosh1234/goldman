@@ -200,6 +200,10 @@ class PropertyRepository {
                 and_clauses.push({ "propertyAddress.country": mongoose.Types.ObjectId(req.body.country) });
             }
 
+            if (_.isObject(req.body) && _.has(req.body, 'city')) {
+                and_clauses.push({ "propertyAddress.city": mongoose.Types.ObjectId(req.body.city) });
+            }
+
             if (_.isObject(req.body) && _.has(req.body, 'price')) {
                 and_clauses.push({ "price": { $lte: parseInt(req.body.price) } });
             }
@@ -225,7 +229,7 @@ class PropertyRepository {
             }
 
             if (_.isObject(req.body) && _.has(req.body, 'total_area')) {
-                and_clauses.push({ "totalArea": { $lte: parseInt(req.body.total_area) } });
+                and_clauses.push({ "totalArea": { $gte: parseInt(req.body.total_area) } });
             }
 
             if (_.isObject(req.body) && _.has(req.body, 'search_text') && req.body.search_text.trim() != '') {
@@ -238,11 +242,11 @@ class PropertyRepository {
                         { 'propertyAddress.street_address': { $regex: req.body.search_text, $options: 'i' } },
                         { 'landAgent.full_name': { $regex: req.body.search_text, $options: 'i' } },
                         { 'description': { $regex: req.body.search_text, $options: 'i' } },
+                        { 'city.city': { $regex: req.body.search_text, $options: 'i' } },
+                        { 'country.country_name': { $regex: req.body.search_text, $options: 'i' } },
                     ]
                 });
             }
-
-            console.log(and_clauses, 'and_clauses')
 
             conditions['$and'] = and_clauses;
 

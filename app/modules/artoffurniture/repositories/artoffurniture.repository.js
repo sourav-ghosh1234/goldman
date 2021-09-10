@@ -58,6 +58,28 @@ class ArtOfFurnitureRepository {
                     },
                 },
                 { $unwind: { path: "$categoryDetails", preserveNullAndEmptyArrays: true } },
+                {
+                    $lookup: {
+                        from: "colors",
+                        localField: "colour",
+                        foreignField: "_id",
+                        as: "colourDetails",
+                    },
+                },
+                { $unwind: { path: "$colourDetails", preserveNullAndEmptyArrays: true } },
+                {
+                    $group:{
+                        '_id':'$_id',
+                        'image':{$first:'$image'},
+                        'title':{$first:'$title'},
+                        'price':{$first:'$price'},
+                        'status':{$first:'$status'},
+                        'isDeleted':{$first:'$isDeleted'},
+                        'company_name':{$first:'$company_name'},
+                        'category_name':{$first:'$categoryDetails.name'},
+                        'colour':{$addToSet:'$colourDetails.name'},
+                    }
+                },
 				{ $match: conditions },
 				sortOperator
 				]);
