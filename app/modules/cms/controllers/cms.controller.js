@@ -6,8 +6,6 @@ const namedRouter = routeLabel(router);
 const querystring = require('querystring');
 const fs = require('fs');
 
-
-
 class cmsController {
     constructor() {
         this.cms = [];
