@@ -1,6 +1,25 @@
 define({ "api": [
   {
     "type": "get",
+    "url": "/art-of-decor/details/:id",
+    "title": "Art Of Decor Details By id",
+    "version": "1.0.0",
+    "group": "Art_Of_Decor",
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n    \"status\": 200,\n    \"data\": {\n        \"_id\": \"6139dd112af033396e3eb79e\",\n        \"title\": \"Sienna Mini Vase\",\n        \"company_name\": \"LUXDECO\",\n        \"price\": 30,\n        \"dimensions\": \"20\",\n        \"colour\": [\n            \"Green\"\n        ],\n        \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\",\n        \"slug\": \"sienna-mini-vase\",\n        \"image\": \"1631182097833_dd1.png\",\n        \"imageGallery\": [\n            \"1631182097835_dd11.png\",\n            \"1631182097837_dd2.png\",\n            \"1631182097837_dd3.png\",\n            \"1631182097838_dd4.png\"\n        ],\n        \"status\": \"Active\",\n        \"isDeleted\": false,\n        \"translate\": [\n            {\n                \"title\": \"Sienna Mini Vase\",\n                \"description\": \"<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\\r\\n\",\n                \"company_name\": \"LUXDECO\",\n                \"language\": \"fr\",\n                \"_id\": \"6139de0d2af033396e3eb7f5\"\n            }\n        ]\n    },\n    \"message\": \"Records fetched successfully.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/api/artofdecor.routes.js",
+    "groupTitle": "Art_Of_Decor",
+    "name": "GetArtOfDecorDetailsId"
+  },
+  {
+    "type": "get",
     "url": "/artofdecor/content",
     "title": "Art Of Decor Content",
     "version": "1.0.0",
@@ -48,7 +67,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success",
-          "content": "{\n    \"status\": 200,\n    \"data\": [\n        {\n            \"_id\": \"6137569300734a6b6a253cbe\",\n            \"title\": \"New Service\",\n            \"company_name\": \"New Service\",\n            \"category\": \"613722cb87378713e2306bf5\",\n            \"price\": 4532,\n            \"dimensions\": \"New Service\",\n            \"colour\": \"New Service\",\n            \"description\": \"New Service\",\n            \"image\": \"1631022949632_Desktop-free-building-wallpaper.jpg\",\n            \"imageGallery\": [\n                \"1631016595849_business-structure-which-type-is-best-for-your-business.png\",\n                \"1631022949660_KLK-IMAGES-826x550-Hunting.jpg\"\n            ],\n            \"language\": \"en\",\n            \"status\": \"Active\",\n            \"isDeleted\": false,\n            \"translate\": [\n                {\n                    \"title\": \"Test 5 FR\",\n                    \"description\": \"<p>Test 5 FR</p>\\r\\n\",\n                    \"company_name\": \"Test 5 FR\",\n                    \"language\": \"fr\",\n                    \"_id\": \"613772b4c3e7be8d2f667dcc\"\n                }\n            ],\n            \"createdAt\": \"2021-09-07T12:09:55.910Z\",\n            \"__v\": 0,\n            \"categoryDetails\": {\n                \"_id\": \"613722cb87378713e2306bf5\",\n                \"name\": \"Ourdoor\",\n                \"status\": \"Active\",\n                \"isDeleted\": false,\n                \"createdAt\": \"2019-04-15T08:24:40.827Z\",\n                \"updatedAt\": \"2020-10-21T14:05:01.039Z\",\n                \"slug\": \"ourdoor\"\n            }\n        }\n    ],\n    \"pageCount\": 1,\n    \"totalCount\": 1,\n    \"message\": \"Art Of Furniture fetched successfully.\"\n}",
+          "content": "{\n    \"status\": 200,\n    \"data\": [\n        {\n            \"_id\": \"6137569300734a6b6a253cbe\",\n            \"title\": \"New Service\",\n            \"company_name\": \"New Service\",\n            \"category\": \"613722cb87378713e2306bf5\",\n            \"price\": 4532,\n            \"dimensions\": \"New Service\",\n            \"colour\": \"New Service\",\n            \"description\": \"New Service\",\n            \"image\": \"1631022949632_Desktop-free-building-wallpaper.jpg\",\n            \"imageGallery\": [\n                \"1631016595849_business-structure-which-type-is-best-for-your-business.png\",\n                \"1631022949660_KLK-IMAGES-826x550-Hunting.jpg\"\n            ],\n            \"language\": \"en\",\n            \"status\": \"Active\",\n            \"isDeleted\": false,\n            \"translate\": [\n                {\n                    \"title\": \"Test 5 FR\",\n                    \"description\": \"<p>Test 5 FR</p>\\r\\n\",\n                    \"company_name\": \"Test 5 FR\",\n                    \"language\": \"fr\",\n                    \"_id\": \"613772b4c3e7be8d2f667dcc\"\n                }\n            ],\n            \"createdAt\": \"2021-09-07T12:09:55.910Z\",\n            \"__v\": 0,\n            \"categoryDetails\": {\n                \"_id\": \"613722cb87378713e2306bf5\",\n                \"name\": \"Ourdoor\",\n                \"status\": \"Active\",\n                \"isDeleted\": false,\n                \"createdAt\": \"2019-04-15T08:24:40.827Z\",\n                \"updatedAt\": \"2020-10-21T14:05:01.039Z\",\n                \"slug\": \"ourdoor\"\n            }\n        }\n    ],\n    \"pageCount\": 1,\n    \"totalCount\": 1,\n    \"message\": \"Records fetched successfully.\"\n}",
           "type": "json"
         }
       ]
@@ -56,25 +75,6 @@ define({ "api": [
     "filename": "app/routes/api/artofdecor.routes.js",
     "groupTitle": "Art_Of_Decor",
     "name": "PostArtOfDecorList"
-  },
-  {
-    "type": "get",
-    "url": "/art-of-decor/details/:id",
-    "title": "Art Of Decor Details By id",
-    "version": "1.0.0",
-    "group": "Art_Of_Furniture",
-    "success": {
-      "examples": [
-        {
-          "title": "Success",
-          "content": "{\n    \"status\": 200,\n    \"data\": {\n        \"_id\": \"6139dd112af033396e3eb79e\",\n        \"title\": \"Sienna Mini Vase\",\n        \"company_name\": \"LUXDECO\",\n        \"price\": 30,\n        \"dimensions\": \"20\",\n        \"colour\": [\n            \"Green\"\n        ],\n        \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\",\n        \"slug\": \"sienna-mini-vase\",\n        \"image\": \"1631182097833_dd1.png\",\n        \"imageGallery\": [\n            \"1631182097835_dd11.png\",\n            \"1631182097837_dd2.png\",\n            \"1631182097837_dd3.png\",\n            \"1631182097838_dd4.png\"\n        ],\n        \"status\": \"Active\",\n        \"isDeleted\": false,\n        \"translate\": [\n            {\n                \"title\": \"Sienna Mini Vase\",\n                \"description\": \"<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\\r\\n\",\n                \"company_name\": \"LUXDECO\",\n                \"language\": \"fr\",\n                \"_id\": \"6139de0d2af033396e3eb7f5\"\n            }\n        ]\n    },\n    \"message\": \"Records fetched successfully.\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "app/routes/api/artofdecor.routes.js",
-    "groupTitle": "Art_Of_Furniture",
-    "name": "GetArtOfDecorDetailsId"
   },
   {
     "type": "get",

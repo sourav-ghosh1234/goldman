@@ -175,7 +175,7 @@ namedRouter.get("api.artofdecor.content", '/artofdecor/content', async (req, res
     ],
     "pageCount": 1,
     "totalCount": 1,
-    "message": "Art Of Furniture fetched successfully."
+    "message": "Records fetched successfully."
 }
 */
 namedRouter.post("api.art-of-decor.list", '/art-of-decor/list', async (req, res) => {
@@ -190,7 +190,7 @@ namedRouter.post("api.art-of-decor.list", '/art-of-decor/list', async (req, res)
 /**
  * @api {get} /art-of-decor/details/:id Art Of Decor Details By id
  * @apiVersion 1.0.0
- * @apiGroup Art Of Furniture
+ * @apiGroup Art Of Decor
  * @apiSuccessExample {json} Success
  *{
     "status": 200,
