@@ -739,6 +739,25 @@
   },
   {
     "type": "get",
+    "url": "/property/content",
+    "title": "property Content",
+    "version": "1.0.0",
+    "group": "Property",
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n    \"status\": 200,\n    \"data\": {\n        \"_id\": \"613f76aa1edb21accf716b19\",\n        \"title\": \"Do you want to rent your home?\",\n        \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\",\n        \"image\": \"1631550473826_pli.png\",\n        \"language\": \"en\",\n        \"status\": \"Active\",\n        \"isDeleted\": false,\n        \"translate\": [\n            {\n                \"title\": \"Do you want to rent your home?\",\n                \"description\": \"<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\\r\\n\",\n                \"language\": \"fr\",\n                \"_id\": \"613f7c09242f341423d9c35a\"\n            }\n        ]\n    },\n    \"message\": \"Text fetched successfully.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "app/routes/api/property.routes.js",
+    "groupTitle": "Property",
+    "name": "GetPropertyContent"
+  },
+  {
+    "type": "get",
     "url": "/property/details/:id",
     "title": "Property Details By id",
     "version": "1.0.0",

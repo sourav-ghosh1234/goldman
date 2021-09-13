@@ -6,6 +6,50 @@ const multer = require('multer');
 const propertyController = require('webservice/property.controller');
 const request_param = multer();
 
+
+
+
+
+
+
+/**
+ * @api {get} /property/content property Content
+ * @apiVersion 1.0.0
+ * @apiGroup Property
+ * @apiSuccessExample {json} Success
+ * {
+    "status": 200,
+    "data": {
+        "_id": "613f76aa1edb21accf716b19",
+        "title": "Do you want to rent your home?",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "image": "1631550473826_pli.png",
+        "language": "en",
+        "status": "Active",
+        "isDeleted": false,
+        "translate": [
+            {
+                "title": "Do you want to rent your home?",
+                "description": "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\r\n",
+                "language": "fr",
+                "_id": "613f7c09242f341423d9c35a"
+            }
+        ]
+    },
+    "message": "Text fetched successfully."
+}
+*/
+
+namedRouter.get("api.property.content", '/property/content', async (req, res) => {
+    try {
+        const success = await propertyController.getContentEdit(req, res);
+        res.status(success.status).send(success);
+    } catch (error) {
+        res.status(error.status).send(error);
+    }
+});
+
+
 /**
  * @api {post} /property/list Property List
  * @apiVersion 1.0.0
