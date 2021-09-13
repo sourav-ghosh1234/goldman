@@ -388,9 +388,9 @@ class PropertyRepository {
                         'propertyAddress': {
                             $first: {
                                 'country': '$countriesDetails.country_name',
-                                'countryId': { $first: '$countriesDetails._id' },
+                                'countryId': '$countriesDetails._id',
                                 'city': '$cityDetails.city',
-                                'cityId': { $first: '$cityDetails._id' },
+                                'cityId': '$cityDetails._id',
                                 'street_address_number': '$propertyAddress.street_address_number',
                                 'street_address': '$propertyAddress.street_address',
                                 'unit': '$unit',
