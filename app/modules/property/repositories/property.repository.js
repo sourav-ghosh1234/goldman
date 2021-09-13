@@ -405,7 +405,7 @@ class PropertyRepository {
                         'subTitle': { $first: '$subTitle' },
                         'propertyType': { $first: '$propertyTypeDetails.title' },
                         'establishedNew': { $first: '$establishedNew' },
-                        'landAgent': { $first: '$landAgentDetails.full_name' },
+                        'landAgent': { $first: '$landAgentDetails' },
                         'dualAgent': { $first: '$dualAgent' },
                         'rentalPerWeek': { $first: '$rentalPerWeek' },
                         'rentalPerMonth': { $first: '$rentalPerMonth' },
