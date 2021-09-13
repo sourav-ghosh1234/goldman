@@ -76,6 +76,8 @@
                                                 <option value="">All</option>
                                                 <option value="sale">Sale</option>
                                                 <option value="rent">Rent</option>
+                                                <option value="buy">Buy</option>
+                                                <option value="new_devlopment">New Devlopment</option>
                                             </select>
                                         </div>
                                     </div>
@@ -91,13 +93,12 @@
                                                 <option value="">All</option>
 
                                                 <% if(response.landAgent) {%>
-                                                    <% response.landAgent.forEach(landAgent=>
-                                                        {%>
+                                                    <% response.landAgent.forEach(landAgent=>{%>
                                                         <option value="<%= landAgent._id %>">
                                                             <%= landAgent.full_name %>
                                                         </option>
-                                                        <% })%>
-                                                            <% } %>
+                                                    <% })%>
+                                                <% } %>
                                             </select>
                                         </div>
                                     </div>
@@ -112,13 +113,12 @@
                                             <select class="form-control bootstrap-select" id="kt_form_property">
                                                 <option value="">All</option>
                                                 <% if(response.propertyType) {%>
-                                                    <% response.propertyType.forEach(propertyType=>
-                                                        {%>
+                                                    <% response.propertyType.forEach(propertyType=>{%>
                                                         <option value="<%= propertyType._id %>">
                                                             <%= propertyType.title %>
                                                         </option>
-                                                        <% })%>
-                                                            <% } %>
+                                                    <% })%>
+                                                <% } %>
                                             </select>
                                         </div>
                                     </div>

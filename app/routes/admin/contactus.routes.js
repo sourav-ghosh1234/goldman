@@ -27,6 +27,7 @@ namedRouter.get("contactus.edit", '/contactus/edit/:id', contactusController.edi
 namedRouter.get("contactus.delete", '/contactus/delete/:id', contactusController.destroy);
 namedRouter.post("contactus.update", '/contactus/update', request_param.any(), contactusController.update);
 namedRouter.get("contactus.statusChange", '/contactus/status-change/:id', request_param.any(), contactusController.changeStatus);
+
 namedRouter.get("contactcontent.edit", "/contactus/content-edit", contactusController.editContent);
 namedRouter.post("contactcontent.update", '/contactus/content-update', request_param.any(), contactusController.updateContent);
 

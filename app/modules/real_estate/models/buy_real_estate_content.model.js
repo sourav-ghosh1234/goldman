@@ -5,7 +5,7 @@ const mongooseAggregatePaginate = require('mongoose-aggregate-paginate');
 
 const BuyRealEstateContentSchema = new Schema({
     title: { type: String, default: '' },
-    cityId: { type: Schema.Types.ObjectId, ref: 'City' },
+    cityId: { type: Schema.Types.ObjectId, ref: 'City', default: null },
     description: { type: String, default: '' },
     language: {type:String, default: 'en'},
     translate:[{
