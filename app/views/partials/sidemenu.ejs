@@ -119,9 +119,9 @@
                         </ul>
                     </div>
                 </li>
-                <li class="kt-menu__item kt-menu__item--submenu <%=(page_name == 'propertytype-management' || page_name== 'amenities-management' || page_name== 'characteristics-management' || page_name== 'property-management') ? 'kt-menu__item--open' : ''%>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+                <li class="kt-menu__item kt-menu__item--submenu <%=(page_name == 'propertytype-management' || page_name== 'amenities-management' || page_name== 'characteristics-management' || page_name== 'property-management' || page_name == 'propertyContent-management') ? 'kt-menu__item--open' : ''%>" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
                     <a href="javascript:;" class="kt-menu__link kt-menu__toggle
-                        <%=(page_name == 'propertytype-management' || page_name== 'amenities-management' || page_name== 'characteristics-management' || page_name== 'property-management') ? 'active' : ''%>">
+                        <%=(page_name == 'propertytype-management' || page_name== 'amenities-management' || page_name== 'characteristics-management' || page_name== 'property-management' || page_name == 'propertyContent-management') ? 'active' : ''%>">
                         <i class="kt-menu__link-icon fas fa-building"></i>
 
                         <span class="kt-menu__link-text">Property Manage</span>
@@ -158,6 +158,14 @@
                                 <a href="<%= generateUrl('property.list') %>" class="kt-menu__link <%=(page_name == 'property-management') ? 'active' : ''%>">
                                     <i class="kt-menu__link-icon fas fa-building"></i>
                                     <span class="kt-menu__link-text">Property</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="kt-menu__subnav">
+                            <li class="kt-menu__item " aria-haspopup="true">
+                                <a href="<%= generateUrl('property-content.edit') %>" class="kt-menu__link <%=(page_name == 'propertyContent-management') ? 'active' : ''%>">
+                                    <i class="kt-menu__link-icon fas fa-building"></i>
+                                    <span class="kt-menu__link-text">Property Content</span>
                                 </a>
                             </li>
                         </ul>
