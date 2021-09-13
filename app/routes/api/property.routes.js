@@ -15,6 +15,7 @@ const request_param = multer();
 /**
  * @api {get} /property/content property Content
  * @apiVersion 1.0.0
+ * @apiDescription Api for property content details. Image path : "/uploads/propertyContent"
  * @apiGroup Property
  * @apiSuccessExample {json} Success
  * {

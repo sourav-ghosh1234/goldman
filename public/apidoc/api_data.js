@@ -742,6 +742,7 @@ define({ "api": [
     "url": "/property/content",
     "title": "property Content",
     "version": "1.0.0",
+    "description": "<p>Api for property content details. Image path : &quot;/uploads/propertyContent&quot;</p>",
     "group": "Property",
     "success": {
       "examples": [
