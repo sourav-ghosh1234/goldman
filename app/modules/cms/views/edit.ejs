@@ -28,8 +28,9 @@
                             <a class="nav-link" data-toggle="tab" href="#kt_tabs_<%=data.shortcode%>"><%=data.title%></a>
                         </li>
                         <%}%>
-                                    <%})%>
+                        <%})%>
                     </ul>
+
                     <div class="tab-content">
                         <%
                             let count = 0;
@@ -41,7 +42,8 @@
                                 <div class="col-lg-12">
                                     <label>Title:</label>
                                     <input type="text" name="title" id="title" class="form-control"
-                                         placeholder="Enter Cms Title" value="<%= response.cms_data.title%>">
+                                         placeholder="Enter Cms Title" 
+                                         value="<%=response.cms_data.title%>">
                                 </div>
                             </div>
 
@@ -54,9 +56,8 @@
                                     </textarea>
                                 </div>
                             </div>
-
-    
                         </div>
+
                         <%}else{
                         let title = '';
                         let content = '';
@@ -90,13 +91,11 @@
                         </div>
 
                         <% count++ }%>
-
-
                         <%})%>
                     </div>
-                    <!-- hidden user id -->
-                    <!-- <input type="hidden" name="id" value="<%=response.cms_data._id%>"> -->
+
                 </div>
+
                 <div class="kt-portlet__foot">
                     <div class="kt-form__actions">
                         <div class="row">

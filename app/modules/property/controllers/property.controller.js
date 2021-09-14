@@ -15,6 +15,16 @@ const languageRepo = require('language/repositories/language.repository');
 const amenitiesRepo = require('amenities/repositories/amenities.repository');
 const characteristicsRepo = require('characteristics/repositories/characteristics.repository');
 
+const NodeGeocoder = require('node-geocoder');
+const options = {
+    provider: 'google',
+    apiKey: process.env.GOOGLE_API_KEY,
+    formatter: null 
+};
+
+const geocoder = NodeGeocoder(options);
+
+
 class PropertyController {
     constructor() {
         this.property = [];
@@ -48,6 +58,19 @@ class PropertyController {
     async store(req, res) {
         try {
             let property = await propertyRepo.getByField({ 'title': { $regex: req.body.title, $options: 'i' }, 'isDeleted': false });
+
+            var full_address = req.body.propertyAddress.street_address + ' ' + req.body.propertyAddress.street_address_number + ' ' + req.body.propertyAddress.unit + ' ' + req.body.propertyAddress.suburb;
+
+            var lat_lng_address = await geocoder.geocode(full_address);
+
+            if(!_.isEmpty(lat_lng_address)){
+                req.body.propertyAddress.latitude = lat_lng_address[0]['latitude'];
+                req.body.propertyAddress.longitude = lat_lng_address[0]['longitude'];
+            }else{
+                req.body.propertyAddress.latitude ='';
+                req.body.propertyAddress.longitude = '';  
+            }
+            
             if (_.isEmpty(property)) {
                 if (req.files.length > 0) {
 
@@ -141,6 +164,19 @@ class PropertyController {
                 let propertyData = await propertyRepo.getById(propertyId);
                 // req.body.imageGallery = propertyData.imageGallery;
                 let imageArray = propertyData.imageGallery;
+
+
+                var full_address = req.body.propertyAddress.street_address + ' ' + req.body.propertyAddress.street_address_number + ' ' + req.body.propertyAddress.unit + ' ' + req.body.propertyAddress.suburb;
+
+                var lat_lng_address = await geocoder.geocode(full_address);
+
+                if(!_.isEmpty(lat_lng_address)){
+                    req.body.propertyAddress.latitude = lat_lng_address[0]['latitude'];
+                    req.body.propertyAddress.longitude = lat_lng_address[0]['longitude'];
+                }else{
+                    req.body.propertyAddress.latitude ='';
+                    req.body.propertyAddress.longitude = '';  
+                }
 
                 if (req.files && req.files.length > 0) {
 

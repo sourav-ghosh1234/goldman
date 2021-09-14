@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const mongooseAggregatePaginate = require('mongoose-aggregate-paginate');
+var SchemaTypes = mongoose.Schema.Types;
 
 const deleted = [true, false];
 const status = ["Active", "Inactive"];
@@ -35,7 +36,9 @@ const PropertySchema = new Schema({
         street_address: { type: String, default: '' },
         suburb: { type: String, default: '' },
         municipality: { type: String, default: '' },
-        suburb: { type: String, default: '' }
+        suburb: { type: String, default: '' },
+        latitude:{ type: SchemaTypes.Double, default: '' },
+        longitude :{ type: SchemaTypes.Double, default: '' }
     },
     totalRooms: { type: Number, default: 0 },
     noOfBedRooms: { type: Number, default: 0 },
