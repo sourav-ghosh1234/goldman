@@ -5,22 +5,15 @@ const mongooseAggregatePaginate = require('mongoose-aggregate-paginate');
 const deleted = [true, false];
 const status = ["Active", "Inactive"];
 
-const artDecorSchema = new Schema({
+const propertyContentSchema = new Schema({
   title : { type: String, default: '' },
-  company_name: { type: String, default: '' },
-  slug : { type: String, default: '' },
-  price : { type: Number, default: 0  },
-  dimensions : { type: String, default: '' },
-  colour: [{type: Schema.Types.ObjectId, ref: 'Color', default: null }],
   description : { type: String, default: '' },
   image: { type: String, default: '' },
-  imageGallery: [{ type: String, default: '' }],
   language: { type: String, default: 'en' },
   translate: [
       {
         title : { type: String, default: '' },
         description : { type: String, default: '' },
-        company_name: { type: String, default: '' },
         language: { type: String, default: '' },
       }
   ],
@@ -30,7 +23,7 @@ const artDecorSchema = new Schema({
 });
 
 // For pagination
-artDecorSchema.plugin(mongooseAggregatePaginate);
+propertyContentSchema.plugin(mongooseAggregatePaginate);
 
 // create the model for users and expose it to our app
-module.exports = mongoose.model('artDecor', artDecorSchema);
+module.exports = mongoose.model('Property_Content', propertyContentSchema);

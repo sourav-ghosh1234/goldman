@@ -388,7 +388,9 @@ class PropertyRepository {
                         'propertyAddress': {
                             $first: {
                                 'country': '$countriesDetails.country_name',
+                                'countryId': '$countriesDetails._id',
                                 'city': '$cityDetails.city',
+                                'cityId': '$cityDetails._id',
                                 'street_address_number': '$propertyAddress.street_address_number',
                                 'street_address': '$propertyAddress.street_address',
                                 'unit': '$unit',
@@ -396,13 +398,14 @@ class PropertyRepository {
                             }
                         },
                         'parking': { $first: '$parking' },
+                        'parking': { $first: '$parking' },
                         'houseSize': { $first: '$houseSize' },
                         'landSize': { $first: '$landSize' },
                         'title': { $first: '$title' },
                         'subTitle': { $first: '$subTitle' },
                         'propertyType': { $first: '$propertyTypeDetails.title' },
                         'establishedNew': { $first: '$establishedNew' },
-                        'landAgent': { $first: '$landAgentDetails.full_name' },
+                        'landAgent': { $first: '$landAgentDetails' },
                         'dualAgent': { $first: '$dualAgent' },
                         'rentalPerWeek': { $first: '$rentalPerWeek' },
                         'rentalPerMonth': { $first: '$rentalPerMonth' },

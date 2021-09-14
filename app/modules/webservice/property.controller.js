@@ -1,8 +1,22 @@
 const propertyRepo = require('property/repositories/property.repository');
+const propertyContentRepo = require('property_content/repositories/property_content.repository');
 const mongoose = require('mongoose');
 
 class newsController {
     constructor() { }
+
+    async getContentEdit(req, res) {
+        try {
+          let propertyContent = await propertyContentRepo.getByField({});
+          if (propertyContent) {
+            return { status: 200, data: propertyContent, message: 'Text fetched successfully.' }
+          } else {
+            return {  status: 201, data: [], message: 'There are no data at this moment.' }
+          }
+        } catch (error) {
+          return res.status(500).send({ message: error.message });
+        }
+      }
 
     async propertyList(req, res) {
         try {
